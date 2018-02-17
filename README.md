@@ -24,7 +24,7 @@ Tile :rabbit:
 - [ ] nesto
 
 ### Pitanja
-1. Kako da nazovem ovo pod "Ostalo" gde se nalaze cenovnik, o nama i kontakt? Mislim na heading na prvoj strani
+1. Kako da nazovem heading "Ostalo" gde se nalaze cenovnik, o nama i kontakt? Ostalo je bzvz.
 
 ### Problemi
 
