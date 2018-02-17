@@ -1,0 +1,269 @@
+/* Table of contents, ctrl + f and search for:
+_______________
+- General
+- Typography
+- Header and Nav
+- Footer
+- Forms
+- Misc
+- Media Queries
+_______________
+*/
+
+/*COLORS
+--------
+#fbb023 - yellow
+#0a0400 - black
+#eeba5b - white-yellow
+#E4F1C3,#BAD696,#9EBF6D,#BBE2BC,#D8F1D3,#E4F1C3
+
+/***General***/
+
+* {
+   box-sizing: border-box;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+   background-color: #ffffff;
+   color: #233944;
+   font-size: 1.5em;
+   /*padding: 15px 15px ***ako nema kontejnera*/
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.container__main {
+    margin-top: 4rem;
+}
+
+.section__main {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    text-align: center;
+    background-color: #f4f2bf;
+}
+
+.section__ostalo {
+    padding-top: 5rem;
+}
+
+.section__stampanje {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    background-color: #f4f2bf;
+}
+
+
+.link h3:hover {
+    color: #b6aa92;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/***Typography***/
+
+.section__heading {
+    margin-bottom: 3.5rem;
+    text-align: center;
+}
+
+.section__heading:after {
+    display: block;
+    height: 2px;
+    background-color: gray;
+    content: " ";
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 8px;
+}
+
+h3 {
+    color: #0a0400;
+}
+
+.section__main .fa {
+    font-size: 2.8rem;
+    margin-bottom: .8rem;
+}
+/***Header and Nav***/
+
+header {
+    background-color: #d0c4ac;
+    border-radius: 5px 5px 0 0;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.logo {
+    max-width: 150px;
+}
+
+.nav {
+    width: 100%;
+    float: right;
+    list-style-type: none;
+    color: #8f897d;
+}
+
+
+ul.nav {
+    margin: 0 auto;
+    padding-top: 10px; /*PROMENI*/
+}
+
+ul li a {
+    color: #8f897d;
+}
+
+ul li a:hover {
+    color: green;
+}
+
+/**nav1 je za ostale stranice poput stampanje.html, odnosi se na navigaciju pocetna / stampanje ...**/
+ul.nav1 {
+    background-color: #BAD696;
+}
+
+ul.nav1 li {
+    display: inline;
+    color: #D8F1D3;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 2rem;
+}
+
+.tile a {
+    display: block;
+    padding: 10px;
+    border: 1px solid red;
+    margin-right: 5px;
+}
+
+/**Registruj se i uloguj se**/
+.fa-user, .fa-user-plus {
+    padding-left: 5px;
+}
+
+/***Footer***/
+
+footer {
+    background-color: #8f897d;
+    text-align: center;
+    padding-top: 2rem;
+    margin-bottom: 5rem;
+}
+
+footer .container {
+
+}
+
+/***FORMS***/
+.form-box {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px 20px;
+    background: #BAD696;
+    border-radius: 5px;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+
+/***MISC***/
+
+/**Linija pocetna / stampanje ...**/
+.line {
+    color: rgb(124, 133, 100);
+    font-size: 1.8rem;
+}
+
+
+/* Media Queries */
+@media (max-width: 548px) {
+
+    h3 {
+        font-size: 1.4em;
+    }
+
+    p {
+        font-size: 1.2em;
+    }
+
+    footer {
+        font-size: .9em;
+    }
+
+}
+
+@media (min-width: 549px) {
+    h3 {
+        font-size: 1.2em;
+    }
+
+    .shadow {
+        position:relative;
+    }
+
+    .shadow {
+        box-shadow:0 1px 10px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.1) inset;
+    }
+
+    .shadow:before, .shadow:after {
+        position:absolute;
+        content:"";
+        bottom:20px;
+        left:12px;
+        top:90%;
+        width:60%;
+        background:#B2DBBF;
+        z-index:-1;
+        -webkit-box-shadow: 0 20px 5px #9B7468;
+        -moz-box-shadow: 0 20px 5px #9B7468;
+        box-shadow: 0 20px 5px #70C1B3;
+        -webkit-transform: rotate(-3deg);
+        -moz-transform: rotate(-3deg);
+        transform: rotate(-3deg);
+    }
+
+    .container__cenovnik {
+        max-width: 35rem;
+    }
+
+    th, td {
+        border-bottom-color: black;
+    }
+}
+
+
+@media (min-width: 768px) {
+    .section__main {
+      padding: 10rem 0 8;
+    }
+
+    h3 {
+        font-size: 1.3em;
+    }
+}
+
+@media (min-width: 992px) {
+    .section__main {
+      padding: 11 0 11rem;
+    }
+
+    h3 {
+        font-size: 1.4em;
+    }
+}
+
+@media (min-width: 1200px) {
+    h3 {
+        font-size: 1.5em;
+    }
+}

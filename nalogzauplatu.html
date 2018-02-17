@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html class="no-js" lang="sr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ePrint</title>
+    <!--Meta tags-->
+    <meta name="description" content="Usluge se sastoje od pripreme za štampu, štampe, pečatiranja, kovertiranja, i otpremanja na poštu ili drugom dostavljaču.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--Font from Google-->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&amp;subset=latin-ext" rel="stylesheet" type="text/css">
+    <!--CSS files-->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/icon.png">
+    <!--FA icons-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="container container__main shadow">
+        <!--HEADER-->
+        <header>
+            <div class="row">
+                <div class="six columns">
+                    <a href="index.html">
+                        <img class="logo" src="images/eprint1.png" />
+                    </a>
+                </div>
+                <!--NAVIGATION-->
+                <div class="six columns navigation__header">
+                    <div class="navigation__header--nav">
+                        <ul class="nav">
+                            <li>
+                                <a href="#">Registruj se
+                                    <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">Uloguj se
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--end of second one-half column-->
+            </div>
+            <!--end of row-->
+        </header>
+
+        <!-- Navigation -->
+        <div class="twelve columns">
+            <ul class="nav1">
+                <li>
+                    <a class="tile" href="index.html">
+                        <i class="fa fa-home" aria-hidden="true"></i>Pocetna</a>
+                </li>
+                <span class="line">/</span>
+                <li>
+                    <a class="tile" href="./uplatnice.html">Uplatnice</a>
+                </li>
+                <span class="line">/</span>
+                <li>
+                    <a class="tile" href="./nalogzauplatu.html">Nalog za uplatu</a>
+                </li>
+            </ul>
+        </div>
+        <!-- End of navigation -->
+
+
+        <!--Stampanje section-->
+        <section class="section__stampanje">
+            <div class="container">
+                <h2 class="section__heading">Nalog za uplatu</h2>
+            </div>
+            <!-- OVDE POCINJE FORMA ZA ***STAMPANJE*** -->
+            <form>
+                <div class="form-box">
+                    <div class="row">
+
+                        <!-- UNOS PODATAKA ***************************** -->
+                        <!--<h5>Unos podataka</h5>-->
+                        <!--PlATILAC ******************************-->
+                        <label for="exampleEmailInput">Platilac</label>
+                        <input class="u-full-width" type="text" placeholder="" id="NumberInput">
+                        <!-- ***************************** -->
+
+                        <!--SVRHA UPLATE ******************************-->
+                        <label for="exampleEmailInput">Svrha uplate</label>
+                        <input class="u-full-width" type="text" placeholder="" id="NumberInput">
+                        <!-- ***************************** -->
+
+                        <!--PRIMALAC ******************************-->
+                        <label for="exampleEmailInput">Primalac</label>
+                        <input class="u-full-width" type="text" placeholder="" id="NumberInput">
+                        <!-- ***************************** -->
+
+                        <!--SIFRA PLACANJA ******************************-->
+                        <label for="exampleEmailInput">Sifra placanja</label>
+                        <input class="u-full-width" type="text" placeholder="" id="NumberInput">
+                        <!-- ***************************** -->
+
+                        <!--VALUTA ******************************-->
+                        <label for="exampleEmailInput">Valuta</label>
+                        <input class="u-full-width" type="text" placeholder="" id="NumberInput">
+                        <!-- ***************************** -->
+
+                        <!--IZNOS ******************************-->
+                        <label for="exampleEmailInput">Iznos</label>
+                        <input class="u-full-width" type="text" placeholder="" id="NumberInput">
+                        <!-- ***************************** -->
+
+                        <!--RACUN PRIMAOCA ******************************-->
+                        <label for="exampleEmailInput">Racun primaoca</label>
+                        <input class="u-full-width" type="text" placeholder="" id="NumberInput">
+                        <!-- ***************************** -->
+
+                        <!--MODEL ******************************-->
+                        <label for="exampleEmailInput">Model</label>
+                        <input class="u-full-width" type="text" placeholder="" id="NumberInput">
+                        <!-- ***************************** -->
+
+                        <!--POZIV NA BROJ ******************************-->
+                        <label for="exampleEmailInput">Poziv na broj</label>
+                        <input class="u-full-width" type="text" placeholder="" id="NumberInput">
+                        <!-- ***************************** -->
+
+                        <!-- Kraj unosa podataka, sledi radio buttons -->
+
+                        <!-- BROJ UPLATNICA U SETU ***************************** -->
+                        <label for="">Broj uplatnica u setu</label>
+                        <label for="regularRadio">
+                            <input type="radio" name="radioBoja" id="prvaBoja" value="radio 1" checked />
+                            <span>1+1</span>
+                        </label>
+                        <label for="secondRegularRadio">
+                            <input type="radio" name="radioBoja" id="drugaBoja" value="radio 2" />
+                            <span>1+2</span>
+                        </label>
+                        <!-- ***************************** -->
+
+                        <!-- Kolicina setova  ***************************** -->
+                        <label for="">Kolicina setova</label>
+                        <label for="regularRadio">
+                            <input type="radio" name="radioJednostrano" id="regularRadio" value="radio 1" checked />
+                            <span>100</span>
+                        </label>
+                        <label for="secondRegularRadio">
+                            <input type="radio" name="radioJednostrano" id="secondRegularRadio" value="radio 2" />
+                            <span>200</span>
+                        </label>
+                        <label for="regularRadio">
+                            <input type="radio" name="radioJednostrano" id="regularRadio" value="radio 1" checked />
+                            <span>500</span>
+                        </label>
+                        <label for="secondRegularRadio">
+                            <input type="radio" name="radioJednostrano" id="secondRegularRadio" value="radio 2" />
+                            <span>900</span>
+                        </label>
+                        <label for="regularRadio">
+                            <input type="radio" name="radioJednostrano" id="regularRadio" value="radio 1" checked />
+                            <span>1800</span>
+                        </label>
+                        <label for="secondRegularRadio">
+                            <input type="radio" name="radioJednostrano" id="secondRegularRadio" value="radio 2" />
+                            <span>2700</span>
+                        </label>
+                        <label for="regularRadio">
+                            <input type="radio" name="radioJednostrano" id="regularRadio" value="radio 1" checked />
+                            <span>5400</span>
+                        </label>
+                        <label for="secondRegularRadio">
+                            <input type="radio" name="radioJednostrano" id="secondRegularRadio" value="radio 2" />
+                            <span>8100</span>
+                        </label>
+                        <label for="secondRegularRadio">
+                            <input type="radio" name="radioJednostrano" id="secondRegularRadio" value="radio 2" />
+                            <span>10800</span>
+                        </label>
+                        <!-- ***************************** -->
+
+        
+
+                        <!-- Krajnja poruka -->
+                        <label for="exampleMessage">Poruka</label>
+                        <textarea class="u-full-width" placeholder="Dodatni komentar ..." id="exampleMessage"></textarea>
+                        <label class="example-send-yourself-copy">
+                            <input type="checkbox">
+                            <span class="label-body">Posalji kopiju sebi</span>
+                        </label>
+                        <input class="button-primary" type="submit" value="Posalji">
+                    </div>
+            </form>
+        </section>
+
+
+
+
+
+        <!--Footer-->
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="one-half column">
+                        <p>26232 Pančevo, Matije Gupca 24</p>
+                    </div>
+                    <div class="one-half column">
+                        <p>065 983 983 8</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        </div>
+</body>
+
+</html>

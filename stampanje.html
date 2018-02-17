@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html class="no-js" lang="sr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ePrint</title>
+  <!--Meta tags-->
+  <meta name="description" content="Usluge se sastoje od pripreme za štampu, štampe, pečatiranja, kovertiranja, i otpremanja na poštu ili drugom dostavljaču.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!--Font from Google-->
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&amp;subset=latin-ext" rel="stylesheet" type="text/css">
+  <!--CSS files-->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/style.css">
+  <!--Favicon-->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/icon.png">
+  <!--FA icons-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <div class="container container__main shadow">
+    <!--HEADER-->
+    <header>
+      <div class="row">
+        <div class="six columns">
+          <a href="index.html">
+            <img class="logo" src="images/eprint1.png" />
+          </a>
+        </div>
+        <!--NAVIGATION-->
+        <div class="six columns navigation__header">
+          <div class="navigation__header--nav">
+            <ul class="nav">
+              <li>
+                <a href="#">Registruj se
+                  <i class="fa fa-user-plus" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#">Uloguj se
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!--end of second one-half column-->
+      </div>
+      <!--end of row-->
+    </header>
+
+    <!-- Navigation -->
+    <div class="twelve columns">
+      <ul class="nav1">
+        <li>
+          <a class="tile" href="index.html">
+            <i class="fa fa-home" aria-hidden="true"></i>Pocetna</a>
+        </li>
+        <span class="line">/</span>
+        <li>
+          <a class="tile" href="./stampanje.html">Stampanje</a>
+        </li>
+      </ul>
+    </div>
+    <!-- End of navigation -->
+
+
+    <!--Stampanje section-->
+    <section class="section__stampanje">
+      <div class="container">
+        <h2 class="section__heading">Stampanje</h2>
+      </div>
+      <!-- OVDE POCINJE FORMA ZA ***STAMPANJE*** -->
+      <form>
+        <div class="form-box">
+          <!--UPLOAD dugme-->
+          <input class="button-primary" type="submit" value="Upload">
+          <div class="row">
+
+            <!-- BROJ PRIMERAKA ***************************** -->
+            <label for="exampleEmailInput">Broj primeraka</label>
+            <input class="u-full-width" type="number" placeholder="1" id="NumberInput">
+            <!-- Redosled primeraka -->
+            <label for="regularRadio">
+              <input type="radio" name="radioPrimerak" id="first" value="radio 1" checked />
+              <span>1,2,3; 1,2,3; 1,2,3</span>
+            </label>
+            <label for="secondRegularRadio">
+              <input type="radio" name="radioPrimerak" id="second" value="radio 2" />
+              <span>1,1,1; 2,2,2; 3,3,3</span>
+            </label>
+            <!-- ***************************** -->
+
+            <!-- BOJA ***************************** -->
+            <label for="">Boja</label>
+            <label for="regularRadio">
+              <input type="radio" name="radioBoja" id="prvaBoja" value="radio 1" checked />
+              <span>Crno belo</span>
+            </label>
+            <label for="secondRegularRadio">
+              <input type="radio" name="radioBoja" id="drugaBoja" value="radio 2" />
+              <span>U boji</span>
+            </label>
+            <!-- ***************************** -->
+
+            <!-- JEDNOSTRANO/DVOSTRANO  ***************************** -->
+            <label for="">Jednostrano / Dvostrano</label>
+            <label for="regularRadio">
+              <input type="radio" name="radioJednostrano" id="regularRadio" value="radio 1" checked />
+              <span>Jednostrano</span>
+            </label>
+            <label for="secondRegularRadio">
+              <input type="radio" name="radioJednostrano" id="secondRegularRadio" value="radio 2" />
+              <span>Dvostrano</span>
+            </label>
+            <!-- ***************************** -->
+
+            <!-- VELICINA PAPIRA -->
+            <label for="">Velicina papira</label>
+            <label for="regularRadio">
+              <input type="radio" name="radioPapir" id="regularRadio" value="radio 1" checked />
+              <span>A4</span>
+            </label>
+            <label for="secondRegularRadio">
+              <input type="radio" name="radioPapir" id="secondRegularRadio" value="radio 2" />
+              <span>A3</span>
+            </label>
+            <!-- ***************************** -->
+
+            <!-- DEBILJINA PAPIRA -->
+            <label for="">Debljina papira</label>
+            <label for="regularRadio">
+              <input type="radio" name="radioDebljina" id="regularRadio" value="radio 1" checked />
+              <span>80gr/m2</span>
+            </label>
+            <label for="secondRegularRadio">
+              <input type="radio" name="radioDebljina" id="secondRegularRadio" value="radio 2" />
+              <span>100gr/m2</span>
+            </label>
+            <!-- ***************************** -->
+
+
+            <!-- KORICENJE -->
+            <label for="">Koricenje</label>
+            <label for="regularRadio">
+              <input type="radio" name="radioKoricenje" id="regularRadio" value="radio 1" checked />
+              <span>Plasticnom spiralom</span>
+            </label>
+            <label for="secondRegularRadio">
+              <input type="radio" name="radioKoricenje" id="secondRegularRadio" value="radio 2" />
+              <span>Zicanom spiralom</span>
+            </label>
+            <label for="secondRegularRadio">
+              <input type="radio" name="radioKoricenje" id="secondRegularRadio" value="radio 2" />
+              <span>Tvrdo koricenje</span>
+            </label>
+            <!-- Upload korice dugme -->
+            <input class="button-primary" type="submit" value="Upload korice">
+            <!-- ***************************** -->
+
+            <!-- HEFTANJE -->
+            <label for="">Heftanje</label>
+            <label for="regularRadio">
+              <input type="radio" name="radioHeftanje" id="regularRadio" value="radio 1" checked />
+              <span>Gore levo</span>
+            </label>
+            <label for="secondRegularRadio">
+              <input type="radio" name="radioHeftanje" id="secondRegularRadio" value="radio 2" />
+              <span>Gore desno</span>
+            </label>
+            <label for="secondRegularRadio">
+              <input type="radio" name="radioHeftanje" id="secondRegularRadio" value="radio 2" />
+              <span>Dole levo</span>
+            </label>
+            <label for="secondRegularRadio">
+              <input type="radio" name="radioHeftanje" id="secondRegularRadio" value="radio 2" />
+              <span>Dole desno</span>
+            </label>
+            <label for="secondRegularRadio">
+              <input type="radio" name="radioHeftanje" id="secondRegularRadio" value="radio 2" />
+              <span>Po sredini levo</span>
+            </label>
+            <label for="secondRegularRadio">
+              <input type="radio" name="radioHeftanje" id="secondRegularRadio" value="radio 2" />
+              <span>Po sredini desno</span>
+            </label>
+            <label for="secondRegularRadio">
+              <input type="radio" name="radioHeftanje" id="secondRegularRadio" value="radio 2" />
+              <span>Po sredini gore</span>
+            </label>
+            <label for="secondRegularRadio">
+              <input type="radio" name="radioHeftanje" id="secondRegularRadio" value="radio 2" />
+              <span>Po sredini dole</span>
+            </label>
+            <!-- ***************************** -->
+
+            <!-- BUSENJE -->
+            <label for="">Busenje</label>
+            <label for="regularRadio">
+              <input type="radio" name="radioKoricenje" id="regularRadio" value="radio 1" checked />
+              <span>Dve rupe za registrator levo</span>
+            </label>
+            <label for="secondRegularRadio">
+              <input type="radio" name="radioKoricenje" id="secondRegularRadio" value="radio 2" />
+              <span>Dve rupe za registrator desno</span>
+            </label>
+            <label for="secondRegularRadio">
+              <input type="radio" name="radioKoricenje" id="secondRegularRadio" value="radio 2" />
+              <span>Dve rupe za registrator gore</span>
+            </label>
+            <label for="secondRegularRadio">
+              <input type="radio" name="radioKoricenje" id="secondRegularRadio" value="radio 2" />
+              <span>Dve rupe za registrator dole</span>
+            </label>
+            <!-- ***************************** -->
+
+            <!-- Krajnja poruka -->
+            <label for="exampleMessage">Poruka</label>
+            <textarea class="u-full-width" placeholder="Dodatni komentar ..." id="exampleMessage"></textarea>
+            <label class="example-send-yourself-copy">
+              <input type="checkbox">
+              <span class="label-body">Posalji kopiju sebi</span>
+            </label>
+            <input class="button-primary" type="submit" value="Posalji">
+          </div>
+      </form>
+    </section>
+
+
+
+
+
+    <!--Footer-->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="one-half column">
+            <p>26232 Pančevo, Matije Gupca 24</p>
+          </div>
+          <div class="one-half column">
+            <p>065 983 983 8</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </div>
+</body>
+
+</html>
