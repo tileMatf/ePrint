@@ -13,10 +13,10 @@ Sone
 - [ ] Zavrsi ostale usluge i njihove forme
 - [ ] Dodaj navigaciju u uslugama 
 - [ ] Proveri metatagove, dodaj za Face/Twit, promeni favicon
-- [ ] Stilizuj drugacije forme
+- [ ] Bolje stilizuj forme
 - [ ] Napravi modal za Registraciju
 - [ ] Promeni font
-- [ ] Admin panel
+- [ ] Napravi Admin panel
 
 Tile
 - [ ] nesto
