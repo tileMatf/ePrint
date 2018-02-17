@@ -6,9 +6,9 @@ http://getskeleton.com/
 Font Awesome font
 https://fontawesome.com/
 
-## Ajde ovde da pisemo kao notes i brisemo kada postane nebitno?
+######Ajde ovde da pisemo nekakve "napomene" i brisemo kada postanu nebitne ili se popravi, kao ovo ispod?
 
-## Bagovi, napomene
+#### Bagovi
 
 Forme 
 "name, id, value" - nisam siguran kako treba da ih nazivam, i da li svaki treba drugacije da se imenuje? 
