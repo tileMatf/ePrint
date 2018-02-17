@@ -7,7 +7,7 @@ Font Awesome font
 https://fontawesome.com/
 
 
-# Bagovi, napomene
+## Bagovi, napomene
 
 #Forme 
 "name, id, value" - nisam siguran kako treba da ih nazivam, i da li svaki treba drugacije da se imenuje? 
