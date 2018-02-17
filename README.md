@@ -6,10 +6,11 @@ http://getskeleton.com/
 Font Awesome font
 https://fontawesome.com/
 
+## Ajde ovde da pisemo kao notes i brisemo kada postane nebitno?
 
 ## Bagovi, napomene
 
-#Forme 
+Forme 
 "name, id, value" - nisam siguran kako treba da ih nazivam, i da li svaki treba drugacije da se imenuje? 
 
 trenutno ukoliko udjes u stampanje ~forma, kada klikces u prazno on chekira jednostrano/dvostrano opciju. To je zbog ID-a?
