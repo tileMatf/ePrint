@@ -18,7 +18,7 @@ Sone
 - [ ] Promeni font
 - [ ] Napravi Admin panel
 
-Tile
+Tile /play heygirl
 - [ ] nesto
 - [ ] nesto
 - [ ] nesto
