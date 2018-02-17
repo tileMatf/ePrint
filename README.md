@@ -8,7 +8,7 @@ https://fontawesome.com/
 
 ### Plan
 
-Sone 
+Sone :baby_chick:
 - [x] Push
 - [ ] Zavrsi ostale usluge i njihove forme
 - [ ] Dodaj navigaciju u uslugama 
@@ -18,7 +18,7 @@ Sone
 - [ ] Promeni font
 - [ ] Napravi Admin panel
 
-Tile /play heygirl
+Tile :rabbit:
 - [ ] nesto
 - [ ] nesto
 - [ ] nesto
