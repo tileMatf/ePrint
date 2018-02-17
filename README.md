@@ -6,10 +6,27 @@ http://getskeleton.com/
 Font Awesome font
 https://fontawesome.com/
 
-###### Ajde ovde da pisemo nekakve "napomene" i brisemo kada postanu nebitne ili se popravi, kao ovo ispod?
+### Plan
 
-#### Bagovi
+Sone 
+- [x] Push
+- [ ] Zavrsi ostale usluge i njihove forme
+- [ ] Dodaj navigaciju u uslugama 
+- [ ] Proveri metatagove, dodaj za Face/Twit, promeni favicon
+- [ ] Stilizuj drugacije forme
+- [ ] Napravi modal za Registraciju
+- [ ] Promeni font
+- [ ] Admin panel
 
+Tile
+- [ ] nesto
+- [ ] nesto
+- [ ] nesto
+
+### Pitanja
+1. Kako da nazovem ovo pod "Ostalo" gde spadaju cenovnik, o nama i kontakt?
+
+##### Problemi
 Forme 
 "name, id, value" - nisam siguran kako treba da ih nazivam, i da li svaki treba drugacije da se imenuje? 
 
