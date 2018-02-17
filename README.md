@@ -26,7 +26,7 @@ Tile
 ### Pitanja
 1. Kako da nazovem ovo pod "Ostalo" gde se nalaze cenovnik, o nama i kontakt? Mislim na heading na prvoj strani
 
-##### Problemi
+### Problemi
 Forme 
 "name, id, value" - nisam siguran kako treba da ih nazivam, i da li svaki treba drugacije da se imenuje? 
 
