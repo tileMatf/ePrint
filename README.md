@@ -24,7 +24,7 @@ Tile
 - [ ] nesto
 
 ### Pitanja
-1. Kako da nazovem ovo pod "Ostalo" gde spadaju cenovnik, o nama i kontakt?
+1. Kako da nazovem ovo pod "Ostalo" gde se nalaze cenovnik, o nama i kontakt? Mislim na heading na prvoj strani
 
 ##### Problemi
 Forme 
