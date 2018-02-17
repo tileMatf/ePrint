@@ -6,7 +6,7 @@ http://getskeleton.com/
 Font Awesome font
 https://fontawesome.com/
 
-######Ajde ovde da pisemo nekakve "napomene" i brisemo kada postanu nebitne ili se popravi, kao ovo ispod?
+###### Ajde ovde da pisemo nekakve "napomene" i brisemo kada postanu nebitne ili se popravi, kao ovo ispod?
 
 #### Bagovi
 
