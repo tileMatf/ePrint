@@ -28,12 +28,12 @@ General
 }
 
 html {
-	height: 100%;
+    height: 100%;
 }
 
 body {
    background-color: #ffffff;
-   color: #233944;
+   color: #222;
    font-size: 1.5em;
    /*padding: 15px 15px ***ako nema kontejnera*/
 }
@@ -52,7 +52,7 @@ body {
     padding-top: 4rem;
     padding-bottom: 4rem;
     text-align: center;
-    background-color: #f4f2bf;
+    background-color: #ffffff;
 }
 
 .section__ostalo {
@@ -62,7 +62,7 @@ body {
 .section__stampanje {
     padding-top: 4rem;
     padding-bottom: 4rem;
-    background-color: #f4f2bf;
+    background-color: #ffffff;
 }
 
 
@@ -92,9 +92,6 @@ Typography
     margin-top: 8px;
 }
 
-h3 {
-    color: #0a0400;
-}
 
 .section__main .fa {
     font-size: 2.8rem;
@@ -107,7 +104,7 @@ Basic list/links
 ***/
 
 a {
-    color: #233944;
+    color: #222;
 }
 
 a:link {
@@ -115,7 +112,7 @@ a:link {
 }
 
 a:hover {
-    color: #456270;
+    color: #576268;
 }
 
 /***
@@ -124,7 +121,7 @@ Header and Nav
 ***/
 
 header {
-    background-color: #d0c4ac;
+    background-color: #fdf9f9;
     border-radius: 5px 5px 0 0;
     text-align: center;
     padding-top: 10px;
@@ -149,7 +146,7 @@ ul.nav {
 
 /**nav1 je za ostale stranice poput stampanje.html, odnosi se na navigaciju pocetna / stampanje ...**/
 ul.nav1 {
-    background-color: #BAD696;
+    background-color: #fdfbfb;
 }
 
 ul.nav1 li {
@@ -167,10 +164,11 @@ ul.nav1 li {
     margin-right: 5px;
 }
 
-/**navigacija sa strane, pored formi**/
+/**navigacija u footeru**/
 .aside {
     text-align: center;  
-    background-color: #8f897d;
+    padding: 1rem 1rem;
+    background-color: #eee8d5;
 }
 
 .side__nav--ul {
@@ -194,9 +192,10 @@ Footer
 ***/
 
 footer {
-    background-color: #8f897d;
+    background-color: #eee8d5;
     text-align: center;
     padding-top: 2rem;
+    padding-bottom: 2rem;
     margin-bottom: 5rem;
 }
 
@@ -211,8 +210,8 @@ FORMS
 .form-box {
     max-width: 600px;
     margin: 0 auto;
-    padding: 20px 20px;
-    background: #BAD696;
+    padding: 80px 80px;
+    background: #fdfbfb;
     border-radius: 5px;
     position: relative;
     box-sizing: border-box;
@@ -261,7 +260,8 @@ Media Queries
     }
 
     .shadow {
-        box-shadow:0 1px 10px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.1) inset;
+        box-shadow:0 1px 10px rgba(226, 203, 203, 0.3);
+        /**box-shadow:0 1px 10px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.1) inset;**/
     }
 
     .shadow:before, .shadow:after {
