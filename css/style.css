@@ -2,6 +2,7 @@
 _______________
 - General
 - Typography
+- Basic list/links
 - Header and Nav
 - Footer
 - Forms
@@ -17,7 +18,10 @@ _______________
 #eeba5b - white-yellow
 #E4F1C3,#BAD696,#9EBF6D,#BBE2BC,#D8F1D3,#E4F1C3
 
-/***General***/
+/***
+General
+-----------------------------------------
+***/
 
 * {
    box-sizing: border-box;
@@ -34,8 +38,9 @@ body {
    /*padding: 15px 15px ***ako nema kontejnera*/
 }
 
-a {
+.side__nav--ul li {
     text-decoration: none;
+    color: white;
 }
 
 
@@ -67,7 +72,10 @@ a {
     text-decoration: underline;
 }
 
-/***Typography***/
+/***
+Typography
+-----------------------------------------
+***/
 
 .section__heading {
     margin-bottom: 3.5rem;
@@ -92,7 +100,28 @@ h3 {
     font-size: 2.8rem;
     margin-bottom: .8rem;
 }
-/***Header and Nav***/
+
+/***
+Basic list/links
+-----------------------------------------
+***/
+
+a {
+    color: #233944;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:hover {
+    color: #456270;
+}
+
+/***
+Header and Nav
+-----------------------------------------
+***/
 
 header {
     background-color: #d0c4ac;
@@ -118,14 +147,6 @@ ul.nav {
     padding-top: 10px; /*PROMENI*/
 }
 
-ul li a {
-    color: #8f897d;
-}
-
-ul li a:hover {
-    color: green;
-}
-
 /**nav1 je za ostale stranice poput stampanje.html, odnosi se na navigaciju pocetna / stampanje ...**/
 ul.nav1 {
     background-color: #BAD696;
@@ -146,12 +167,31 @@ ul.nav1 li {
     margin-right: 5px;
 }
 
+/**navigacija sa strane, pored formi**/
+.aside {
+    text-align: center;  
+    background-color: #8f897d;
+}
+
+.side__nav--ul {
+    list-style-type: none;
+}
+
+div.three.columns.aside {
+    margin: 0 auto;
+    margin-top: 10rem;
+}
+
+
 /**Registruj se i uloguj se**/
 .fa-user, .fa-user-plus {
     padding-left: 5px;
 }
 
-/***Footer***/
+/***
+Footer
+-----------------------------------------
+***/
 
 footer {
     background-color: #8f897d;
@@ -164,9 +204,12 @@ footer .container {
 
 }
 
-/***FORMS***/
+/***
+FORMS
+-----------------------------------------
+***/
 .form-box {
-    max-width: 500px;
+    max-width: 600px;
     margin: 0 auto;
     padding: 20px 20px;
     background: #BAD696;
@@ -176,7 +219,10 @@ footer .container {
   }
 
 
-/***MISC***/
+/***
+MISC
+-----------------------------------------
+***/
 
 /**Linija pocetna / stampanje ...**/
 .line {
@@ -185,7 +231,10 @@ footer .container {
 }
 
 
-/* Media Queries */
+/***
+Media Queries 
+-----------------------------------------
+***/
 @media (max-width: 548px) {
 
     h3 {

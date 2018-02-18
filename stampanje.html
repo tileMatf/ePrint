@@ -71,183 +71,195 @@
 
     <!--Stampanje section-->
     <section class="section__stampanje">
-      <div class="container">
-        <h2 class="section__heading">Stampanje</h2>
-      </div>
+      <h2 class="section__heading">Stampanje</h2>
       <!-- OVDE POCINJE FORMA ZA ***STAMPANJE*** -->
-      <form>
-        <div class="form-box">
-          <!--UPLOAD dugme-->
-          <input class="button-primary" type="submit" value="Upload">
-          <div class="row">
+      <!-- one half column (stampanje) -->
+      <form class="form__stampanje form-box">
+        <!--UPLOAD dugme-->
+        <input class="button-primary" type="submit" value="Upload">
+        <!-- BROJ PRIMERAKA ***************************** -->
+        <label for="exampleEmailInput">Broj primeraka</label>
+        <input class="u-full-width" type="number" placeholder="1" id="NumberInput">
+        <!-- Redosled primeraka -->
+        <label for="regularRadio">
+          <input type="radio" name="radioPrimerak" id="first" value="radio 1" checked />
+          <span>1,2,3; 1,2,3; 1,2,3</span>
+        </label>
+        <label for="secondRegularRadio">
+          <input type="radio" name="radioPrimerak" id="second" value="radio 2" />
+          <span>1,1,1; 2,2,2; 3,3,3</span>
+        </label>
+        <!-- ***************************** -->
 
-            <!-- BROJ PRIMERAKA ***************************** -->
-            <label for="exampleEmailInput">Broj primeraka</label>
-            <input class="u-full-width" type="number" placeholder="1" id="NumberInput">
-            <!-- Redosled primeraka -->
-            <label for="regularRadio">
-              <input type="radio" name="radioPrimerak" id="first" value="radio 1" checked />
-              <span>1,2,3; 1,2,3; 1,2,3</span>
-            </label>
-            <label for="secondRegularRadio">
-              <input type="radio" name="radioPrimerak" id="second" value="radio 2" />
-              <span>1,1,1; 2,2,2; 3,3,3</span>
-            </label>
-            <!-- ***************************** -->
+        <!-- BOJA ***************************** -->
+        <label for="">Boja</label>
+        <label for="regularRadio">
+          <input type="radio" name="radioBoja" id="prvaBoja" value="radio 1" checked />
+          <span>Crno belo</span>
+        </label>
+        <label for="secondRegularRadio">
+          <input type="radio" name="radioBoja" id="drugaBoja" value="radio 2" />
+          <span>U boji</span>
+        </label>
+        <!-- ***************************** -->
 
-            <!-- BOJA ***************************** -->
-            <label for="">Boja</label>
-            <label for="regularRadio">
-              <input type="radio" name="radioBoja" id="prvaBoja" value="radio 1" checked />
-              <span>Crno belo</span>
-            </label>
-            <label for="secondRegularRadio">
-              <input type="radio" name="radioBoja" id="drugaBoja" value="radio 2" />
-              <span>U boji</span>
-            </label>
-            <!-- ***************************** -->
+        <!-- JEDNOSTRANO/DVOSTRANO  ***************************** -->
+        <label for="">Jednostrano / Dvostrano</label>
+        <label for="regularRadio">
+          <input type="radio" name="radioJednostrano" id="regularRadio" value="radio 1" checked />
+          <span>Jednostrano</span>
+        </label>
+        <label for="secondRegularRadio">
+          <input type="radio" name="radioJednostrano" id="secondRegularRadio" value="radio 2" />
+          <span>Dvostrano</span>
+        </label>
+        <!-- ***************************** -->
 
-            <!-- JEDNOSTRANO/DVOSTRANO  ***************************** -->
-            <label for="">Jednostrano / Dvostrano</label>
-            <label for="regularRadio">
-              <input type="radio" name="radioJednostrano" id="regularRadio" value="radio 1" checked />
-              <span>Jednostrano</span>
-            </label>
-            <label for="secondRegularRadio">
-              <input type="radio" name="radioJednostrano" id="secondRegularRadio" value="radio 2" />
-              <span>Dvostrano</span>
-            </label>
-            <!-- ***************************** -->
+        <!-- VELICINA PAPIRA -->
+        <label for="">Velicina papira</label>
+        <label for="regularRadio">
+          <input type="radio" name="radioPapir" id="regularRadio" value="radio 1" checked />
+          <span>A4</span>
+        </label>
+        <label for="secondRegularRadio">
+          <input type="radio" name="radioPapir" id="secondRegularRadio" value="radio 2" />
+          <span>A3</span>
+        </label>
+        <!-- ***************************** -->
 
-            <!-- VELICINA PAPIRA -->
-            <label for="">Velicina papira</label>
-            <label for="regularRadio">
-              <input type="radio" name="radioPapir" id="regularRadio" value="radio 1" checked />
-              <span>A4</span>
-            </label>
-            <label for="secondRegularRadio">
-              <input type="radio" name="radioPapir" id="secondRegularRadio" value="radio 2" />
-              <span>A3</span>
-            </label>
-            <!-- ***************************** -->
-
-            <!-- DEBILJINA PAPIRA -->
-            <label for="">Debljina papira</label>
-            <label for="regularRadio">
-              <input type="radio" name="radioDebljina" id="regularRadio" value="radio 1" checked />
-              <span>80gr/m2</span>
-            </label>
-            <label for="secondRegularRadio">
-              <input type="radio" name="radioDebljina" id="secondRegularRadio" value="radio 2" />
-              <span>100gr/m2</span>
-            </label>
-            <!-- ***************************** -->
+        <!-- DEBILJINA PAPIRA -->
+        <label for="">Debljina papira</label>
+        <label for="regularRadio">
+          <input type="radio" name="radioDebljina" id="regularRadio" value="radio 1" checked />
+          <span>80gr/m2</span>
+        </label>
+        <label for="secondRegularRadio">
+          <input type="radio" name="radioDebljina" id="secondRegularRadio" value="radio 2" />
+          <span>100gr/m2</span>
+        </label>
+        <!-- ***************************** -->
 
 
-            <!-- KORICENJE -->
-            <label for="">Koricenje</label>
-            <label for="regularRadio">
-              <input type="radio" name="radioKoricenje" id="regularRadio" value="radio 1" checked />
-              <span>Plasticnom spiralom</span>
-            </label>
-            <label for="secondRegularRadio">
-              <input type="radio" name="radioKoricenje" id="secondRegularRadio" value="radio 2" />
-              <span>Zicanom spiralom</span>
-            </label>
-            <label for="secondRegularRadio">
-              <input type="radio" name="radioKoricenje" id="secondRegularRadio" value="radio 2" />
-              <span>Tvrdo koricenje</span>
-            </label>
-            <!-- Upload korice dugme -->
-            <input class="button-primary" type="submit" value="Upload korice">
-            <!-- ***************************** -->
+        <!-- KORICENJE -->
+        <label for="">Koricenje</label>
+        <label for="regularRadio">
+          <input type="radio" name="radioKoricenje" id="regularRadio" value="radio 1" checked />
+          <span>Plasticnom spiralom</span>
+        </label>
+        <label for="secondRegularRadio">
+          <input type="radio" name="radioKoricenje" id="secondRegularRadio" value="radio 2" />
+          <span>Zicanom spiralom</span>
+        </label>
+        <label for="secondRegularRadio">
+          <input type="radio" name="radioKoricenje" id="secondRegularRadio" value="radio 2" />
+          <span>Tvrdo koricenje</span>
+        </label>
+        <!-- Upload korice dugme -->
+        <input class="button-primary" type="submit" value="Upload korice">
+        <!-- ***************************** -->
 
-            <!-- HEFTANJE -->
-            <label for="">Heftanje</label>
-            <label for="regularRadio">
-              <input type="radio" name="radioHeftanje" id="regularRadio" value="radio 1" checked />
-              <span>Gore levo</span>
-            </label>
-            <label for="secondRegularRadio">
-              <input type="radio" name="radioHeftanje" id="secondRegularRadio" value="radio 2" />
-              <span>Gore desno</span>
-            </label>
-            <label for="secondRegularRadio">
-              <input type="radio" name="radioHeftanje" id="secondRegularRadio" value="radio 2" />
-              <span>Dole levo</span>
-            </label>
-            <label for="secondRegularRadio">
-              <input type="radio" name="radioHeftanje" id="secondRegularRadio" value="radio 2" />
-              <span>Dole desno</span>
-            </label>
-            <label for="secondRegularRadio">
-              <input type="radio" name="radioHeftanje" id="secondRegularRadio" value="radio 2" />
-              <span>Po sredini levo</span>
-            </label>
-            <label for="secondRegularRadio">
-              <input type="radio" name="radioHeftanje" id="secondRegularRadio" value="radio 2" />
-              <span>Po sredini desno</span>
-            </label>
-            <label for="secondRegularRadio">
-              <input type="radio" name="radioHeftanje" id="secondRegularRadio" value="radio 2" />
-              <span>Po sredini gore</span>
-            </label>
-            <label for="secondRegularRadio">
-              <input type="radio" name="radioHeftanje" id="secondRegularRadio" value="radio 2" />
-              <span>Po sredini dole</span>
-            </label>
-            <!-- ***************************** -->
+        <!-- HEFTANJE -->
+        <label for="">Heftanje</label>
+        <label for="regularRadio">
+          <input type="radio" name="radioHeftanje" id="regularRadio" value="radio 1" checked />
+          <span>Gore levo</span>
+        </label>
+        <label for="secondRegularRadio">
+          <input type="radio" name="radioHeftanje" id="secondRegularRadio" value="radio 2" />
+          <span>Gore desno</span>
+        </label>
+        <label for="secondRegularRadio">
+          <input type="radio" name="radioHeftanje" id="secondRegularRadio" value="radio 2" />
+          <span>Dole levo</span>
+        </label>
+        <label for="secondRegularRadio">
+          <input type="radio" name="radioHeftanje" id="secondRegularRadio" value="radio 2" />
+          <span>Dole desno</span>
+        </label>
+        <label for="secondRegularRadio">
+          <input type="radio" name="radioHeftanje" id="secondRegularRadio" value="radio 2" />
+          <span>Po sredini levo</span>
+        </label>
+        <label for="secondRegularRadio">
+          <input type="radio" name="radioHeftanje" id="secondRegularRadio" value="radio 2" />
+          <span>Po sredini desno</span>
+        </label>
+        <label for="secondRegularRadio">
+          <input type="radio" name="radioHeftanje" id="secondRegularRadio" value="radio 2" />
+          <span>Po sredini gore</span>
+        </label>
+        <label for="secondRegularRadio">
+          <input type="radio" name="radioHeftanje" id="secondRegularRadio" value="radio 2" />
+          <span>Po sredini dole</span>
+        </label>
+        <!-- ***************************** -->
 
-            <!-- BUSENJE -->
-            <label for="">Busenje</label>
-            <label for="regularRadio">
-              <input type="radio" name="radioKoricenje" id="regularRadio" value="radio 1" checked />
-              <span>Dve rupe za registrator levo</span>
-            </label>
-            <label for="secondRegularRadio">
-              <input type="radio" name="radioKoricenje" id="secondRegularRadio" value="radio 2" />
-              <span>Dve rupe za registrator desno</span>
-            </label>
-            <label for="secondRegularRadio">
-              <input type="radio" name="radioKoricenje" id="secondRegularRadio" value="radio 2" />
-              <span>Dve rupe za registrator gore</span>
-            </label>
-            <label for="secondRegularRadio">
-              <input type="radio" name="radioKoricenje" id="secondRegularRadio" value="radio 2" />
-              <span>Dve rupe za registrator dole</span>
-            </label>
-            <!-- ***************************** -->
+        <!-- BUSENJE -->
+        <label for="">Busenje</label>
+        <label for="regularRadio">
+          <input type="radio" name="radioKoricenje" id="regularRadio" value="radio 1" checked />
+          <span>Dve rupe za registrator levo</span>
+        </label>
+        <label for="secondRegularRadio">
+          <input type="radio" name="radioKoricenje" id="secondRegularRadio" value="radio 2" />
+          <span>Dve rupe za registrator desno</span>
+        </label>
+        <label for="secondRegularRadio">
+          <input type="radio" name="radioKoricenje" id="secondRegularRadio" value="radio 2" />
+          <span>Dve rupe za registrator gore</span>
+        </label>
+        <label for="secondRegularRadio">
+          <input type="radio" name="radioKoricenje" id="secondRegularRadio" value="radio 2" />
+          <span>Dve rupe za registrator dole</span>
+        </label>
+        <!-- ***************************** -->
 
-            <!-- Krajnja poruka -->
-            <label for="exampleMessage">Poruka</label>
-            <textarea class="u-full-width" placeholder="Dodatni komentar ..." id="exampleMessage"></textarea>
-            <label class="example-send-yourself-copy">
-              <input type="checkbox">
-              <span class="label-body">Posalji kopiju sebi</span>
-            </label>
-            <input class="button-primary" type="submit" value="Posalji">
-          </div>
+        <!-- Krajnja poruka -->
+        <label for="exampleMessage">Poruka</label>
+        <textarea class="u-full-width" placeholder="Dodatni komentar ..." id="exampleMessage"></textarea>
+        <label class="example-send-yourself-copy">
+          <input type="checkbox">
+          <span class="label-body">Posalji kopiju sebi</span>
+        </label>
+        <input class="button-primary" type="submit" value="Posalji">
       </form>
     </section>
-
-
-
 
 
     <!--Footer-->
     <footer>
       <div class="container">
         <div class="row">
-          <div class="one-half column">
-            <p>26232 Pančevo, Matije Gupca 24</p>
+          <!--Usluge na dnu-->
+          <div class="six columns aside">
+            <h3>Usluge</h3>
+            <nav class="side__nav">
+              <ul class="side__nav--ul">
+                <li><a href="./stampanje.html">Stampanje</a></li>
+                <li><a href="./blokovi.html">Preslikavajuci blokovi</a></li>
+                <li><a href="./uplatnice.html">Uplatnice</a></li>
+                <li><a href="./koverteidostavnice.html">Koverte, Dostavnice, Formulari za adresiranje</a></li>
+                <li><a href="./omotspisa.html">Omot spisa</a></li>
+              </ul>
+            </nav>
           </div>
-          <div class="one-half column">
-            <p>065 983 983 8</p>
+
+          <div class="six columns aside">
+            <h3>Ostalo</h3>
+            <nav class="side__nav">
+              <ul class="side__nav--ul">
+                  <li><a href="./cenovnik.html">Cenovnik</a></li>
+                  <li><a href="./onama.html">O nama</a></li>
+                  <li><a href="./kontakt.html">Kontakt</a></li>
+              </ul>
+            </nav>
           </div>
         </div>
       </div>
     </footer>
-    </div>
+    <!--End of footer-->
+  </div>
+  <!--end of container-->
 </body>
 
 </html>
