@@ -12,12 +12,12 @@ Sone :baby_chick:
 - [x] Push
 - [ ] Zavrsi ostale usluge i njihove forme
 - [x] Dodaj navigaciju u uslugama 
-- [ ] Proveri metatagove, dodaj za Face/Twit, promeni favicon
 - [ ] Bolje stilizuj forme
 - [ ] JavaScript da mora da chekira "prihvatam uslove"
 - [ ] Napravi modal za Registraciju
 - [ ] Promeni font
 - [ ] Napravi Admin panel
+- [ ] Proveri metatagove, dodaj za Face/Twit, promeni favicon
 
 Tile :rabbit:
 - [ ] nesto
