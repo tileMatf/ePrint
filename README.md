@@ -11,9 +11,10 @@ https://fontawesome.com/
 Sone :baby_chick:
 - [x] Push
 - [ ] Zavrsi ostale usluge i njihove forme
-- [ ] Dodaj navigaciju u uslugama 
+- [x] Dodaj navigaciju u uslugama 
 - [ ] Proveri metatagove, dodaj za Face/Twit, promeni favicon
 - [ ] Bolje stilizuj forme
+- [ ] JavaScript da mora da chekira "prihvatam uslove"
 - [ ] Napravi modal za Registraciju
 - [ ] Promeni font
 - [ ] Napravi Admin panel
