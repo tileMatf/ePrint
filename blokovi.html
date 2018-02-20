@@ -106,12 +106,12 @@
                         <!-- VELICINA BLOKA  ***************************** -->
                         <label for="">Velicina bloka</label>
                         <label for="regularRadio">
-                            <input type="radio" name="radioJednostrano" id="regularRadio" value="radio 1" />
-                            <span>A5</span>
+                            <input type="radio" name="radioJednostrano" id="regularRadio" value="radio 1" checked/>
+                            <span>A4</span>
                         </label>
                         <label for="secondRegularRadio">
-                            <input type="radio" name="radioJednostrano" id="secondRegularRadio" value="radio 2" checked />
-                            <span>A4</span>
+                            <input type="radio" name="radioJednostrano" id="secondRegularRadio" value="radio 2" />
+                            <span>A5</span>
                         </label>
                         <!-- ***************************** -->
 
@@ -136,7 +136,7 @@
                         <textarea class="u-full-width" placeholder="Dodatni komentar ..." id="exampleMessage"></textarea>
                         <label class="example-send-yourself-copy">
                             <input type="checkbox">
-                            <span class="label-body">Posalji kopiju sebi</span>
+                            <span class="label-body">Prihvatam uslove</span>
                         </label>
                         <input class="button-primary" type="submit" value="Posalji">
                     </div>
@@ -151,16 +151,57 @@
         <footer>
             <div class="container">
                 <div class="row">
-                    <div class="one-half column">
-                        <p>26232 Pančevo, Matije Gupca 24</p>
+                    <!--Usluge na dnu-->
+                    <div class="six columns aside">
+                        <h3>Usluge</h3>
+                        <nav class="side__nav">
+                            <ul class="side__nav--ul">
+                                <li>
+                                    <a href="./stampanje.html">Stampanje</a>
+                                </li>
+                                <li>
+                                    <a href="./blokovi.html">Preslikavajuci blokovi</a>
+                                </li>
+                                <li>
+                                    <a href="./uplatnice.html">Uplatnice</a>
+                                </li>
+                                <li>
+                                    <a href="./koverteidostavnice.html">Koverte, Dostavnice, Formulari za adresiranje</a>
+                                </li>
+                                <li>
+                                    <a href="./omotspisa.html">Omot spisa</a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
-                    <div class="one-half column">
-                        <p>065 983 983 8</p>
+                    <!-- End of usluga -->
+
+                    <div class="six columns aside">
+                        <h3>Ostalo</h3>
+                        <nav class="side__nav">
+                            <ul class="side__nav--ul">
+                                <li>
+                                    <a href="./cenovnik.html">Cenovnik</a>
+                                </li>
+                                <li>
+                                    <a href="./onama.html">O nama</a>
+                                </li>
+                                <li>
+                                    <a href="./kontakt.html">Kontakt</a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
+                    <!-- End of ostalo -->
+
                 </div>
+                <!-- End of row -->
             </div>
+            <!-- End of container -->
         </footer>
+        <!--End of footer-->
         </div>
+        <!--end of MAIN container-->
 </body>
 
 </html>
