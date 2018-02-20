@@ -37,3 +37,4 @@ trenutno ukoliko udjes u stampanje ~forma, kada klikces u prazno on chekira jedn
 Promeni nazive u formi za stampanje (id, name, value) i sta vec treba, pa cu po tom principu da radim i ostale
 
 ###### 2
+Uplatnice su nesto istripovane, pitaj ga za "unos podataka", "varijabilna stampa", "upload" na kraju? Greska ili ne u nalogu za prenos?
