@@ -11,12 +11,13 @@ https://fontawesome.com/
 Sone :baby_chick:
 - [x] Push
 - [ ] Zavrsi ostale usluge i njihove forme
-- [ ] Dodaj navigaciju u uslugama 
-- [ ] Proveri metatagove, dodaj za Face/Twit, promeni favicon
+- [x] Dodaj navigaciju u uslugama 
 - [ ] Bolje stilizuj forme
+- [ ] JavaScript da mora da chekira "prihvatam uslove"
 - [ ] Napravi modal za Registraciju
 - [ ] Promeni font
 - [ ] Napravi Admin panel
+- [ ] Proveri metatagove, dodaj za Face/Twit, promeni favicon
 
 Tile :rabbit:
 - [ ] nesto
@@ -36,3 +37,4 @@ trenutno ukoliko udjes u stampanje ~forma, kada klikces u prazno on chekira jedn
 Promeni nazive u formi za stampanje (id, name, value) i sta vec treba, pa cu po tom principu da radim i ostale
 
 ###### 2
+Uplatnice su nesto istripovane, pitaj ga za "unos podataka", "varijabilna stampa", "upload" na kraju? Greska ili ne u nalogu za prenos?
