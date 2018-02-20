@@ -160,6 +160,7 @@ ul.nav.nav-login-register {
 /**nav1 je za ostale stranice poput stampanje.html, odnosi se na navigaciju pocetna / stampanje ...**/
 ul.nav1 {
     background-color: #fdfbfb;
+    padding-left: 5px
 }
 
 ul.nav1 li {
@@ -170,11 +171,16 @@ ul.nav1 li {
     font-size: 2rem;
 }
 
+/** ????? **/
 .tile a {
     display: block;
     padding: 10px;
     border: 1px solid red;
     margin-right: 5px;
+}
+
+.fa-home {
+    padding-right: 4px;
 }
 
 /**navigacija u footeru**/
