@@ -48,5 +48,9 @@ trenutno ukoliko udjes u stampanje ~forma, kada klikces u prazno on chekira jedn
 ###### 2
 
 ### Update
+###### 1	
 	Dugme za upload sam morala da promenim, jer mora da bude tipa 'file'. Probaj da stilizujes, ali cini se da je 
 	zeznuto stilizovati to dugme. Ja sam nasla ovde neko objasnjenje: https://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/
+###### 2
+	U delu stampanje, dodaj da ukoliko korisnik stiklira 'Posalji kopiju sebi' da se pojavi polje za upis email adrese na koju
+	se salje kopija.
