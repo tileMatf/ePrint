@@ -1,0 +1,179 @@
+<?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+
+require_once "../connection.php";
+require_once '../PHPMailer/src/Exception.php';
+require_once '../PHPMailer/src/PHPMailer.php';
+require_once '../PHPMailer/src/SMTP.php';
+
+try{
+	$db = new DB();
+
+	$target_dir = "uploaded_file/";
+	$target_binding_dir = "uploaded_binding_file/";	
+	$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+	$uploadOk = 1;
+	$status = 0;
+	$fileType = pathinfo($target_file,PATHINFO_EXTENSION);
+	
+	
+	// Check if file is a actual image or fake image
+/*	if(isset($_POST["submit"])) {
+		$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);		
+		if($check !== false) {
+			echo "File is an image - " . $check["mime"] . ".";
+			$uploadOk = 1;
+		} else {
+			echo "File is not an image.";
+			$uploadOk = 0;
+			$status = 1;
+		} 		
+	}
+*/	
+
+	// Allow certain file formats	
+	if($fileType != "pdf" && $fileType != "jpg") {
+		echo "Sorry, only PDF & JPG files are allowed.";
+		$uploadOk = 0;
+		$status = 1;
+	}
+	// Check if $uploadOk is set to 0 by an error
+	if ($uploadOk == 0) {
+		echo "Sorry, your file was not uploaded.";
+	// if everything is ok, try to upload file
+	} else {
+		// Check if file already exists
+		if (file_exists($target_file)) {
+			unlink($target_file);
+			move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
+			echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+			$status = 2;			
+		}
+		else if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+			//$uploadOk = $db->uploadFile($target_file);
+			if($uploadOk == 1){
+				echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+				$status = 3;
+			} else {
+				echo  "Sorry, there was an error uploading your file to database.";
+				$status = 4;
+			}
+		} else {
+			echo "Sorry, there was an error uploading your file to file system.";			
+			$status = 5;
+		}
+	}
+		
+	if(!empty($_FILES['bindingFileToUpload']['name'])){		
+		$target_binding_file = $target_binding_dir . basename($_FILES["bindingFileToUpload"]["name"]);	
+		echo $target_binding_file;
+		$bindingFileType = pathinfo($target_binding_file,PATHINFO_EXTENSION);
+		
+		// Allow certain file formats for binding
+		if($bindingFileType != "pdf" && $bindingFileType != "jpg") {
+			echo "Sorry, only PDF & JPG files are allowed.";			
+			$uploadOk = 0;
+			$status = 6;
+		}
+		// Check if $uploadOk is set to 0 by an error
+		if ($uploadOk == 0) {
+			echo "Sorry, your file was not uploaded.";
+		// if everything is ok, try to upload file
+		} else {
+			// Check if file already exists
+			if (file_exists($target_binding_file)) {
+				unlink($target_binding_file);
+				move_uploaded_file($_FILES["bindingFileToUpload"]["tmp_name"], $target_binding_file);
+				echo "The file ". basename( $_FILES["bindingFileToUpload"]["name"]). " has been uploaded.";
+				$status = 7;			
+			}
+			else if (move_uploaded_file($_FILES["bindingFileToUpload"]["tmp_name"], $target_binding_file)) {
+				//$uploadOk = $db->uploadFile($target_file);
+				if($uploadOk == 1){
+					echo "The file ". basename( $_FILES["bindingFileToUpload"]["name"]). " has been uploaded.";
+					$status = 8;
+				} else {
+					echo  "Sorry, there was an error uploading your file to database.";
+					$status = 9;
+				}
+			} else {
+				echo "Sorry, there was an error uploading your file to file system.";			
+				$status = 10;
+			}
+		}
+	}	
+	
+	$message = 
+		'<html>
+			<head><title> </title></head>
+			<body>
+				<label> Korisnik: </label> korisnik123 </br>
+				<label> Vreme: </label> '.date("h:i").' </br>
+				<label> Tip: </label> stampanje </br>
+				<label> Datoteka: </label> '.basename( $_FILES["fileToUpload"]["name"]).' </br>
+				<label> Izabrane opcije: </label> </br>
+				<ul>
+					<li>Broj primeraka: '.$_POST['noInput'].'</li>
+					<li>Redosled stampanja: '.$_POST['orderOfInput'].'</li>
+					<li>Boja: '.$_POST['colorOfInput'].'</li>
+					<li>Nacin stampanja: '.$_POST['typeOfPrint'].'</li>
+					<li>Velicina papira: '.$_POST['paperSize'].'</li>
+					<li>Debljina papira: '.$_POST['paperWidth'].'</li>
+					<li>Koricenje: '.$_POST['bindingType'].'</li>
+					<li>Dodate korice: ';
+			if(!empty($_FILES['bindingFileToUpload']['name'])){
+				$message = $message . 'DA</li>
+					<li>Naziv datoteke za korice: '. basename( $_FILES["bindingFileToUpload"]["name"]). '</li>';
+			} else {
+				$message = $message . 'NE</li>';
+			}
+	$message = $message . '
+					<li>Heftanje: '.$_POST['heftingType'].'</li>
+					<li>Busenje: '.$_POST['drillingType'].'</li>
+					<li>Komentar korisnika: '.$_POST['comment'].'</li>
+				</ul>
+			</body>
+		</html>';
+	//$message = wordwrap($message,70);
+	
+	$mail = new PHPMailer;
+	
+	$mail->isSMTP();                            // Set mailer to use SMTP
+//	$mail->SMTPDebug = 4;						//for debugging
+	$mail->Host = 'smtp.gmail.com';             // Specify main and backup SMTP servers
+	$mail->SMTPAuth = true;                     // Enable SMTP authentication
+	$mail->Username = 'tijjana0807@gmail.com';  // SMTP username
+	$mail->Password = 'chadmajkl15'; 			// SMTP password
+	$mail->SMTPSecure = 'tls';                  // Enable TLS encryption, `ssl` also accepted
+	$mail->Port = 587;                          // TCP port to connect to
+	$mail->SMTPOptions = array('ssl' => array(
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+        'allow_self_signed' => true)
+	);
+	$mail->setFrom('tijjana0807@gmail.com', 'EPrint');
+	$mail->addAddress('tijjana@hotmail.com');   // Add a recipient
+	if(isset($_POST['sendCopy'])){
+		$mail->addCC('tichko@yahoo.com');
+		echo '<br> Dodao CC';
+	}	
+	$mail->isHTML(true);  // Set email format to HTML
+	$mail->Subject = 'Email from EPrint (New Order)';
+	$mail->Body    = $message;
+	echo "<br>" .$message;
+	
+	//need to install https://getcomposer.org/download/
+	if(!$mail->send()) {
+		echo 'Message could not be sent.<br>';
+		echo 'Mailer Error: ' . $mail->ErrorInfo . '<br>';
+	} else {
+		echo 'Message has been sent';
+	}	
+	
+//	header("Location: ./stampanje.php?status=".$status);
+//	exit();
+} catch(RuntimeException $e){
+	echo $e->getMessage();
+} 
+?>
