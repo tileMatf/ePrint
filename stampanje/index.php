@@ -64,12 +64,12 @@
     <div class="twelve columns">
       <ul class="nav1">
         <li>
-          <a class="tile" href="index.html">
+          <a class="tile" href="../">
             <i class="fa fa-home" aria-hidden="true"></i>Pocetna</a>
         </li>
         <span class="line">/</span>
         <li>
-          <a class="tile" href="./stampanje.html">Stampanje</a>
+          <a class="tile" href="./">Stampanje</a>
         </li>
       </ul>
     </div>
