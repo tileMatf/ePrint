@@ -11,9 +11,9 @@
     <!--Font from Google-->
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&amp;subset=latin-ext" rel="stylesheet" type="text/css">
     <!--CSS files-->
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/skeleton.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/skeleton.css">
+    <link rel="stylesheet" href="../css/style.css">
     <!--Favicon-->
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="apple-touch-icon" href="images/icon.png">
@@ -83,59 +83,59 @@
                     <div class="row">
 
                         <!-- BROJ SETOVA ***************************** -->
-                        <label for="exampleEmailInput">Broj setova</label>
-                        <input class="u-full-width" type="number" placeholder="1" id="NumberInput">
+                        <label for="noOfSet">Broj setova</label>
+                        <input class="u-full-width" type="number" value="1" name="noOfSet">
                         <!-- ***************************** -->
 
                         <!-- BOJA ***************************** -->
                         <label for="">Boja</label>
-                        <label for="regularRadio">
-                            <input type="radio" name="radioBoja" id="prvaBoja" value="radio 1" checked />
+                        <label for="blockColor">
+                            <input type="radio" name="blockColor" value="Crno-belo" checked />
                             <span>Crno belo</span>
                         </label>
-                        <label for="secondRegularRadio">
-                            <input type="radio" name="radioBoja" id="drugaBoja" value="radio 2" />
+                        <label for="blockColor">
+                            <input type="radio" name="blockColor" value="Plavo-belo" />
                             <span>Plavo belo</span>
                         </label>
-                        <label for="secondRegularRadio">
-                            <input type="radio" name="radioBoja" id="drugaBoja" value="radio 2" />
+                        <label for="blockColor">
+                            <input type="radio" name="blockColor" value="U boji" />
                             <span>U boji</span>
                         </label>
                         <!-- ***************************** -->
 
                         <!-- VELICINA BLOKA  ***************************** -->
                         <label for="">Velicina bloka</label>
-                        <label for="regularRadio">
-                            <input type="radio" name="radioJednostrano" id="regularRadio" value="radio 1" checked/>
+                        <label for="blockSize">
+                            <input type="radio" name="blockSize" value="A4" checked/>
                             <span>A4</span>
                         </label>
-                        <label for="secondRegularRadio">
-                            <input type="radio" name="radioJednostrano" id="secondRegularRadio" value="radio 2" />
+                        <label for="blockSize">
+                            <input type="radio" name="blockSize" value="A5" />
                             <span>A5</span>
                         </label>
                         <!-- ***************************** -->
 
                         <!-- SPAKOVANO -->
                         <label for="">Spakovano</label>
-                        <label for="regularRadio">
-                            <input type="radio" name="radioPapir" id="regularRadio" value="radio 1" />
+                        <label for="packing">
+                            <input type="radio" name="packing" value="Heftanjem gore" />
                             <span>Heftanjem gore</span>
                         </label>
-                        <label for="regularRadio">
-                            <input type="radio" name="radioPapir" id="regularRadio" value="radio 1" />
+                        <label for="packing">
+                            <input type="radio" name="packing" value="Heftanjem levo" />
                             <span>Heftanjem levo</span>
                         </label>
-                        <label for="secondRegularRadio">
-                            <input type="radio" name="radioPapir" id="secondRegularRadio" value="radio 2" checked />
+                        <label for="packing">
+                            <input type="radio" name="packing" value="U fasciklu" checked />
                             <span>U fasciklu</span>
                         </label>
                         <!-- ***************************** -->
 
                         <!-- Krajnja poruka -->
-                        <label for="exampleMessage">Poruka</label>
-                        <textarea class="u-full-width" placeholder="Dodatni komentar ..." id="exampleMessage"></textarea>
+                        <label for="message">Poruka</label>
+                        <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="message"></textarea>
                         <label class="example-send-yourself-copy">
-                            <input type="checkbox">
+                            <input type="checkbox" name="acceptCondition">
                             <span class="label-body">Prihvatam uslove</span>
                         </label>
                         <input class="button-primary" type="submit" value="Posalji">
