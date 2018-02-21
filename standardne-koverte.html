@@ -64,61 +64,99 @@
                 <li>
                     <a class="tile" href="koverte-dostavnice-formulari.html">Koverte, dostavnice, formulari za adresiranje</a>
                 </li>
+                <span class="line">/</span>
+                <li>
+                    <a class="tile" href="standardne-koverte.html">Standardne koverte</a>
+                </li>
             </ul>
         </div>
         <!-- End of navigation -->
 
 
+        <!--Stampanje section-->
+        <section class="section__stampanje">
+            <h2 class="section__heading">Standardne koverte</h2>
 
-        <!--MAIN PAGE SECTION-->
-        <section class="section__main">
-            <div class="container" style="padding-top:70px; padding-bottom: 70px;">
-                <!--first row-->
-                <div class="row">
-                    <div class="one-half column">
-                        <i class="fa fa-envelope"></i>
-                        <a href="koverte-sa-povratnicom-za-stampanje.html" class="link">
-                            <h3>Koverte sa povratnicom za stampanje</h3>
-                        </a>
-                    </div>
+            <!-- OVDE POCINJE FORMA ** -->
+            <form class="form__stampanje form-box">
 
-                    <div class="one-half column">
-                        <i class="fa fa-envelope"></i>
-                        <a href="dostavnice.html" class="link">
-                            <h3>Dostavnice</h3>
-                        </a>
-                    </div>
-                </div>
-                <!--second row-->
-                <div class="row">
-                    <div class="one-half column">
-                        <i class="fa fa-envelope"></i>
-                        <a href="koverte-sa-dostavnicom-za-rucno-popunjavanje.html" class="link">
-                            <h3>Koverte sa dostavnicom za rucno popunjavanje</h3>
-                        </a>
-                    </div>
+                <!--UPLOAD dugme-->
+                <input class="button-primary" type="submit" value="Upload">
 
-                    <div class="one-half column">
-                        <i class="fa fa-envelope"></i>
-                        <a href="formulari-za-adresiranje.html" class="link">
-                            <h3>Formulari za adresiranje</h3>
-                        </a>
-                    </div>
-                </div>
-                <!-- third row-->
-                <div class="row">
-                    <div class="one-half column">
-                        <i class="fa fa-envelope"></i>
-                        <a href="standardne-koverte.html" class="link">
-                            <h3>Standardne koverte</h3>
-                        </a>
-                    </div>
-                </div>
-                <!--end of three rows-->
-            </div>
-            <!--end of container-->
+                <!-- VELICINA -->
+                <label for="">Velicina</label>
+                <label for="regularRadio">
+                    <input type="radio" name="radioPrimerak" id="first" value="radio 1" checked />
+                    <span>B6</span>
+                </label>
+                <label for="secondRegularRadio">
+                    <input type="radio" name="radioPrimerak" id="second" value="radio 2" />
+                    <span>B5</span>
+                </label>
+                <label for="secondRegularRadio">
+                    <input type="radio" name="radioPrimerak" id="second" value="radio 2" />
+                    <span>C4</span>
+                </label>
+                <label for="secondRegularRadio">
+                    <input type="radio" name="radioPrimerak" id="second" value="radio 2" />
+                    <span>American sa prozorom desnim</span>
+                </label>
+                <label for="secondRegularRadio">
+                    <input type="radio" name="radioPrimerak" id="second" value="radio 2" />
+                    <span>American bez prozora</span>
+                </label>
+                <!-- ***************************** -->
+
+                <!-- Kolicina -->
+                <label for="exampleRecipientInput">Kolicina</label>
+                <select class="u-full-width" id="exampleRecipientInput">
+                    <option value="Option 1" selected>1000</option>
+                    <option value="Option 2">2000</option>
+                    <option value="Option 3">3000</option>
+                    <option value="Option 4">4000</option>
+                    <option value="Option 5">5000</option>
+                    <option value="Option 6">6000</option>
+                    <option value="Option 7">7000</option>
+                    <option value="Option 8">8000</option>
+                    <option value="Option 9">9000</option>
+                    <option value="Option 10">10000</option>
+                </select>
+                <!-- ***************************** -->
+
+                <!--Stampanje na posledjini ******************************-->
+                <label for="exampleEmailInput">Stampanje na poledjini:</label>
+                <input class="u-full-width" type="text" placeholder="Prvi red..." id="NumberInput">
+                <input class="u-full-width" type="text" placeholder="Drugi red..." id="NumberInput">
+                <input class="u-full-width" type="text" placeholder="Treci red..." id="NumberInput">
+                <input class="u-full-width" type="text" placeholder="Cetvrti red..." id="NumberInput">
+                <!-- ***************************** -->
+
+                <!--Stampanje na adresnoj strani ******************************-->
+                <label for="exampleEmailInput">Stampanje na adresnoj strani:</label>
+                <input class="u-full-width" type="text" placeholder="Prvi red..." id="NumberInput">
+                <input class="u-full-width" type="text" placeholder="Drugi red..." id="NumberInput">
+                <input class="u-full-width" type="text" placeholder="Treci red..." id="NumberInput">
+                <input class="u-full-width" type="text" placeholder="Cetvrti red..." id="NumberInput">
+                <!-- ***************************** -->
+
+                <!-- Krajnja poruka -->
+                <label for="exampleMessage">Poruka</label>
+                <textarea class="u-full-width" placeholder="Dodatni komentar ..." id="exampleMessage"></textarea>
+
+                <!-- Varijabilni podaci i prihvatam uslove -->
+                <label class="example">
+                    <input type="checkbox">
+                    <span class="label-body">Varijabilni podaci</span>
+                </label>
+                <label class="example">
+                    <input type="checkbox">
+                    <span class="label-body">Prihvatam uslove</span>
+                </label>
+
+                <!-- Dugme -->
+                <input class="button-primary" type="submit" value="Posalji">
+            </form>
         </section>
-
 
 
         <!--Footer-->

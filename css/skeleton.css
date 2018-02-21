@@ -254,7 +254,7 @@ textarea {
      -moz-appearance: none;
           appearance: none; }
 textarea {
-  min-height: 65px;
+  min-height: 120px;
   padding-top: 6px;
   padding-bottom: 6px; }
 input[type="email"]:focus,
@@ -266,12 +266,13 @@ input[type="url"]:focus,
 input[type="password"]:focus,
 textarea:focus,
 select:focus {
-  border: 1px solid #33C3F0;
+  border: 1.3px solid #33C3F0;
   outline: 0; }
 label,
 legend {
   display: block;
   margin-bottom: .5rem;
+  padding-bottom: .3rem;
   font-weight: 600; }
 fieldset {
   padding: 0;

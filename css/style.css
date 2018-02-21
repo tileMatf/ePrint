@@ -63,6 +63,7 @@ body {
 
 .section__ostalo {
     padding-top: 5rem;
+    padding-bottom: 8rem;
 }
 
 .section__stampanje {
@@ -84,12 +85,28 @@ Typography
 ***/
 
 .section__heading {
-    margin-bottom: 4rem;
+    margin-bottom: 6rem;
+    margin-top: 6rem;
     text-align: center;
     /* font-weight: bold; <--- mozda */
 }
 
 .section__heading:after {
+    display: block;
+    height: 2px;
+    background-color: gray;
+    content: " ";
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 8px;
+}
+
+.mainpage__heading {
+    margin-bottom: 4rem;
+    margin-top: 1rem;
+}
+
+.mainpage__heading:after {
     display: block;
     height: 2px;
     background-color: gray;
@@ -230,6 +247,8 @@ FORMS
     max-width: 800px;
     margin: 0 auto;
     padding: 80px 80px;
+    margin-top: 30px;
+    margin-bottom: 100px;
     background: #fdfbfb;
     border-radius: 5px;
     position: relative;

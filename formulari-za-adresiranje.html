@@ -64,61 +64,46 @@
                 <li>
                     <a class="tile" href="koverte-dostavnice-formulari.html">Koverte, dostavnice, formulari za adresiranje</a>
                 </li>
+                <span class="line">/</span>
+                <li>
+                    <a class="tile" href="formulari-za-adresiranje.html">Formulari za adresiranje</a>
+                </li>
             </ul>
         </div>
         <!-- End of navigation -->
 
 
+        <!--Stampanje section-->
+        <section class="section__stampanje">
+            <h2 class="section__heading">Formulari za adresiranje</h2>
 
-        <!--MAIN PAGE SECTION-->
-        <section class="section__main">
-            <div class="container" style="padding-top:70px; padding-bottom: 70px;">
-                <!--first row-->
-                <div class="row">
-                    <div class="one-half column">
-                        <i class="fa fa-envelope"></i>
-                        <a href="koverte-sa-povratnicom-za-stampanje.html" class="link">
-                            <h3>Koverte sa povratnicom za stampanje</h3>
-                        </a>
-                    </div>
+            <!-- OVDE POCINJE FORMA ** -->
+            <form class="form__stampanje form-box">
+                <!-- Kolicina -->
+                <label for="exampleRecipientInput">Kolicina</label>
+                <select class="u-full-width" id="exampleRecipientInput">
+                    <option value="Option 1" selected>1000</option>
+                    <option value="Option 2">2000</option>
+                    <option value="Option 3">3000</option>
+                    <option value="Option 4">4000</option>
+                    <option value="Option 5">5000</option>
+                    <option value="Option 6">6000</option>
+                    <option value="Option 7">7000</option>
+                    <option value="Option 8">8000</option>
+                    <option value="Option 9">9000</option>
+                    <option value="Option 10">10000</option>
+                </select>
+                <!-- ***************************** -->
 
-                    <div class="one-half column">
-                        <i class="fa fa-envelope"></i>
-                        <a href="dostavnice.html" class="link">
-                            <h3>Dostavnice</h3>
-                        </a>
-                    </div>
-                </div>
-                <!--second row-->
-                <div class="row">
-                    <div class="one-half column">
-                        <i class="fa fa-envelope"></i>
-                        <a href="koverte-sa-dostavnicom-za-rucno-popunjavanje.html" class="link">
-                            <h3>Koverte sa dostavnicom za rucno popunjavanje</h3>
-                        </a>
-                    </div>
+                <label class="example">
+                    <input type="checkbox">
+                    <span class="label-body">Prihvatam uslove</span>
+                </label>
 
-                    <div class="one-half column">
-                        <i class="fa fa-envelope"></i>
-                        <a href="formulari-za-adresiranje.html" class="link">
-                            <h3>Formulari za adresiranje</h3>
-                        </a>
-                    </div>
-                </div>
-                <!-- third row-->
-                <div class="row">
-                    <div class="one-half column">
-                        <i class="fa fa-envelope"></i>
-                        <a href="standardne-koverte.html" class="link">
-                            <h3>Standardne koverte</h3>
-                        </a>
-                    </div>
-                </div>
-                <!--end of three rows-->
-            </div>
-            <!--end of container-->
+                <!-- Dugme -->
+                <input class="button-primary" type="submit" value="Posalji">
+            </form>
         </section>
-
 
 
         <!--Footer-->
