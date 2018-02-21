@@ -47,3 +47,6 @@ trenutno ukoliko udjes u stampanje ~forma, kada klikces u prazno on chekira jedn
 
 ###### 2
 
+### Update
+	Dugme za upload sam morala da promenim, jer mora da bude tipa 'file'. Probaj da stilizujes, ali cini se da je 
+	zeznuto stilizovati to dugme. Ja sam nasla ovde neko objasnjenje: https://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/
