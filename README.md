@@ -26,15 +26,16 @@ Tile :rabbit:
 
 ### Pitanja
 1. Kako da nazovem heading "Ostalo" gde se nalaze cenovnik, o nama i kontakt? Ostalo je bzvz.
+2. Uplatnice su nesto istripovane, pitaj ga za "unos podataka", "varijabilna stampa", "upload" na kraju? Greska ili ne u nalogu za prenos?
+3. Da li nesto od ponudjenih ne mora da se cekira, ili je sve obavezno izabrati?
+4. Standardne koverte - pitaj da li je dobro za "na poledjini" i "na adresnoj strani"
+
 
 ### Problemi
 
 ###### 1
 Forme 
-"name, id, value" - nisam siguran kako treba da ih nazivam, i da li svaki treba drugacije da se imenuje? 
-
-trenutno ukoliko udjes u stampanje ~forma, kada klikces u prazno on chekira jednostrano/dvostrano opciju. To je zbog ID-a?
-Promeni nazive u formi za stampanje (id, name, value) i sta vec treba, pa cu po tom principu da radim i ostale
+trenutno ukoliko udjes u stampanje ~forma, kada klikces u prazno on chekira jednostrano/dvostrano opciju. 
 
 ###### 2
-Uplatnice su nesto istripovane, pitaj ga za "unos podataka", "varijabilna stampa", "upload" na kraju? Greska ili ne u nalogu za prenos?
+
