@@ -6,6 +6,7 @@ require_once "../connection.php";
 require_once '../PHPMailer/src/Exception.php';
 require_once '../PHPMailer/src/PHPMailer.php';
 require_once '../PHPMailer/src/SMTP.php';
+require_once '../mail.php';
 
 try{
 	$db = new DB();
@@ -135,41 +136,13 @@ try{
 				</ul>
 			</body>
 		</html>';
-	//$message = wordwrap($message,70);
 	
-	$mail = new PHPMailer;
 	
-	$mail->isSMTP();                            // Set mailer to use SMTP
-//	$mail->SMTPDebug = 4;						//for debugging
-	$mail->Host = 'smtp.gmail.com';             // Specify main and backup SMTP servers
-	$mail->SMTPAuth = true;                     // Enable SMTP authentication
-	$mail->Username = 'tijjana0807@gmail.com';  // SMTP username
-	$mail->Password = 'chadmajkl15'; 			// SMTP password
-	$mail->SMTPSecure = 'tls';                  // Enable TLS encryption, `ssl` also accepted
-	$mail->Port = 587;                          // TCP port to connect to
-	$mail->SMTPOptions = array('ssl' => array(
-        'verify_peer' => false,
-        'verify_peer_name' => false,
-        'allow_self_signed' => true)
-	);
-	$mail->setFrom('tijjana0807@gmail.com', 'EPrint');
-	$mail->addAddress('tijjana@hotmail.com');   // Add a recipient
-	if(isset($_POST['sendCopy'])){
-		$mail->addCC('tichko@yahoo.com');
-		echo '<br> Dodao CC';
-	}	
-	$mail->isHTML(true);  // Set email format to HTML
-	$mail->Subject = 'Email from EPrint (New Order)';
-	$mail->Body    = $message;
-	echo "<br>" .$message;
-	
-	//need to install https://getcomposer.org/download/
-	if(!$mail->send()) {
-		echo 'Message could not be sent.<br>';
-		echo 'Mailer Error: ' . $mail->ErrorInfo . '<br>';
-	} else {
-		echo 'Message has been sent';
-	}	
+	if(!isset($_POST['sendCopy']))
+		sendMail($message);
+	else {
+		sendMail($message, $_POST['userEmail']);		
+	}
 	
 //	header("Location: ./stampanje.php?status=".$status);
 //	exit();
