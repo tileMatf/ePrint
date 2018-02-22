@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="../css/skeleton.css">
     <link rel="stylesheet" href="../css/style.css">
     <!--Favicon-->
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel="apple-touch-icon" href="images/icon.png">
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+    <link rel="apple-touch-icon" href="../images/icon.png">
     <!--FA icons-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -27,8 +27,8 @@
         <header>
             <div class="row">
                 <div class="six columns">
-                    <a href="index.html">
-                        <img class="logo" src="images/eprint1.png" />
+                    <a href="../">
+                        <img class="logo" src="../images/eprint1.png" />
                     </a>
                 </div>
                 <!--NAVIGATION-->
@@ -57,18 +57,16 @@
         <div class="twelve columns">
             <ul class="nav1">
                 <li>
-                    <a class="tile" href="index.html">
+                    <a class="tile" href="../">
                         <i class="fa fa-home" aria-hidden="true"></i>Pocetna</a>
                 </li>
                 <span class="line">/</span>
                 <li>
-                    <a class="tile" href="#">Preslikavajuci Blokovi</a>
+                    <a class="tile" href="./">Preslikavajuci Blokovi</a>
                 </li>
             </ul>
         </div>
         <!-- End of navigation -->
-
-
 
         <!--Stampanje section-->
         <section class="section__stampanje">
@@ -76,10 +74,11 @@
                 <h2 class="section__heading">Preslikavajuci blokovi</h2>
             </div>
             <!-- OVDE POCINJE FORMA ZA ***BLOKOVE*** -->
-            <form>
+            <form method="POST" action="upload.php" enctype="multipart/form-data">
                 <div class="form-box">
                     <!--UPLOAD dugme-->
-                    <input class="button-primary" type="submit" value="Upload">
+                    <label>Okacite vase fajlove</label>
+		            <input type='file' name='fileToUpload' accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf' required>
                     <div class="row">
 
                         <!-- BROJ SETOVA ***************************** -->
@@ -133,14 +132,17 @@
 
                         <!-- Krajnja poruka -->
                         <label for="message">Poruka</label>
-                        <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="message"></textarea>
-                        <label class="example-send-yourself-copy">
-                            <input type="checkbox" name="acceptCondition">
-                            <span class="label-body">Prihvatam uslove</span>
+                        <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"></textarea>
+                        <label class="sendCopy">
+                        <input type="checkbox" name="sendCopy">
+                        <span class="label-body">Posalji kopiju sebi</span>
                         </label>
-                        <input class="button-primary" type="submit" value="Posalji">
+                        <label class="acceptConditions">
+                        <input type="checkbox" name="acceptCondition" required>
+                        <span class="label-body">Prihvatam uslove</span>
+                        </label>
+                        <input class="button-primary" type="submit" value="Posalji" name="submit" />
                     </div>
-                </div>
             </form>
         </section>
 
@@ -158,19 +160,19 @@
                         <nav class="side__nav">
                             <ul class="side__nav--ul">
                                 <li>
-                                    <a href="./stampanje.html">Stampanje</a>
+                                    <a href="../stampanje">Stampanje</a>
                                 </li>
                                 <li>
-                                    <a href="./blokovi.html">Preslikavajuci blokovi</a>
+                                    <a href="./">Preslikavajuci blokovi</a>
                                 </li>
                                 <li>
-                                    <a href="./uplatnice.html">Uplatnice</a>
+                                    <a href="../uplatnice">Uplatnice</a>
                                 </li>
                                 <li>
-                                    <a href="./koverteidostavnice.html">Koverte, Dostavnice, Formulari za adresiranje</a>
+                                    <a href="../koverte-dostavnice-formulari">Koverte, Dostavnice, Formulari za adresiranje</a>
                                 </li>
                                 <li>
-                                    <a href="./omotspisa.html">Omot spisa</a>
+                                    <a href="../omot-spisa">Omot spisa</a>
                                 </li>
                             </ul>
                         </nav>
@@ -182,13 +184,13 @@
                         <nav class="side__nav">
                             <ul class="side__nav--ul">
                                 <li>
-                                    <a href="./cenovnik.html">Cenovnik</a>
+                                    <a href="../cenovnik">Cenovnik</a>
                                 </li>
                                 <li>
-                                    <a href="./onama.html">O nama</a>
+                                    <a href="../o-nama">O nama</a>
                                 </li>
                                 <li>
-                                    <a href="./kontakt.html">Kontakt</a>
+                                    <a href="../kontakt">Kontakt</a>
                                 </li>
                             </ul>
                         </nav>

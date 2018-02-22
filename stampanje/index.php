@@ -11,12 +11,12 @@
   <!--Font from Google-->
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&amp;subset=latin-ext" rel="stylesheet" type="text/css">
   <!--CSS files-->
-  <link rel="stylesheet" href=".../css/normalize.css">
+  <link rel="stylesheet" href="../css/normalize.css">
   <link rel="stylesheet" href="../css/skeleton.css">
   <link rel="stylesheet" href="../css/style.css">
   <!--Favicon-->
-  <link rel="icon" type="image/png" href="images/favicon.png">
-  <link rel="apple-touch-icon" href="images/icon.png">
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="apple-touch-icon" href="../images/icon.png">
   <!--FA icons-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -34,8 +34,8 @@
     <header>
       <div class="row">
         <div class="six columns">
-          <a href="index.html">
-            <img class="logo" src="images/eprint1.png" />
+          <a href="../">
+            <img class="logo" src="../images/eprint1.png" />
           </a>
         </div>
         <!--NAVIGATION-->
@@ -80,13 +80,15 @@
       <div class="container">
         <h2 class="section__heading">Stampanje</h2>
       </div>
+
       <!-- OVDE POCINJE FORMA ZA ***STAMPANJE*** -->
       <form method="POST" action="upload.php" enctype="multipart/form-data">
         <div class="form-box">
           <!--UPLOAD dugme-->
-		  <!--<input class="button-primary" type="submit" value="Upload">-->
-		  <input type='file' name='fileToUpload' accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf' required>		
-          <div class="row">
+      <!--<input class="button-primary" type="submit" value="Upload">-->
+            <label>Okacite vase fajlove</label>
+		        <input type='file' name='fileToUpload' accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf' required>		
+            <div class="row">
 
             <!-- BROJ PRIMERAKA ***************************** -->
             <label for="noInput">Broj primeraka</label>
@@ -166,7 +168,8 @@
             </label>
             <!-- Upload korice dugme -->
             <!--<input class="button-primary" type="submit" value="Upload korice">-->
-			<input type='file' name='bindingFileToUpload' accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf'>
+            <label>Okacite koricu</label>
+			      <input type='file' name='bindingFileToUpload' accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf'>
             <!-- ***************************** -->
 
             <!-- HEFTANJE -->
@@ -228,11 +231,15 @@
             <!-- Krajnja poruka -->
             <label for="message">Poruka</label>
             <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"></textarea>
-            <label class="example-send-yourself-copy">
+            <label class="sendCopy">
               <input type="checkbox" name="sendCopy">
               <span class="label-body">Posalji kopiju sebi</span>
             </label>
-            <input class="button-primary" type="submit" value="Posalji" name="submit">
+            <label class="acceptConditions">
+              <input type="checkbox" name="acceptCondition" required>
+              <span class="label-body">Prihvatam uslove</span>
+            </label>
+            <input class="button-primary" type="submit" value="Posalji" name="submit" />
           </div>
       </form>
     </section>
@@ -241,20 +248,61 @@
 
 
 
-    <!--Footer-->
-    <footer>
-      <div class="container">
-        <div class="row">
-          <div class="one-half column">
-            <p>26232 Pančevo, Matije Gupca 24</p>
-          </div>
-          <div class="one-half column">
-            <p>065 983 983 8</p>
-          </div>
-        </div>
-      </div>
-    </footer>
+        <!--Footer-->
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <!--Usluge na dnu-->
+                    <div class="six columns aside">
+                        <h3>Usluge</h3>
+                        <nav class="side__nav">
+                            <ul class="side__nav--ul">
+                                <li>
+                                    <a href="./">Stampanje</a>
+                                </li>
+                                <li>
+                                    <a href="../blokovi">Preslikavajuci blokovi</a>
+                                </li>
+                                <li>
+                                    <a href="../uplatnice">Uplatnice</a>
+                                </li>
+                                <li>
+                                    <a href="../koverte-dostavnice-formulari">Koverte, Dostavnice, Formulari za adresiranje</a>
+                                </li>
+                                <li>
+                                    <a href="../omot-spisa">Omot spisa</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <!-- End of usluga -->
+
+                    <div class="six columns aside">
+                        <h3>Ostalo</h3>
+                        <nav class="side__nav">
+                            <ul class="side__nav--ul">
+                                <li>
+                                    <a href="../cenovnik">Cenovnik</a>
+                                </li>
+                                <li>
+                                    <a href="../o-nama">O nama</a>
+                                </li>
+                                <li>
+                                    <a href="../kontakt">Kontakt</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <!-- End of ostalo -->
+
+                </div>
+                <!-- End of row -->
+            </div>
+            <!-- End of container -->
+        </footer>
+        <!--End of footer-->
     </div>
+    <!--end of MAIN container-->
 </body>
 
 </html>
