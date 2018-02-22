@@ -11,12 +11,12 @@
     <!--Font from Google-->
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&amp;subset=latin-ext" rel="stylesheet" type="text/css">
     <!--CSS files-->
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/skeleton.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../../css/normalize.css">
+    <link rel="stylesheet" href="../../css/skeleton.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <!--Favicon-->
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel="apple-touch-icon" href="images/icon.png">
+    <link rel="icon" type="image/png" href="../../images/favicon.png">
+    <link rel="apple-touch-icon" href="../../images/icon.png">
     <!--FA icons-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="six columns">
                     <a href="index.html">
-                        <img class="logo" src="images/eprint1.png" />
+                        <img class="logo" src="../../images/eprint1.png" />
                     </a>
                 </div>
                 <!--NAVIGATION-->
@@ -57,16 +57,16 @@
         <div class="twelve columns">
             <ul class="nav1">
                 <li>
-                    <a class="tile" href="index.html">
+                    <a class="tile" href="../../">
                         <i class="fa fa-home" aria-hidden="true"></i>Pocetna</a>
                 </li>
                 <span class="line">/</span>
                 <li>
-                    <a class="tile" href="koverte-dostavnice-formulari.html">Koverte, dostavnice, formulari za adresiranje</a>
+                    <a class="tile" href="../">Koverte, dostavnice, formulari za adresiranje</a>
                 </li>
                 <span class="line">/</span>
                 <li>
-                    <a class="tile" href="formulari-za-adresiranje.html">Formulari za adresiranje</a>
+                    <a class="tile" href="./">Formulari za adresiranje</a>
                 </li>
             </ul>
         </div>
@@ -78,30 +78,32 @@
             <h2 class="section__heading">Formulari za adresiranje</h2>
 
             <!-- OVDE POCINJE FORMA ** -->
-            <form class="form__stampanje form-box">
-                <!-- Kolicina -->
-                <label for="exampleRecipientInput">Kolicina</label>
-                <select class="u-full-width" id="exampleRecipientInput">
-                    <option value="Option 1" selected>1000</option>
-                    <option value="Option 2">2000</option>
-                    <option value="Option 3">3000</option>
-                    <option value="Option 4">4000</option>
-                    <option value="Option 5">5000</option>
-                    <option value="Option 6">6000</option>
-                    <option value="Option 7">7000</option>
-                    <option value="Option 8">8000</option>
-                    <option value="Option 9">9000</option>
-                    <option value="Option 10">10000</option>
-                </select>
-                <!-- ***************************** -->
+            <form>
+                <div class="form__stampanje form-box">
+                    <!-- Kolicina -->
+                    <label for="quantity">Kolicina</label>
+                    <select class="u-full-width" name="quantity">
+                        <option value="1000" selected>1000</option>
+                        <option value="2000">2000</option>
+                        <option value="3000">3000</option>
+                        <option value="4000">4000</option>
+                        <option value="5000">5000</option>
+                        <option value="6000">6000</option>
+                        <option value="7000">7000</option>
+                        <option value="8000">8000</option>
+                        <option value="9000">9000</option>
+                        <option value="10000">10000</option>
+                    </select>
+                    <!-- ***************************** -->
 
-                <label class="example">
-                    <input type="checkbox">
-                    <span class="label-body">Prihvatam uslove</span>
-                </label>
-
-                <!-- Dugme -->
-                <input class="button-primary" type="submit" value="Posalji">
+                    <label for="sendCopy">
+                        <input type="checkbox" name="sendCopy">
+                        <span class="label-body">Posalji kopiju sebi</span>
+                    </label>
+                    <input class="button-primary" type="submit" value="Posalji" name="submit" />
+                    <!-- Smisli kako ovo lepse da izgleda -->
+                    <p class="uslovi" style="font-size:1.3rem;">Prihvatam uslove</p> 
+                </div>
             </form>
         </section>
 
@@ -116,19 +118,19 @@
                         <nav class="side__nav">
                             <ul class="side__nav--ul">
                                 <li>
-                                    <a href="stampanje.html">Stampanje</a>
+                                    <a href="../../stampanje">Stampanje</a>
                                 </li>
                                 <li>
-                                    <a href="blokovi.html">Preslikavajuci blokovi</a>
+                                    <a href="../../blokovi">Preslikavajuci blokovi</a>
                                 </li>
                                 <li>
-                                    <a href="uplatnice.html">Uplatnice</a>
+                                    <a href="../../uplatnice">Uplatnice</a>
                                 </li>
                                 <li>
-                                    <a href="koverte-dostavnice-formulari.html">Koverte, Dostavnice, Formulari za adresiranje</a>
+                                    <a href="./">Koverte, Dostavnice, Formulari za adresiranje</a>
                                 </li>
                                 <li>
-                                    <a href="omot-spisa.html">Omot spisa</a>
+                                    <a href="../../omot-spisa">Omot spisa</a>
                                 </li>
                             </ul>
                         </nav>
@@ -140,13 +142,13 @@
                         <nav class="side__nav">
                             <ul class="side__nav--ul">
                                 <li>
-                                    <a href="cenovnik.html">Cenovnik</a>
+                                    <a href="../../cenovnik">Cenovnik</a>
                                 </li>
                                 <li>
-                                    <a href="o-nama.html">O nama</a>
+                                    <a href="../../o-nama">O nama</a>
                                 </li>
                                 <li>
-                                    <a href="kontakt.html">Kontakt</a>
+                                    <a href="../../kontakt">Kontakt</a>
                                 </li>
                             </ul>
                         </nav>

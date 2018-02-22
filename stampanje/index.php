@@ -77,16 +77,17 @@
       <!-- OVDE POCINJE FORMA ZA ***STAMPANJE*** -->
       <form method="POST" action="upload.php" enctype="multipart/form-data">
         <div class="form-box">
+
           <!--UPLOAD dugme-->
-      <!--<input class="button-primary" type="submit" value="Upload">-->
+          <!--<input class="button-primary" type="submit" value="Upload">-->
             <label>Okacite vase fajlove</label>
 		        <input type='file' name='fileToUpload' accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf' required>		
-            <div class="row">
 
             <!-- BROJ PRIMERAKA ***************************** -->
             <label for="noInput">Broj primeraka</label>
             <input name="noInput" type="number" value="1" class="u-full-width" required>
             <!-- Redosled primeraka -->
+            <label>Slozi stranice</label>
             <label for="orderOfInput">
               <input type="radio" name="orderOfInput" value="1,2,3; 1,2,3; 1,2,3" checked />
               <span>1,2,3; 1,2,3; 1,2,3</span>
