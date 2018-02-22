@@ -20,7 +20,7 @@ Sone :baby_chick:
 - [ ] Proveri metatagove, dodaj za Face/Twit, promeni favicon
 
 
-### Korisni linkovi za mene:
+##### Korisni linkovi za mene:
 	http://formvalidation.io/examples/supporting-skeleton-framework/
 
 	https://stackoverflow.com/questions/29682670/how-to-send-form-using-skeleton-boilerplate
@@ -39,10 +39,7 @@ Tile :rabbit:
 
 
 ### Organizacija
-	Pogledaj kako sam uradila stampanje/index.php - to je tvoj stampanje.html dokument za izmenjenim id-evima, name-ovima 
-	i ostalim. Takodje bi trebalo da se pravi ovako kako sam ja napravila folder za svaku sekciju pa se unutar toga nalazi
-	index.php kako bi putanja izgledala '/eprint/stampanje/' umesto '/eprint/stampanje.html'. Takodje, treba sad da promenis
-	putanje do loga i to sve sto se ne vidi u stampanje/index.php
+
 
 ### Pitanja za advokata
 1. Kako da nazovem heading "Ostalo" gde se nalaze cenovnik, o nama i kontakt? Ostalo je bzvz.
@@ -54,8 +51,8 @@ Tile :rabbit:
 
 ### Update
 ###### 1	
-	Dugme za upload sam morala da promenim, jer mora da bude tipa 'file'. Probaj da stilizujes, ali cini se da je 
-	zeznuto stilizovati to dugme. Ja sam nasla ovde neko objasnjenje: https://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/
+Dugme za upload sam morala da promenim, jer mora da bude tipa 'file'. Probaj da stilizujes, ali cini se da je 
+zeznuto stilizovati to dugme. Ja sam nasla ovde neko objasnjenje: https://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/
 
 	MOZDA JE NAJBOLJE DA OSTANE DIFOLT, POGOTOVO STO JE CEO SAJT MINIMALISTIC + CITAM KOMENTARE U OVOM LINKU DA POSTOJI PROBLEM NA TELEFONIMA.
 ###### 2
@@ -72,7 +69,7 @@ Tile :rabbit:
 
 	Choose file - moze samo jedan fajl da se odabere?
 	Kako se pravi folder putanja za uplatnice (ima vise fajlova, uplatnice.php pa podfolder?)
-	Ajde pogledaj u Omotu spisa "kolicina" 133 linija koda, je l to okej? Tako treba da napravim i za "heftanje" i "busenje"..
+	Ajde pogledaj u "Omotu spisa" - "kolicina" na 133 liniji koda, je l to okej? Tako treba da napravim i za "heftanje" i "busenje" u "Stampanju"
 
 
 
