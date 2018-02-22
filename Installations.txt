@@ -1,0 +1,9 @@
+* Composer
+	https://getcomposer.org/download/
+
+* For php text on image
+	https://www.newmediacampaigns.com/blog/add-text-to-an-image-with-php
+
+* For php mailer
+  https://github.com/PHPMailer/PHPMailer
+  https://packagist.org/packages/phpmailer/phpmailer
