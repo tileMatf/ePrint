@@ -1,7 +1,15 @@
 <?php
 
-	public function sendMail($message, $cc = null){
+use PHPMailer\PHPMailer\PHPMailer;
+
+require_once '../PHPMailer/src/Exception.php';
+require_once '../PHPMailer/src/PHPMailer.php';
+require_once '../PHPMailer/src/SMTP.php';
+
+	function sendMail($message, $cc = null){
 		
+		echo '<br>'. $message;
+		echo '<br>Cc: '. $cc .'<br>';
 		$mail = new PHPMailer;
 	
 		$mail->isSMTP();                            // Set mailer to use SMTP
@@ -26,7 +34,6 @@
 		$mail->isHTML(true);  // Set email format to HTML
 		$mail->Subject = 'Email from EPrint - new order';
 		$mail->Body    = $message;
-		echo "<br>" .$message;
 		
 		//need to install https://getcomposer.org/download/
 		if(!$mail->send()) {

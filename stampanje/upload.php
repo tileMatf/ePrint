@@ -1,11 +1,6 @@
 <?php
 
-use PHPMailer\PHPMailer\PHPMailer;
-
 require_once "../connection.php";
-require_once '../PHPMailer/src/Exception.php';
-require_once '../PHPMailer/src/PHPMailer.php';
-require_once '../PHPMailer/src/SMTP.php';
 require_once '../mail.php';
 
 try{
@@ -139,13 +134,13 @@ try{
 	
 	
 	if(!isset($_POST['sendCopy']))
-		sendMail($message);
+		$status = sendMail($message);
 	else {
-		sendMail($message, $_POST['userEmail']);		
+		$status = sendMail($message, $_POST['userEmail']);		
 	}
 	
-//	header("Location: ./stampanje.php?status=".$status);
-//	exit();
+	//header("Location: ./index.php?status=".$status);
+	//exit();
 } catch(RuntimeException $e){
 	echo $e->getMessage();
 } 
