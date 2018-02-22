@@ -67,8 +67,11 @@ https://css-tricks.com/exposing-form-fields-radio-button-css/
 
 ###### 3
 Ne mogu da verujem, izgleda da nisam aploadovao prekljuce, stampanje je imalo za "heftanje" i "busenje" padajucu opciju, a ne radio button :-(
+
 Choose file - moze samo jedan fajl da se odabere?
+
 Kako se pravi folder putanja za uplatnice (ima vise fajlova, uplatnice.php pa podfolder?)
+
 Ajde pogledaj u "Omotu spisa" - "kolicina" na 133 liniji koda, je l to okej? Tako treba da napravim i za "heftanje" i "busenje" u "Stampanju"
 
 
