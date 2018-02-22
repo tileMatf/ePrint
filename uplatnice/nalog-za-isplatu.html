@@ -124,28 +124,28 @@
                     <input class="u-full-width" type="text" placeholder="" name="mockUp">
                     <!-- ***************************** -->
 
-                    <!--POZIV NA BROJ ZADUZENJA ******************************-->
+                    <!--POZIV NA BROJ ******************************-->
                     <label for="referenceNumber">Poziv na broj</label>
                     <input class="u-full-width" type="text" placeholder="" name="referenceNumber">
                     <!-- ***************************** -->
 
                     <!-- Kraj naloga za prenos u setu sledi radio buttons -->
 
-                    <!-- BROJ UPLATNICA U SETU ***************************** -->
-                    <label for="">Broj naloga za prenos u setu</label>
+                    <!-- BROJ UPLATNICA U SETU ***************************** --> <!-- SVAKA UPLATNICA OVO IMA DRUGACIJE -->
+                    <label for="">Broj naloga za isplatu u setu</label>
                     <label for="blockSizeInSet">
                         <input type="radio" name="blockSizeInSet" value="1+1" checked />
                         <span>1+1</span>
                     </label>
                     <label for="blockSizeInSet">
-                        <input type="radio" name="blockSizeInSet" id="drugaBoja" value="1+2" />
+                        <input type="radio" name="blockSizeInSet" value="1+2" />
                         <span>1+2</span>
                     </label>
                     <!-- ***************************** -->
 
                     <!-- KOLICINA SETOVA -->
-                    <label for="exampleRecipientInput">Kolicina setova</label>
-                    <select class="u-full-width">
+                    <label for="quantity">Kolicina setova</label>
+                    <select class="u-full-width" name="quantity">
                         <option value="100">100</option>
                         <option value="200">200</option>
                         <option value="500">500</option>
@@ -158,22 +158,23 @@
                     </select>
                     <!-- ***************************** -->
 
-                    <!-- Krajnja poruka -->
-                    <label for="exampleMessage">Poruka</label>
-                    <textarea class="u-full-width" placeholder="Dodatni komentar ..." id="exampleMessage"></textarea>
-
+                    <!--Krajnja poruka-->
+                    <label for="message">Poruka</label>
+                    <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"></textarea>
                     <!-- Varijabilni podaci i prihvatam uslove -->
-                    <label class="example">
-                        <input type="checkbox">
+                    <label for="varData">
+                        <input type="checkbox" name="varData">
                         <span class="label-body">Varijabilni podaci</span>
                     </label>
-                    <label class="example">
-                        <input type="checkbox">
+                    <label for="sendCopy">
+                        <input type="checkbox" name="sendCopy">
+                        <span class="label-body">Posalji kopiju sebi</span>
+                    </label>
+                    <label for="acceptConditions">
+                        <input type="checkbox" name="acceptCondition" required>
                         <span class="label-body">Prihvatam uslove</span>
                     </label>
-
-                    <!-- Dugme -->
-                    <input class="button-primary" type="submit" value="Posalji">
+                    <input class="button-primary" type="submit" value="Posalji" name="submit" />
                 </div>
             </form>
         </section>
@@ -192,19 +193,19 @@
                         <nav class="side__nav">
                             <ul class="side__nav--ul">
                                 <li>
-                                    <a href="stampanje.html">Stampanje</a>
+                                    <a href="../stampanje.html">Stampanje</a>
                                 </li>
                                 <li>
-                                    <a href="blokovi.html">Preslikavajuci blokovi</a>
+                                    <a href="../blokovi.html">Preslikavajuci blokovi</a>
                                 </li>
                                 <li>
-                                    <a href="uplatnice.html">Uplatnice</a>
+                                    <a href="../uplatnice.html">Uplatnice</a>
                                 </li>
                                 <li>
-                                    <a href="koverte-dostavnice-formulari.html">Koverte, Dostavnice, Formulari za adresiranje</a>
+                                    <a href="../koverte-dostavnice-formulari.html">Koverte, Dostavnice, Formulari za adresiranje</a>
                                 </li>
                                 <li>
-                                    <a href="omot-spisa.html">Omot spisa</a>
+                                    <a href="../omot-spisa.html">Omot spisa</a>
                                 </li>
                             </ul>
                         </nav>
@@ -216,13 +217,13 @@
                         <nav class="side__nav">
                             <ul class="side__nav--ul">
                                 <li>
-                                    <a href="cenovnik.html">Cenovnik</a>
+                                    <a href="../cenovnik.html">Cenovnik</a>
                                 </li>
                                 <li>
-                                    <a href="o-nama.html">O nama</a>
+                                    <a href="../o-nama.html">O nama</a>
                                 </li>
                                 <li>
-                                    <a href="kontakt.html">Kontakt</a>
+                                    <a href="../kontakt.html">Kontakt</a>
                                 </li>
                             </ul>
                         </nav>

@@ -133,11 +133,11 @@
                         <!-- Krajnja poruka -->
                         <label for="message">Poruka</label>
                         <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"></textarea>
-                        <label class="sendCopy">
+                        <label for="sendCopy">
                         <input type="checkbox" name="sendCopy">
                         <span class="label-body">Posalji kopiju sebi</span>
                         </label>
-                        <label class="acceptConditions">
+                        <label for="acceptConditions">
                         <input type="checkbox" name="acceptCondition" required>
                         <span class="label-body">Prihvatam uslove</span>
                         </label>
