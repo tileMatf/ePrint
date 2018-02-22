@@ -11,12 +11,12 @@
     <!--Font from Google-->
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&amp;subset=latin-ext" rel="stylesheet" type="text/css">
     <!--CSS files-->
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/skeleton.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/skeleton.css">
+    <link rel="stylesheet" href="../css/style.css">
     <!--Favicon-->
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel="apple-touch-icon" href="images/icon.png">
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+    <link rel="apple-touch-icon" href="../images/icon.png">
     <!--FA icons-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -27,8 +27,8 @@
         <header>
             <div class="row">
                 <div class="six columns">
-                    <a href="index.html">
-                        <img class="logo" src="images/eprint1.png" />
+                    <a href="../">
+                        <img class="logo" src="../images/eprint1.png" />
                     </a>
                 </div>
                 <!--NAVIGATION-->
@@ -57,12 +57,12 @@
         <div class="twelve columns">
             <ul class="nav1">
                 <li>
-                    <a class="tile" href="index.html">
+                    <a class="tile" href="../">
                         <i class="fa fa-home" aria-hidden="true"></i>Pocetna</a>
                 </li>
                 <span class="line">/</span>
                 <li>
-                    <a class="tile" href="omot-spisa.html">Omot spisa</a>
+                    <a class="tile" href="./">Omot spisa</a>
                 </li>
             </ul>
         </div>
@@ -77,58 +77,59 @@
             <form class="form__stampanje form-box">
 
                 <!--UPLOAD dugme-->
-                <input class="button-primary" type="submit" value="Upload">
+                <label>Okacite vase fajlove</label>
+		        <input type='file' name='fileToUpload' accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf' required>
 
                 <!-- ZA -->
-                <label for="">Za</label>
-                <label for="regularRadio">
-                    <input type="radio" name="radioPrimerak" id="first" value="radio 1" checked />
+                <label>Za</label>
+                <label for="forInput">
+                    <input type="radio" name="forInput" value="Javni izvrsitelj" checked />
                     <span>Javni izvrsitelj</span>
                 </label>
                 <label for="secondRegularRadio">
-                    <input type="radio" name="radioPrimerak" id="second" value="radio 2" />
+                    <input type="radio" name="forInput" value="Javni beleznik" />
                     <span>Javni beleznik</span>
                 </label>
                 <label for="secondRegularRadio">
-                    <input type="radio" name="radioPrimerak" id="second" value="radio 2" />
+                    <input type="radio" name="forInput" value="Advokat" />
                     <span>Advokat</span>
                 </label>
                 <!-- ***************************** -->
 
                 <!--Ime i prezime ******************************-->
-                <label for="exampleEmailInput">Ime i prezime</label>
-                <input class="u-full-width" type="text" placeholder="" id="NumberInput">
+                <label for="noInput">Ime i prezime</label>
+                <input name="noInput" class="u-full-width" type="text" placeholder="">
                 <!-- ***************************** -->
 
                 <!--Ulica ******************************-->
-                <label for="exampleEmailInput">Ulica</label>
-                <input class="u-full-width" type="text" placeholder="" id="NumberInput">
+                <label for="noInput">Ulica</label>
+                <input name="noInput" class="u-full-width" type="text" placeholder="">
                 <!-- ***************************** -->
 
                 <!--Postanski broj ******************************-->
-                <label for="exampleEmailInput">Postani broj</label>
-                <input class="u-full-width" type="text" placeholder="" id="NumberInput">
+                <label for="noInput">Postani broj</label>
+                <input name="noInput" class="u-full-width" type="text" placeholder="">
                 <!-- ***************************** -->
 
                 <!--Mesto ******************************-->
-                <label for="exampleEmailInput">Mesto</label>
-                <input class="u-full-width" type="text" placeholder="" id="NumberInput">
+                <label for="noInput">Mesto</label>
+                <input name="noInput"  class="u-full-width" type="text" placeholder="">
                 <!-- ***************************** -->
 
                 <!-- Vrsta papira ***************************** -->
-                <label for="">Vrsta papira</label>
-                <label for="regularRadio">
-                    <input type="radio" name="radioBoja" id="prvaBoja" value="radio 1" />
+                <label>Vrsta papira</label>
+                <label for="typeOfPaper">
+                    <input type="radio" name="typeOfPaper" value="100gr/m2" />
                     <span>100gr/m2</span>
                 </label>
-                <label for="secondRegularRadio">
-                    <input type="radio" name="radioBoja" id="drugaBoja" value="radio 2" />
+                <label for="typeOfPaper">
+                    <input type="radio" name="typeOfPaper" value="300gr/m2" />
                     <span>300gr/m2</span>
                 </label>
                 <!-- ***************************** -->
 
                 <!-- Kolicina -->
-                <label for="exampleRecipientInput">Kolicina</label>
+                <label for="">Kolicina</label>
                 <select class="u-full-width" id="exampleRecipientInput">
                     <option value="Option 1" selected>1000</option>
                     <option value="Option 2">2000</option>
@@ -142,15 +143,19 @@
                 </select>
                 <!-- ***************************** -->
 
-                <!-- Krajnja poruka -->
-                <label for="exampleMessage">Poruka</label>
-                <textarea class="u-full-width" placeholder="Dodatni komentar ..." id="exampleMessage"></textarea>
-                <label class="example-send-yourself-copy">
-                    <input type="checkbox">
+                    <!-- Krajnja poruka -->
+                    <label for="message">Poruka</label>
+                    <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"></textarea>
+                    <label class="sendCopy">
+                    <input type="checkbox" name="sendCopy">
+                    <span class="label-body">Posalji kopiju sebi</span>
+                    </label>
+                    <label class="acceptConditions">
+                    <input type="checkbox" name="acceptCondition" required>
                     <span class="label-body">Prihvatam uslove</span>
-                </label>
-                <input class="button-primary" type="submit" value="Posalji">
-            </form>
+                    </label>
+                    <input class="button-primary" type="submit" value="Posalji" name="submit" />
+                </div>
         </section>
 
 

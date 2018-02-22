@@ -11,12 +11,12 @@
     <!--Font from Google-->
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&amp;subset=latin-ext" rel="stylesheet" type="text/css">
     <!--CSS files-->
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/skeleton.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/skeleton.css">
+    <link rel="stylesheet" href="../css/style.css">
     <!--Favicon-->
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel="apple-touch-icon" href="images/icon.png">
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+    <link rel="apple-touch-icon" href="../images/icon.png">
     <!--FA icons-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -27,8 +27,8 @@
         <header>
             <div class="row">
                 <div class="six columns">
-                    <a href="index.html">
-                        <img class="logo" src="images/eprint1.png" />
+                    <a href="../">
+                        <img class="logo" src="../images/eprint1.png" />
                     </a>
                 </div>
                 <!--NAVIGATION-->
@@ -57,12 +57,12 @@
         <div class="twelve columns">
             <ul class="nav1">
                 <li>
-                    <a class="tile" href="index.html">
+                    <a class="tile" href="../">
                         <i class="fa fa-home" aria-hidden="true"></i>Pocetna</a>
                 </li>
                 <span class="line">/</span>
                 <li>
-                    <a class="tile" href="./cenovnik.html">Cenovnik</a>
+                    <a class="tile" href="./">Kontakt</a>
                 </li>
             </ul>
         </div>
@@ -71,30 +71,26 @@
         <!--MAIN PAGE SECTION-->
         <section class="section__main">
             <div class="row">
-                <h2 class="section__heading">Cenovnik</h2>
+                <h2 class="section__heading">Kontakt</h2>
             </div>
-            <!--Cenovnik-->
-            <div class="container container__cenovnik">
-                <table class="u-full-width">
-                    <thead>
-                        <tr>
-                            <th>Usluga</th>
-                            <th>Cena</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Stampanje</td>
-                            <td>150 din</td>
-                        </tr>
-                        <tr>
-                            <td>Kovertiranje</td>
-                            <td>200 din</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <!--Kontakt-->
+            <div class="container">
+                <form>
+                    <div class="row">
+                        <div class="six columns">
+                            <label for="yourEmail">Vas email</label>
+                            <input class="u-full-width" type="email" placeholder="">
+                        </div>
+                        <div class="nameAndLastName">
+                            <label for="exampleEmailInput">Vase ime i prezime</label>
+                            <input class="u-full-width" type="text" placeholder="">
+                        </div>
+                    </div>
+                    <label for="message">Poruka</label>
+                    <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"></textarea>
+                    <input class="button-primary" type="submit" value="Posalji">
+                </form>
             </div>
-
         </section>
 
 
