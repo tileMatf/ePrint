@@ -77,13 +77,13 @@
             <form method="POST" action="upload.php" enctype="multipart/form-data">
                 <div class="form-box">
                     <!--UPLOAD dugme-->
-                    <label>Okacite vase fajlove</label>
+                    <label>Okacite vas fajl</label>
 		            <input type='file' name='fileToUpload' accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf' required>
                     <div class="row">
 
                         <!-- BROJ SETOVA ***************************** -->
                         <label for="noOfSet">Broj setova</label>
-                        <input class="u-full-width" type="number" value="1" name="noOfSet">
+                        <input class="u-full-width" type="number" name="noOfSet" value="1">
                         <!-- ***************************** -->
 
                         <!-- BOJA ***************************** -->

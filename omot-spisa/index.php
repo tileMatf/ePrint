@@ -129,17 +129,17 @@
                 <!-- ***************************** -->
 
                 <!-- Kolicina -->
-                <label for="">Kolicina</label>
-                <select class="u-full-width" id="exampleRecipientInput">
-                    <option value="Option 1" selected>1000</option>
-                    <option value="Option 2">2000</option>
-                    <option value="Option 3">3000</option>
-                    <option value="Option 4">4000</option>
-                    <option value="Option 5">5000</option>
-                    <option value="Option 6">6000</option>
-                    <option value="Option 7">7000</option>
-                    <option value="Option 8">8000</option>
-                    <option value="Option 8">9000</option>
+                <label for="quantity">Kolicina</label>
+                <select class="u-full-width" name="quantity">
+                    <option value="1000" selected>1000</option>
+                    <option value="2000">2000</option>
+                    <option value="3000">3000</option>
+                    <option value="4000">4000</option>
+                    <option value="5000">5000</option>
+                    <option value="6000">6000</option>
+                    <option value="7000">7000</option>
+                    <option value="8000">8000</option>
+                    <option value="9000">9000</option>
                 </select>
                 <!-- ***************************** -->
 

@@ -81,8 +81,8 @@
                             <label for="yourEmail">Vas email</label>
                             <input class="u-full-width" type="email" placeholder="">
                         </div>
-                        <div class="nameAndLastName">
-                            <label for="exampleEmailInput">Vase ime i prezime</label>
+                        <div class="six columns">
+                            <label for="nameAndLastName">Vase ime i prezime</label>
                             <input class="u-full-width" type="text" placeholder="">
                         </div>
                     </div>

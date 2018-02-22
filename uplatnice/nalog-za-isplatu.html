@@ -11,12 +11,12 @@
     <!--Font from Google-->
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&amp;subset=latin-ext" rel="stylesheet" type="text/css">
     <!--CSS files-->
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/skeleton.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/skeleton.css">
+    <link rel="stylesheet" href="../css/style.css">
     <!--Favicon-->
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel="apple-touch-icon" href="images/icon.png">
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+    <link rel="apple-touch-icon" href="../images/icon.png">
     <!--FA icons-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -27,8 +27,8 @@
         <header>
             <div class="row">
                 <div class="six columns">
-                    <a href="index.html">
-                        <img class="logo" src="images/eprint1.png" />
+                    <a href="../index.html">
+                        <img class="logo" src="../images/eprint1.png" />
                     </a>
                 </div>
                 <!--NAVIGATION-->
@@ -83,77 +83,78 @@
                 <div class="form-box">
                     <!-- UNOS PODATAKA ***************************** -->
                     <!--<h5>Unos podataka</h5>-->
+
                     <!--PlATILAC ******************************-->
-                    <label for="exampleEmailInput">Platilac</label>
-                    <input class="u-full-width" type="text" placeholder="" id="NumberInput">
+                    <label for="payer">Platilac</label>
+                    <input class="u-full-width" type="text" placeholder="" name="payer">
                     <!-- ***************************** -->
 
                     <!--SVRHA UPLATE ******************************-->
-                    <label for="exampleEmailInput">Svrha uplate</label>
-                    <input class="u-full-width" type="text" placeholder="" id="NumberInput">
+                    <label for="purposeOfPayment">Svrha uplate</label>
+                    <input class="u-full-width" type="text" placeholder="" name="purposeOfPayment">
                     <!-- ***************************** -->
 
                     <!--PRIMALAC ******************************-->
-                    <label for="exampleEmailInput">Primalac</label>
-                    <input class="u-full-width" type="text" placeholder="" id="NumberInput">
+                    <label for="recipient">Primalac</label>
+                    <input class="u-full-width" type="text" placeholder="" name="recipient">
                     <!-- ***************************** -->
 
                     <!--SIFRA PLACANJA ******************************-->
-                    <label for="exampleEmailInput">Sifra placanja</label>
-                    <input class="u-full-width" type="text" placeholder="" id="NumberInput">
+                    <label for="paymentCode">Sifra placanja</label>
+                    <input class="u-full-width" type="text" placeholder="" name="paymentCode">
                     <!-- ***************************** -->
 
                     <!--VALUTA ******************************-->
-                    <label for="exampleEmailInput">Valuta</label>
-                    <input class="u-full-width" type="text" placeholder="" id="NumberInput">
+                    <label for="currency">Valuta</label>
+                    <input class="u-full-width" type="text" placeholder="" name="currency">
                     <!-- ***************************** -->
 
                     <!--IZNOS ******************************-->
-                    <label for="exampleEmailInput">Iznos</label>
-                    <input class="u-full-width" type="text" placeholder="RSD" id="NumberInput">
+                    <label for="amount">Iznos</label>
+                    <input class="u-full-width" type="text" placeholder="RSD" name="amount">
                     <!-- ***************************** -->
 
                     <!--RACUN PRIMAOCA ******************************-->
-                    <label for="exampleEmailInput">Racun primaoca</label>
-                    <input class="u-full-width" type="text" placeholder="" id="NumberInput">
+                    <label for="accountOfRecipient">Racun primaoca</label>
+                    <input class="u-full-width" type="text" placeholder="" name="accountOfRecipient">
                     <!-- ***************************** -->
 
                     <!--MODEL ******************************-->
-                    <label for="exampleEmailInput">Model</label>
-                    <input class="u-full-width" type="text" placeholder="" id="NumberInput">
+                    <label for="mockUp">Model</label>
+                    <input class="u-full-width" type="text" placeholder="" name="mockUp">
                     <!-- ***************************** -->
 
                     <!--POZIV NA BROJ ZADUZENJA ******************************-->
-                    <label for="exampleEmailInput">Poziv na broj</label>
-                    <input class="u-full-width" type="text" placeholder="" id="NumberInput">
+                    <label for="referenceNumber">Poziv na broj</label>
+                    <input class="u-full-width" type="text" placeholder="" name="referenceNumber">
                     <!-- ***************************** -->
 
                     <!-- Kraj naloga za prenos u setu sledi radio buttons -->
 
                     <!-- BROJ UPLATNICA U SETU ***************************** -->
                     <label for="">Broj naloga za prenos u setu</label>
-                    <label for="regularRadio">
-                        <input type="radio" name="radioBoja" id="prvaBoja" value="radio 1" checked />
+                    <label for="blockSizeInSet">
+                        <input type="radio" name="blockSizeInSet" value="1+1" checked />
                         <span>1+1</span>
                     </label>
-                    <label for="secondRegularRadio">
-                        <input type="radio" name="radioBoja" id="drugaBoja" value="radio 2" />
+                    <label for="blockSizeInSet">
+                        <input type="radio" name="blockSizeInSet" id="drugaBoja" value="1+2" />
                         <span>1+2</span>
                     </label>
                     <!-- ***************************** -->
 
                     <!-- KOLICINA SETOVA -->
                     <label for="exampleRecipientInput">Kolicina setova</label>
-                    <select class="u-full-width" id="exampleRecipientInput">
-                        <option value="Option 1">100</option>
-                        <option value="Option 2">200</option>
-                        <option value="Option 3">500</option>
-                        <option value="Option 4" selected>900</option>
-                        <option value="Option 5">1800</option>
-                        <option value="Option 6">2700</option>
-                        <option value="Option 7">5400</option>
-                        <option value="Option 8">8100</option>
-                        <option value="Option 8">10800</option>
+                    <select class="u-full-width">
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="500">500</option>
+                        <option value="900" selected>900</option>
+                        <option value="1800">1800</option>
+                        <option value="2700">2700</option>
+                        <option value="5400">5400</option>
+                        <option value="8100">8100</option>
+                        <option value="10800">10800</option>
                     </select>
                     <!-- ***************************** -->
 
