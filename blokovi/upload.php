@@ -7,7 +7,6 @@ try{
 	$db = new DB();
 
 	$target_dir = "uploaded_file/";
-	$target_binding_dir = "uploaded_binding_file/";	
 	$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 	$uploadOk = 1;
 	$status = 0;
@@ -106,27 +105,14 @@ try{
 			<body>
 				<label> Korisnik: </label> korisnik123 </br>
 				<label> Vreme: </label> '.date("h:i").' </br>
-				<label> Tip: </label> stampanje </br>
+				<label> Tip: </label> Preslikavajuci blokovi </br>
 				<label> Datoteka: </label> '.basename( $_FILES["fileToUpload"]["name"]).' </br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>
-					<li>Broj primeraka: '.$_POST['noInput'].'</li>
-					<li>Redosled stampanja: '.$_POST['orderOfInput'].'</li>
-					<li>Boja: '.$_POST['colorOfInput'].'</li>
-					<li>Nacin stampanja: '.$_POST['typeOfPrint'].'</li>
-					<li>Velicina papira: '.$_POST['paperSize'].'</li>
-					<li>Debljina papira: '.$_POST['paperWidth'].'</li>
-					<li>Koricenje: '.$_POST['bindingType'].'</li>
-					<li>Dodate korice: ';
-			if(!empty($_FILES['bindingFileToUpload']['name'])){
-				$message = $message . 'DA</li>
-					<li>Naziv datoteke za korice: '. basename( $_FILES["bindingFileToUpload"]["name"]). '</li>';
-			} else {
-				$message = $message . 'NE</li>';
-			}
-	$message = $message . '
-					<li>Heftanje: '.$_POST['heftingType'].'</li>
-					<li>Busenje: '.$_POST['drillingType'].'</li>
+					<li>Broj setova: '.$_POST['noOfSet'].'</li>
+					<li>Boja: '.$_POST['blockColor'].'</li>
+					<li>Velicina: '.$_POST['blockSize'].'</li>
+					<li>Pakovanje: '.$_POST['packing'].'</li>
 					<li>Komentar korisnika: '.$_POST['comment'].'</li>
 				</ul>
 			</body>

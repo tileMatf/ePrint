@@ -44,11 +44,10 @@ https://css-tricks.com/exposing-form-fields-radio-button-css/
 
 ### Pitanja za advokata
 1. Kako da nazovem heading "Ostalo" gde se nalaze cenovnik, o nama i kontakt? Ostalo je bzvz.
-	-- Mozda da nema naslova?
 2. Uplatnice su nesto istripovane, pitaj ga za "unos podataka", "varijabilna stampa", "upload" na kraju? Greska ili ne u nalogu za prenos?
 3. Da li nesto od ponudjenih ne mora da se cekira, ili je sve obavezno izabrati?
 4. Standardne koverte - pitaj da li je dobro za "na poledjini" i "na adresnoj strani"
-
+5. Omoguciti kacenje vise razlicitih fajlova (sekcija stampanje)?
 
 ### Update
 ###### 1	
@@ -69,9 +68,6 @@ https://css-tricks.com/exposing-form-fields-radio-button-css/
 ###### 3
 Ne mogu da verujem, izgleda da nisam aploadovao prekljuce, stampanje je imalo za "heftanje" i "busenje" padajucu opciju, 
 a ne radio button :-( -- Da, radio button je bio kad sam ja radila, to ti nisam dirala :D
-
-Choose file - moze samo jedan fajl da se odabere? -- Moze samo jedan, ali moze da se namesti da prima vise, tako da
-	to ide u pitanja za advokata?
 
 Kako se pravi folder putanja za uplatnice (ima vise fajlova, uplatnice.php pa podfolder?) -- Ostavi za sada ovako, pa kad
 	budem radila, videcu kako je najbolje.
