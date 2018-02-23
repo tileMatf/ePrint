@@ -10,7 +10,7 @@ https://fontawesome.com/
 
 Sone :baby_chick:
 - [x] Push
-- [ ] Zavrsi ostale usluge i njihove forme
+- [x] Zavrsi ostale usluge i njihove forme
 - [x] Dodaj navigaciju u uslugama 
 - [ ] Bolje stilizuj forme i "prihvatam uslove" ispod posalji dugmeta
 - [ ] Napravi modal za Registraciju
