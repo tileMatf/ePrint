@@ -34,7 +34,7 @@
                 <!--NAVIGATION-->
                 <div class="six columns navigation__header">
                     <div class="navigation__header--nav">
-                        <ul class="nav">
+                        <ul class="nav nav-reg-log">
                             <li>
                                 <a href="#">Registruj se
                                     <i class="fas fa-user-plus" aria-hidden="true"></i>
@@ -85,69 +85,69 @@
                     <!--<h5>Unos podataka</h5>-->
 
                     <!--PlATILAC ******************************-->
-                    <label for="payer">Platilac</label>
+                    <label for="payer" class="label__heading">Platilac</label>
                     <input class="u-full-width" type="text" placeholder="" name="payer">
                     <!-- ***************************** -->
 
                     <!--SVRHA UPLATE ******************************-->
-                    <label for="purposeOfPayment">Svrha uplate</label>
+                    <label for="purposeOfPayment" class="label__heading">Svrha uplate</label>
                     <input class="u-full-width" type="text" placeholder="" name="purposeOfPayment">
                     <!-- ***************************** -->
 
                     <!--PRIMALAC ******************************-->
-                    <label for="recipient">Primalac</label>
+                    <label for="recipient" class="label__heading">Primalac</label>
                     <input class="u-full-width" type="text" placeholder="" name="recipient">
                     <!-- ***************************** -->
 
                     <!--SIFRA PLACANJA ******************************-->
-                    <label for="paymentCode">Sifra placanja</label>
+                    <label for="paymentCode" class="label__heading">Sifra placanja</label>
                     <input class="u-full-width" type="text" placeholder="" name="paymentCode">
                     <!-- ***************************** -->
 
                     <!--VALUTA ******************************-->
-                    <label for="currency">Valuta</label>
+                    <label for="currency" class="label__heading">Valuta</label>
                     <input class="u-full-width" type="text" placeholder="" name="currency">
                     <!-- ***************************** -->
 
                     <!--IZNOS ******************************-->
-                    <label for="amount">Iznos</label>
+                    <label for="amount" class="label__heading">Iznos</label>
                     <input class="u-full-width" type="text" placeholder="RSD" name="amount">
                     <!-- ***************************** -->
 
                     <!--RACUN PRIMAOCA ******************************-->
-                    <label for="accountOfRecipient">Racun primaoca</label>
+                    <label for="accountOfRecipient" class="label__heading">Racun primaoca</label>
                     <input class="u-full-width" type="text" placeholder="" name="accountOfRecipient">
                     <!-- ***************************** -->
 
                     <!--MODEL ******************************-->
-                    <label for="mockUp">Model</label>
+                    <label for="mockUp" class="label__heading">Model</label>
                     <input class="u-full-width" type="text" placeholder="" name="mockUp">
                     <!-- ***************************** -->
 
                     <!--POZIV NA BROJ ZADUZENJA ******************************--> <!-- OVO JE DRUGACIJE OD DRUGE DVE UPLATNICE -->
-                    <label for="refNumObligation">Poziv na broj zaduzenja</label> <!-- referenceNumberObligation -->
+                    <label for="refNumObligation" class="label__heading">Poziv na broj zaduzenja</label> <!-- referenceNumberObligation -->
                     <input class="u-full-width" type="text" placeholder="" name="refNumObligation">
                     <!-- ***************************** -->
 
                     <!--RACUN PRIMAOCA ******************************-->
-                    <label for="accountOfRecipient">Racun primaoca</label>
+                    <label for="accountOfRecipient" class="label__heading">Racun primaoca</label>
                     <input class="u-full-width" type="text" placeholder="" name="accountOfRecipient">
                     <!-- ***************************** -->
 
                     <!--MODEL ******************************-->
-                    <label for="mockUp">Model</label>
+                    <label for="mockUp" class="label__heading">Model</label>
                     <input class="u-full-width" type="text" placeholder="" name="mockUp">
                     <!-- ***************************** -->
 
                     <!--POZIV NA BROJ ODOBRENJA ******************************-->
-                    <label for="referenceNumberApprovals">Poziv na broj odobrenja</label>
+                    <label for="referenceNumberApprovals" class="label__heading">Poziv na broj odobrenja</label>
                     <input class="u-full-width" type="text" placeholder="" name="referenceNumberApprovals">
                     <!-- ***************************** -->
 
                     <!-- Kraj naloga za prenos u setu sledi radio buttons -->
 
                     <!-- BROJ UPLATNICA U SETU ***************************** -->
-                    <label for="">Broj naloga za prenos u setu</label>
+                    <label for="" class="label__heading">Broj naloga za prenos u setu</label>
                     <label for="numOfTOInSet"> <!-- number of transfer orders in set -->
                         <input type="radio" name="numOfTOInSet" value="1+1" checked />
                         <span>1+1</span>
@@ -159,7 +159,7 @@
                     <!-- ***************************** -->
 
                     <!-- KOLICINA SETOVA --> <!-- -->
-                    <label for="quantity">Kolicina setova</label>
+                    <label for="quantity" class="label__heading">Kolicina setova</label>
                     <select class="u-full-width" name="quantity">
                         <option value="100">100</option>
                         <option value="200">200</option>
@@ -174,7 +174,7 @@
                     <!-- ***************************** -->
 
                     <!--Krajnja poruka-->
-                    <label for="message">Poruka</label>
+                    <label for="message" class="label__heading">Poruka</label>
                     <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"></textarea>
                     <!-- Varijabilni podaci i prihvatam uslove -->
                     <label for="varData">
@@ -186,6 +186,7 @@
                         <span class="label-body">Posalji kopiju sebi</span>
                     </label>
                     <input class="button-primary" type="submit" value="Posalji" name="submit" />
+                    <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
                 </div>
             </form>
         </section>

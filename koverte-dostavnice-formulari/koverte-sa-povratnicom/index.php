@@ -93,7 +93,7 @@
                     </label>
 
                     <!-- Kolicina -->
-                    <label for="quantity">Kolicina</label>
+                    <label for="quantity" class="label__heading">Kolicina</label>
                     <select class="u-full-width" name="quantity">
                         <option value="1000" selected>1000</option>
                         <option value="2000">2000</option>

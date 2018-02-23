@@ -18,7 +18,7 @@
     <link rel="icon" type="image/png" href="../../images/favicon.png">
     <link rel="apple-touch-icon" href="../../images/icon.png">
     <!--FA icons-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 </head>
 
 <body>
@@ -34,15 +34,15 @@
                 <!--NAVIGATION-->
                 <div class="six columns navigation__header">
                     <div class="navigation__header--nav">
-                        <ul class="nav">
+                        <ul class="nav nav-reg-log">
                             <li>
                                 <a href="#">Registruj se
-                                    <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                    <i class="fas fa-user-plus" aria-hidden="true"></i>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">Uloguj se
-                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    <i class="fas fa-user" aria-hidden="true"></i>
                                 </a>
                             </li>
                         </ul>
@@ -58,7 +58,7 @@
             <ul class="nav1">
                 <li>
                     <a class="tile" href="../../">
-                        <i class="fa fa-home" aria-hidden="true"></i>Pocetna</a>
+                        <i class="fas fa-home" aria-hidden="true"></i>Pocetna</a>
                 </li>
                 <span class="line">/</span>
                 <li>
@@ -66,7 +66,7 @@
                 </li>
                 <span class="line">/</span>
                 <li>
-                    <a class="tile" href="./">Standardne koverte</a>
+                    <a class="tile" href="./" style="font-size: 1.6rem;">Standardne koverte</a>
                 </li>
             </ul>
         </div>
@@ -81,11 +81,11 @@
             <form method="POST" action="upload.php" enctype="multipart/form-data">
                 <div class="form-box">
                     <!--UPLOAD dugme-->
-                    <label>Okacite vas fajl</label>
+                    <label class="label__heading">Okacite vas fajl</label>
                     <input type='file' name='fileToUpload' accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf' required>	
 
                     <!-- VELICINA -->
-                    <label>Velicina</label>
+                    <label class="label__heading">Velicina</label>
                     <label for="size">
                         <input type="radio" name="size" value="B6" checked />
                         <span>B6</span>
@@ -109,7 +109,7 @@
                     <!-- ***************************** -->
 
                     <!-- Kolicina -->
-                    <label for="quantity">Kolicina</label>
+                    <label for="quantity" class="label__heading">Kolicina</label>
                     <select class="u-full-width" name="quantity">
                         <option value="1000" selected>1000</option>
                         <option value="2000">2000</option>
@@ -125,7 +125,7 @@
                     <!-- ***************************** -->
 
                     <!--Stampanje na posledjini ******************************-->
-                    <label for="printingOnBack">Stampanje na poledjini:</label>
+                    <label for="printingOnBack" class="label__heading">Stampanje na poledjini:</label>
                     <input class="u-full-width" type="text" placeholder="Prvi red..." name="printingOnBack">
                     <input class="u-full-width" type="text" placeholder="Drugi red..." name="printingOnBack">
                     <input class="u-full-width" type="text" placeholder="Treci red..." name="printingOnBack">
@@ -133,7 +133,7 @@
                     <!-- ***************************** -->
 
                     <!--Stampanje na adresnoj strani ******************************-->
-                    <label for="printingOnAdressPage">Stampanje na adresnoj strani:</label>
+                    <label for="printingOnAdressPage" class="label__heading">Stampanje na adresnoj strani:</label>
                     <input class="u-full-width" type="text" placeholder="Prvi red..." name="printingOnAdressPage">
                     <input class="u-full-width" type="text" placeholder="Drugi red..." name="printingOnAdressPage">
                     <input class="u-full-width" type="text" placeholder="Treci red..." name="printingOnAdressPage">
@@ -141,7 +141,7 @@
                     <!-- ***************************** -->
 
                     <!--Krajnja poruka-->
-                    <label for="message">Poruka</label>
+                    <label for="message" class="label__heading">Poruka</label>
                     <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"></textarea>
                     <!-- Varijabilni podaci i prihvatam uslove -->
                     <label for="varData">
@@ -154,6 +154,7 @@
                     </label>
                     <!-- POSALJI DUGME -->
                     <input class="button-primary" type="submit" value="Posalji" name="submit" />
+                    <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
                 </div>
             </form>
         </section>

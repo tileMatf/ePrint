@@ -18,7 +18,7 @@
     <link rel="icon" type="image/png" href="../images/favicon.png">
     <link rel="apple-touch-icon" href="../images/icon.png">
     <!--FA icons-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 </head>
 
 <body>
@@ -37,12 +37,12 @@
                         <ul class="nav">
                             <li>
                                 <a href="#">Registruj se
-                                    <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                    <i class="fas fa-user-plus" aria-hidden="true"></i>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">Uloguj se
-                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    <i class="fas fa-user" aria-hidden="true"></i>
                                 </a>
                             </li>
                         </ul>
@@ -57,12 +57,12 @@
         <div class="twelve columns">
             <ul class="nav1">
                 <li>
-                    <a class="tile" href="index.html">
-                        <i class="fa fa-home" aria-hidden="true"></i>Pocetna</a>
+                    <a class="tile" href="../">
+                        <i class="fas fa-home" aria-hidden="true"></i>Pocetna</a>
                 </li>
                 <span class="line">/</span>
                 <li>
-                    <a class="tile" href="./cenovnik.html">Cenovnik</a>
+                    <a class="tile" href="./" style="font-size: 1.6rem;">Cenovnik</a>
                 </li>
             </ul>
         </div>
@@ -83,6 +83,22 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                            <td>Stampanje</td>
+                            <td>150 din</td>
+                        </tr>
+                        <tr>
+                            <td>Kovertiranje</td>
+                            <td>200 din</td>
+                        </tr>
+                        <tr>
+                            <td>Stampanje</td>
+                            <td>150 din</td>
+                        </tr>
+                        <tr>
+                            <td>Kovertiranje</td>
+                            <td>200 din</td>
+                        </tr>
                         <tr>
                             <td>Stampanje</td>
                             <td>150 din</td>

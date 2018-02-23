@@ -62,7 +62,7 @@
                 </li>
                 <span class="line">/</span>
                 <li>
-                    <a class="tile" href="./">Preslikavajuci Blokovi</a>
+                    <a class="tile" href="./" style="font-size: 1.6rem;">Preslikavajuci Blokovi</a>
                 </li>
             </ul>
         </div>
@@ -77,7 +77,7 @@
             <form method="POST" action="upload.php" enctype="multipart/form-data">
                 <div class="form-box">
                     <!--UPLOAD dugme-->
-                    <label class="label__heading">Okacite vas fajl</label>
+                    <label class="label__heading">Okacite Vas fajl</label>
 		            <input type='file' name='fileToUpload' accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf' required>
                     <div class="row">
 

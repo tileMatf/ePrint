@@ -253,7 +253,11 @@ div.three.columns.aside {
 .fa-user, .fa-user-plus {
     padding-left: 5px;
 }
-
+/*ako bude bela pozadina 
+.navigation__header--nav a {
+    color: #fff;
+}
+*/
 /***
 Footer
 -----------------------------------------
@@ -285,6 +289,7 @@ FORMS
     border-radius: 5px;
     position: relative;
     box-sizing: border-box;
+    box-shadow: 0 1px 5px rgba(226, 203, 203, 0.3);
   }
 
 
@@ -297,6 +302,11 @@ MISC
 .line {
     color: rgb(124, 133, 100);
     font-size: 1.8rem;
+}
+
+/** dugme posalji **/
+.button.button-primary, button.button-primary, input[type="submit"].button-primary, input[type="reset"].button-primary, input[type="button"].button-primary {
+
 }
 
 

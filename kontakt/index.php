@@ -18,7 +18,7 @@
     <link rel="icon" type="image/png" href="../images/favicon.png">
     <link rel="apple-touch-icon" href="../images/icon.png">
     <!--FA icons-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 </head>
 
 <body>
@@ -37,12 +37,12 @@
                         <ul class="nav">
                             <li>
                                 <a href="#">Registruj se
-                                    <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                    <i class="fas fa-user-plus" aria-hidden="true"></i>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">Uloguj se
-                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    <i class="fas fa-user" aria-hidden="true"></i>
                                 </a>
                             </li>
                         </ul>
@@ -58,11 +58,11 @@
             <ul class="nav1">
                 <li>
                     <a class="tile" href="../">
-                        <i class="fa fa-home" aria-hidden="true"></i>Pocetna</a>
+                        <i class="fas fa-home" aria-hidden="true"></i>Pocetna</a>
                 </li>
                 <span class="line">/</span>
                 <li>
-                    <a class="tile" href="./">Kontakt</a>
+                    <a class="tile" href="./" style="font-size: 1.6rem;">Kontakt</a>
                 </li>
             </ul>
         </div>
@@ -78,16 +78,16 @@
                 <form>
                     <div class="row">
                         <div class="six columns">
-                            <label for="yourEmail">Vas email</label>
+                            <label for="yourEmail" class="label__heading">Vas email</label>
                             <input class="u-full-width" type="email" placeholder="">
                         </div>
                         <div class="six columns">
-                            <label for="nameAndLastName">Vase ime i prezime</label>
+                            <label for="nameAndLastName" class="label__heading">Vase ime i prezime</label>
                             <input class="u-full-width" type="text" placeholder="">
                         </div>
                     </div>
-                    <label for="message">Poruka</label>
-                    <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"></textarea>
+                    <label for="message" class="label__heading">Poruka</label>
+                    <textarea class="u-full-width" placeholder="Slobodno nas kontaktirajte ukoliko imate bilo kakvih pitanja ..." name="comment"></textarea>
                     <input class="button-primary" type="submit" value="Posalji">
                 </form>
             </div>

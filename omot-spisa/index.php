@@ -78,11 +78,11 @@
                 <div class="form-box">
 
                     <!--UPLOAD dugme-->
-                    <label>Okacite Vas fajl</label>
+                    <label class="label__heading">Okacite Vas fajl</label>
                     <input type='file' name='fileToUpload' accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf' required>
 
                     <!-- ZA -->
-                    <label>Za</label>
+                    <label class="label__heading">Za</label>
                     <label for="forInput">
                         <input type="radio" name="forInput" value="Javni izvrsitelj" checked />
                         <span>Javni izvrsitelj</span>
@@ -98,39 +98,39 @@
                     <!-- ***************************** -->
 
                     <!--Ime i prezime ******************************-->
-                    <label for="nameLastname">Ime i prezime</label>
+                    <label for="nameLastname" class="label__heading">Ime i prezime</label>
                     <input name="nameLastname" class="u-full-width" type="text" placeholder="">
                     <!-- ***************************** -->
 
                     <!--Ulica ******************************-->
-                    <label for="street">Ulica</label>
+                    <label for="street" class="label__heading">Ulica</label>
                     <input name="street" class="u-full-width" type="text" placeholder="">
                     <!-- ***************************** -->
 
                     <!--Postanski broj ******************************-->
-                    <label for="zipCode">Postanski broj</label>
+                    <label for="zipCode" class="label__heading">Postanski broj</label>
                     <input name="zipCode" class="u-full-width" type="text" placeholder="">
                     <!-- ***************************** -->
 
                     <!--Mesto ******************************-->
-                    <label for="location">Mesto</label>
+                    <label for="location" class="label__heading">Mesto</label>
                     <input name="location"  class="u-full-width" type="text" placeholder="">
                     <!-- ***************************** -->
 
                     <!-- Vrsta papira ***************************** -->
-                    <label>Vrsta papira</label>
+                    <label class="label__heading">Vrsta papira</label>
                     <label for="typeOfPaper">
                         <input type="radio" name="typeOfPaper" value="100gr/m2" />
                         <span>100gr/m2</span>
                     </label>
-                    <label for="typeOfPaper">
+                    <label for="typeOfPaper" class="label__heading">
                         <input type="radio" name="typeOfPaper" value="300gr/m2" />
                         <span>300gr/m2</span>
                     </label>
                     <!-- ***************************** -->
 
                     <!-- Kolicina -->
-                    <label for="quantity">Kolicina</label>
+                    <label for="quantity" class="label__heading">Kolicina</label>
                     <select class="u-full-width" name="quantity">
                         <option value="1000" selected>1000</option>
                         <option value="2000">2000</option>
@@ -145,13 +145,14 @@
                     <!-- ***************************** -->
 
                     <!-- Krajnja poruka -->
-                        <label for="message">Poruka</label>
+                        <label for="message" class="label__heading">Poruka</label>
                         <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"></textarea>
                         <label class="sendCopy">
                         <input type="checkbox" name="sendCopy">
                         <span class="label-body">Posalji kopiju sebi</span>
                         </label>
                         <input class="button-primary" type="submit" value="Posalji" name="submit" />
+                        <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
                 </div>
             </form>
         </section>
