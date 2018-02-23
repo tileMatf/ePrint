@@ -56,12 +56,12 @@ odgovor: Moze da se desi, ali je realnije da ce onda morati opet novu formu da p
 
 odgovor: Neka pise - narudzbinom prihvatam uslove poslovanja pored dugmete posalji (DAKLE BEZ STIKLIRANJA)
 
-### Update 22. februar
+### Update za 22. i 23. februar
 ###### 1	
 	Treba promeniti putanju za uplatnice u zavisnosti od toga gde ce se nalaziti.
 
 ###### 2
-	da li mislis da je bolje da posalji kopiju sebi bude opcija samo za registrovane? 
+	Mozda je bolje da "posalji kopiju sebi" bude opcija samo za registrovane?  Da bude disabled za neregistrovane?
 
 ###### 3
 	Reci ako nesto ne radim dobro!
@@ -72,4 +72,4 @@ odgovor: Neka pise - narudzbinom prihvatam uslove poslovanja pored dugmete posal
 
 ###### 5 
 	Ne registruje mi promene u CSS-u, sto je cudnovato. 
-	Sutra cu to da Guglujem, mada ne vidim sta bi mogao da bude problem, dobra je putanja cim registruje CSS, a nove promene ne registruje o.O wtf  
+	Meni je pomoglo ovo: https://stackoverflow.com/questions/18543776/why-is-my-css-not-updating-in-web-browser  
