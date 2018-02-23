@@ -78,8 +78,9 @@
             <h2 class="section__heading">Formulari za adresiranje</h2>
 
             <!-- OVDE POCINJE FORMA ** -->
-            <form>
-                <div class="form__stampanje form-box">
+            <form method="POST" action="upload.php" enctype="multipart/form-data">
+                <div class="form-box">
+                    
                     <!-- Kolicina -->
                     <label for="quantity">Kolicina</label>
                     <select class="u-full-width" name="quantity">

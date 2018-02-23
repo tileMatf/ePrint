@@ -11,12 +11,12 @@
     <!--Font from Google-->
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&amp;subset=latin-ext" rel="stylesheet" type="text/css">
     <!--CSS files-->
-    <link rel="stylesheet" href="../css/normalize.css">
-    <link rel="stylesheet" href="../css/skeleton.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../css/normalize.css">
+    <link rel="stylesheet" href="../../css/skeleton.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <!--Favicon-->
-    <link rel="icon" type="image/png" href="../images/favicon.png">
-    <link rel="apple-touch-icon" href="../images/icon.png">
+    <link rel="icon" type="image/png" href="../../images/favicon.png">
+    <link rel="apple-touch-icon" href="../../images/icon.png">
     <!--FA icons-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -27,8 +27,8 @@
         <header>
             <div class="row">
                 <div class="six columns">
-                    <a href="../">
-                        <img class="logo" src="../images/eprint1.png" />
+                    <a href="../../">
+                        <img class="logo" src="../../images/eprint1.png" />
                     </a>
                 </div>
                 <!--NAVIGATION-->
@@ -57,12 +57,16 @@
         <div class="twelve columns">
             <ul class="nav1">
                 <li>
-                    <a class="tile" href="../">
+                    <a class="tile" href="../../">
                         <i class="fa fa-home" aria-hidden="true"></i>Pocetna</a>
                 </li>
                 <span class="line">/</span>
                 <li>
-                    <a class="tile" href="./">Omot spisa</a>
+                    <a class="tile" href="../">Koverte, dostavnice, formulari za adresiranje</a>
+                </li>
+                <span class="line">/</span>
+                <li>
+                    <a class="tile" href="./">Dostavnice</a>
                 </li>
             </ul>
         </div>
@@ -71,16 +75,12 @@
 
         <!--Stampanje section-->
         <section class="section__stampanje">
-            <h2 class="section__heading">Omot Spisa</h2>
+            <h2 class="section__heading">Dostavnice</h2>
+
 
             <!-- OVDE POCINJE FORMA ** -->
             <form method="POST" action="upload.php" enctype="multipart/form-data">
                 <div class="form-box">
-
-                    <!--UPLOAD dugme-->
-                    <label>Okacite vase fajlove</label>
-                    <input type='file' name='fileToUpload' accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf' required>
-
                     <!-- ZA -->
                     <label>Za</label>
                     <label for="forInput">
@@ -91,11 +91,6 @@
                         <input type="radio" name="forInput" value="Javni beleznik" />
                         <span>Javni beleznik</span>
                     </label>
-                    <label for="forInput">
-                        <input type="radio" name="forInput" value="Advokat" />
-                        <span>Advokat</span>
-                    </label>
-                    <!-- ***************************** -->
 
                     <!--Ime i prezime ******************************-->
                     <label for="nameLastname">Ime i prezime</label>
@@ -117,18 +112,6 @@
                     <input name="location"  class="u-full-width" type="text" placeholder="">
                     <!-- ***************************** -->
 
-                    <!-- Vrsta papira ***************************** -->
-                    <label>Vrsta papira</label>
-                    <label for="typeOfPaper">
-                        <input type="radio" name="typeOfPaper" value="100gr/m2" />
-                        <span>100gr/m2</span>
-                    </label>
-                    <label for="typeOfPaper">
-                        <input type="radio" name="typeOfPaper" value="300gr/m2" />
-                        <span>300gr/m2</span>
-                    </label>
-                    <!-- ***************************** -->
-
                     <!-- Kolicina -->
                     <label for="quantity">Kolicina</label>
                     <select class="u-full-width" name="quantity">
@@ -141,21 +124,17 @@
                         <option value="7000">7000</option>
                         <option value="8000">8000</option>
                         <option value="9000">9000</option>
+                        <option value="10000">10000</option>
                     </select>
                     <!-- ***************************** -->
 
-                    <!-- Krajnja poruka -->
-                        <label for="message">Poruka</label>
-                        <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"></textarea>
-                        <label class="sendCopy">
+                    <label for="sendCopy">
                         <input type="checkbox" name="sendCopy">
                         <span class="label-body">Posalji kopiju sebi</span>
-                        </label>
-                        <label class="acceptConditions">
-                        <input type="checkbox" name="acceptCondition" required>
-                        <span class="label-body">Prihvatam uslove</span>
-                        </label>
-                        <input class="button-primary" type="submit" value="Posalji" name="submit" />
+                    </label>
+                    <input class="button-primary" type="submit" value="Posalji" name="submit" />
+                    <!-- Smisli kako ovo lepse da izgleda -->
+                    <p class="uslovi" style="font-size:1.3rem;">Prihvatam uslove</p> 
                 </div>
             </form>
         </section>
@@ -171,19 +150,19 @@
                         <nav class="side__nav">
                             <ul class="side__nav--ul">
                                 <li>
-                                    <a href="../stampanje">Stampanje</a>
+                                    <a href="../../stampanje">Stampanje</a>
                                 </li>
                                 <li>
-                                    <a href="../blokovi">Preslikavajuci blokovi</a>
+                                    <a href="../../blokovi">Preslikavajuci blokovi</a>
                                 </li>
                                 <li>
-                                    <a href="../uplatnice">Uplatnice</a>
+                                    <a href="../../uplatnice">Uplatnice</a>
                                 </li>
                                 <li>
-                                    <a href="../koverte-dostavnice-formulari">Koverte, Dostavnice, Formulari za adresiranje</a>
+                                    <a href="./">Koverte, Dostavnice, Formulari za adresiranje</a>
                                 </li>
                                 <li>
-                                    <a href="../omot-spisa">Omot spisa</a>
+                                    <a href="../../omot-spisa">Omot spisa</a>
                                 </li>
                             </ul>
                         </nav>
@@ -195,13 +174,13 @@
                         <nav class="side__nav">
                             <ul class="side__nav--ul">
                                 <li>
-                                    <a href="../cenovnik">Cenovnik</a>
+                                    <a href="../../cenovnik">Cenovnik</a>
                                 </li>
                                 <li>
-                                    <a href="../o-nama">O nama</a>
+                                    <a href="../../o-nama">O nama</a>
                                 </li>
                                 <li>
-                                    <a href="../kontakt">Kontakt</a>
+                                    <a href="../../kontakt">Kontakt</a>
                                 </li>
                             </ul>
                         </nav>

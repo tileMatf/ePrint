@@ -12,11 +12,11 @@ Sone :baby_chick:
 - [x] Push
 - [ ] Zavrsi ostale usluge i njihove forme
 - [x] Dodaj navigaciju u uslugama 
-- [ ] Bolje stilizuj forme
-- [ ] JavaScript da mora da chekira "prihvatam uslove"
+- [ ] Bolje stilizuj forme i "prihvatam uslove" ispod posalji dugmeta
 - [ ] Napravi modal za Registraciju
-- [ ] Promeni font
+- [ ] Promeni font style i testiraj font size (pogotovo naslov i navigacija u headeru)
 - [ ] Napravi Admin panel
+- [ ] style css za sve browsere
 - [ ] Proveri metatagove, dodaj za Face/Twit, promeni favicon
 
 
@@ -56,15 +56,15 @@ odgovor: Neka pise - narudzbinom prihvatam uslove poslovanja pored dugmete posal
 	Treba promeniti putanju za uplatnice u zavisnosti od toga gde ce se nalaziti.
 
 ###### 2
-	U delu stampanje, dodaj da ukoliko korisnik stiklira 'Posalji kopiju sebi' da se pojavi polje za upis email adrese na koju
-	se salje kopija.
-
-	- kada proverim + da li mislis da je bolje da posalji kopiju sebi bude opcija samo za registrovane?
+	da li mislis da je bolje da posalji kopiju sebi bude opcija samo za registrovane? 
 
 ###### 3
+	Reci ako nesto ne radim dobro!
+	Na primer, nisam siguran da li mora value da bude unikatan kroz ceo sajt? I u dostavnicama i omotu spisa postoji label="forInput" Kapiram da ga ti povlacis iz odredjenog fajla, da je nebitno sto postoji jos neki forInput u drugom fajlu.. ako gresim, reci da ispravim
 
-Ajde pogledaj u "Omotu spisa" - "kolicina" na 133 liniji koda, je l to okej? Tako treba da napravim i za "heftanje" i "busenje" u "Stampanju"
-	Pa dobro je, samo id mi ne treba, treba mi name i value za 1000 ce biti 1000, za 2000 - 2000, itd.
-	I name-ovi na engleskom molim te :D
+###### 4 
+	Pogledaj omot spisa kod na liniji 100 pa do 118 - je l sam ih dobro nazvao? :D To se provlaci kroz vise formi, pa radim samo copy-paste
 
-
+###### 5 
+	Ne registruje mi promene u CSS-u, sto je cudnovato. 
+	Sutra cu to da Guglujem, mada ne vidim sta bi mogao da bude problem, dobra je putanja cim registruje CSS, a nove promene ne registruje o.O wtf  
