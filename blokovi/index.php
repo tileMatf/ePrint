@@ -18,7 +18,7 @@
     <link rel="icon" type="image/png" href="../images/favicon.png">
     <link rel="apple-touch-icon" href="../images/icon.png">
     <!--FA icons-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 </head>
 
 <body>
@@ -34,15 +34,15 @@
                 <!--NAVIGATION-->
                 <div class="six columns navigation__header">
                     <div class="navigation__header--nav">
-                        <ul class="nav">
+                        <ul class="nav nav-reg-log">
                             <li>
                                 <a href="#">Registruj se
-                                    <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                    <i class="fas fa-user-plus" aria-hidden="true"></i>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">Uloguj se
-                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    <i class="fas fa-user" aria-hidden="true"></i>
                                 </a>
                             </li>
                         </ul>
@@ -58,7 +58,7 @@
             <ul class="nav1">
                 <li>
                     <a class="tile" href="../">
-                        <i class="fa fa-home" aria-hidden="true"></i>Pocetna</a>
+                        <i class="fas fa-home" aria-hidden="true"></i>Pocetna</a>
                 </li>
                 <span class="line">/</span>
                 <li>
@@ -77,33 +77,33 @@
             <form method="POST" action="upload.php" enctype="multipart/form-data">
                 <div class="form-box">
                     <!--UPLOAD dugme-->
-                    <label>Okacite vas fajl</label>
+                    <label class="label__heading">Okacite vas fajl</label>
 		            <input type='file' name='fileToUpload' accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf' required>
                     <div class="row">
 
                         <!-- BROJ SETOVA ***************************** -->
-                        <label for="noOfSet">Broj setova</label>
+                        <label for="noOfSet" class="label__heading">Broj setova</label>
                         <input class="u-full-width" type="number" name="noOfSet" value="1">
                         <!-- ***************************** -->
 
                         <!-- BOJA ***************************** -->
-                        <label for="">Boja</label>
+                        <label for="" class="label__heading">Boja</label>
                         <label for="blockColor">
                             <input type="radio" name="blockColor" value="Crno-belo" checked />
                             <span>Crno belo</span>
                         </label>
-                        <label for="blockColor">
+                        <label for="blockColor" class="label__heading">
                             <input type="radio" name="blockColor" value="Plavo-belo" />
                             <span>Plavo belo</span>
                         </label>
-                        <label for="blockColor">
+                        <label for="blockColor" class="label__heading">
                             <input type="radio" name="blockColor" value="U boji" />
                             <span>U boji</span>
                         </label>
                         <!-- ***************************** -->
 
                         <!-- VELICINA BLOKA  ***************************** -->
-                        <label for="">Velicina bloka</label>
+                        <label for="" class="label__heading">Velicina bloka</label>
                         <label for="blockSize">
                             <input type="radio" name="blockSize" value="A4" checked/>
                             <span>A4</span>
@@ -115,7 +115,7 @@
                         <!-- ***************************** -->
 
                         <!-- SPAKOVANO -->
-                        <label for="">Spakovano</label>
+                        <label for="" class="label__heading">Spakovano</label>
                         <label for="packing">
                             <input type="radio" name="packing" value="Heftanjem gore" />
                             <span>Heftanjem gore</span>
@@ -131,17 +131,14 @@
                         <!-- ***************************** -->
 
                         <!-- Krajnja poruka -->
-                        <label for="message">Poruka</label>
+                        <label for="message" class="label__heading">Poruka</label>
                         <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"></textarea>
                         <label for="sendCopy">
                         <input type="checkbox" name="sendCopy">
                         <span class="label-body">Posalji kopiju sebi</span>
                         </label>
-                        <label for="acceptConditions">
-                        <input type="checkbox" name="acceptCondition" required>
-                        <span class="label-body">Prihvatam uslove</span>
-                        </label>
                         <input class="button-primary" type="submit" value="Posalji" name="submit" />
+                        <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
                     </div>
             </form>
         </section>

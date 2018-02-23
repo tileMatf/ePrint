@@ -271,8 +271,8 @@ select:focus {
 label,
 legend {
   display: block;
-  margin-bottom: .5rem;
-  padding-bottom: .3rem;
+  margin-bottom: .3rem;
+  padding-bottom: .1rem;
   font-weight: 600; }
 fieldset {
   padding: 0;

@@ -18,7 +18,7 @@
     <link rel="icon" type="image/png" href="../../images/favicon.png">
     <link rel="apple-touch-icon" href="../../images/icon.png">
     <!--FA icons-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 </head>
 
 <body>
@@ -34,15 +34,15 @@
                 <!--NAVIGATION-->
                 <div class="six columns navigation__header">
                     <div class="navigation__header--nav">
-                        <ul class="nav">
+                        <ul class="nav nav-reg-log">
                             <li>
                                 <a href="#">Registruj se
-                                    <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                    <i class="fas fa-user-plus" aria-hidden="true"></i>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">Uloguj se
-                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    <i class="fas fa-user" aria-hidden="true"></i>
                                 </a>
                             </li>
                         </ul>
@@ -58,7 +58,7 @@
             <ul class="nav1">
                 <li>
                     <a class="tile" href="../../">
-                        <i class="fa fa-home" aria-hidden="true"></i>Pocetna</a>
+                        <i class="fas fa-home" aria-hidden="true"></i>Pocetna</a>
                 </li>
                 <span class="line">/</span>
                 <li>
@@ -66,7 +66,7 @@
                 </li>
                 <span class="line">/</span>
                 <li>
-                    <a class="tile" href="./">Koverte sa povratnicom za stampanje</a>
+                    <a class="tile" href="./" style="font-size: 1.6rem;">Koverte sa povratnicom za stampanje</a>
                 </li>
             </ul>
         </div>
@@ -82,7 +82,7 @@
             <form method="POST" action="upload.php" enctype="multipart/form-data">
                 <div class="form-box">
                     <!-- BOJA -->
-                    <label>Boja</label>
+                    <label class="label__heading">Boja</label>
                     <label for="color">
                         <input type="radio" name="color" value="plave" checked />
                         <span>Plave</span>
@@ -114,7 +114,7 @@
                     </label>
                     <input class="button-primary" type="submit" value="Posalji" name="submit" />
                     <!-- Smisli kako ovo lepse da izgleda -->
-                    <p class="uslovi" style="font-size:1.3rem;">Prihvatam uslove</p> 
+                    <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p> 
                 </div>
             </form>
         </section>

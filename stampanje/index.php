@@ -18,7 +18,7 @@
   <link rel="icon" type="image/png" href="../images/favicon.png">
   <link rel="apple-touch-icon" href="../images/icon.png">
   <!--FA icons-->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 </head>
 
 <body>
@@ -34,15 +34,15 @@
         <!--NAVIGATION-->
         <div class="six columns navigation__header">
           <div class="navigation__header--nav">
-            <ul class="nav">
+            <ul class="nav nav-reg-log">
               <li>
                 <a href="#">Registruj se
-                  <i class="fa fa-user-plus" aria-hidden="true"></i>
+                  <i class="fas fa-user-plus" aria-hidden="true"></i>
                 </a>
               </li>
               <li>
                 <a href="#">Uloguj se
-                  <i class="fa fa-user" aria-hidden="true"></i>
+                  <i class="fas fa-user" aria-hidden="true"></i>
                 </a>
               </li>
             </ul>
@@ -58,11 +58,11 @@
       <ul class="nav1">
         <li>
           <a class="tile" href="../">
-            <i class="fa fa-home" aria-hidden="true"></i>Pocetna</a>
+            <i class="fas fa-home" aria-hidden="true"></i>Pocetna</a>
         </li>
         <span class="line">/</span>
         <li>
-          <a class="tile" href="./">Stampanje</a>
+          <a class="tile" href="./" style="font-size: 1.6rem;">Stampanje</a>
         </li>
       </ul>
     </div>
@@ -80,14 +80,14 @@
 
           <!--UPLOAD dugme-->
           <!--<input class="button-primary" type="submit" value="Upload">-->
-            <label>Okacite vase fajlove</label>
+            <label class="label__heading">Okacite Vas fajl</label>
 		        <input type='file' name='fileToUpload' accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf' required>		
 
             <!-- BROJ PRIMERAKA ***************************** -->
-            <label for="noInput">Broj primeraka</label>
+            <label for="noInput" class="label__heading">Broj primeraka</label>
             <input name="noInput" type="number" value="1" class="u-full-width" required>
             <!-- Redosled primeraka -->
-            <label>Slozi stranice</label>
+            <label class="label__heading">Slozi stranice</label>
             <label for="orderOfInput">
               <input type="radio" name="orderOfInput" value="1,2,3; 1,2,3; 1,2,3" checked />
               <span>1,2,3; 1,2,3; 1,2,3</span>
@@ -98,7 +98,7 @@
             <!-- ***************************** -->
 
             <!-- BOJA ***************************** -->
-            <label>Boja</label>
+            <label class="label__heading">Boja</label>
             <label for="colorOfInput">
               <input type="radio" name="colorOfInput" value="Crno-belo" checked />
               <span>Crno belo</span>
@@ -110,7 +110,7 @@
             <!-- ***************************** -->
 
             <!-- JEDNOSTRANO/DVOSTRANO  ***************************** -->
-            <label>Jednostrano / Dvostrano</label>
+            <label class="label__heading">Jednostrano / Dvostrano</label>
             <label for="typeOfPrint">
               <input type="radio" name="typeOfPrint" value="Jednostrano" checked />
               <span>Jednostrano</span>
@@ -122,7 +122,7 @@
             <!-- ***************************** -->
 
             <!-- VELICINA PAPIRA -->
-            <label>Velicina papira</label>
+            <label class="label__heading">Velicina papira</label>
             <label for="paperSize">
               <input type="radio" name="paperSize" value="A4" checked />
               <span>A4</span>
@@ -134,7 +134,7 @@
             <!-- ***************************** -->
 
             <!-- DEBILJINA PAPIRA -->
-            <label>Debljina papira</label>
+            <label class="label__heading">Debljina papira</label>
             <label for="paperWidth">
               <input type="radio" name="paperWidth" value="80gr/m2" checked />
               <span>80 gr/m<sup>2</sup></span>
@@ -147,7 +147,7 @@
 
 
             <!-- KORICENJE -->
-            <label>Koricenje</label>
+            <label class="label__heading">Koricenje</label>
             <label for="bindingType">
               <input type="radio" name="bindingType" value="Plasticnom spiralom" checked />
               <span>Plasticnom spiralom</span>
@@ -162,78 +162,44 @@
             </label>
             <!-- Upload korice dugme -->
             <!--<input class="button-primary" type="submit" value="Upload korice">-->
-            <label>Okacite koricu</label>
+            <label class="label__heading">Okacite koricu</label>
 			      <input type='file' name='bindingFileToUpload' accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf'>
             <!-- ***************************** -->
 
             <!-- HEFTANJE -->
-            <label for="">Heftanje</label>
-            <label for="heftingType">
-              <input type="radio" name="heftingType" value="Gore levo" checked />
-              <span>Gore levo</span>
-            </label>
-            <label for="heftingType">
-              <input type="radio" name="heftingType" value="Gore desno" />
-              <span>Gore desno</span>
-            </label>
-            <label for="heftingType">
-              <input type="radio" name="heftingType" value="Dole levo" />
-              <span>Dole levo</span>
-            </label>
-            <label for="heftingType">
-              <input type="radio" name="heftingType" value="Dole desno" />
-              <span>Dole desno</span>
-            </label>
-            <label for="heftingType">
-              <input type="radio" name="heftingType" value="Po sredini levo" />
-              <span>Po sredini levo</span>
-            </label>
-            <label for="heftingType">
-              <input type="radio" name="heftingType" value="Po sredini desno" />
-              <span>Po sredini desno</span>
-            </label>
-            <label for="heftingType">
-              <input type="radio" name="heftingType" value="Po sredini gore" />
-              <span>Po sredini gore</span>
-            </label>
-            <label for="heftingType">
-              <input type="radio" name="heftingType" value="Po sredini dole" />
-              <span>Po sredini dole</span>
-            </label>
+              <label for="heftingType" class="label__heading">Heftanje</label>
+              <select class="u-full-width" name="heftingType">
+                <option value="Gore levo" selected>Gore levo</option>
+                <option value="Gore desno">Gore desno</option>
+                <option value="Dole levo">Dole levo</option>
+                <option value="Dole desno">Dole desno</option>
+                <option value="Po sredini levo">Po sredini levo</option>
+                <option value="Po sredini desno">Po sredini desno</option>
+                <option value="Po sredini gore">Po sredini gore</option>
+                <option value="Po sredini dole">Po sredini dole</option>
+              </select>
             <!-- ***************************** -->
 
+
             <!-- BUSENJE -->
-            <label>Busenje</label>
-            <label for="drillingType">
-              <input type="radio" name="drillingType" value="Dve rupe za registrator levo" checked />
-              <span>Dve rupe za registrator levo</span>
-            </label>
-            <label for="drillingType">
-              <input type="radio" name="drillingType" value="Dve rupe za registrator desno" />
-              <span>Dve rupe za registrator desno</span>
-            </label>
-            <label for="drillingType">
-              <input type="radio" name="drillingType" value="Dve rupe za registrator gore" />
-              <span>Dve rupe za registrator gore</span>
-            </label>
-            <label for="drillingType">
-              <input type="radio" name="drillingType" value="Dve rupe za registrator dole" />
-              <span>Dve rupe za registrator dole</span>
-            </label>
+              <label for="drillingType" class="label__heading">Busenje</label>
+              <select class="u-full-width" name="drillingType">
+                <option value="Dve rupe za registrator levo" selected>Dve rupe za registrator levo</option>
+                <option value="Dve rupe za registrator desno">Dve rupe za registrator desno</option>
+                <option value="Dve rupe za registrator gore">Dve rupe za registrator gore</option>
+                <option value="Dve rupe za registrator doleo">Dve rupe za registrator dole</option>
+              </select>
             <!-- ***************************** -->
 
             <!-- Krajnja poruka -->
-            <label for="message">Poruka</label>
+            <label for="message" class="label__heading">Poruka</label>
             <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"></textarea>
             <label class="sendCopy">
               <input type="checkbox" name="sendCopy">
               <span class="label-body">Posalji kopiju sebi</span>
             </label>
-            <label class="acceptConditions">
-              <input type="checkbox" name="acceptCondition" required>
-              <span class="label-body">Prihvatam uslove</span>
-            </label>
             <input class="button-primary" type="submit" value="Posalji" name="submit" />
+            <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p> 
           </div>
       </form>
     </section>

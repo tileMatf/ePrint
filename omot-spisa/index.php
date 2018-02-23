@@ -18,7 +18,7 @@
     <link rel="icon" type="image/png" href="../images/favicon.png">
     <link rel="apple-touch-icon" href="../images/icon.png">
     <!--FA icons-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 </head>
 
 <body>
@@ -37,12 +37,12 @@
                         <ul class="nav">
                             <li>
                                 <a href="#">Registruj se
-                                    <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                    <i class="fas fa-user-plus" aria-hidden="true"></i>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">Uloguj se
-                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    <i class="fas fa-user" aria-hidden="true"></i>
                                 </a>
                             </li>
                         </ul>
@@ -58,11 +58,11 @@
             <ul class="nav1">
                 <li>
                     <a class="tile" href="../">
-                        <i class="fa fa-home" aria-hidden="true"></i>Pocetna</a>
+                        <i class="fas fa-home" aria-hidden="true"></i>Pocetna</a>
                 </li>
                 <span class="line">/</span>
                 <li>
-                    <a class="tile" href="./">Omot spisa</a>
+                    <a class="tile" href="./" style="font-size: 1.6rem;">Omot spisa</a>
                 </li>
             </ul>
         </div>
@@ -78,7 +78,7 @@
                 <div class="form-box">
 
                     <!--UPLOAD dugme-->
-                    <label>Okacite vase fajlove</label>
+                    <label>Okacite Vas fajl</label>
                     <input type='file' name='fileToUpload' accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf' required>
 
                     <!-- ZA -->
@@ -150,10 +150,6 @@
                         <label class="sendCopy">
                         <input type="checkbox" name="sendCopy">
                         <span class="label-body">Posalji kopiju sebi</span>
-                        </label>
-                        <label class="acceptConditions">
-                        <input type="checkbox" name="acceptCondition" required>
-                        <span class="label-body">Prihvatam uslove</span>
                         </label>
                         <input class="button-primary" type="submit" value="Posalji" name="submit" />
                 </div>
