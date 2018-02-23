@@ -45,10 +45,15 @@ https://css-tricks.com/exposing-form-fields-radio-button-css/
 ### Pitanja za advokata
 1. Kako da nazovem heading "Ostalo" gde se nalaze cenovnik, o nama i kontakt? Ostalo je bzvz.
 2. Standardne koverte - pitaj da li je dobro za "na poledjini" i "na adresnoj strani" - da li treba sve popuniti?
+
 odgovor: Ne mora
+
 3. Omoguciti kacenje vise razlicitih fajlova (sekcija stampanje)?
+
 odgovor: Moze da se desi, ali je realnije da ce onda morati opet novu formu da popunjava jer ce najverovatnije biti drugaciji podaci
+
 4. Pitanje za "prihvatam uslove"
+
 odgovor: Neka pise - narudzbinom prihvatam uslove poslovanja pored dugmete posalji (DAKLE BEZ STIKLIRANJA)
 
 ### Update 22. februar
