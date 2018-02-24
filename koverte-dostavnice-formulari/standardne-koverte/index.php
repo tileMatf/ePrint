@@ -86,24 +86,24 @@
 
                     <!-- VELICINA -->
                     <label class="label__heading">Velicina</label>
-                    <label for="size">
-                        <input type="radio" name="size" value="B6" checked />
+                    <label for="B6">
+                        <input type="radio" id="B6" name="size" value="B6" checked />
                         <span>B6</span>
                     </label>
-                    <label for="size">
-                        <input type="radio" name="size" value="B5" />
+                    <label for="B5">
+                        <input type="radio" id="B5" name="size" value="B5" />
                         <span>B5</span>
                     </label>
-                    <label for="size">
-                        <input type="radio" name="size" value="C4" />
+                    <label for="C4">
+                        <input type="radio" id="C4" name="size" value="C4" />
                         <span>C4</span>
                     </label>
-                    <label for="size">
-                        <input type="radio" name="size" value="American sa prozorom desnim" />
+                    <label for="American1">
+                        <input type="radio" id="American1" name="size" value="American sa prozorom desnim" />
                         <span>American sa prozorom desnim</span>
                     </label>
-                    <label for="size">
-                        <input type="radio" name="size" value="American bez prozora" />
+                    <label for="American2">
+                        <input type="radio" id="American2" name="size" value="American bez prozora" />
                         <span>American bez prozora</span>
                     </label>
                     <!-- ***************************** -->
@@ -125,19 +125,19 @@
                     <!-- ***************************** -->
 
                     <!--Stampanje na posledjini ******************************-->
-                    <label for="printingOnBack" class="label__heading">Stampanje na poledjini:</label>
-                    <input class="u-full-width" type="text" placeholder="Prvi red..." name="printingOnBack">
-                    <input class="u-full-width" type="text" placeholder="Drugi red..." name="printingOnBack">
-                    <input class="u-full-width" type="text" placeholder="Treci red..." name="printingOnBack">
-                    <input class="u-full-width" type="text" placeholder="Cetvrti red..." name="printingOnBack">
+                    <label class="label__heading">Stampanje na poledjini:</label>
+                    <input class="u-full-width" type="text" placeholder="Prvi red..." name="printingOnBack1" value="">
+                    <input class="u-full-width" type="text" placeholder="Drugi red..." name="printingOnBack2" value="">
+                    <input class="u-full-width" type="text" placeholder="Treci red..." name="printingOnBack3" value="">
+                    <input class="u-full-width" type="text" placeholder="Cetvrti red..." name="printingOnBack4" value="">
                     <!-- ***************************** -->
 
                     <!--Stampanje na adresnoj strani ******************************-->
-                    <label for="printingOnAdressPage" class="label__heading">Stampanje na adresnoj strani:</label>
-                    <input class="u-full-width" type="text" placeholder="Prvi red..." name="printingOnAdressPage">
-                    <input class="u-full-width" type="text" placeholder="Drugi red..." name="printingOnAdressPage">
-                    <input class="u-full-width" type="text" placeholder="Treci red..." name="printingOnAdressPage">
-                    <input class="u-full-width" type="text" placeholder="Cetvrti red..." name="printingOnAdressPage">
+                    <label class="label__heading">Stampanje na adresnoj strani:</label>
+                    <input class="u-full-width" type="text" placeholder="Prvi red..." name="printingOnAdressPage1" value="">
+                    <input class="u-full-width" type="text" placeholder="Drugi red..." name="printingOnAdressPage2" value="">
+                    <input class="u-full-width" type="text" placeholder="Treci red..." name="printingOnAdressPage3" value="">
+                    <input class="u-full-width" type="text" placeholder="Cetvrti red..." name="printingOnAdressPage4" value="">
                     <!-- ***************************** -->
 
                     <!--Krajnja poruka-->
@@ -145,11 +145,11 @@
                     <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"></textarea>
                     <!-- Varijabilni podaci i prihvatam uslove -->
                     <label for="varData">
-                        <input type="checkbox" name="varData">
+                        <input type="checkbox" name="varData" id="varData">
                         <span class="label-body">Varijabilni podaci</span>
                     </label>
                     <label for="sendCopy">
-                        <input type="checkbox" name="sendCopy">
+                        <input type="checkbox" name="sendCopy" id="sendCopy">
                         <span class="label-body">Posalji kopiju sebi</span>
                     </label>
                     <!-- POSALJI DUGME -->

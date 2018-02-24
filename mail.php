@@ -2,9 +2,9 @@
 
 use PHPMailer\PHPMailer\PHPMailer;
 
-require_once '../PHPMailer/src/Exception.php';
-require_once '../PHPMailer/src/PHPMailer.php';
-require_once '../PHPMailer/src/SMTP.php';
+require_once 'PHPMailer/src/Exception.php';
+require_once 'PHPMailer/src/PHPMailer.php';
+require_once 'PHPMailer/src/SMTP.php';
 
 function sendMail($message, $cc = null){
 		
@@ -25,6 +25,7 @@ function sendMail($message, $cc = null){
 		'verify_peer_name' => false,
 		'allow_self_signed' => true)
 	);
+	$mail->CharSet = 'UTF-8';
 	$mail->setFrom('tijjana0807@gmail.com', 'EPrint');
 	$mail->addAddress('tijjana@hotmail.com');   // Add a recipient
 	if($cc !== NULL){
@@ -32,7 +33,7 @@ function sendMail($message, $cc = null){
 		echo '<br> Dodao CC';
 	}	
 	$mail->isHTML(true);  // Set email format to HTML
-	$mail->Subject = 'Email from EPrint - new order';
+	$mail->Subject = 'EPrint - new order';
 	$mail->Body    = $message;
 	
 	//need to install https://getcomposer.org/download/

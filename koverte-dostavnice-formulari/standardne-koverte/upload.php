@@ -4,10 +4,9 @@ require_once "../../connection.php";
 require_once '../../mail.php';
 
 try{
-	$db = new DB();
+	//$db = new DB();
 
 	$target_dir = "uploaded_file/";
-	$target_binding_dir = "uploaded_binding_file/";	
 	$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 	$uploadOk = 1;
 	$status = 0;
@@ -60,80 +59,49 @@ try{
 			$status = 5;
 		}
 	}
-		
-	if(!empty($_FILES['bindingFileToUpload']['name'])){		
-		$target_binding_file = $target_binding_dir . basename($_FILES["bindingFileToUpload"]["name"]);	
-		echo $target_binding_file;
-		$bindingFileType = pathinfo($target_binding_file,PATHINFO_EXTENSION);
-		
-		// Allow certain file formats for binding
-		if($bindingFileType != "pdf" && $bindingFileType != "jpg") {
-			echo "Sorry, only PDF & JPG files are allowed.";			
-			$uploadOk = 0;
-			$status = 6;
-		}
-		// Check if $uploadOk is set to 0 by an error
-		if ($uploadOk == 0) {
-			echo "Sorry, your file was not uploaded.";
-		// if everything is ok, try to upload file
-		} else {
-			// Check if file already exists
-			if (file_exists($target_binding_file)) {
-				unlink($target_binding_file);
-				move_uploaded_file($_FILES["bindingFileToUpload"]["tmp_name"], $target_binding_file);
-				echo "The file ". basename( $_FILES["bindingFileToUpload"]["name"]). " has been uploaded.";
-				$status = 7;			
-			}
-			else if (move_uploaded_file($_FILES["bindingFileToUpload"]["tmp_name"], $target_binding_file)) {
-				//$uploadOk = $db->uploadFile($target_file);
-				if($uploadOk == 1){
-					echo "The file ". basename( $_FILES["bindingFileToUpload"]["name"]). " has been uploaded.";
-					$status = 8;
-				} else {
-					echo  "Sorry, there was an error uploading your file to database.";
-					$status = 9;
-				}
-			} else {
-				echo "Sorry, there was an error uploading your file to file system.";			
-				$status = 10;
-			}
-		}
-	}	
-	
+			
 	$message = 
 		'<html>
 			<head><title> </title></head>
 			<body>
 				<label> Korisnik: </label> korisnik123 </br>
 				<label> Vreme: </label> '.date("h:i").' </br>
-				<label> Tip: </label> stampanje </br>
+				<label> Tip: </label> Standardne koverte </br>
 				<label> Datoteka: </label> '.basename( $_FILES["fileToUpload"]["name"]).' </br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>
-					<li>Broj primeraka: '.$_POST['noInput'].'</li>
-					<li>Redosled stampanja: '.$_POST['orderOfInput'].'</li>
-					<li>Boja: '.$_POST['colorOfInput'].'</li>
-					<li>Nacin stampanja: '.$_POST['typeOfPrint'].'</li>
-					<li>Velicina papira: '.$_POST['paperSize'].'</li>
-					<li>Debljina papira: '.$_POST['paperWidth'].'</li>
-					<li>Koricenje: '.$_POST['bindingType'].'</li>
-					<li>Dodate korice: ';
-			if(!empty($_FILES['bindingFileToUpload']['name'])){
-				$message = $message . 'DA</li>
-					<li>Naziv datoteke za korice: '. basename( $_FILES["bindingFileToUpload"]["name"]). '</li>';
-			} else {
-				$message = $message . 'NE</li>';
-			}
-	$message = $message . '
-					<li>Heftanje: '.$_POST['heftingType'].'</li>
-					<li>Busenje: '.$_POST['drillingType'].'</li>
-					<li>Komentar korisnika: '.$_POST['comment'].'</li>
+					<li>Veličina: '.$_POST['size'].'</li>
+					<li>Količina: '.$_POST['quantity'].'</li>
+					<li>Štampanje na poleđini: 
+						<ul>
+							<li>Prvi red: '.$_POST['printingOnBack1'].'</li>
+							<li>Drugi red: '.$_POST['printingOnBack2'].'</li>
+							<li>Treći red: '.$_POST['printingOnBack3'].'</li>
+							<li>Četvrti red: '.$_POST['printingOnBack4'].'</li>							
+						</ul>
+					</li>
+					<li>Štampanje na adresnoj strani: 
+						<ul>
+							<li>Prvi red: '.$_POST['printingOnAdressPage1'].'</li>
+							<li>Drugi red: '.$_POST['printingOnAdressPage2'].'</li>
+							<li>Treći red: '.$_POST['printingOnAdressPage3'].'</li>
+							<li>Četvrti red: '.$_POST['printingOnAdressPage4'].'</li>							
+						</ul>
+					</li>
+					<li>Varijabilni podaci: ';
+					if(isset($_POST['varData']))
+						$message = $message . 'DA </li>';
+					else
+						$message = $message . 'NE </li>';					
+
+		$message = $message .
+					'<li>Komentar korisnika: '.$_POST['comment'].'</li>
 				</ul>
 			</body>
 		</html>';
 	
 	
-	//u statusu postoji kolizija, izmeniti
+	//u statusu postoji kolizija, izmeniti zbog sendMail
 	if(!isset($_POST['sendCopy']))
 		$status = sendMail($message);
 	else {

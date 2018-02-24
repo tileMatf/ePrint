@@ -88,59 +88,59 @@
             <input name="noInput" type="number" value="1" class="u-full-width" required>
             <!-- Redosled primeraka -->
             <label class="label__heading">Slozi stranice</label>
-            <label for="orderOfInput">
-              <input type="radio" name="orderOfInput" value="1,2,3; 1,2,3; 1,2,3" checked />
+            <label for="orderOfInput1">
+              <input type="radio" id="orderOfInput1" name="orderOfInput" value="1,2,3; 1,2,3; 1,2,3" checked />
               <span>1,2,3; 1,2,3; 1,2,3</span>
-            <label for="orderOfInput">
-              <input type="radio" name="orderOfInput" value="1,1,1; 2,2,2; 3,3,3" />
+            <label for="orderOfInput2">
+              <input type="radio" id="orderOfInput2" name="orderOfInput" value="1,1,1; 2,2,2; 3,3,3" />
               <span>1,1,1; 2,2,2; 3,3,3</span>
             </label>
             <!-- ***************************** -->
 
             <!-- BOJA ***************************** -->
             <label class="label__heading">Boja</label>
-            <label for="colorOfInput">
-              <input type="radio" name="colorOfInput" value="Crno-belo" checked />
+            <label for="colorBlack">
+              <input type="radio" id="colorBlack" name="colorOfInput" value="Crno-belo" checked />
               <span>Crno belo</span>
             </label>
-            <label for="colorOfInput">
-              <input type="radio" name="colorOfInput" value="U boji" />
+            <label for="colorAll">
+              <input type="radio" id="colorAll" name="colorOfInput" value="U boji" />
               <span>U boji</span>
             </label>
             <!-- ***************************** -->
 
             <!-- JEDNOSTRANO/DVOSTRANO  ***************************** -->
             <label class="label__heading">Jednostrano / Dvostrano</label>
-            <label for="typeOfPrint">
-              <input type="radio" name="typeOfPrint" value="Jednostrano" checked />
+            <label for="onePagePrint">
+              <input type="radio" id="onePagePrint" name="typeOfPrint" value="Jednostrano" checked />
               <span>Jednostrano</span>
             </label>
-            <label for="typeOfPrint">
-              <input type="radio" name="typeOfPrint" value="Dvostrano" />
+            <label for="bothPagePrint">
+              <input type="radio" id="bothPagePrint" name="typeOfPrint" value="Dvostrano" />
               <span>Dvostrano</span>
             </label>
             <!-- ***************************** -->
 
             <!-- VELICINA PAPIRA -->
             <label class="label__heading">Velicina papira</label>
-            <label for="paperSize">
-              <input type="radio" name="paperSize" value="A4" checked />
+            <label for="paperSizeA4">
+              <input type="radio" id="paperSizeA4" name="paperSize" value="A4" checked />
               <span>A4</span>
             </label>
-            <label for="paperSize">
-              <input type="radio" name="paperSize" value="A3" />
+            <label for="paperSizeA3">
+              <input type="radio" id="paperSizeA3" name="paperSize" value="A3" />
               <span>A3</span>
             </label>
             <!-- ***************************** -->
 
             <!-- DEBILJINA PAPIRA -->
             <label class="label__heading">Debljina papira</label>
-            <label for="paperWidth">
-              <input type="radio" name="paperWidth" value="80gr/m2" checked />
+            <label for="paperWidth80">
+              <input type="radio" id="paperWidth80" name="paperWidth" value="80gr/m2" checked />
               <span>80 gr/m<sup>2</sup></span>
             </label>
-            <label for="paperWidth">
-              <input type="radio" name="paperWidth" value="100gr/m2" />
+            <label for="paperWidth100">
+              <input type="radio" id="paperWidth100" name="paperWidth" value="100gr/m2" />
               <span>100 gr/m<sup>2</sup></span>
             </label>
             <!-- ***************************** -->
@@ -148,16 +148,16 @@
 
             <!-- KORICENJE -->
             <label class="label__heading">Koricenje</label>
-            <label for="bindingType">
-              <input type="radio" name="bindingType" value="Plasticnom spiralom" checked />
+            <label for="bindingTypePlastic">
+              <input type="radio" id="bindingTypePlastic" name="bindingType" value="Plasticnom spiralom" checked />
               <span>Plasticnom spiralom</span>
             </label>
-            <label for="bindingType">
-              <input type="radio" name="bindingType" value="Zicanom spiralom" />
+            <label for="bindingTypeWire">
+              <input type="radio" id="bindingTypeWire" name="bindingType" value="Zicanom spiralom" />
               <span>Zicanom spiralom</span>
             </label>
-            <label for="bindingType">
-              <input type="radio" name="bindingType" value="Tvrdo koricenje" />
+            <label for="bindingTypeHard">
+              <input type="radio" id="bindingTypeHard" name="bindingType" value="Tvrdo koricenje" />
               <span>Tvrdo koricenje</span>
             </label>
             <!-- Upload korice dugme -->
@@ -187,7 +187,7 @@
                 <option value="Dve rupe za registrator levo" selected>Dve rupe za registrator levo</option>
                 <option value="Dve rupe za registrator desno">Dve rupe za registrator desno</option>
                 <option value="Dve rupe za registrator gore">Dve rupe za registrator gore</option>
-                <option value="Dve rupe za registrator doleo">Dve rupe za registrator dole</option>
+                <option value="Dve rupe za registrator dole">Dve rupe za registrator dole</option>
               </select>
             <!-- ***************************** -->
 
@@ -195,7 +195,7 @@
             <label for="message" class="label__heading">Poruka</label>
             <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"></textarea>
             <label class="sendCopy">
-              <input type="checkbox" name="sendCopy">
+              <input type="checkbox" id="sendCopy" name="sendCopy">
               <span class="label-body">Posalji kopiju sebi</span>
             </label>
             <input class="button-primary" type="submit" value="Posalji" name="submit" />
