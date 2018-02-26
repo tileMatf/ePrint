@@ -19,6 +19,8 @@
   <link rel="apple-touch-icon" href="images/icon.png">
   <!--FA icons-->
   <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <!-- JS files -->
+  <script src="js/main.js"></script>
 </head>
 
 <body>
@@ -36,14 +38,10 @@
             <!--Registruj se i Uloguj se-->
             <ul class="nav login nav-reg-log">
               <li>
-                <a href="#">Registruj se
-                  <i class="fas fa-user-plus" aria-hidden="true"></i>
-                </a>
+                <button onclick="document.getElementById('id01').style.display='block'">Uloguj se<i class="fas fa-user-plus" aria-hidden="true"></i></button>
               </li>
               <li>
-                <a href="#">Uloguj se
-                  <i class="fas fa-user" aria-hidden="true"></i>
-                </a>
+                <button onclick="document.getElementById('id02').style.display='block'">Registruj se<i class="fas fa-user-plus" aria-hidden="true"></i></button>
               </li>
             </ul>
         </div>
@@ -51,6 +49,66 @@
       </div>
       <!--end of row-->
     </header>
+
+    <!-- LOGIN MODAL -->
+  <div id="id01" class="modal">
+      
+      <form class="modal-content animate" action="/action_page.php">
+        <div class="container">
+          <label for="uname"><b>Ime</b></label>
+          <input type="text" placeholder="Enter Username" name="uname" required>
+    
+          <label for="psw"><b>Lozinka</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" required>
+            
+          <button type="submit" class="login-btn">Login</button>
+          <label>
+            <input type="checkbox" checked="checked" name="remember"> Remember me
+          </label>
+        </div>
+    
+        <div class="container" style="background-color:#f1f1f1; margin-top: 40px;">
+          <div class="row">
+            <div class="seven columns">
+              <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+            </div>
+            <div class="five columns" style="padding-top: 5px;">
+              <span class="psw">Forgot <a href="#">password?</a></span>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+        <!-- LOGIN MODAL 2 -->
+  <div id="id02" class="modal">
+      
+      <form class="modal-content animate" action="/action_page.php">
+        <div class="container">
+          <label for="uname"><b>Ime naloga</b></label>
+          <input type="text" placeholder="Upisi ime" name="uname" required>
+    
+          <label for="psw"><b>Sifra</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" required>
+            
+          <button type="submit" class="login-btn">Login</button>
+          <label>
+            <input type="checkbox" checked="checked" name="remember"> Remember me
+          </label>
+        </div>
+    
+        <div class="container" style="background-color:#f1f1f1;">
+          <div class="row">
+            <div class="seven columns">
+              <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+            </div>
+            <div class="five columns">
+              <span class="psw">Forgot <a href="#">password?</a></span>
+            </div>
+          </div>
+        </div>
+     </form>
+  </div>
 
     <!---- MAIN PAGE SECTION ---->
     <section class="section__main">
@@ -160,6 +218,22 @@
     </footer>
   </div>
 
+  <script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+    var modal2 = document.getElementById('id02');
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+        else if (event.target == modal2) {
+          modal2.style.display = "none";
+        }
+    }
+
+    </script> 
 </body>
 
 </html>
