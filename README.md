@@ -12,12 +12,14 @@ Sone :baby_chick:
 - [x] Push
 - [x] Zavrsi ostale usluge i njihove forme
 - [x] Dodaj navigaciju u uslugama 
-- [ ] Bolje stilizuj forme i "prihvatam uslove" ispod posalji dugmeta
-- [ ] Napravi modal za Registraciju
+- [x] Bolje stilizuj forme i "prihvatam uslove" ispod posalji dugmeta
+- [x] Napravi modal za Registraciju
+- [ ] Upload dugme
+- [ ] Spusti kada stiklira
 - [ ] Promeni font style i testiraj font size (pogotovo naslov i navigacija u headeru)
 - [ ] Napravi Admin panel
 - [ ] style css za sve browsere
-- [ ] Proveri metatagove, dodaj za Face/Twit, promeni favicon
+- [x/ ] Proveri metatagove, dodaj za Face/Twit, promeni favicon - URADI ZA SVAKU STRANICU
 
 
 Tile :rabbit:
@@ -36,6 +38,13 @@ https://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-wa
 prihvatam uslove + pojavljuje se forma
 https://codepen.io/chriscoyier/pen/LEGXOK
 https://css-tricks.com/exposing-form-fields-radio-button-css/
+
+meta tagovi
+https://github.com/joshbuchea/HEAD#recommended-minimum
+https://css-tricks.com/essential-meta-tags-social-media/
+https://blog.kissmetrics.com/open-graph-meta-tags/
+http://ogp.me/
+
 
 
 

@@ -444,6 +444,18 @@ Media Queries
         margin-top: 15px;
     }
 
+    .modal {
+        font-size: 1em;
+    }
+    
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    .modal p {
+        font-size: 1em;
+    }
 }
 
 @media (min-width: 549px) {

@@ -189,7 +189,7 @@ if(isset($_POST['submit'])) {
   <title>ePrint</title>
   <!--Meta tags-->
   <meta name="description" content="Usluge se sastoje od pripreme za štampu, štampe, pečatiranja, kovertiranja, i otpremanja na poštu ili drugom dostavljaču.">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,  shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <!--Font from Google-->
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&amp;subset=latin-ext" rel="stylesheet" type="text/css">
