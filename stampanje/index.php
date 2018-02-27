@@ -202,8 +202,9 @@ if(isset($_POST['submit'])) {
   <link rel="apple-touch-icon" href="../images/icon.png">
   <!--FA icons-->
   <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-  
-  <script src="upload.js"></script>
+
+  <!-- JS files -->
+  <script src="../js/main.js"></script>
 </head>
 
 <body>
@@ -216,17 +217,17 @@ if(isset($_POST['submit'])) {
             <img class="logo" src="../images/eprint1.png" />
           </a>
         </div>
-        <!--NAVIGATION-->
+        <!--NAVIGATION HEADER-->
         <div class="six columns navigation__header">
           <div class="navigation__header--nav">
             <ul class="nav nav-reg-log">
               <li>
-                <a href="#">Registruj se
+                <a href="#0" class="cd-signin">Uloguj se
                   <i class="fas fa-user-plus" aria-hidden="true"></i>
                 </a>
               </li>
               <li>
-                <a href="#">Uloguj se
+                <a href="#0" class="cd-signup">Registruj se
                   <i class="fas fa-user" aria-hidden="true"></i>
                 </a>
               </li>
@@ -238,7 +239,9 @@ if(isset($_POST['submit'])) {
       <!--end of row-->
     </header>
 
-    <!-- Navigation -->
+  
+ 
+    <!-- Navigation 2 -->
     <div class="twelve columns">
       <ul class="nav1">
         <li>
