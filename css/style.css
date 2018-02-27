@@ -413,10 +413,25 @@ MISC
 }
 
 /** dugme posalji **/
-.button.button-primary, button.button-primary, input[type="submit"].button-primary, input[type="reset"].button-primary, input[type="button"].button-primary {
-
+input[type="submit"].button-primary {
+    background-color: #4CAF50;
+    color: white;
+    margin: 0 auto;
+    border: none;
+    cursor: pointer;
 }
 
+input[type="submit"].button-primary:hover {
+    background-color: rgb(91, 194, 95);
+    color: #222;
+    opacity: 0.8;
+}
+
+
+/** pojavljivanje email inputa **/
+#email {
+    display:none;
+}
 
 /***
 Media Queries 
