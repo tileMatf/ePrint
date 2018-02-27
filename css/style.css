@@ -337,10 +337,6 @@ button:hover {
     padding: 16px 50px;
 }
 
-div span.psw {
-    padding-top: 250px;
-}
-
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
@@ -400,10 +396,6 @@ div span.psw {
 
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {
-    span.psw {
-       display: block;
-       float: none;
-    }
     .cancelbtn {
        width: 100%;
     }
