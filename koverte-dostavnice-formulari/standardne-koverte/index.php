@@ -14,6 +14,7 @@ if(isset($_POST['submit'])) {
 	try{
 		//$db = new DB();
 
+		date_default_timezone_set('Europe/Belgrade');
 		$target_dir = "uploaded_file/";
 		$target_binding_dir = "uploaded_binding_file/";	
 		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
