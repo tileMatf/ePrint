@@ -11,6 +11,8 @@ try{
 	$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 	$uploadOk = 1;
 	$status = 0;
+	$fileStatus = 0;
+	$bindingFileStatus = 0;
 	$fileType = pathinfo($target_file,PATHINFO_EXTENSION);
 	
 	
@@ -30,37 +32,36 @@ try{
 
 	// Allow certain file formats	
 	if($fileType != "pdf" && $fileType != "jpg") {
-		echo "Sorry, only PDF & JPG files are allowed.";
+		$statusMessage = "Sorry, only PDF & JPG files are allowed.";
 		$uploadOk = 0;
-		$status = 1;
+		$fileStatus = 1;
 	}
 	// Check if $uploadOk is set to 0 by an error
 	if ($uploadOk == 0) {
-		echo "Sorry, your file was not uploaded.";
+		$statusMessage .= " Sorry, your file was not uploaded.";
 	// if everything is ok, try to upload file
 	} else {
 		// Check if file already exists
 		if (file_exists($target_file)) {
 			unlink($target_file);
 			move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
-			echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-			$status = 2;			
+			$statusMessage = "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+			$fileStatus = 2;			
 		}
 		else if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 			//$uploadOk = $db->uploadFile($target_file);
 			if($uploadOk == 1){
-				echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-				$status = 3;
+				$statusMessage = "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+				$fileStatus = 3;
 			} else {
-				echo  "Sorry, there was an error uploading your file to database.";
-				$status = 4;
+				$statusMessage = "Sorry, there was an error uploading your file to database.";
+				$fileStatus = 4;
 			}
 		} else {
-			echo "Sorry, there was an error uploading your file to file system.";			
-			$status = 5;
+			$statusMessage = "Sorry, there was an error uploading your file to file system.";			
+			$fileStatus = 5;
 		}
 	}
-		
 	if(!empty($_FILES['bindingFileToUpload']['name'])){		
 		$target_binding_file = $target_binding_dir . basename($_FILES["bindingFileToUpload"]["name"]);	
 		echo $target_binding_file;
@@ -68,34 +69,34 @@ try{
 		
 		// Allow certain file formats for binding
 		if($bindingFileType != "pdf" && $bindingFileType != "jpg") {
-			echo "Sorry, only PDF & JPG files are allowed.";			
+			$statusMessage = "Sorry, only PDF & JPG files are allowed.";			
 			$uploadOk = 0;
-			$status = 6;
+			$bindingFileStatus = 1;
 		}
 		// Check if $uploadOk is set to 0 by an error
 		if ($uploadOk == 0) {
-			echo "Sorry, your file was not uploaded.";
+			$statusMessage = "Sorry, your file was not uploaded.";
 		// if everything is ok, try to upload file
 		} else {
 			// Check if file already exists
 			if (file_exists($target_binding_file)) {
 				unlink($target_binding_file);
 				move_uploaded_file($_FILES["bindingFileToUpload"]["tmp_name"], $target_binding_file);
-				echo "The file ". basename( $_FILES["bindingFileToUpload"]["name"]). " has been uploaded.";
-				$status = 7;			
+				$statusMessage = "The file ". basename( $_FILES["bindingFileToUpload"]["name"]). " has been uploaded.";
+				$bindingFileStatus = 2;			
 			}
 			else if (move_uploaded_file($_FILES["bindingFileToUpload"]["tmp_name"], $target_binding_file)) {
 				//$uploadOk = $db->uploadFile($target_file);
 				if($uploadOk == 1){
-					echo "The file ". basename( $_FILES["bindingFileToUpload"]["name"]). " has been uploaded.";
-					$status = 8;
+					$statusMessage = "The file ". basename( $_FILES["bindingFileToUpload"]["name"]). " has been uploaded.";
+					$bindingFileStatus = 3;
 				} else {
-					echo  "Sorry, there was an error uploading your file to database.";
-					$status = 9;
+					$statusMessage = "Sorry, there was an error uploading your file to database.";
+					$bindingFileStatus = 4;
 				}
 			} else {
-				echo "Sorry, there was an error uploading your file to file system.";			
-				$status = 10;
+				$statusMessage = "Sorry, there was an error uploading your file to file system.";			
+				$bindingFileStatus = 5;
 			}
 		}
 	}	
@@ -105,6 +106,7 @@ try{
 			<head><title> </title></head>
 			<body>
 				<label> Korisnik: </label> korisnik123 </br>
+				<label> Datum: </label> '.date("d.m.Y").' </br>
 				<label> Vreme: </label> '.date("h:i").' </br>
 				<label> Tip: </label> stampanje </br>
 				<label> Datoteka: </label> '.basename( $_FILES["fileToUpload"]["name"]).' </br>
@@ -133,15 +135,29 @@ try{
 		</html>';
 	
 	
-	//u statusu postoji kolizija, izmeniti
 	if(!isset($_POST['sendCopy']))
-		$status = sendMail($message);
+		$mailStatus = sendMail($message);
 	else {
-		$status = sendMail($message, $_POST['userEmail']);		
+		$mailStatus = sendMail($message, $_POST['userEmail']);		
+	}
+		
+	if(($fileStatus === 2 || $fileStatus === 3) && $mailStatus === true){
+		if(!empty($_FILES['bindingFileToUpload']['name'])){
+			if($bindingFileStatus === 2 || $bindingFileStatus === 3){
+				$_POST['status'] = true;
+			} else {
+				$_POST['status'] = false;
+			}
+		} else {
+			$_POST['status'] = true;
+		}
+	} else {
+		$_POST['status'] = false;
 	}
 	
-	//header("Location: ./index.php?status=".$status);
-	//exit();
+	$_POST['statusMessage'] = $statusMessage;
+	header("Location: ./");
+	exit();
 } catch(RuntimeException $e){
 	echo $e->getMessage();
 } 

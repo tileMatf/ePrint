@@ -1,3 +1,4 @@
+
 <?php
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -8,8 +9,8 @@ require_once 'PHPMailer/src/SMTP.php';
 
 function sendMail($message, $cc = null){
 		
-	echo '<br>'. $message;
-	echo '<br>Cc: '. $cc .'<br>';
+	//echo '<br>'. $message;
+	//echo '<br>Cc: '. $cc .'<br>';
 	$mail = new PHPMailer;
 
 	$mail->isSMTP();                            // Set mailer to use SMTP
@@ -30,7 +31,7 @@ function sendMail($message, $cc = null){
 	$mail->addAddress('tijjana@hotmail.com');   // Add a recipient
 	if($cc !== NULL){
 		$mail->addCC($cc);
-		echo '<br> Dodao CC';
+		//echo '<br> Dodao CC';
 	}	
 	$mail->isHTML(true);  // Set email format to HTML
 	$mail->Subject = 'EPrint - new order';
@@ -38,11 +39,11 @@ function sendMail($message, $cc = null){
 	
 	//need to install https://getcomposer.org/download/
 	if(!$mail->send()) {
-		echo 'Message could not be sent.<br>';
-		echo 'Mailer Error: ' . $mail->ErrorInfo . '<br>';
+		//echo 'Message could not be sent.<br>';
+		$statusMessage = 'Mailer Error: ' . $mail->ErrorInfo;
 		return false;
 	} else {
-		echo 'Message has been sent';
+		//echo 'Message has been sent';
 		return true;
 	}	
 }	
