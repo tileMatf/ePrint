@@ -54,6 +54,9 @@ http://ogp.me/
 ### Organizacija
 
 
+### Nesto
+	- Jako puno merge-a, do 12 uvece. Pogledaj da li je sve tvoje jos uvek tu. :D
+
 ### Pitanja za advokata
 1. Kako da nazovem heading "Ostalo" gde se nalaze cenovnik, o nama i kontakt? Ostalo je bzvz.
 2. Standardne koverte - pitaj da li je dobro za "na poledjini" i "na adresnoj strani" - da li treba sve popuniti?
