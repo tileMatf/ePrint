@@ -25,7 +25,7 @@ Sone :baby_chick:
 
 
 Tile :rabbit:
-- [ ] nesto
+- [ ] Dodati da prilikom slanja, ako dodje do greske, ostanu zapamceni podaci iz forme
 - [ ] nesto
 - [ ] nesto
 

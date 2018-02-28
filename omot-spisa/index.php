@@ -1,3 +1,41 @@
+<?php
+
+//require_once "../connection.php";
+require_once '../functions/mail.php';
+require_once '../functions/functions.php';
+
+if(isset($_POST['submit'])) {
+	try{		
+		$status = 0;
+		$fileStatus = 0;
+		
+		$fileStatus = uploadFile("uploaded_file/");
+		$statusMessage = generateMessage($fileStatus);
+		if($fileStatus !== 2 && $fileStatus !== 3)
+			return false;
+	
+		$message = makeMessage('omot-spisa');
+		
+		$status = false;
+		if($fileStatus === 2 || $fileStatus === 3){
+			$status = true;
+		} else {
+			$status = false;
+		}
+
+		if($status === true) {
+			if(!isset($post['sendCopy']))
+				$status = sendMail($message);
+			else {
+				$status = sendMail($message, $post['userEmail']);		
+			}
+		}		
+	} catch(RuntimeException $e){
+		return $e->getMessage();
+	}
+}
+?>
+
 <!DOCTYPE html>
 <html class="no-js" lang="sr">
 
@@ -74,9 +112,23 @@
             <h2 class="section__heading">Omot Spisa</h2>
 
             <!-- OVDE POCINJE FORMA ** -->
-            <form method="POST" action="upload.php" enctype="multipart/form-data">
+            <form method="POST" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
                 <div class="form-box">
-
+				<!-- Paragraf za povratnu poruku -->		
+				<?php
+					if(isset($status)){
+						if($status === true){
+							if(isset($statusMessage) && $statusMessage)
+								echo '<p style="font-size:2rem; font-style: italic; color: green">'.
+									htmlspecialchars($statusMessage) . '</p>';
+						}
+						else {
+							if(isset($statusMessage) && $statusMessage)
+								echo '<p style="font-size:2rem; font-style: italic; color: red">'.
+									htmlspecialchars($statusMessage) . '</p>';						
+						}
+					}
+				?> 
                     <!--UPLOAD dugme-->
                     <label class="label__heading">Okacite Vas fajl</label>
                     <input type='file' name='fileToUpload' accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf' required>
@@ -103,8 +155,8 @@
                     <!-- ***************************** -->
 
                     <!--Ulica ******************************-->
-                    <label for="street" class="label__heading">Ulica</label>
-                    <input name="street" class="u-full-width" type="text" placeholder="">
+                    <label for="adress" class="label__heading">Ulica</label>
+                    <input name="adress" class="u-full-width" type="text" placeholder="">
                     <!-- ***************************** -->
 
                     <!--Postanski broj ******************************-->
@@ -120,12 +172,12 @@
                     <!-- Vrsta papira ***************************** -->
                     <label class="label__heading">Vrsta papira</label>
                     <label for="typeOfPaper">
-                        <input type="radio" name="typeOfPaper" value="100gr/m2" />
-                        <span>100gr/m2</span>
+                        <input type="radio" name="typeOfPaper" value="100gr/m2" checked/>
+                        <span>100gr/m<sup>2</span>
                     </label>
                     <label for="typeOfPaper" class="label__heading">
                         <input type="radio" name="typeOfPaper" value="300gr/m2" />
-                        <span>300gr/m2</span>
+                        <span>300gr/m<sup>2</span>
                     </label>
                     <!-- ***************************** -->
 

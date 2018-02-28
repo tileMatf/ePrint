@@ -8,9 +8,8 @@ require_once 'PHPMailer/src/PHPMailer.php';
 require_once 'PHPMailer/src/SMTP.php';
 
 function sendMail($message, $cc = null){
-		
-	//echo '<br>'. $message;
-	//echo '<br>Cc: '. $cc .'<br>';
+
+	date_default_timezone_set('Europe/Belgrade');
 	$mail = new PHPMailer;
 
 	$mail->isSMTP();                            // Set mailer to use SMTP

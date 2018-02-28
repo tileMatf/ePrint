@@ -1,170 +1,33 @@
 <?php
 
-require_once "../connection.php";
-require_once '../mail.php';
-
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
+//require_once "../connection.php";
+require_once '../functions/mail.php';
+require_once '../functions/functions.php';
 
 if(isset($_POST['submit'])) {
-	try{
-		//$db = new DB();
-
-		date_default_timezone_set('Europe/Belgrade');
-		$target_dir = "uploaded_file/";
-		$target_binding_dir = "uploaded_binding_file/";	
-		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-		$uploadOk = 1;
+	try{		
 		$status = 0;
 		$fileStatus = 0;
-		$bindingFileStatus = 0;
-		$fileType = pathinfo($target_file,PATHINFO_EXTENSION);	
+		$bindingFileStatus = 0;	
 		
-		// Check if file is a actual image or fake image
-	/*	if(isset($_POST["submit"])) {
-			$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);		
-			if($check !== false) {
-				echo "File is an image - " . $check["mime"] . ".";
-				$uploadOk = 1;
-			} else {
-				echo "File is not an image.";
-				$uploadOk = 0;
-				$status = 1;
-			} 		
-		}
-	*/	
-
-		// Allow certain file formats	
-		if($fileType != "pdf" && $fileType != "jpg") {
-//			$statusMessage = "Sorry, only PDF & JPG files are allowed.";
-			$statusMessage = "Greška, dozvoljene su samo PDF i JPG datoteke.";
-			$uploadOk = 0;
-			$fileStatus = 1;
-		}
-		// Check if $uploadOk is set to 0 by an error
-		if ($uploadOk == 0) {
-//			$statusMessage .= "Sorry, your file was not uploaded.";
-			$statusMessage .= " Vaša datoteka nije otpremljena.";
-		// if everything is ok, try to upload file
-		} else {
-			// Check if file already exists
-			if (file_exists($target_file)) {
-				unlink($target_file);
-				move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
-//				$statusMessage = "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-				$statusMessage = "Datoteka ". basename( $_FILES["fileToUpload"]["name"]). " je otpremljena.";
-				$fileStatus = 2;			
-			}
-			else if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-				//$uploadOk = $db->uploadFile($target_file);
-				if($uploadOk == 1){
-//					$statusMessage = "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-					$statusMessage = "Datoteka ". basename( $_FILES["fileToUpload"]["name"]). " je otpremljena.";
-					$fileStatus = 3;
-				} else {
-//					$statusMessage = "Sorry, there was an error uploading your file to database.";
-					$statusMessage = "Oprostite, došlo je do greške prilikom otpremanja Vaše datoteke u bazu podataka.";
-					$fileStatus = 4;
-				}
-			} else {
-//				$statusMessage = "Sorry, there was an error uploading your file to file system.";
-				$statusMessage = "Oprostite, došlo je do greške prilikom otpremanja Vaše datoteke u sistem datoteka.";			
-				$fileStatus = 5;
+		$fileStatus = uploadFile("uploaded_file/");
+		$statusMessage = generateMessage($fileStatus);
+		if($fileStatus !== 2 && $fileStatus !== 3)
+			return false;
+	
+		if(!empty($_FILES['bindingFileToUpload']['name'])){
+			$bindingFileStatus = uploadFile("uploaded_binding_file/");		
+			if($bindingFileStatus !== 2 && $bindingFileStatus !== 3){
+				$statusMessage = generateMessage($bindingFileStatus);
+				return false;
 			}
 		}
-		if(!empty($_FILES['bindingFileToUpload']['name'])){		
-			$target_binding_file = $target_binding_dir . basename($_FILES["bindingFileToUpload"]["name"]);	
-			$bindingFileType = pathinfo($target_binding_file,PATHINFO_EXTENSION);
-			
-			// Allow certain file formats for binding
-			if($bindingFileType != "pdf" && $bindingFileType != "jpg") {
-//				$statusMessage = "Sorry, only PDF & JPG files are allowed.";			
-				$statusMessage = "Greška, dozvoljene su samo PDF i JPG datoteke.";
-				$uploadOk = 0;
-				$bindingFileStatus = 1;
-			}
-			// Check if $uploadOk is set to 0 by an error
-			if ($uploadOk == 0) {
-//				$statusMessage = "Sorry, your file was not uploaded.";
-				$statusMessage = "Oprostite, Vaša datoteka nije otpremljena.";
-			// if everything is ok, try to upload file
-			} else {
-				// Check if file already exists
-				if (file_exists($target_binding_file)) {
-					unlink($target_binding_file);
-					move_uploaded_file($_FILES["bindingFileToUpload"]["tmp_name"], $target_binding_file);
-//					$statusMessage = "The file ". basename( $_FILES["bindingFileToUpload"]["name"]). " has been uploaded.";
-					$statusMessage = "Datoteka ". basename( $_FILES["bindingFileToUpload"]["name"]). " je otpremljena.";
-					$bindingFileStatus = 2;			
-				}
-				else if (move_uploaded_file($_FILES["bindingFileToUpload"]["tmp_name"], $target_binding_file)) {
-					//$uploadOk = $db->uploadFile($target_file);
-					if($uploadOk == 1){
-//						$statusMessage = "The file ". basename( $_FILES["bindingFileToUpload"]["name"]). " has been uploaded.";
-						$statusMessage = "Datoteka ". basename( $_FILES["bindingFileToUpload"]["name"]). " je otpremljena.";
-						$bindingFileStatus = 3;
-					} else {
-//						$statusMessage = "Sorry, there was an error uploading your file to database.";
-						$statusMessage = "Oprostite, došlo je do greške prilikom otpremanja datoteke u bazu podataka.";
-						$bindingFileStatus = 4;
-					}
-				} else {
-//					$statusMessage = "Sorry, there was an error uploading your file to file system.";			
-					$statusMessage = "Oprostite, došlo je do greške prilikom otpremanja Vaše datoteke u sistem datoteka.";
-					$bindingFileStatus = 5;
-				}
-			}
-		}	
-		
-		$message = 
-			'<html>
-				<head><title> </title></head>
-				<body>
-					<label> Korisnik: </label> korisnik123 </br>
-					<label> Datum: </label> '.date("d.m.Y.").' </br>
-					<label> Vreme: </label> '.date("h:i").' </br>
-					<label> Tip: </label> stampanje </br>
-					<label> Datoteka: </label> '.basename( $_FILES["fileToUpload"]["name"]).' </br>
-					<label> Izabrane opcije: </label> </br>
-					<ul>
-						<li>Broj primeraka: '.$_POST['noInput'].'</li>
-						<li>Redosled stampanja: '.$_POST['orderOfInput'].'</li>
-						<li>Boja: '.$_POST['colorOfInput'].'</li>
-						<li>Nacin stampanja: '.$_POST['typeOfPrint'].'</li>
-						<li>Velicina papira: '.$_POST['paperSize'].'</li>
-						<li>Debljina papira: '.$_POST['paperWidth'].'</li>
-						<li>Koricenje: '.$_POST['bindingType'].'</li>
-						<li>Dodate korice: ';
-				if(!empty($_FILES['bindingFileToUpload']['name'])){
-					$message = $message . 'DA</li>
-						<li>Naziv datoteke za korice: '. basename( $_FILES["bindingFileToUpload"]["name"]). '</li>';
-				} else {
-					$message = $message . 'NE</li>';
-				}
-				
-				
-		$message = $message . '
-						<li>Heftanje: '.$_POST['heftingType'].'</li>
-						<li>Busenje: '.$_POST['drillingType'].'</li>
-						<li>Komentar korisnika: '. test_input($_POST['comment']).'</li>
-					</ul>
-				</body>
-			</html>';
-		
-		
-		if(!isset($_POST['sendCopy']))
-			$mailStatus = sendMail($message);
-		else {
-			$mailStatus = sendMail($message, $_POST['userEmail']);		
-		}
+	
+		$message = makeMessage('stampanje');
 		
 		$status = false;
-		if(($fileStatus === 2 || $fileStatus === 3) && $mailStatus === true){
-			if(!empty($_FILES['bindingFileToUpload']['name'])){
+		if($fileStatus === 2 || $fileStatus === 3){
+			if(!empty($files['bindingFileToUpload']['name'])){
 				if($bindingFileStatus === 2 || $bindingFileStatus === 3){
 					$status = true;
 				} else {
@@ -175,10 +38,18 @@ if(isset($_POST['submit'])) {
 			}
 		} else {
 			$status = false;
+		}
+
+		if($status === true) {
+			if(!isset($post['sendCopy']))
+				$status = sendMail($message);
+			else {
+				$status = sendMail($message, $post['userEmail']);		
+			}
 		}		
 	} catch(RuntimeException $e){
 		return $e->getMessage();
-	} 
+	}
 }
 ?>
 
@@ -338,18 +209,17 @@ if(isset($_POST['submit'])) {
       <!-- OVDE POCINJE FORMA ZA ***STAMPANJE*** -->
       <form method="POST" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
         <div class="form-box">
-
 		<!-- Paragraf za povratnu poruku -->		
 		<?php
 			if(isset($status)){
 				if($status === true){
 					if(isset($statusMessage) && $statusMessage)
-						echo '<p id="statusMessage" style="font-size:2rem; font-style: italic; color: green">'.
+						echo '<p style="font-size:2rem; font-style: italic; color: green">'.
 							htmlspecialchars($statusMessage) . '</p>';
 				}
 				else {
 					if(isset($statusMessage) && $statusMessage)
-						echo '<p id="statusMessage" style="font-size:2rem; font-style: italic; color: red">'.
+						echo '<p style="font-size:2rem; font-style: italic; color: red">'.
 							htmlspecialchars($statusMessage) . '</p>';						
 				}
 			}

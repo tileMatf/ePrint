@@ -1,3 +1,32 @@
+<?php
+
+//require_once "../connection.php";
+require_once '../../functions/mail.php';
+require_once "../../functions/functions.php";
+
+
+if(isset($_POST['submit'])) {
+	try{
+		//$db = new DB();
+		
+		$status = 0;	
+		$message = makeMessage('nalog-za-prenos');			
+		
+		if(!isset($_POST['sendCopy']))
+			$status = sendMail($message);			
+		else {
+			$status = sendMail($message, $_POST['userEmail']);		
+		}
+		if($status === true)
+			$statusMessage = "Nalog za prenos je uspešno poslat.";
+		else
+			$statusMessage = "Oprostite, došlo je do greške prilikom slanja. Molim Vas pokušajte ponovo.";
+	} catch(RuntimeException $e){
+		return $e->getMessage();
+	} 
+}
+?>
+
 <!DOCTYPE html>
 <html class="no-js" lang="sr">
 
@@ -11,9 +40,9 @@
     <!--Font from Google-->
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&amp;subset=latin-ext" rel="stylesheet" type="text/css">
     <!--CSS files-->
-    <link rel="stylesheet" href="../css/normalize.css">
-    <link rel="stylesheet" href="../css/skeleton.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../css/normalize.css">
+    <link rel="stylesheet" href="../../css/skeleton.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <!--Favicon-->
     <link rel="icon" type="image/png" href="../images/favicon.png">
     <link rel="apple-touch-icon" href="../images/icon.png">
@@ -57,16 +86,16 @@
         <div class="twelve columns">
             <ul class="nav1">
                 <li>
-                    <a class="tile" href="../">
+                    <a class="tile" href="../../">
                         <i class="fas fa-home" aria-hidden="true"></i>Pocetna</a>
                 </li>
                 <span class="line">/</span>
                 <li>
-                    <a class="tile" href="./uplatnice.html">Uplatnice</a>
+                    <a class="tile" href="../">Uplatnice</a>
                 </li>
                 <span class="line">/</span>
                 <li>
-                    <a class="tile" href="./nalog-za-prenos.html" style="font-size: 1.6rem;">Nalog za prenos</a>
+                    <a class="tile" href="./" style="font-size: 1.6rem;">Nalog za prenos</a>
                 </li>
             </ul>
         </div>
@@ -79,8 +108,23 @@
                 <h2 class="section__heading">Nalog za prenos</h2>
             </div>
             <!-- OVDE POCINJE FORMA -->
-            <form>
+            <form method="POST" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                 <div class="form-box">
+				<!-- Paragraf za povratnu poruku -->		
+				<?php
+					if(isset($status)){
+						if($status === true){
+							if(isset($statusMessage) && $statusMessage)
+								echo '<p style="font-size:2rem; font-style: italic; color: green">'.
+									htmlspecialchars($statusMessage) . '</p>';
+						}
+						else {
+							if(isset($statusMessage) && $statusMessage)
+								echo '<p style="font-size:2rem; font-style: italic; color: red">'.
+									htmlspecialchars($statusMessage) . '</p>';						
+						}
+					}
+				?>				
                     <!-- UNOS PODATAKA ***************************** -->
                     <!--<h5>Unos podataka</h5>-->
 
@@ -125,8 +169,8 @@
                     <!-- ***************************** -->
 
                     <!--POZIV NA BROJ ZADUZENJA ******************************--> <!-- OVO JE DRUGACIJE OD DRUGE DVE UPLATNICE -->
-                    <label for="refNumObligation" class="label__heading">Poziv na broj zaduzenja</label> <!-- referenceNumberObligation -->
-                    <input class="u-full-width" type="text" placeholder="" name="refNumObligation">
+                    <label for="referenceNumber" class="label__heading">Poziv na broj zaduzenja</label> <!-- referenceNumberObligation -->
+                    <input class="u-full-width" type="text" placeholder="" name="referenceNumber">
                     <!-- ***************************** -->
 
                     <!--RACUN PRIMAOCA ******************************-->
@@ -148,12 +192,12 @@
 
                     <!-- BROJ UPLATNICA U SETU ***************************** -->
                     <label for="" class="label__heading">Broj naloga za prenos u setu</label>
-                    <label for="numOfTOInSet"> <!-- number of transfer orders in set -->
-                        <input type="radio" name="numOfTOInSet" value="1+1" checked />
+                    <label for="numOfPaySet"> <!-- number of transfer orders in set -->
+                        <input type="radio" name="numOfPaySet" value="1+1" checked />
                         <span>1+1</span>
                     </label>
-                    <label for="numOfTOInSet">
-                        <input type="radio" name="numOfTOInSet" value="1+2" />
+                    <label for="numOfPaySet">
+                        <input type="radio" name="numOfPaySet" value="1+2" />
                         <span>1+2</span>
                     </label>
                     <!-- ***************************** -->

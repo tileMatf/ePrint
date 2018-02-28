@@ -1,3 +1,32 @@
+<?php
+
+//require_once "../connection.php";
+require_once '../../functions/mail.php';
+require_once "../../functions/functions.php";
+
+
+if(isset($_POST['submit'])) {
+	try{
+		//$db = new DB();
+		
+		$status = 0;	
+		$message = makeMessage('nalog-za-isplatu');			
+		
+		if(!isset($_POST['sendCopy']))
+			$status = sendMail($message);			
+		else {
+			$status = sendMail($message, $_POST['userEmail']);		
+		}
+		if($status === true)
+			$statusMessage = "Nalog za isplatu je uspešno poslat.";
+		else
+			$statusMessage = "Oprostite, došlo je do greške prilikom slanja. Molim Vas pokušajte ponovo.";
+	} catch(RuntimeException $e){
+		return $e->getMessage();
+	} 
+}
+?>
+
 <!DOCTYPE html>
 <html class="no-js" lang="sr">
 
@@ -11,9 +40,9 @@
     <!--Font from Google-->
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&amp;subset=latin-ext" rel="stylesheet" type="text/css">
     <!--CSS files-->
-    <link rel="stylesheet" href="../css/normalize.css">
-    <link rel="stylesheet" href="../css/skeleton.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../css/normalize.css">
+    <link rel="stylesheet" href="../../css/skeleton.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <!--Favicon-->
     <link rel="icon" type="image/png" href="../images/favicon.png">
     <link rel="apple-touch-icon" href="../images/icon.png">
@@ -57,16 +86,16 @@
         <div class="twelve columns">
             <ul class="nav1">
                 <li>
-                    <a class="tile" href="../">
+                    <a class="tile" href="../../">
                         <i class="fas fa-home" aria-hidden="true"></i>Pocetna</a>
                 </li>
                 <span class="line">/</span>
                 <li>
-                    <a class="tile" href="./uplatnice.html">Uplatnice</a>
+                    <a class="tile" href="../">Uplatnice</a>
                 </li>
                 <span class="line">/</span>
                 <li>
-                    <a class="tile" href="./nalogzauplatu.html" style="font-size: 1.6rem;">Nalog za uplatu</a>
+                    <a class="tile" href="./" style="font-size: 1.6rem;">Nalog za isplatu</a>
                 </li>
             </ul>
         </div>
@@ -76,11 +105,26 @@
         <!--Stampanje section-->
         <section class="section__stampanje">
             <div class="container">
-                <h2 class="section__heading">Nalog za uplatu</h2>
+                <h2 class="section__heading">Nalog za isplatu</h2>
             </div>
             <!-- OVDE POCINJE FORMA -->
-            <form method="POST" action="upload.php" enctype="multipart/form-data">
+            <form method="POST" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                 <div class="form-box">
+				<!-- Paragraf za povratnu poruku -->		
+				<?php
+					if(isset($status)){
+						if($status === true){
+							if(isset($statusMessage) && $statusMessage)
+								echo '<p style="font-size:2rem; font-style: italic; color: green">'.
+									htmlspecialchars($statusMessage) . '</p>';
+						}
+						else {
+							if(isset($statusMessage) && $statusMessage)
+								echo '<p style="font-size:2rem; font-style: italic; color: red">'.
+									htmlspecialchars($statusMessage) . '</p>';						
+						}
+					}
+				?> 				
                     <!-- UNOS PODATAKA ***************************** -->
                     <!--<h5>Unos podataka</h5>-->
 
@@ -129,16 +173,16 @@
                     <input class="u-full-width" type="text" placeholder="" name="referenceNumber">
                     <!-- ***************************** -->
 
-                    <!-- Kraj unosa podataka, sledi radio buttons -->
+                    <!-- Kraj naloga za prenos u setu sledi radio buttons -->
 
-                    <!-- BROJ UPLATNICA U SETU ***************************** -->
-                    <label for="" class="label__heading">Broj uplatnica u setu</label>
-                    <label for="numOfPaySet">
-                        <input type="radio" name="numOfPaySet" value="1+1" checked />
+                    <!-- BROJ UPLATNICA U SETU ***************************** --> <!-- SVAKA UPLATNICA OVO IMA DRUGACIJE -->
+                    <label for="" class="label__heading">Broj naloga za isplatu u setu</label>
+                    <label for="1plus1">
+                        <input type="radio" name="numOfPaySet" id="1plus1" value="1+1" checked />
                         <span>1+1</span>
                     </label>
-                    <label for="numberOfPaySet">
-                        <input type="radio" name="numOfPaySet" value="1+2" />
+                    <label for="1plus2">
+                        <input type="radio" name="numOfPaySet" id="1plus2" value="1+2" />
                         <span>1+2</span>
                     </label>
                     <!-- ***************************** -->
@@ -156,7 +200,7 @@
                         <option value="8100">8100</option>
                         <option value="10800">10800</option>
                     </select>
-
+                    <!-- ***************************** -->
 
                     <!--Krajnja poruka-->
                     <label for="message" class="label__heading">Poruka</label>
@@ -177,6 +221,9 @@
         </section>
 
 
+
+
+
         <!--Footer-->
         <footer>
             <div class="container">
@@ -187,19 +234,19 @@
                         <nav class="side__nav">
                             <ul class="side__nav--ul">
                                 <li>
-                                    <a href="../stampanje">Stampanje</a>
+                                    <a href="../stampanje.html">Stampanje</a>
                                 </li>
                                 <li>
-                                    <a href="../blokovi">Preslikavajuci blokovi</a>
+                                    <a href="../blokovi.html">Preslikavajuci blokovi</a>
                                 </li>
                                 <li>
-                                    <a href="./uplatnice">Uplatnice</a>
+                                    <a href="../uplatnice.html">Uplatnice</a>
                                 </li>
                                 <li>
-                                    <a href="../koverte-dostavnice-formulari">Koverte, Dostavnice, Formulari za adresiranje</a>
+                                    <a href="../koverte-dostavnice-formulari.html">Koverte, Dostavnice, Formulari za adresiranje</a>
                                 </li>
                                 <li>
-                                    <a href="../omot-spisa">Omot spisa</a>
+                                    <a href="../omot-spisa.html">Omot spisa</a>
                                 </li>
                             </ul>
                         </nav>
@@ -211,13 +258,13 @@
                         <nav class="side__nav">
                             <ul class="side__nav--ul">
                                 <li>
-                                    <a href="../cenovnik">Cenovnik</a>
+                                    <a href="../cenovnik.html">Cenovnik</a>
                                 </li>
                                 <li>
-                                    <a href="../o-namatml">O nama</a>
+                                    <a href="../o-nama.html">O nama</a>
                                 </li>
                                 <li>
-                                    <a href="../kontakt">Kontakt</a>
+                                    <a href="../kontakt.html">Kontakt</a>
                                 </li>
                             </ul>
                         </nav>

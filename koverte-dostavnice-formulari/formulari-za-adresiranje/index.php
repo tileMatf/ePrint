@@ -1,3 +1,30 @@
+<?php
+
+//require_once "../../connection.php";
+require_once '../../functions/mail.php';
+require_once '../../functions/functions.php';
+
+if(isset($_POST['submit'])) {
+	try{		
+		$status = 0;
+	
+		$message = makeMessage('formulari-za-adresiranje');
+
+		if(!isset($post['sendCopy']))
+			$status = sendMail($message);
+		else 
+			$status = sendMail($message, $post['userEmail']);		
+				
+		if($status === true)
+			$statusMessage = "Formular za adresiranje je uspešno naručen.";
+		else
+			$statusMessage = "Oprostite, došlo je do greške. Molim Vas, pokušajte ponovo.";
+	} catch(RuntimeException $e){
+		return $e->getMessage();
+	}
+}
+?>
+
 <!DOCTYPE html>
 <html class="no-js" lang="sr">
 
@@ -78,9 +105,22 @@
             <h2 class="section__heading">Formulari za adresiranje</h2>
 
             <!-- OVDE POCINJE FORMA ** -->
-            <form method="POST" action="upload.php" enctype="multipart/form-data">
+            <form method="POST" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                 <div class="form-box">
-                    
+                <?php
+					if(isset($status)){
+						if($status === true){
+							if(isset($statusMessage) && $statusMessage)
+								echo '<p style="font-size:2rem; font-style: italic; color: green">'.
+									htmlspecialchars($statusMessage) . '</p>';
+						}
+						else {
+							if(isset($statusMessage) && $statusMessage)
+								echo '<p style="font-size:2rem; font-style: italic; color: red">'.
+									htmlspecialchars($statusMessage) . '</p>';						
+						}
+					}
+				?> 
                     <!-- Kolicina -->
                     <label for="quantity" class="label__heading">Kolicina</label>
                     <select class="u-full-width" name="quantity">

@@ -1,3 +1,30 @@
+<?php
+
+//require_once "../../connection.php";
+require_once '../../functions/mail.php';
+require_once '../../functions/functions.php';
+
+if(isset($_POST['submit'])) {
+	try{		
+		$status = 0;
+	
+		$message = makeMessage('koverte-sa-dostavnicom');
+
+		if(!isset($post['sendCopy']))
+			$status = sendMail($message);
+		else 
+			$status = sendMail($message, $post['userEmail']);		
+				
+		if($status === true)
+			$statusMessage = "Koverta sa dostavnicom za ručno popunjavanje je uspešno naručena.";
+		else
+			$statusMessage = "Oprostite, došlo je do greške. Molim Vas, pokušajte ponovo.";
+	} catch(RuntimeException $e){
+		return $e->getMessage();
+	}
+}
+?>
+
 <!DOCTYPE html>
 <html class="no-js" lang="sr">
 
@@ -78,8 +105,22 @@
             <h2 class="section__heading section-heading--smaller">Koverte sa dostavnicom za rucno popunjavanje</h2>
 
             <!-- OVDE POCINJE FORMA ** -->
-            <form method="POST" action="upload.php" enctype="multipart/form-data">
+            <form method="POST" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                 <div class="form-box">
+				<?php
+					if(isset($status)){
+						if($status === true){
+							if(isset($statusMessage) && $statusMessage)
+								echo '<p style="font-size:2rem; font-style: italic; color: green">'.
+									htmlspecialchars($statusMessage) . '</p>';
+						}
+						else {
+							if(isset($statusMessage) && $statusMessage)
+								echo '<p style="font-size:2rem; font-style: italic; color: red">'.
+									htmlspecialchars($statusMessage) . '</p>';						
+						}
+					}
+				?> 
                     <!-- ZA -->
                     <label class="label__heading">Za</label>
                     <label for="forInput">
@@ -108,8 +149,8 @@
                     <!-- ***************************** -->
 
                     <!--Ulica ******************************-->
-                    <label for="street" class="label__heading">Ulica</label>
-                    <input name="street" class="u-full-width" type="text" placeholder="">
+                    <label for="adress" class="label__heading">Ulica</label>
+                    <input name="adress" class="u-full-width" type="text" placeholder="">
                     <!-- ***************************** -->
 
                     <!--Postanski broj ******************************-->

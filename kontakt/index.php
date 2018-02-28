@@ -1,20 +1,13 @@
 <?php
 
-require_once "../connection.php";
-require_once '../mail.php';
-
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
+//require_once "../connection.php";
+require_once '../functions/mail.php';
+require_once '../functions/functions.php';
 
 if(isset($_POST['submit'])) {
 	try{
 		//$db = new DB();
 
-		date_default_timezone_set('Europe/Belgrade');
 		$status = 0;
 		
 		$message = 
