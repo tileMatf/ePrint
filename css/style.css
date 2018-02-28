@@ -40,7 +40,6 @@ body {
    background: linear-gradient(to left, rgb(250, 250, 250), rgb(250, 245, 255));
    color: #222;
    font-size: 1.5em;
-   /*padding: 15px 15px ***ako nema kontejnera*/
 }
 
 .side__nav--ul li {
@@ -134,7 +133,7 @@ Typography
 }
 
 .section__main h3 {
-    margin-top: 1rem;
+    margin-top: 1rem; 
 }
 
 .label__heading {
@@ -182,7 +181,8 @@ Header and Nav
 
 header {
     background-color: #fdf9f9;
-    border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+            border-radius: 5px 5px 0 0;
     text-align: center;
     padding-top: 30px;
     padding-bottom: 20px;
@@ -287,10 +287,14 @@ FORMS
     margin-top: 30px;
     margin-bottom: 100px;
     background: #fdfbfb;
-    border-radius: 5px;
+    -webkit-border-radius: 5px;
+            border-radius: 5px;
     position: relative;
-    box-sizing: border-box;
-    box-shadow: 0 1px 5px rgba(226, 203, 203, 0.3);
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    -webkit-box-shadow: 0 1px 5px rgba(226, 203, 203, 0.3);
+            box-shadow: 0 1px 5px rgba(226, 203, 203, 0.3);
   }
 
 
@@ -304,7 +308,24 @@ input[type=text], input[type=password] {
     padding: 12px 10px;
     display: inline-block;
     border: 1px solid #ccc;
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+input[type="submit"].button-primary:focus,
+input[type="reset"].button-primary:focus,
+input[type="button"].button-primary:focus {
+    background-color: rgb(86, 199, 90); 
+    color: white;
+}
+
+.button:focus,
+button:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus,
+input[type="button"]:focus {
+    color: #444;
 }
 
 /* Set a style for all buttons */
@@ -389,8 +410,8 @@ button:hover {
 }
     
 @keyframes animatezoom {
-    from {transform: scale(0)} 
-    to {transform: scale(1)}
+    from {-webkit-transform: scale(0);transform: scale(0)} 
+    to {-webkit-transform: scale(1);transform: scale(1)}
 }
 
 /* Change styles for span and cancel button on extra small screens */
@@ -445,7 +466,6 @@ input[type="submit"].button-primary:hover {
 
 .inputfile + label {
     font-size: 1.25em;
-    font-weight: 700;
     color: white;
     background-color: rgb(91, 194, 95);
     display: inline-block;
@@ -517,7 +537,8 @@ Media Queries
     }
 
     .shadow {
-        box-shadow:0 1px 10px rgba(226, 203, 203, 0.3);
+        -webkit-box-shadow:0 1px 10px rgba(226, 203, 203, 0.3);
+                box-shadow:0 1px 10px rgba(226, 203, 203, 0.3);
         /**box-shadow:0 1px 10px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.1) inset;**/
     }
 
@@ -531,11 +552,10 @@ Media Queries
         background:#B2DBBF;
         z-index:-1;
         -webkit-box-shadow: 0 20px 5px #9B7468;
-        -moz-box-shadow: 0 20px 5px #9B7468;
         box-shadow: 0 20px 5px #70C1B3;
         -webkit-transform: rotate(-3deg);
-        -moz-transform: rotate(-3deg);
-        transform: rotate(-3deg);
+        -ms-transform: rotate(-3deg);
+            transform: rotate(-3deg);
     }
 
     .container__cenovnik {

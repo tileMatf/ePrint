@@ -1,6 +1,6 @@
 <?php
 
-require_once "../connection.php";
+//require_once "../connection.php";
 require_once '../mail.php';
 
 function test_input($data) {
@@ -290,19 +290,19 @@ if(isset($_POST['submit'])) {
                 <p>Popunite navedena polja.</p>
                 <hr>
                 <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Upisite Vasu email adresu" name="email" required>
+                <input type="text" placeholder="Upišite Vašu email adresu" name="email" required>
           
                 <label for="psw"><b>Lozinka</b></label>
-                <input type="password" placeholder="Upisite Vasu lozinku" name="psw" required>
+                <input type="password" placeholder="Upišite Vašu lozinku" name="psw" required>
           
                 <label for="psw-repeat"><b>Potvrdite lozinku</b></label>
-                <input type="password" placeholder="Potvrdite Vasu lozinku" name="psw-repeat" required>
+                <input type="password" placeholder="Potvrdite Vašu lozinku" name="psw-repeat" required>
                 
                 <label>
                   <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Zapamti me
                 </label>
           
-                <p>Pravljenjem naloga prihvatate nase <a href="#" style="color:dodgerblue">uslove</a> poslovanja</p>
+                <p>Pravljenjem naloga prihvatate naše <a href="#" style="color:dodgerblue">uslove</a> poslovanja</p>
           
                 <div class="clearfix">
                   <button type="button" onclick="document.getElementById('modal2').style.display='none'" class="cancelbtn">Nazad</button>
@@ -319,11 +319,11 @@ if(isset($_POST['submit'])) {
       <ul class="nav1">
         <li>
           <a class="tile" href="../">
-            <i class="fas fa-home" aria-hidden="true"></i>Pocetna</a>
+            <i class="fas fa-home" aria-hidden="true"></i>Početna</a>
         </li>
         <span class="line">/</span>
         <li>
-          <a class="tile" href="./" style="font-size: 1.6rem;">Stampanje</a>
+          <a class="tile" href="./" style="font-size: 1.6rem;">Štampanje</a>
         </li>
       </ul>
     </div>
@@ -332,7 +332,7 @@ if(isset($_POST['submit'])) {
     <!--Stampanje section-->
     <section class="section__stampanje">
       <div class="container">
-        <h2 class="section__heading">Stampanje</h2>
+        <h2 class="section__heading">Štampanje</h2>
       </div>
 
       <!-- OVDE POCINJE FORMA ZA ***STAMPANJE*** -->
@@ -356,13 +356,13 @@ if(isset($_POST['submit'])) {
 		?> 
           <!--UPLOAD dugme-->          
             <input type='file' name='fileToUpload' id="file" class="inputfile" accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf' required >
-            <label for="file"><i class="fa-upload fas fa-upload"></i><span>Okacite fajl</span></label>
+            <label for="file"><i class="fa-upload fas fa-upload"></i><span>Okačite fajl</span></label>
 
             <!-- BROJ PRIMERAKA ***************************** -->
             <label for="noInput" class="label__heading">Broj primeraka</label>
             <input name="noInput" type="number" value="1" class="u-full-width" required>
             <!-- Redosled primeraka -->
-            <label class="label__heading">Slozi stranice</label>
+            <label class="label__heading">Složi stranice</label>
             <label for="orderOfInput1">
               <input type="radio" id="orderOfInput1" name="orderOfInput" value="1,2,3; 1,2,3; 1,2,3" checked />
               <span>1,2,3; 1,2,3; 1,2,3</span>
@@ -397,7 +397,7 @@ if(isset($_POST['submit'])) {
             <!-- ***************************** -->
 
             <!-- VELICINA PAPIRA -->
-            <label class="label__heading">Velicina papira</label>
+            <label class="label__heading">Veličina papira</label>
             <label for="paperSizeA4">
               <input type="radio" id="paperSizeA4" name="paperSize" value="A4" checked />
               <span>A4</span>
@@ -422,22 +422,22 @@ if(isset($_POST['submit'])) {
 
 
             <!-- KORICENJE -->
-            <label class="label__heading">Koricenje</label>
+            <label class="label__heading">Koričenje</label>
             <label for="bindingTypePlastic">
               <input type="radio" id="bindingTypePlastic" name="bindingType" value="Plasticnom spiralom" checked />
-              <span>Plasticnom spiralom</span>
+              <span>Plastičnom spiralom</span>
             </label>
             <label for="bindingTypeWire">
               <input type="radio" id="bindingTypeWire" name="bindingType" value="Zicanom spiralom" />
-              <span>Zicanom spiralom</span>
+              <span>Žičanom spiralom</span>
             </label>
             <label for="bindingTypeHard">
               <input type="radio" id="bindingTypeHard" name="bindingType" value="Tvrdo koricenje" />
-              <span>Tvrdo koricenje</span>
+              <span>Tvrdo koričenje</span>
             </label>
             <!-- Upload korice dugme -->
             <!--<input class="button-primary" type="submit" value="Upload korice">-->
-            <label class="label__heading">Okacite koricu</label>
+            <label class="label__heading">Okačite koricu</label>
 			      <input type='file' name='bindingFileToUpload' accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf'>
             <!-- ***************************** -->
 
@@ -457,7 +457,7 @@ if(isset($_POST['submit'])) {
 
 
             <!-- BUSENJE -->
-              <label for="drillingType" class="label__heading">Busenje</label>
+              <label for="drillingType" class="label__heading">Bušenje</label>
               <select class="u-full-width" name="drillingType">
                 <option value="Dve rupe za registrator levo" selected>Dve rupe za registrator levo</option>
                 <option value="Dve rupe za registrator desno">Dve rupe za registrator desno</option>
@@ -471,10 +471,10 @@ if(isset($_POST['submit'])) {
             <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"></textarea>
             <label class="sendCopy">
               <input type="checkbox" id="sendCopy" name="sendCopy">
-              <span class="label-body">Posalji kopiju sebi</span>
-              <input type="text" placeholder="Upisite Vas email" id="email" name="email" />
+              <span class="label-body">Pošalji kopiju sebi</span>
+              <input type="text" placeholder="Upišite Vas email" id="email" name="email" />
             </label>
-            <input class="button-primary" type="submit" value="Posalji" name="submit" />
+            <input class="button-primary" type="submit" value="Pošalji" name="submit" />
             <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p> 
           </div>
       </form>
@@ -494,10 +494,10 @@ if(isset($_POST['submit'])) {
                         <nav class="side__nav">
                             <ul class="side__nav--ul">
                                 <li>
-                                    <a href="./">Stampanje</a>
+                                    <a href="./">Štampanje</a>
                                 </li>
                                 <li>
-                                    <a href="../blokovi">Preslikavajuci blokovi</a>
+                                    <a href="../blokovi">Preslikavajući blokovi</a>
                                 </li>
                                 <li>
                                     <a href="../uplatnice">Uplatnice</a>
@@ -540,7 +540,7 @@ if(isset($_POST['submit'])) {
     </div>
     <!--end of MAIN container-->
 
-  <!-- JS files -->
-  <script src="../js/main.js"></script>
+<!-- JS files -->
+<script src="../js/main.js"></script>
 </body>
 </html>

@@ -15,12 +15,13 @@ Sone :baby_chick:
 - [x] Bolje stilizuj forme i "prihvatam uslove" ispod posalji dugmeta
 - [x] Napravi modal za Registraciju
 - [ ] Stilizuj bolje dugmice, na sta ono lici
-- [ ] Upload dugme
+- [x] Upload dugme
 - [x] Spusti kada stiklira
 - [ ] Promeni font style i testiraj font size (pogotovo naslov i navigacija u headeru)
 - [ ] Napravi Admin panel
-- [ ] style css za sve browsere
+- [x] style css za sve browsere
 - [ ] Da moze da se klikne na ikonicu
+- [ ] 2 dugmeta u stampanje, upload za korice
 - [x/ ] Proveri metatagove, dodaj za Face/Twit, promeni favicon - URADI ZA SVAKU STRANICU
 
 
