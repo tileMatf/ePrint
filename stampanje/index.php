@@ -355,8 +355,7 @@ if(isset($_POST['submit'])) {
 			}
 		?> 
           <!--UPLOAD dugme-->          
-            <label class="label__heading">Okacite Vas fajl</label>
-            <input type='file' name='fileToUpload' id="file" class="inputfile" accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf' data-multiple-caption="{count} files selected" multiple required >
+            <input type='file' name='fileToUpload' id="file" class="inputfile" accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf' required >
             <label for="file"><i class="fa-upload fas fa-upload"></i><span>Okacite fajl</span></label>
 
             <!-- BROJ PRIMERAKA ***************************** -->
