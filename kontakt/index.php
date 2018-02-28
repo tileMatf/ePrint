@@ -18,17 +18,17 @@ if(isset($_POST['submit'])) {
 		$status = 0;
 		
 		$message = 
-			'<html>
+			"<html>
 				<head><title> </title></head>
 				<body>
-					<label> Korisnik: </label> '.$_POST['email'].' </br>
-					<label> Ime i prezime korisnika: </label> '. $_POST['nameAndLastName'].' </br>
-					<label> Datum: </label> '.date("d.m.Y.").' </br>
-					<label> Vreme: </label> '.date("h:i").' </br>
+					<label> Korisnik: </label> ".test_input($_POST['email'])." </br>
+					<label> Ime i prezime korisnika: </label> ".test_input($_POST['nameAndLastName'])." </br>
+					<label> Datum: </label> ".date("d.m.Y.")." </br>
+					<label> Vreme: </label> ".date("h:i")." </br>
 					<label> Tip: </label> Pitanje korisnika </br>
-					<label> Pitanje/komentar: </label> '. $_POST['message'].' </br>
+					<label> Pitanje/komentar: </label> ". nl2br(test_input($_POST['message']))." </br>
 				</body>
-			</html>';
+			</html>";
 
 		$status = sendMail($message);
 		
