@@ -20,6 +20,7 @@ Sone :baby_chick:
 - [ ] Promeni font style i testiraj font size (pogotovo naslov i navigacija u headeru)
 - [ ] Napravi Admin panel
 - [ ] style css za sve browsere
+- [ ] Da moze da se klikne na ikonicu
 - [x/ ] Proveri metatagove, dodaj za Face/Twit, promeni favicon - URADI ZA SVAKU STRANICU
 
 
