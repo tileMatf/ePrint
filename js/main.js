@@ -15,13 +15,15 @@
     //Input for checked "send me copy"
     var checkbox = document.getElementById('sendCopy');
     var input = document.getElementById('email');
-    checkbox.addEventListener('click', function () {
-    if (input.style.display != 'block') {
-        input.style.display = 'block';
-    } else {
-        input.style.display = '';
+    if(checkbox != null){
+        checkbox.addEventListener('click', function () {
+            if (input.style.display != 'block') {
+                input.style.display = 'block';
+            } else {
+                input.style.display = '';
+            }
+        });
     }
-});
 
     //Upload button
 
