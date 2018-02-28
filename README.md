@@ -14,8 +14,9 @@ Sone :baby_chick:
 - [x] Dodaj navigaciju u uslugama 
 - [x] Bolje stilizuj forme i "prihvatam uslove" ispod posalji dugmeta
 - [x] Napravi modal za Registraciju
+- [ ] Stilizuj bolje dugmice, na sta ono lici
 - [ ] Upload dugme
-- [ ] Spusti kada stiklira
+- [x] Spusti kada stiklira
 - [ ] Promeni font style i testiraj font size (pogotovo naslov i navigacija u headeru)
 - [ ] Napravi Admin panel
 - [ ] style css za sve browsere
