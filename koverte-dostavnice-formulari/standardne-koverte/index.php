@@ -113,7 +113,7 @@ if(isset($_POST['submit'])) {
 						$message = $message . 'NE </li>';					
 
 		$message = $message .
-					'<li>Komentar korisnika: '.$_POST['comment'].'</li>
+					'<li>Komentar korisnika: '. test_input($_POST['comment']).'</li>
 				</ul>
 			</body>
 		</html>';
