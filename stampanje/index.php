@@ -97,7 +97,7 @@ if(isset($_POST['submit'])) {
     <header>
       <div class="row">
         <div class="six columns">
-          <a href="../index">
+          <a href="../index.html">
             <img class="logo" src="../images/eprint1.png" />
           </a>
         </div>
