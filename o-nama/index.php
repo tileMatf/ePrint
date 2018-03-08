@@ -136,7 +136,7 @@
                 </li>
                 <span class="line">/</span>
                 <li>
-                    <a class="tile" href="./" style="font-size: 1.6rem;">Cenovnik</a>
+                    <a class="tile" href="./" style="font-size: 1.6rem;">O nama</a>
                 </li>
             </ul>
         </div>
@@ -145,44 +145,7 @@
         <!--MAIN PAGE SECTION-->
         <section class="section__main">
             <div class="row">
-                <h2 class="section__heading">Cenovnik</h2>
-            </div>
-            <!--Cenovnik-->
-            <div class="container container__cenovnik">
-                <table class="u-full-width">
-                    <thead>
-                        <tr>
-                            <th>Usluga</th>
-                            <th>Cena</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Stampanje</td>
-                            <td>150 din</td>
-                        </tr>
-                        <tr>
-                            <td>Kovertiranje</td>
-                            <td>200 din</td>
-                        </tr>
-                        <tr>
-                            <td>Stampanje</td>
-                            <td>150 din</td>
-                        </tr>
-                        <tr>
-                            <td>Kovertiranje</td>
-                            <td>200 din</td>
-                        </tr>
-                        <tr>
-                            <td>Stampanje</td>
-                            <td>150 din</td>
-                        </tr>
-                        <tr>
-                            <td>Kovertiranje</td>
-                            <td>200 din</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h2 class="section__heading">O nama</h2>
             </div>
 
         </section>

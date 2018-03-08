@@ -182,8 +182,6 @@ if(isset($_POST['submit'])) {
               </div>
             </form>
           </div>    
-
-  
  
     <!-- Navigation 2 -->
     <div class="twelve columns">
@@ -224,7 +222,7 @@ if(isset($_POST['submit'])) {
 				}
 			}
 		?> 
-          <!--UPLOAD dugme-->          
+            <!--UPLOAD dugme-->          
             <input type='file' name='fileToUpload' id="file" class="inputfile" accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf' required >
             <label for="file"><i class="fa-upload fas fa-upload"></i><span>Okačite fajl</span></label>
 
@@ -344,6 +342,7 @@ if(isset($_POST['submit'])) {
               <span class="label-body">Pošalji kopiju sebi</span>
               <input type="text" placeholder="Upišite Vas email" id="email" name="email" />
             </label>
+            <!-- POSALJI DUGME -->
             <input class="button-primary" type="submit" value="Pošalji" name="submit" />
             <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p> 
           </div>

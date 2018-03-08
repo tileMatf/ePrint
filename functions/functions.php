@@ -345,19 +345,22 @@ function createPaymentOrder($type){
 	$image = imagecreatefromjpeg(dirname(__FILE__) . '/Image/' . $type . '.jpg');
     $black = imagecolorallocate($image, 0, 0, 0);
     $font_path = dirname(__FILE__) . '/Font/OpenSans-Regular.ttf';
-    $text = $_POST['payer'];
-	$name = getName($text);
-	$adress = getAdress($text);
+	$name = $_POST['payer'];
+	$adress = $_POST['address'] . ", " . $_POST['location'];
+	$country = $_POST['country'];	
 	
 	if($type === 'nalog-za-isplatu'){
 		imagettftext($image, 15, 0, 75, 112, $black, $font_path, $name);
 		imagettftext($image, 15, 0, 75, 135, $black, $font_path, $adress);
+		imagettftext($image, 15, 0, 75, 158, $black, $font_path, $country);
 	} else if($type === 'nalog-za-uplatu'){
 		imagettftext($image, 11, 0, 30, 58, $black, $font_path, $name);
 		imagettftext($image, 11, 0, 30, 75, $black, $font_path, $adress);
+		imagettftext($image, 11, 0, 30, 92, $black, $font_path, $country);
 	} else {
 		imagettftext($image, 15, 0, 80, 130, $black, $font_path, $name);
 		imagettftext($image, 15, 0, 80, 152, $black, $font_path, $adress);
+		imagettftext($image, 15, 0, 80, 174, $black, $font_path, $country);
 	}
 		
 	$purposeOfPayment = $_POST['purposeOfPayment'];

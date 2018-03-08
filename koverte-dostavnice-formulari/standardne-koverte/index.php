@@ -46,8 +46,23 @@ if(isset($_POST['submit'])) {
     <title>ePrint</title>
     <!--Meta tags-->
     <meta name="description" content="Usluge se sastoje od pripreme za štampu, štampe, pečatiranja, kovertiranja, i otpremanja na poštu ili drugom dostavljaču.">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,  shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--Facebook meta tags-->
+    <meta property="og:url" content="http://example .com/page.html">
+    <meta property="og:title" content="ePrint">
+    <meta property="og:image" content="http://example.com/image.jpg">
+    <meta property="og:description" content="Usluge se sastoje od pripreme za štampu, štampe, pečatiranja, kovertiranja, i otpremanja na poštu ili drugom dostavljaču.">
+    <meta property="og:site_name" content="Site Name">
+    <meta property="og:locale" content="Sh_SP">
+    <meta property="og:type" content="website" />
+    <!-- Twitter meta tags -->
+    <meta name="twitter:url" content="http://example.com/page.html">
+    <meta name="twitter:title" content="ePrint">
+    <meta name="twitter:image" content="http://example.com/image.jpg">
+    <meta name="twitter:description" content=Usluge se sastoje od pripreme za štampu, štampe, pečatiranja, kovertiranja, i otpremanja na poštu ili drugom dostavljaču.>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image:alt" content="Alt text for image">
     <!--Font from Google-->
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&amp;subset=latin-ext" rel="stylesheet" type="text/css">
     <!--CSS files-->
@@ -55,6 +70,17 @@ if(isset($_POST['submit'])) {
     <link rel="stylesheet" href="../../css/skeleton.css">
     <link rel="stylesheet" href="../../css/style.css">
     <!--Favicon-->
+    <link rel="icon" type="image/png" href="../../images/favicon.png">
+    <link rel="apple-touch-icon" href="../images/icon.png">
+    <!--Favicon-->
+    <!-- For IE 10 and below -->
+    <!-- Place favicon.ico in the root directory - no tag necessary -->
+    <!-- Icon in the highest resolution we need it for -->
+    <link rel="icon" sizes="192x192" href="../images/favicon.png">
+    <!-- Apple Touch Icon (reuse 192px icon.png) -->
+    <link rel="apple-touch-icon" href="../images/favicon.png">
+    <!-- Safari Pinned Tab Icon -->
+    <link rel="mask-icon" href="../../images/favicon.png" color="blue">    
     <link rel="icon" type="image/png" href="../../images/favicon.png">
     <link rel="apple-touch-icon" href="../../images/icon.png">
     <!--FA icons-->
@@ -74,16 +100,12 @@ if(isset($_POST['submit'])) {
                 <!--NAVIGATION-->
                 <div class="six columns navigation__header">
                     <div class="navigation__header--nav">
-                        <ul class="nav nav-reg-log">
+                        <ul class="nav login nav-reg-log">
                             <li>
-                                <a href="#">Registruj se
-                                    <i class="fas fa-user-plus" aria-hidden="true"></i>
-                                </a>
+                            <button onclick="document.getElementById('modal1').style.display='block'">Uloguj se<i class="fas fa-user-plus" aria-hidden="true"></i></button>
                             </li>
                             <li>
-                                <a href="#">Uloguj se
-                                    <i class="fas fa-user" aria-hidden="true"></i>
-                                </a>
+                            <button onclick="document.getElementById('modal2').style.display='block'">Registruj se<i class="fas fa-user-plus" aria-hidden="true"></i></button>
                             </li>
                         </ul>
                     </div>
@@ -92,13 +114,75 @@ if(isset($_POST['submit'])) {
             </div>
             <!--end of row-->
         </header>
+         <!-- LOGIN MODAL1 -->
+         <div id="modal1" class="modal">
+            <span onclick="document.getElementById('modal1').style.display='none'" class="close" title="Close Modal">&times;</span>
+            <form class="modal-content animate" action="/action_page.php">
+                <div class="container">
+                    <h1 class="log-reg__heading">Uloguj se</h1>
+                    <p>Popunite navedena polja.</p>
+                    <hr>
+                    <label for="email"><b>Email</b></label>
+                    <input type="text" placeholder="Unesite email" name="email" required>
+                
+                    <label for="psw"><b>Lozinka</b></label>
+                    <input type="password" placeholder="Unesite lozinku" name="psw" required>
+                        
+                    <button type="submit" class="login-btn">Login</button>
+                    <label>
+                        <input type="checkbox" checked="checked" name="remember"> Zapamti me
+                    </label>
+                </div>
+    
+                <div class="container" style="background-color:#f1f1f1; margin-top: 40px;">
+                    <div class="row">
+                        <div class="seven columns">
+                        <button type="button" onclick="document.getElementById('modal1').style.display='none'" class="cancelbtn">Nazad</button>
+                    </div>
+                    <div class="five columns" style="padding-top: 5px;">
+                        <a href="#">Zaboravili ste šifru?</a></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- REGISTER MODAL 2 -->
+    <div id="modal2" class="modal">
+        <span onclick="document.getElementById('modal2').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <form class="modal-content animate" action="/action_page.php">
+            <div class="container">
+                <h1 class="log-reg__heading">Registruj se</h1>
+                <p>Popunite navedena polja.</p>
+                <hr>
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="Upišite Vašu email adresu" name="email" required>
+            
+                <label for="psw"><b>Lozinka</b></label>
+                <input type="password" placeholder="Upišite Vašu lozinku" name="psw" required>
+            
+                <label for="psw-repeat"><b>Potvrdite lozinku</b></label>
+                <input type="password" placeholder="Potvrdite Vašu lozinku" name="psw-repeat" required>
+                    
+                <label>
+                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Zapamti me
+                </label>
+            
+                <p>Pravljenjem naloga prihvatate naše <a href="#" style="color:dodgerblue">uslove</a> poslovanja</p>
+            
+                <div class="clearfix">
+                    <button type="button" onclick="document.getElementById('modal2').style.display='none'" class="cancelbtn">Nazad</button>
+                    <button type="submit" class="signupbtn">Registruj se</button>
+                </div>
+            </div>
+        </form>
+    </div>    
 
         <!-- Navigation -->
         <div class="twelve columns">
             <ul class="nav1">
                 <li>
                     <a class="tile" href="../../">
-                        <i class="fas fa-home" aria-hidden="true"></i>Pocetna</a>
+                        <i class="fas fa-home" aria-hidden="true"></i>Početna</a>
                 </li>
                 <span class="line">/</span>
                 <li>
@@ -135,12 +219,12 @@ if(isset($_POST['submit'])) {
 						}
 					}
 				?> 
-                    <!--UPLOAD dugme-->
-                    <label class="label__heading">Okacite vas fajl</label>
-                    <input type='file' name='fileToUpload' accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf' required>	
+                    <!--UPLOAD dugme-->          
+                    <input type='file' name='fileToUpload' id="file" class="inputfile" accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf' required >
+                    <label for="file"><i class="fa-upload fas fa-upload"></i><span>Okačite fajl</span></label>	
 
                     <!-- VELICINA -->
-                    <label class="label__heading">Velicina</label>
+                    <label class="label__heading">Veličina</label>
                     <label for="B6">
                         <input type="radio" id="B6" name="size" value="B6" checked />
                         <span>B6</span>
@@ -164,7 +248,7 @@ if(isset($_POST['submit'])) {
                     <!-- ***************************** -->
 
                     <!-- Kolicina -->
-                    <label for="quantity" class="label__heading">Kolicina</label>
+                    <label for="quantity" class="label__heading">Količina</label>
                     <select class="u-full-width" name="quantity">
                         <option value="1000" selected>1000</option>
                         <option value="2000">2000</option>
@@ -180,19 +264,19 @@ if(isset($_POST['submit'])) {
                     <!-- ***************************** -->
 
                     <!--Stampanje na posledjini ******************************-->
-                    <label class="label__heading">Stampanje na poledjini:</label>
+                    <label class="label__heading">Štampanje na poledjini:</label>
                     <input class="u-full-width" type="text" placeholder="Prvi red..." name="printingOnBack1" value="">
                     <input class="u-full-width" type="text" placeholder="Drugi red..." name="printingOnBack2" value="">
-                    <input class="u-full-width" type="text" placeholder="Treci red..." name="printingOnBack3" value="">
-                    <input class="u-full-width" type="text" placeholder="Cetvrti red..." name="printingOnBack4" value="">
+                    <input class="u-full-width" type="text" placeholder="Treći red..." name="printingOnBack3" value="">
+                    <input class="u-full-width" type="text" placeholder="Četvrti red..." name="printingOnBack4" value="">
                     <!-- ***************************** -->
 
                     <!--Stampanje na adresnoj strani ******************************-->
-                    <label class="label__heading">Stampanje na adresnoj strani:</label>
+                    <label class="label__heading">Štampanje na adresnoj strani:</label>
                     <input class="u-full-width" type="text" placeholder="Prvi red..." name="printingOnAdressPage1" value="">
                     <input class="u-full-width" type="text" placeholder="Drugi red..." name="printingOnAdressPage2" value="">
-                    <input class="u-full-width" type="text" placeholder="Treci red..." name="printingOnAdressPage3" value="">
-                    <input class="u-full-width" type="text" placeholder="Cetvrti red..." name="printingOnAdressPage4" value="">
+                    <input class="u-full-width" type="text" placeholder="Treći red..." name="printingOnAdressPage3" value="">
+                    <input class="u-full-width" type="text" placeholder="Četvrti red..." name="printingOnAdressPage4" value="">
                     <!-- ***************************** -->
 
                     <!--Krajnja poruka-->
@@ -203,12 +287,13 @@ if(isset($_POST['submit'])) {
                         <input type="checkbox" name="varData" id="varData">
                         <span class="label-body">Varijabilni podaci</span>
                     </label>
-                    <label for="sendCopy">
-                        <input type="checkbox" name="sendCopy" id="sendCopy">
-                        <span class="label-body">Posalji kopiju sebi</span>
+                    <label class="sendCopy">
+                        <input type="checkbox" id="sendCopy" name="sendCopy">
+                        <span class="label-body">Pošalji kopiju sebi</span>
+                        <input type="text" placeholder="Upišite Vas email" id="email" name="email" />
                     </label>
                     <!-- POSALJI DUGME -->
-                    <input class="button-primary" type="submit" value="Posalji" name="submit" />
+                    <input class="button-primary" type="submit" value="Pošalji" name="submit" />
                     <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
                 </div>
             </form>
@@ -225,10 +310,10 @@ if(isset($_POST['submit'])) {
                         <nav class="side__nav">
                             <ul class="side__nav--ul">
                                 <li>
-                                    <a href="../../stampanje">Stampanje</a>
+                                    <a href="../../stampanje">Štampanje</a>
                                 </li>
                                 <li>
-                                    <a href="../../blokovi">Preslikavajuci blokovi</a>
+                                    <a href="../../blokovi">Preslikavajući blokovi</a>
                                 </li>
                                 <li>
                                     <a href="../../uplatnice">Uplatnice</a>
@@ -270,6 +355,8 @@ if(isset($_POST['submit'])) {
         <!--End of footer-->
     </div>
     <!--end of MAIN container-->
+<!-- JS files -->
+<script src="../../js/main.js"></script>
 </body>
 
 </html>
