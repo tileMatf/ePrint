@@ -404,9 +404,9 @@ if(isset($_POST['submit'])) {
         <!--End of footer-->
     </div>
     <!--end of MAIN container-->
-<!-- JS files -->
-<script src="../../js/main.js"></script>
+	<!-- JS files -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="../../js/main.js"></script>
 	<script>
 	
 		var pictureClose = document.getElementsByClassName("picture-close")[0];
