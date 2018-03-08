@@ -47,3 +47,11 @@
 			label.innerHTML = labelVal;
 	});
 });
+
+/* $(document).keydown(function(e) {
+	// ESCAPE key pressed
+		if (e.keyCode == 27 && document.getElementById('pictureModal') != null) {
+			document.getElementById('pictureModal').style.display = 'none';
+		}
+	});
+*/

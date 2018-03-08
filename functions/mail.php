@@ -1,4 +1,3 @@
-
 <?php
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -30,7 +29,6 @@ function sendMail($message, $cc = null){
 	$mail->addAddress('tijjana@hotmail.com');   // Add a recipient
 	if($cc !== NULL){
 		$mail->addCC($cc);
-		//echo '<br> Dodao CC';
 	}	
 	$mail->isHTML(true);  // Set email format to HTML
 	$mail->Subject = 'EPrint - new order';
@@ -38,11 +36,9 @@ function sendMail($message, $cc = null){
 	
 	//need to install https://getcomposer.org/download/
 	if(!$mail->send()) {
-		//echo 'Message could not be sent.<br>';
 		$statusMessage = 'Mailer Error: ' . $mail->ErrorInfo;
 		return false;
 	} else {
-		//echo 'Message has been sent';
 		return true;
 	}	
 }	

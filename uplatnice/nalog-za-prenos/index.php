@@ -9,7 +9,18 @@ if(isset($_POST['submit'])) {
 	try{
 		//$db = new DB();
 		
-		$status = 0;	
+		$createPicture = createPicture('nalog-za-prenos');
+		
+		if($createPicture === true){
+			echo "<div id='pictureModal' class='picture-modal'>
+					  <span class='picture-close'>&times;</span>
+					  <img class='picture-modal-content' id='nalog' src='../output/nalog-za-prenos-popunjen.jpg'>
+					  <div id='picture-caption'></div>
+					  <button id='paymentConfirm'>Ok</button>
+				 </div>";
+		}
+		
+		/*$status = 0;	
 		$message = makeMessage('nalog-za-prenos');			
 		
 		if(!isset($_POST['sendCopy']))
@@ -20,7 +31,7 @@ if(isset($_POST['submit'])) {
 		if($status === true)
 			$statusMessage = "Nalog za prenos je uspešno poslat.";
 		else
-			$statusMessage = "Oprostite, došlo je do greške prilikom slanja. Molim Vas pokušajte ponovo.";
+			$statusMessage = "Oprostite, došlo je do greške prilikom slanja. Molim Vas pokušajte ponovo.";*/
 	} catch(RuntimeException $e){
 		return $e->getMessage();
 	} 
@@ -57,7 +68,7 @@ if(isset($_POST['submit'])) {
             <div class="row">
                 <div class="six columns">
                     <a href="../index.html">
-                        <img class="logo" src="../images/eprint1.png" />
+                        <img class="logo" src="../../images/eprint1.png" />
                     </a>
                 </div>
                 <!--NAVIGATION-->
@@ -111,81 +122,80 @@ if(isset($_POST['submit'])) {
             <form method="POST" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                 <div class="form-box">
 				<!-- Paragraf za povratnu poruku -->		
-				<?php
-					if(isset($status)){
-						if($status === true){
-							if(isset($statusMessage) && $statusMessage)
-								echo '<p style="font-size:2rem; font-style: italic; color: green">'.
-									htmlspecialchars($statusMessage) . '</p>';
-						}
-						else {
-							if(isset($statusMessage) && $statusMessage)
-								echo '<p style="font-size:2rem; font-style: italic; color: red">'.
-									htmlspecialchars($statusMessage) . '</p>';						
-						}
-					}
-				?>				
+				<p style="font-size:2rem; font-style: italic;" id="statusMessage"></p>				
                     <!-- UNOS PODATAKA ***************************** -->
                     <!--<h5>Unos podataka</h5>-->
 
                     <!--PlATILAC ******************************-->
                     <label for="payer" class="label__heading">Platilac</label>
-                    <input class="u-full-width" type="text" placeholder="" name="payer">
+                    <input class="u-full-width" type="text" placeholder="" name="payer"
+						value="<?php echo isset($_POST['payer']) ? $_POST['payer'] : '' ?>" >
                     <!-- ***************************** -->
 
                     <!--SVRHA UPLATE ******************************-->
                     <label for="purposeOfPayment" class="label__heading">Svrha uplate</label>
-                    <input class="u-full-width" type="text" placeholder="" name="purposeOfPayment">
+                    <input class="u-full-width" type="text" placeholder="" name="purposeOfPayment"
+						value="<?php echo isset($_POST['purposeOfPayment']) ? $_POST['purposeOfPayment'] : '' ?>" >
                     <!-- ***************************** -->
 
                     <!--PRIMALAC ******************************-->
                     <label for="recipient" class="label__heading">Primalac</label>
-                    <input class="u-full-width" type="text" placeholder="" name="recipient">
+                    <input class="u-full-width" type="text" placeholder="" name="recipient"
+						value="<?php echo isset($_POST['recipient']) ? $_POST['recipient'] : '' ?>" >
                     <!-- ***************************** -->
 
                     <!--SIFRA PLACANJA ******************************-->
                     <label for="paymentCode" class="label__heading">Sifra placanja</label>
-                    <input class="u-full-width" type="text" placeholder="" name="paymentCode">
+                    <input class="u-full-width" type="text" placeholder="" name="paymentCode"
+						value="<?php echo isset($_POST['paymentCode']) ? $_POST['paymentCode'] : '' ?>" >
                     <!-- ***************************** -->
 
                     <!--VALUTA ******************************-->
                     <label for="currency" class="label__heading">Valuta</label>
-                    <input class="u-full-width" type="text" placeholder="" name="currency">
+                    <input class="u-full-width" type="text" placeholder="" name="currency"
+						value="<?php echo isset($_POST['currency']) ? $_POST['currency'] : '' ?>" >
                     <!-- ***************************** -->
 
                     <!--IZNOS ******************************-->
                     <label for="amount" class="label__heading">Iznos</label>
-                    <input class="u-full-width" type="text" placeholder="RSD" name="amount">
+                    <input class="u-full-width" type="text" placeholder="RSD" name="amount"
+						value="<?php echo isset($_POST['amount']) ? $_POST['amount'] : '' ?>" >
                     <!-- ***************************** -->
 
                     <!--RACUN PRIMAOCA ******************************-->
-                    <label for="accountOfRecipient" class="label__heading">Racun primaoca</label>
-                    <input class="u-full-width" type="text" placeholder="" name="accountOfRecipient">
+                    <label for="accountOfOrderer" class="label__heading">Racun nalogodavca</label>
+                    <input class="u-full-width" type="text" placeholder="" name="accountOfOrderer"
+						value="<?php echo isset($_POST['accountOfOrderer']) ? $_POST['accountOfOrderer'] : '' ?>" >
                     <!-- ***************************** -->
 
                     <!--MODEL ******************************-->
-                    <label for="mockUp" class="label__heading">Model</label>
-                    <input class="u-full-width" type="text" placeholder="" name="mockUp">
+                    <label for="mockUpDebit" class="label__heading">Model (zaduzenje)</label>
+                    <input class="u-full-width" type="text" placeholder="" name="mockUpDebit"
+						value="<?php echo isset($_POST['mockUpDebit']) ? $_POST['mockUpDebit'] : '' ?>" >
                     <!-- ***************************** -->
 
                     <!--POZIV NA BROJ ZADUZENJA ******************************--> <!-- OVO JE DRUGACIJE OD DRUGE DVE UPLATNICE -->
                     <label for="referenceNumber" class="label__heading">Poziv na broj zaduzenja</label> <!-- referenceNumberObligation -->
-                    <input class="u-full-width" type="text" placeholder="" name="referenceNumber">
+                    <input class="u-full-width" type="text" placeholder="" name="referenceNumber"
+						value="<?php echo isset($_POST['referenceNumber']) ? $_POST['referenceNumber'] : '' ?>" >
                     <!-- ***************************** -->
 
                     <!--RACUN PRIMAOCA ******************************-->
                     <label for="accountOfRecipient" class="label__heading">Racun primaoca</label>
-                    <input class="u-full-width" type="text" placeholder="" name="accountOfRecipient">
+                    <input class="u-full-width" type="text" placeholder="" name="accountOfRecipient"
+						value="<?php echo isset($_POST['accountOfRecipient']) ? $_POST['accountOfRecipient'] : '' ?>" >
                     <!-- ***************************** -->
 
                     <!--MODEL ******************************-->
-                    <label for="mockUp" class="label__heading">Model</label>
-                    <input class="u-full-width" type="text" placeholder="" name="mockUp">
+                    <label for="mockUpApproval" class="label__heading">Model (odobrenje)</label>
+                    <input class="u-full-width" type="text" placeholder="" name="mockUpApproval"
+						value="<?php echo isset($_POST['mockUpApproval']) ? $_POST['mockUpApproval'] : '' ?>">
                     <!-- ***************************** -->
 
                     <!--POZIV NA BROJ ODOBRENJA ******************************-->
                     <label for="referenceNumberApprovals" class="label__heading">Poziv na broj odobrenja</label>
-                    <input class="u-full-width" type="text" placeholder="" name="referenceNumberApprovals">
+                    <input class="u-full-width" type="text" placeholder="" name="referenceNumberApprovals"
+						value="<?php echo isset($_POST['referenceNumberApprovals']) ? $_POST['referenceNumberApprovals'] : '' ?>">
                     <!-- ***************************** -->
 
                     <!-- Kraj naloga za prenos u setu sledi radio buttons -->
@@ -193,11 +203,13 @@ if(isset($_POST['submit'])) {
                     <!-- BROJ UPLATNICA U SETU ***************************** -->
                     <label for="" class="label__heading">Broj naloga za prenos u setu</label>
                     <label for="numOfPaySet"> <!-- number of transfer orders in set -->
-                        <input type="radio" name="numOfPaySet" value="1+1" checked />
+                        <input type="radio" name="numOfPaySet" value="1+1" checked 
+							<?php echo (isset($_POST['numOfPaySet']) && $_POST['numOfPaySet'] == '1+1') || !isset($_POST['numOfPaySet']) ? "checked" : "" ?> />
                         <span>1+1</span>
                     </label>
                     <label for="numOfPaySet">
-                        <input type="radio" name="numOfPaySet" value="1+2" />
+                        <input type="radio" name="numOfPaySet" value="1+2" 
+							<?php echo isset($_POST['numOfPaySet']) && $_POST['numOfPaySet'] == '1+2' ? "checked" : ""?> />
                         <span>1+2</span>
                     </label>
                     <!-- ***************************** -->
@@ -205,28 +217,28 @@ if(isset($_POST['submit'])) {
                     <!-- KOLICINA SETOVA --> <!-- -->
                     <label for="quantity" class="label__heading">Kolicina setova</label>
                     <select class="u-full-width" name="quantity">
-                        <option value="100">100</option>
-                        <option value="200">200</option>
-                        <option value="500">500</option>
+                        <option value="100" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '100' ? "selected" : "" ?>>100</option>
+                        <option value="200" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '200' ? "selected" : "" ?>>200</option>
+                        <option value="500" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '500' ? "selected" : "" ?>>500</option>
                         <option value="900" selected>900</option>
-                        <option value="1800">1800</option>
-                        <option value="2700">2700</option>
-                        <option value="5400">5400</option>
-                        <option value="8100">8100</option>
-                        <option value="10800">10800</option>
+                        <option value="1800" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '1800' ? "selected" : "" ?>>1800</option>
+                        <option value="2700" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '2700' ? "selected" : "" ?>>2700</option>
+                        <option value="5400" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '5400' ? "selected" : "" ?>>5400</option>
+                        <option value="8100" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '8100' ? "selected" : "" ?>>8100</option>
+                        <option value="10800" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '10800' ? "selected" : "" ?>>10800</option>
                     </select>
                     <!-- ***************************** -->
 
                     <!--Krajnja poruka-->
                     <label for="message" class="label__heading">Poruka</label>
-                    <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"></textarea>
+                    <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"><?php echo isset($_POST['comment']) ? $_POST['comment'] : ''?></textarea>
                     <!-- Varijabilni podaci i prihvatam uslove -->
                     <label for="varData">
-                        <input type="checkbox" name="varData">
+                        <input type="checkbox" name="varData" <?php echo isset($_POST['varData']) ? 'checked' : ''?>>
                         <span class="label-body">Varijabilni podaci</span>
                     </label>
                     <label for="sendCopy">
-                        <input type="checkbox" name="sendCopy">
+                        <input type="checkbox" name="sendCopy" <?php echo isset($_POST['sendCopy']) ? 'checked' : ''?>>
                         <span class="label-body">Posalji kopiju sebi</span>
                     </label>
                     <input class="button-primary" type="submit" value="Posalji" name="submit" />
@@ -294,6 +306,45 @@ if(isset($_POST['submit'])) {
         <!--End of footer-->
     </div>
     <!--end of MAIN container-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script>
+	
+		var pictureClose = document.getElementsByClassName("picture-close")[0];
+		// When the user clicks on <span> (x), close the modal
+		pictureClose.onclick = function() { 
+			$('#pictureModal').css("display", "none");
+		}
+	
+		$("#paymentConfirm").click(function(e) {
+			e.preventDefault();	
+			$('#pictureModal').css("display", "none");
+
+			$.ajax({
+				type: "POST",
+				url: "../../functions/confirm/",
+				dataType: "text",
+				data: { 
+					type: 'nalog-za-prenos',
+					data: $('form').serialize()
+				},
+				success: function(result) {
+					if(result == "true") {
+						$('form')[0].reset();
+						$('#statusMessage').text("Nalog za prenos je uspešno poslat.");
+						$('#statusMessage').css("color", "green");
+					} else {
+						$('#statusMessage').text("Oprostite, došlo je do greške prilikom slanja. Molim Vas pokušajte ponovo.");
+						$('#statusMessage').css("color", "red");
+					}
+				},
+				error: function(result) {			
+					$('#statusMessage').text("Oprostite, došlo je do greške na serveru prilikom slanja. Molim Vas, pokušajte ponovo.");
+					$('#statusMessage').css("color", "red");
+				}
+			});
+		});
+	</script>
+	
 </body>
 
 </html>

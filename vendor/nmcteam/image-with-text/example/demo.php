@@ -1,5 +1,5 @@
 <?php
-require '../vendor/autoload.php';
+require '../../../autoload.php';
 
 // Create image
 $image = new \NMC\ImageWithText\Image(dirname(__FILE__) . '/source.jpg');

@@ -1,5 +1,8 @@
 <?php
 
+require dirname(__FILE__) . '../../vendor/autoload.php';
+require 'stringFunctions.php';
+
 function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);
@@ -76,7 +79,10 @@ function generateMessage($status){
 		return "Oprostite, došlo je do greške prilikom otpremanja Vaše datoteke u sistem datoteka.";
 }
 
-function makeMessage($type){	
+function makeMessage($type){
+	$data = $_POST['data'];	
+	parse_str($data, $data);
+	
 	if($type === 'stampanje'){
 		$message = 
 			'<html>
@@ -86,16 +92,16 @@ function makeMessage($type){
 					<label> Datum: </label> '.date("d.m.Y.").' </br>
 					<label> Vreme: </label> '.date("h:i").' </br>
 					<label> Tip: </label> stampanje </br>
-					<label> Datoteka: </label> '.basename( $files["fileToUpload"]["name"]).' </br>
+					<label> Datoteka: </label> '.basename($files["fileToUpload"]["name"]).' </br>
 					<label> Izabrane opcije: </label> </br>
 					<ul>
-						<li>Broj primeraka: '.$_POST['noInput'].'</li>
-						<li>Redosled stampanja: '.$_POST['orderOfInput'].'</li>
-						<li>Boja: '.$_POST['colorOfInput'].'</li>
-						<li>Nacin stampanja: '.$_POST['typeOfPrint'].'</li>
-						<li>Veličina papira: '.$_POST['paperSize'].'</li>
-						<li>Debljina papira: '.$_POST['paperWidth'].'</li>
-						<li>Koričenje: '.$_POST['bindingType'].'</li>
+						<li>Broj primeraka: '.$data['noInput'].'</li>
+						<li>Redosled stampanja: '.$data['orderOfInput'].'</li>
+						<li>Boja: '.$data['colorOfInput'].'</li>
+						<li>Nacin stampanja: '.$data['typeOfPrint'].'</li>
+						<li>Veličina papira: '.$data['paperSize'].'</li>
+						<li>Debljina papira: '.$data['paperWidth'].'</li>
+						<li>Koričenje: '.$data['bindingType'].'</li>
 						<li>Dodate korice: ';
 				if(!empty($_FILES['bindingFileToUpload']['name'])){
 					$message = $message . 'DA</li>
@@ -106,9 +112,9 @@ function makeMessage($type){
 				
 				
 		$message = $message . '
-						<li>Heftanje: '.$_POST['heftingType'].'</li>
-						<li>Bušenje: '.$_POST['drillingType'].'</li>
-						<li>Komentar korisnika: '. test_input($_POST['comment']).'</li>
+						<li>Heftanje: '.$data['heftingType'].'</li>
+						<li>Bušenje: '.$data['drillingType'].'</li>
+						<li>Komentar korisnika: '. test_input($data['comment']).'</li>
 					</ul>
 				</body>
 			</html>';
@@ -126,27 +132,42 @@ function makeMessage($type){
 						$message .= '<label> TIP: </label> Nalog za prenos </br>';
 					else
 						$message .= '<label> Tip: </label> Nalog za isplatu </br>';
-		$message .= '<label> Izabrane opcije: </label> </br>
-					<ul>
-						<li>Platilac: '.$_POST['payer'].'</li>
-						<li>Svrha uplate: '.$_POST['purposeOfPayment'].'</li>
-						<li>Primalac: '.$_POST['recipient'].'</li>
-						<li>Šifra plaćanja: '.$_POST['paymentCode'].'</li>
-						<li>Valuta: '.$_POST['currency'].'</li>
-						<li>Iznos: '.$_POST['amount'].'</li>
-						<li>Račun primaoca: '.$_POST['accountOfRecipient'].'</li>				
-						<li>Model: '.$_POST['mockUp'].'</li>
-						<li>Poziv na broj: '.$_POST['referenceNumber'].'</li>
-						<li>Broj naloga u setu: '. test_input($_POST['numOfPaySet']).'</li>
-						<li>Količina setova: '. test_input($_POST['quantity']).'</li>
+					if($type === 'nalog-za-uplatu' || $type === 'nalog-za-isplatu'){
+						$message .= '<label> Izabrane opcije: </label> </br>
+								<ul>
+									<li>Platilac: '.$data['payer'].'</li>
+									<li>Svrha uplate: '.$data['purposeOfPayment'].'</li>
+									<li>Primalac: '.$data['recipient'].'</li>
+									<li>Šifra plaćanja: '.$data['paymentCode'].'</li>
+									<li>Valuta: '.$data['currency'].'</li>
+									<li>Iznos: '.$data['amount'].'</li>
+									<li>Račun primaoca: '.$data['accountOfRecipient'].'</li>				
+									<li>Model: '.$data['mockUp'].'</li>
+									<li>Poziv na broj: '.$data['referenceNumber'].'</li>';
+					} else {
+						$message .= '<label> Izabrane opcije: </label> </br>
+								<ul>
+									<li>Platilac: '.$data['payer'].'</li>
+									<li>Svrha uplate: '.$data['purposeOfPayment'].'</li>
+									<li>Primalac: '.$data['recipient'].'</li>
+									<li>Šifra plaćanja: '.$data['paymentCode'].'</li>
+									<li>Valuta: '.$data['currency'].'</li>
+									<li>Iznos: '.$data['amount'].'</li>
+									<li>Račun nalogodavca: '.$data['accountOfOrderer'].'</li>				
+									<li>Model (zaduženje): '.$data['mockUpDebit'].'</li>
+									<li>Poziv na broj (zaduženje): '.$data['referenceNumber'].'</li>
+									<li>Račun primaoca: '.$data['accountOfRecipient'].'</li>				
+									<li>Model (odobrenje): '.$data['mockUpApproval'].'</li>
+									<li>Poziv na broj (odobrenje): '.$data['referenceNumberApprovals'].'</li>';						
+					}
+					$message .=	'<li>Broj naloga u setu: '. test_input($data['numOfPaySet']) . '</li>		
+						<li>Količina setova: '. test_input($data['quantity']) . '</li>
 						<li>Varijabilni podaci: ';
-					if(isset($_POST['varData']))
+					if(isset($data['varData']))
 						$message = $message . 'DA </li>';
 					else
-						$message = $message . 'NE </li>';					
-
-		$message = $message .
-					'<li>Komentar korisnika: '. test_input($_POST['comment']).'</li>
+						$message = $message . 'NE </li>';
+					$message .= '<li>Komentar korisnika: ' . test_input($data['comment']) . '</li>
 				</ul>
 			</body>
 		</html>';		
@@ -162,11 +183,11 @@ function makeMessage($type){
 				<label> Datoteka: </label> '.basename( $_FILES["fileToUpload"]["name"]).' </br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>
-					<li>Broj setova: '.$_POST['noOfSet'].'</li>
-					<li>Boja: '.$_POST['blockColor'].'</li>
-					<li>Veličina: '.$_POST['blockSize'].'</li>
-					<li>Pakovanje: '.$_POST['packing'].'</li>
-					<li>Komentar korisnika: '. test_input($_POST['comment']).'</li>
+					<li>Broj setova: '.$data['noOfSet'].'</li>
+					<li>Boja: '.$data['blockColor'].'</li>
+					<li>Veličina: '.$data['blockSize'].'</li>
+					<li>Pakovanje: '.$data['packing'].'</li>
+					<li>Komentar korisnika: '. test_input($data['comment']).'</li>
 				</ul>
 			</body>
 		</html>';
@@ -183,32 +204,32 @@ function makeMessage($type){
 				<label> Datoteka: </label> '.basename( $_FILES["fileToUpload"]["name"]).' </br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>
-					<li>Veličina: '.$_POST['size'].'</li>
-					<li>Količina: '.$_POST['quantity'].'</li>
+					<li>Veličina: '.$data['size'].'</li>
+					<li>Količina: '.$data['quantity'].'</li>
 					<li>Štampanje na poleđini: 
 						<ul>
-							<li>Prvi red: '.$_POST['printingOnBack1'].'</li>
-							<li>Drugi red: '.$_POST['printingOnBack2'].'</li>
-							<li>Treći red: '.$_POST['printingOnBack3'].'</li>
-							<li>Četvrti red: '.$_POST['printingOnBack4'].'</li>							
+							<li>Prvi red: '.$data['printingOnBack1'].'</li>
+							<li>Drugi red: '.$data['printingOnBack2'].'</li>
+							<li>Treći red: '.$data['printingOnBack3'].'</li>
+							<li>Četvrti red: '.$data['printingOnBack4'].'</li>							
 						</ul>
 					</li>
 					<li>Štampanje na adresnoj strani: 
 						<ul>
-							<li>Prvi red: '.$_POST['printingOnAdressPage1'].'</li>
-							<li>Drugi red: '.$_POST['printingOnAdressPage2'].'</li>
-							<li>Treći red: '.$_POST['printingOnAdressPage3'].'</li>
-							<li>Četvrti red: '.$_POST['printingOnAdressPage4'].'</li>							
+							<li>Prvi red: '.$data['printingOnAdressPage1'].'</li>
+							<li>Drugi red: '.$data['printingOnAdressPage2'].'</li>
+							<li>Treći red: '.$data['printingOnAdressPage3'].'</li>
+							<li>Četvrti red: '.$data['printingOnAdressPage4'].'</li>							
 						</ul>
 					</li>
 					<li>Varijabilni podaci: ';
-					if(isset($_POST['varData']))
+					if(isset($data['varData']))
 						$message = $message . 'DA </li>';
 					else
 						$message = $message . 'NE </li>';					
 
 		$message = $message .
-					'<li>Komentar korisnika: '. test_input($_POST['comment']).'</li>
+					'<li>Komentar korisnika: '. test_input($data['comment']).'</li>
 				</ul>
 			</body>
 		</html>';
@@ -224,14 +245,14 @@ function makeMessage($type){
 				<label> Datoteka: </label> '.basename( $_FILES["fileToUpload"]["name"]).' </br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>
-					<li>Za: '.$_POST['forInput'].'</li>
-					<li>Ime i prezime: '.test_input($_POST['nameLastname']).'</li>
-					<li>Ulica: '.test_input($_POST['adress']).'</li>
-					<li>Poštanski broj: '.test_input($_POST['zipCode']).'</li>
-					<li>Mesto: '.test_input($_POST['location']).'</li>
-					<li>Vrsta papira: '.$_POST['typeOfPaper'].'</li>
-					<li>Količina: '.$_POST['quantity'].'</li>
-					<li>Komentar korisnika: '. test_input($_POST['comment']).'</li>
+					<li>Za: '.$data['forInput'].'</li>
+					<li>Ime i prezime: '.test_input($data['nameLastname']).'</li>
+					<li>Ulica: '.test_input($data['adress']).'</li>
+					<li>Poštanski broj: '.test_input($data['zipCode']).'</li>
+					<li>Mesto: '.test_input($data['location']).'</li>
+					<li>Vrsta papira: '.$data['typeOfPaper'].'</li>
+					<li>Količina: '.$data['quantity'].'</li>
+					<li>Komentar korisnika: '. test_input($data['comment']).'</li>
 				</ul>
 			</body>
 		</html>';
@@ -246,8 +267,8 @@ function makeMessage($type){
 				<label> Tip: </label> Koverta sa povratnicom za štampanje</br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>
-					<li>Boja: '.$_POST['color'].'</li>
-					<li>Količina: '.$_POST['quantity'].'</li>
+					<li>Boja: '.$data['color'].'</li>
+					<li>Količina: '.$data['quantity'].'</li>
 				</ul>
 			</body>
 		</html>';
@@ -262,12 +283,12 @@ function makeMessage($type){
 				<label> Tip: </label> Dostavnica </br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>
-					<li>Za: '.$_POST['forInput'].'</li>
-					<li>Ime i prezime: '.test_input($_POST['nameLastname']).'</li>
-					<li>Ulica: '.test_input($_POST['adress']).'</li>
-					<li>Poštanski broj: '.test_input($_POST['zipCode']).'</li>
-					<li>Mesto: '.test_input($_POST['location']).'</li>
-					<li>Količina: '.$_POST['quantity'].'</li>
+					<li>Za: '.$data['forInput'].'</li>
+					<li>Ime i prezime: '.test_input($data['nameLastname']).'</li>
+					<li>Ulica: '.test_input($data['adress']).'</li>
+					<li>Poštanski broj: '.test_input($data['zipCode']).'</li>
+					<li>Mesto: '.test_input($data['location']).'</li>
+					<li>Količina: '.$data['quantity'].'</li>
 				</ul>
 			</body>
 		</html>';
@@ -282,14 +303,14 @@ function makeMessage($type){
 				<label> Tip: </label> Koverta sa dostavnicom za lično popunjavanje </br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>
-					<li>Za: '.$_POST['forInput'].'</li>
-					<li>Boja: '.$_POST['color'].'</li>
-					<li>Ime i prezime: '.test_input($_POST['nameLastname']).'</li>
-					<li>Ulica: '.test_input($_POST['adress']).'</li>
-					<li>Poštanski broj: '.test_input($_POST['zipCode']).'</li>
-					<li>Mesto: '.test_input($_POST['location']).'</li>
-					<li>Poštarina plaćena kod: '.test_input($_POST['postagePaid']).'</li>
-					<li>Količina: '.$_POST['quantity'].'</li>
+					<li>Za: '.$data['forInput'].'</li>
+					<li>Boja: '.$data['color'].'</li>
+					<li>Ime i prezime: '.test_input($data['nameLastname']).'</li>
+					<li>Ulica: '.test_input($data['adress']).'</li>
+					<li>Poštanski broj: '.test_input($data['zipCode']).'</li>
+					<li>Mesto: '.test_input($data['location']).'</li>
+					<li>Poštarina plaćena kod: '.test_input($data['postagePaid']).'</li>
+					<li>Količina: '.$data['quantity'].'</li>
 				</ul>
 			</body>
 		</html>';
@@ -304,7 +325,7 @@ function makeMessage($type){
 				<label> Tip: </label> Formular za adresiranje </br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>					
-					<li>Količina: '.$_POST['quantity'].'</li>
+					<li>Količina: '.$data['quantity'].'</li>
 				</ul>
 			</body>
 		</html>';
@@ -312,4 +333,120 @@ function makeMessage($type){
 	return $message;		
 }
 
+function createPicture($type) {
+	if($type === 'nalog-za-uplatu' || $type === 'nalog-za-isplatu' || $type === 'nalog-za-prenos'){
+		return createPaymentOrder($type);
+	}
+	return false;
+}
+
+function createPaymentOrder($type){	
+	
+	$image = imagecreatefromjpeg(dirname(__FILE__) . '/Image/' . $type . '.jpg');
+    $black = imagecolorallocate($image, 0, 0, 0);
+    $font_path = dirname(__FILE__) . '/Font/OpenSans-Regular.ttf';
+    $text = $_POST['payer'];
+	$name = getName($text);
+	$adress = getAdress($text);
+	
+	if($type === 'nalog-za-isplatu'){
+		imagettftext($image, 15, 0, 75, 112, $black, $font_path, $name);
+		imagettftext($image, 15, 0, 75, 135, $black, $font_path, $adress);
+	} else if($type === 'nalog-za-uplatu'){
+		imagettftext($image, 11, 0, 30, 58, $black, $font_path, $name);
+		imagettftext($image, 11, 0, 30, 75, $black, $font_path, $adress);
+	} else {
+		imagettftext($image, 15, 0, 80, 130, $black, $font_path, $name);
+		imagettftext($image, 15, 0, 80, 152, $black, $font_path, $adress);
+	}
+		
+	$purposeOfPayment = $_POST['purposeOfPayment'];
+	$purposeOfPayment = readjustText($purposeOfPayment);
+	if($type === 'nalog-za-isplatu'){
+		imagettftext($image, 15, 0, 75, 222, $black, $font_path, $purposeOfPayment);
+	} else if($type === 'nalog-za-uplatu') {
+		imagettftext($image, 11, 0, 30, 138, $black, $font_path, $purposeOfPayment);
+	} else { 
+		imagettftext($image, 15, 0, 80, 240, $black, $font_path, $purposeOfPayment);
+	}
+	$recipient = $_POST['recipient'];
+	$recipient = readjustText($recipient);
+	if($type === 'nalog-za-isplatu'){
+		imagettftext($image, 15, 0, 75, 332, $black, $font_path, $recipient);
+	} else if($type === 'nalog-za-uplatu'){
+		imagettftext($image, 11, 0, 30, 215, $black, $font_path, $recipient);
+	} else { 
+		imagettftext($image, 15, 0, 80, 343, $black, $font_path, $recipient);
+	}
+	$paymentCode = $_POST['paymentCode'];
+	if($type === 'nalog-za-isplatu'){
+		imagettftext($image, 18, 0, 685, 144, $black, $font_path, $paymentCode);
+	} else if($type === 'nalog-za-uplatu'){
+		imagettftext($image, 12, 0, 437, 72, $black, $font_path, $paymentCode);
+	} else { 
+		imagettftext($image, 18, 0, 690, 145, $black, $font_path, $paymentCode);
+	}
+	$currency = "RSD";//$_POST['currency'];
+	if($type === 'nalog-za-isplatu'){
+		imagettftext($image, 18, 0, 781, 144, $black, $font_path, $currency);
+    } else if($type === 'nalog-za-uplatu'){
+		imagettftext($image, 12, 0, 505, 72, $black, $font_path, $currency);
+	} else { 
+		imagettftext($image, 18, 0, 785, 145, $black, $font_path, $currency);
+	}
+	$amount = $_POST['amount'];
+	if($amount != ''){
+			$amount = readjustAmount($amount);
+		if($type === 'nalog-za-isplatu'){
+			imagettftext($image, 18, 0, 882, 144, $black, $font_path, $amount);
+		} else if($type === 'nalog-za-uplatu'){ 
+			imagettftext($image, 12, 0, 572, 72, $black, $font_path, $amount);
+		} else { 
+			imagettftext($image, 18, 0, 890, 145, $black, $font_path, $amount);
+		}
+	}
+	$accountOfRecipient = $_POST['accountOfRecipient'];
+	if($type === 'nalog-za-isplatu'){
+		imagettftext($image, 18, 0, 780, 210, $black, $font_path, $accountOfRecipient);
+	} else if($type === 'nalog-za-uplatu'){
+		imagettftext($image, 12, 0, 437, 125, $black, $font_path, $accountOfRecipient);
+	} else { 
+		imagettftext($image, 18, 0, 690, 339, $black, $font_path, $accountOfRecipient);
+	}
+	if($type !== 'nalog-za-prenos'){
+		$mockUp = $_POST['mockUp'];
+		if($type === 'nalog-za-isplatu'){
+			imagettftext($image, 18, 0, 687, 280, $black, $font_path, $mockUp);
+		} else if($type === 'nalog-za-uplatu'){
+			imagettftext($image, 12, 0, 436, 171, $black, $font_path, $mockUp);
+		}
+		$referenceNumber = $_POST['referenceNumber'];
+		if($type === 'nalog-za-isplatu'){
+			imagettftext($image, 18, 0, 777, 280, $black, $font_path, $referenceNumber);
+		} else if($type === 'nalog-za-uplatu'){
+			imagettftext($image, 12, 0, 505, 171, $black, $font_path, $referenceNumber);
+		}
+	} else { //nalog-za-prenos
+		$accountOfOrderer = $_POST['accountOfOrderer'];
+		imagettftext($image, 18, 0, 690, 210, $black, $font_path, $accountOfOrderer);		
+	
+		$mockUpDebit = $_POST['mockUpDebit'];
+		imagettftext($image, 18, 0, 690, 275, $black, $font_path, $mockUpDebit);
+		$referenceNumber = $_POST['referenceNumber'];
+		imagettftext($image, 18, 0, 790, 275, $black, $font_path, $referenceNumber);
+		
+		$mockUpApproval = $_POST['mockUpApproval'];
+		imagettftext($image, 18, 0, 690, 403, $black, $font_path, $mockUpApproval);
+		$referenceNumberApprovals = $_POST['referenceNumberApprovals'];
+		imagettftext($image, 18, 0, 790, 403, $black, $font_path, $referenceNumberApprovals);
+	}
+		
+	//date
+	//imagettftext($image, 13, 0, 220, 320, $black, $font_path, date("d.m.Y."));
+	
+	// Send Image to Browser
+    $success = imagejpeg($image, dirname(__FILE__) . "/../uplatnice/output/".$type."-popunjen.jpg");
+    imagedestroy($image);
+	return $success;
+}
 ?>
