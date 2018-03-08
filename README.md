@@ -25,9 +25,9 @@ Sone :baby_chick:
 
 
 Tile :rabbit:
-- [ ] Dodati da prilikom slanja, ako dodje do greske, ostanu zapamceni podaci iz forme
-- [ ] nesto
-- [ ] nesto
+- [x] Dodati da prilikom slanja, ako dodje do greske, ostanu zapamceni podaci iz forme
+- [ ] Zakljucavanje slike prilikom transakcije
+- [ ] Slanje kopije uplatnice korisniku
 
 ##### Korisni linkovi za mene:
 http://formvalidation.io/examples/supporting-skeleton-framework/

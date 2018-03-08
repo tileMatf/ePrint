@@ -322,7 +322,7 @@ if(isset($_POST['submit'])) {
                     <label class="sendCopy">
                         <input type="checkbox" id="sendCopy" name="sendCopy">
                         <span class="label-body">Pošalji kopiju sebi</span>
-                        <input type="text" placeholder="Upišite Vas email" id="email" name="email" />
+                        <input type="text" placeholder="Upišite Vaš email" id="email" name="email" />
                     </label>
                     <!-- POSALJI DUGME -->
                     <input class="button-primary" type="submit" value="Pošalji" name="submit" />
