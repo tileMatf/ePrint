@@ -208,7 +208,7 @@ if(isset($_POST['submit'])) {
                     <label class="label__heading">Boja</label>
                     <label for="plava">
                         <input type="radio" id="plava" name="color" value="plava"
-						<?php echo (isset($_POST['color']) && $_POST['color'] == 'plava') || !isset($_POST['numOfPaySet']) ? "checked" : "" ?> >
+						<?php echo (isset($_POST['color']) && $_POST['color'] == 'plava') || !isset($_POST['color']) ? "checked" : "" ?> >
                         <span>Plave</span>
                     </label>
                     <label for="bela">

@@ -292,7 +292,7 @@ function makeMessage($type){
 				</ul>
 			</body>
 		</html>';
-	} else if($type === 'koverte-sa-dostavnicom'){
+	} else if($type === 'koverta-sa-dostavnicom'){
 		$message = 
 			'<html>
 			<head><title> </title></head>
@@ -310,6 +310,7 @@ function makeMessage($type){
 					<li>Poštanski broj: '.test_input($data['zipCode']).'</li>
 					<li>Mesto: '.test_input($data['location']).'</li>
 					<li>Poštarina plaćena kod: '.test_input($data['postagePaid']).'</li>
+					<li>Tip koverte: '.test_input($data['envelopeType']).'</li>
 					<li>Količina: '.$data['quantity'].'</li>
 				</ul>
 			</body>
@@ -337,7 +338,7 @@ function createPicture($type) {
 	if($type === 'nalog-za-uplatu' || $type === 'nalog-za-isplatu' || $type === 'nalog-za-prenos'){
 		return createPaymentOrder($type);
 	}
-	else if($type === 'koverta-sa-povratnicom') {
+	else if($type === 'koverta-sa-povratnicom' || $type === 'koverta-sa-dostavnicom') {
 		return createEnvelope($type);
 	}
 	return false;
@@ -463,6 +464,37 @@ function createEnvelope($type) {
 
 	if($type == 'koverta-sa-povratnicom'){
 		$success = true;
+	} else if($type === 'koverta-sa-dostavnicom') {
+		$first_image_file = dirname(__FILE__) . '/Image/' . $type . "-" . $_POST['color']. '.jpg';
+		$image = imagecreatefromjpeg($first_image_file);
+		$black = imagecolorallocate($image, 0, 0, 0);
+		$font_path = dirname(__FILE__) . '/Font/OpenSans-Regular.ttf';
+		
+		if($_POST['forInput'] === 'Javni izvrsitelj')
+			$envelopeFor = "ЈАВНИ ИЗВРШИТЕЉ";
+		else {
+			$envelopeFor = "ЈАВНИ БЕЛЕЖНИК";
+		}
+		imagettftext($image, 20, 0, 170, 1000, $black, $font_path, $envelopeFor);
+		imagettftext($image, 20, 0, 445, 1000, $black, $font_path, strtoupper($_POST['nameLastname']));
+		imagettftext($image, 20, 0, 170, 1030, $black, $font_path, "Ул. ". $_POST['adress']);
+		imagettftext($image, 20, 0, 170, 1060, $black, $font_path, $_POST['zipCode']);
+		imagettftext($image, 20, 0, 280, 1060, $black, $font_path, strtoupper($_POST['location']));
+		imagettftext($image, 19, 0, 680, 1000, $black, $font_path, "ПОШТАРИНА ПЛАЋЕНА КОД ПОШТЕ");
+		imagettftext($image, 20, 0, 800, 1030, $black, $font_path, strtoupper($_POST['postagePaid']));
+		imagettftext($image, 25, 0, 600, 1060, $black, $font_path, $_POST['envelopeType']);
+		imagerectangle($image, 590, 1020, 650, 1070, $black);
+		if($_POST['forInput'] === 'Javni izvrsitelj')
+			imagettftext($image, 20, 0, 830, 1325, $black, $font_path, "ИЗВРШНИ ПОСТУПАК");
+		else 
+			imagettftext($image, 20, 0, 830, 1325, $black, $font_path, "УПРАВНИ ПОСТУПАК");
+		
+		imagettftext($image, 20, 0, 2050, 1400, $black, $font_path, $envelopeFor);
+		imagettftext($image, 20, 0, 2050, 1450, $black, $font_path, $_POST['nameLastname']);
+		imagettftext($image, 20, 0, 2050, 1500, $black, $font_path, "Ул. " . $_POST['adress']);
+		imagettftext($image, 20, 0, 2050, 1550, $black, $font_path, $_POST['zipCode'] . " " . $_POST['location']);
+
+		$success = imagejpeg($image, dirname(__FILE__) . "/../koverte-dostavnice-formulari/output/".$type. "-" . $_POST['color']. ".jpg");
 	}
 	
 	return $success;
