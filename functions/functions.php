@@ -256,7 +256,7 @@ function makeMessage($type){
 				</ul>
 			</body>
 		</html>';
-	} else if($type === 'koverte-sa-povratnicom'){
+	} else if($type === 'koverta-sa-povratnicom'){
 		$message = 
 			'<html>
 			<head><title> </title></head>
@@ -336,6 +336,9 @@ function makeMessage($type){
 function createPicture($type) {
 	if($type === 'nalog-za-uplatu' || $type === 'nalog-za-isplatu' || $type === 'nalog-za-prenos'){
 		return createPaymentOrder($type);
+	}
+	else if($type === 'koverta-sa-povratnicom') {
+		return createEnvelope($type);
 	}
 	return false;
 }
@@ -450,6 +453,18 @@ function createPaymentOrder($type){
 	// Send Image to Browser
     $success = imagejpeg($image, dirname(__FILE__) . "/../uplatnice/output/".$type."-popunjen.jpg");
     imagedestroy($image);
+	return $success;
+}
+
+function createEnvelope($type) {
+	//$image = imagecreatefromjpeg(dirname(__FILE__) . '/Image/' . $type . "-" . $_POST['color']. '.jpg');
+    //$black = imagecolorallocate($image, 0, 0, 0);
+    //$font_path = dirname(__FILE__) . '/Font/OpenSans-Regular.ttf';
+
+	if($type == 'koverta-sa-povratnicom'){
+		$success = true;
+	}
+	
 	return $success;
 }
 ?>

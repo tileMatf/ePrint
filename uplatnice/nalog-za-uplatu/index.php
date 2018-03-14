@@ -1,5 +1,4 @@
 <?php
-
 //require_once "../connection.php";
 //require_once '../../functions/mail.php';
 require_once "../../functions/functions.php";

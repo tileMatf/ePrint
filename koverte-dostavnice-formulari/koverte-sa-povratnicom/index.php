@@ -1,13 +1,23 @@
 <?php
-
 //require_once "../../connection.php";
-require_once '../../functions/mail.php';
+//require_once '../../functions/mail.php';
 require_once '../../functions/functions.php';
 
 if(isset($_POST['submit'])) {
-	try{		
-		$status = 0;
+	try{			
+		$createPicture = createPicture('koverta-sa-povratnicom');
+		
+		if($createPicture === true){
+			echo "<div id='pictureModal' class='picture-modal'>
+					  <span class='picture-close'>&times;</span>
+					  <img class='picture-modal-content' id='nalog' src='../output/koverta-sa-povratnicom-" . $_POST['color'] . ".jpg'>
+					  <div id='picture-caption'></div>
+					  <button id='paymentConfirm'>Ok</button>
+				 </div>";
+		}
 	
+		/*
+		$status = 0;
 		$message = makeMessage('koverte-sa-povratnicom');
 
 		if(!isset($post['sendCopy']))
@@ -18,7 +28,7 @@ if(isset($_POST['submit'])) {
 		if($status === true)
 			$statusMessage = "Koverta sa povratnicom za štampanje je uspešno naručena.";
 		else
-			$statusMessage = "Oprostite, došlo je do greške. Molim Vas, pokušajte ponovo.";
+			$statusMessage = "Oprostite, došlo je do greške. Molim Vas, pokušajte ponovo."; */
 	} catch(RuntimeException $e){
 		return $e->getMessage();
 	}
@@ -192,28 +202,18 @@ if(isset($_POST['submit'])) {
             <!-- OVDE POCINJE FORMA ** -->
             <form method="POST" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                 <div class="form-box">
-				<?php
-					if(isset($status)){
-						if($status === true){
-							if(isset($statusMessage) && $statusMessage)
-								echo '<p style="font-size:2rem; font-style: italic; color: green">'.
-									htmlspecialchars($statusMessage) . '</p>';
-						}
-						else {
-							if(isset($statusMessage) && $statusMessage)
-								echo '<p style="font-size:2rem; font-style: italic; color: red">'.
-									htmlspecialchars($statusMessage) . '</p>';						
-						}
-					}
-				?> 
+				<!-- Paragraf za povratnu poruku -->		
+				<p style="font-size:2rem; font-style: italic;" id="statusMessage"></p>
                     <!-- BOJA -->
                     <label class="label__heading">Boja</label>
-                    <label for="color">
-                        <input type="radio" name="color" value="Plave" checked />
+                    <label for="plava">
+                        <input type="radio" id="plava" name="color" value="plava"
+						<?php echo (isset($_POST['color']) && $_POST['color'] == 'plava') || !isset($_POST['numOfPaySet']) ? "checked" : "" ?> >
                         <span>Plave</span>
                     </label>
-                    <label for="color">
-                        <input type="radio" name="color" value="Bele" />
+                    <label for="bela">
+                        <input type="radio" id="bela" name="color" value="bela" 
+							<?php echo isset($_POST['color']) && $_POST['color'] == 'bela' ? "checked" : ""?> >
                         <span>Bele</span>
                     </label>
 
@@ -221,15 +221,15 @@ if(isset($_POST['submit'])) {
                     <label for="quantity" class="label__heading">Količina</label>
                     <select class="u-full-width" name="quantity">
                         <option value="1000" selected>1000</option>
-                        <option value="2000">2000</option>
-                        <option value="3000">3000</option>
-                        <option value="4000">4000</option>
-                        <option value="5000">5000</option>
-                        <option value="6000">6000</option>
-                        <option value="7000">7000</option>
-                        <option value="8000">8000</option>
-                        <option value="9000">9000</option>
-                        <option value="10000">10000</option>
+                        <option value="2000" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '2000' ? "selected" : ""?>>2000</option>
+                        <option value="3000" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '3000' ? "selected" : ""?>>3000</option>
+                        <option value="4000" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '4000' ? "selected" : ""?>>4000</option>
+                        <option value="5000" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '5000' ? "selected" : ""?>>5000</option>
+                        <option value="6000" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '6000' ? "selected" : ""?>>6000</option>
+                        <option value="7000" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '7000' ? "selected" : ""?>>7000</option>
+                        <option value="8000" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '8000' ? "selected" : ""?>>8000</option>
+                        <option value="9000" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '9000' ? "selected" : ""?>>9000</option>
+                        <option value="10000" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '10000' ? "selected" : ""?>>10000</option>
                     </select>
                     <!-- ***************************** -->
 
@@ -301,8 +301,45 @@ if(isset($_POST['submit'])) {
         <!--End of footer-->
     </div>
     <!--end of MAIN container-->
-<!-- JS files -->
-<script src="../../js/main.js"></script>
+	<!-- JS files -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="../../js/main.js"></script>
+	<script>
+		var pictureClose = document.getElementsByClassName("picture-close")[0];
+		// When the user clicks on <span> (x), close the modal
+		pictureClose.onclick = function() { 
+			$('#pictureModal').css("display", "none");
+		}
+	
+		$("#paymentConfirm").click(function(e) {
+			e.preventDefault();	
+			$('#pictureModal').css("display", "none");
+
+			$.ajax({
+				type: "POST",
+				url: "../../functions/confirm/",
+				dataType: "text",
+				data: { 
+					type: 'koverta-sa-povratnicom',
+					data: $('form').serialize()
+				},
+				success: function(result) {
+					if(result == "true") {
+						$('form')[0].reset();
+						$('#statusMessage').text("Koverta sa povratnicom je uspešno naručena.");
+						$('#statusMessage').css("color", "green");
+					} else {
+						$('#statusMessage').text("Oprostite, došlo je do greške prilikom slanja. Molim Vas pokušajte ponovo.");
+						$('#statusMessage').css("color", "red");
+					}
+				},
+				error: function(result) {			
+					$('#statusMessage').text("Oprostite, došlo je do greške na serveru prilikom slanja. Molim Vas, pokušajte ponovo.");
+					$('#statusMessage').css("color", "red");
+				}
+			});
+		});
+	</script>
 </body>
 
 </html>
