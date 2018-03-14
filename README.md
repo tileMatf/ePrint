@@ -22,7 +22,7 @@ Sone :baby_chick:
 - [ ] Da moze da se klikne na ikonicu
 - [ ] 2 dugmeta u stampanje, upload za korice
 - [x/ ] Proveri metatagove, dodaj za Face/Twit, promeni favicon - URADI ZA SVAKU STRANICU
-
+- [ ] Za login forme dodati da se zatvara na ESC
 
 Tile :rabbit:
 - [x] Dodati da prilikom slanja, ako dodje do greske, ostanu zapamceni podaci iz forme

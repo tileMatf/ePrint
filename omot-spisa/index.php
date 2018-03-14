@@ -103,7 +103,7 @@ if(isset($_POST['submit'])) {
         </header>
     <!-- LOGIN MODAL1 -->
     <div id="modal1" class="modal">
-      <span onclick="document.getElementById('modal1').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <span class="close" title="Close Modal">&times;</span>
       <form class="modal-content animate" action="/action_page.php">
         <div class="container">
           <h1 class="log-reg__heading">Uloguj se</h1>
@@ -124,7 +124,7 @@ if(isset($_POST['submit'])) {
         <div class="container" style="background-color:#f1f1f1; margin-top: 40px;">
           <div class="row">
             <div class="seven columns">
-              <button type="button" onclick="document.getElementById('modal1').style.display='none'" class="cancelbtn">Nazad</button>
+              <button type="button" class="cancelbtn">Nazad</button>
             </div>
             <div class="five columns" style="padding-top: 5px;">
                 <a href="#">Zaboravili ste šifru?</a></span>
@@ -136,7 +136,7 @@ if(isset($_POST['submit'])) {
 
         <!-- REGISTER MODAL 2 -->
         <div id="modal2" class="modal">
-            <span onclick="document.getElementById('modal2').style.display='none'" class="close" title="Close Modal">&times;</span>
+            <span class="close" title="Close Modal">&times;</span>
             <form class="modal-content animate" action="/action_page.php">
               <div class="container">
                 <h1 class="log-reg__heading">Registruj se</h1>
@@ -158,7 +158,7 @@ if(isset($_POST['submit'])) {
                 <p>Pravljenjem naloga prihvatate naše <a href="#" style="color:dodgerblue">uslove</a> poslovanja</p>
           
                 <div class="clearfix">
-                  <button type="button" onclick="document.getElementById('modal2').style.display='none'" class="cancelbtn">Nazad</button>
+                  <button type="button" class="cancelbtn">Nazad</button>
                   <button type="submit" class="signupbtn">Registruj se</button>
                 </div>
               </div>
