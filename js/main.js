@@ -4,12 +4,37 @@
 	var pictureModal = document.getElementById('pictureModal');
 	var closeButtons = document.getElementsByClassName('close');
 	var cancelButtons = document.getElementsByClassName('cancelbtn');
+	var pictureClose = document.getElementsByClassName("picture-close")[0];
+
+	/*Closing picture preview on click*/
+	if(pictureClose != null){
+		pictureClose.onclick = function() { 
+			pictureModal.style.display = "none";
+		}
+	}	
+	
+	/*adding event listener to close button*/
+	for(var i = 0; i < closeButtons.length; i++){
+		var closeButton = closeButtons[i];
+		closeButton.addEventListener('click', closeModal, false);		
+	}	
+	for(var j = 0; j < cancelButtons.length; j++){
+		var cancelButton = cancelButtons[j];
+		cancelButton.addEventListener('click', closeModal, false);
+	}
+	
+	function closeModal(e) {
+		if(modal != null)
+			modal.style.display='none';
+		if(modal2 != null)
+			modal2.style.display='none';			
+	}
 	
 	/*close modals on ESC key press*/
 	document.onkeydown = function (event) {
 		event = event || window.event;
 		if (event.keyCode == 27) {
-			if(pictureModal != null && pictureModal.style.display=='block') {
+			if(pictureModal != null) {
 				pictureModal.style.display='none';
 			}
 			if(modal != null) {
@@ -18,28 +43,6 @@
 			if(modal2 != null) {
 				modal2.style.display='none';
 			}
-		}
-	}	
-	
-	/*adding event listener to close button*/
-	for(var i = 0; i < closeButtons.length; i++){
-		var closeButton = closeButtons[i];
-		closeButton.addEventListener('click', closeModal, false);		
-	}
-	
-	for(var j = 0; j < cancelButtons.length; j++){
-		var cancelButton = cancelButtons[j];
-		cancelButton.addEventListener('click', closeModal, false);
-	}
-	
-	function closeModal(e) {
-		//closeButton1.onclick = function(event) {
-		if(pictureModal != null)
-			pictureModal.style.display='none';
-		if (modal != null)
-			modal.style.display='none';
-		if (modal2 != null){
-			modal2.style.display='none';			
 		}
 	}
 	
@@ -89,6 +92,45 @@
 	});
 });
 
+	/*Ajax call on confirm*/
+	var orderConfirm = document.getElementById("paymentConfirm");
+	
+	if(orderConfirm != null){
+		orderConfirm.addEventListener('click', function(event){
+			event.preventDefault();	
+			pictureModal.style.display = "none";
+			var form = document.forms.namedItem('orderForm');
+			var type = document.getElementById('orderType').getAttribute('value');
+			var successMessage = document.getElementById('successMessage').getAttribute('value');
+			var statusMessage = document.getElementById("statusMessage");
+			var formData = new FormData(form);
+			formData.append('type', type);
+			var xhttp = new XMLHttpRequest();
+		
+			let parameters = [...formData.entries()]
+                     .map(e => encodeURIComponent(e[0]) + "=" + encodeURIComponent(e[1]))
+			
+			xhttp.open("POST", "../../functions/confirm/", true);
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhttp.onload = function(e){
+				console.log(this.responseText);
+				
+				if(this.responseText == true){
+					statusMessage.innerHTML = successMessage;
+					statusMessage.style.color = "green";
+				} else {
+					statusMessage.innerHTML = "Oprostite, došlo je do greške prilikom slanja. Molim Vas, pokušajte ponovo.";
+					statusMessage.style.color = "red";
+				}
+			};
+			
+			xhttp.onerror = function(e) {
+				statusMessage.innerHTML = "Oprostite, došlo je do greške na serveru prilikom slanja. Molim Vas, pokušajte ponovo.";
+				statusMessage.style.color = "red";
+			}
+			xhttp.send(parameters.join('&'));
+		});
+	}
  /*$(function() {
 	$(document).keydown(function(e) {
 	// ESCAPE key pressed

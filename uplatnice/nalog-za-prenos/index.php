@@ -1,37 +1,14 @@
 <?php
-
-//require_once "../connection.php";
-require_once '../../functions/mail.php';
 require_once "../../functions/functions.php";
-
 
 if(isset($_POST['submit'])) {
 	try{
-		//$db = new DB();
-		
-		$createPicture = createPicture('nalog-za-prenos');
-		
-		if($createPicture === true){
-			echo "<div id='pictureModal' class='picture-modal'>
-					  <span class='picture-close'>&times;</span>
-					  <img class='picture-modal-content' id='nalog' src='../output/nalog-za-prenos-popunjen.jpg'>
-					  <div id='picture-caption'></div>
-					  <button id='paymentConfirm'>Ok</button>
-				 </div>";
-		}
-		
-		/*$status = 0;	
-		$message = makeMessage('nalog-za-prenos');			
-		
-		if(!isset($_POST['sendCopy']))
-			$status = sendMail($message);			
-		else {
-			$status = sendMail($message, $_POST['userEmail']);		
-		}
-		if($status === true)
-			$statusMessage = "Nalog za prenos je uspešno poslat.";
-		else
-			$statusMessage = "Oprostite, došlo je do greške prilikom slanja. Molim Vas pokušajte ponovo.";*/
+		echo "<div id='pictureModal' class='picture-modal'>
+			 <span class='picture-close'>&times;</span>
+			  <img id='pictureContent' class='picture-modal-content' 
+				src='../../functions/createPicture.php?". http_build_query($_POST) ."'>
+			 <button id='paymentConfirm'>Ok</button>
+			</div>";
 	} catch(RuntimeException $e){
 		return $e->getMessage();
 	} 
@@ -203,7 +180,7 @@ if(isset($_POST['submit'])) {
                 <h2 class="section__heading">Nalog za prenos</h2>
             </div>
             <!-- OVDE POCINJE FORMA -->
-            <form method="POST" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+            <form method="POST" name="orderForm" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                 <div class="form-box">
 				<!-- Paragraf za povratnu poruku -->		
 				<p style="font-size:2rem; font-style: italic;" id="statusMessage"></p>				
@@ -339,12 +316,13 @@ if(isset($_POST['submit'])) {
                         <input type="checkbox" name="sendCopy">
                         <span class="label-body">Pošalji kopiju sebi</span>
                     </label>
+					<input type="hidden" name="orderType" id="orderType" value="nalog-za-prenos">
+					<input type="hidden" id="successMessage" value="Nalog za prenos je uspešno naručen.">
                     <input class="button-primary" type="submit" value="Pošalji" name="submit" />
                     <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
                 </div>
             </form>
         </section>
-
 
 
 
@@ -405,48 +383,7 @@ if(isset($_POST['submit'])) {
     </div>
     <!--end of MAIN container-->
 	<!-- JS files -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-	<script src="../../js/main.js"></script>
-	<script>
-	
-		var pictureClose = document.getElementsByClassName("picture-close")[0];
-		// When the user clicks on <span> (x), close the modal
-		if(pictureClose != null){
-			pictureClose.onclick = function() { 
-				$('#pictureModal').css("display", "none");
-			}
-		}
-	
-		$("#paymentConfirm").click(function(e) {
-			e.preventDefault();	
-			$('#pictureModal').css("display", "none");
-			
-			$.ajax({
-				type: "POST",
-				url: "../../functions/confirm/",
-				dataType: "text",
-				data: { 
-					type: 'nalog-za-prenos',
-					data: $('form').serialize()
-				},
-				success: function(result) {
-					if(result == "true") {
-						$('form')[0].reset();
-						$('#statusMessage').text("Nalog za prenos je uspešno poslat.");
-						$('#statusMessage').css("color", "green");
-					} else {
-						$('#statusMessage').text("Oprostite, došlo je do greške prilikom slanja. Molim Vas pokušajte ponovo.");
-						$('#statusMessage').css("color", "red");
-					}
-				},
-				error: function(result) {			
-					$('#statusMessage').text("Oprostite, došlo je do greške na serveru prilikom slanja. Molim Vas, pokušajte ponovo.");
-					$('#statusMessage').css("color", "red");
-				}
-			});
-		});
-	</script>
-	
+	<script src="../../js/main.js"></script>	
 </body>
 
 </html>

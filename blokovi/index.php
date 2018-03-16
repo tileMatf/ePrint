@@ -202,7 +202,7 @@ if(isset($_POST['submit'])) {
                 <h2 class="section__heading">Preslikavajući blokovi</h2>
             </div>
             <!-- OVDE POCINJE FORMA ZA ***BLOKOVE*** -->
-            <form method="POST" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
+            <form method="POST" name="orderForm" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
                 <div class="form-box">
 				<!-- Paragraf za povratnu poruku -->		
 				<?php
@@ -280,6 +280,8 @@ if(isset($_POST['submit'])) {
                         <input type="checkbox" name="sendCopy">
                         <span class="label-body">Pošalji kopiju sebi</span>
                         </label>
+						<input type="hidden" name="orderType" id="orderType" value="blokovi">
+						<input type="hidden" id="successMessage" value="Blokovi su uspešno naručeni.">
                         <input class="button-primary" type="submit" value="Pošalji" name="submit" />
                         <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
                     </div>

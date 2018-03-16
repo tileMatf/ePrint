@@ -207,7 +207,7 @@ if(isset($_POST['submit'])) {
       </div>
 
       <!-- OVDE POCINJE FORMA ZA ***STAMPANJE*** -->
-      <form method="POST" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
+      <form method="POST" name="orderType" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
         <div class="form-box">
 		<!-- Paragraf za povratnu poruku -->		
 		<?php
@@ -306,7 +306,6 @@ if(isset($_POST['submit'])) {
               <span>Tvrdo koričenje</span>
             </label>
             <!-- Upload korice dugme -->
-            <!--<input class="button-primary" type="submit" value="Upload korice">-->
             <label class="label__heading">Okačite koricu</label>
 			      <input type='file' name='bindingFileToUpload' accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf'>
             <!-- ***************************** -->
@@ -344,6 +343,8 @@ if(isset($_POST['submit'])) {
               <span class="label-body">Pošalji kopiju sebi</span>
               <input type="text" placeholder="Upišite Vas email" id="email" name="email" />
             </label>
+			<input type="hidden" name="orderType" id="orderType" value="stampanje">
+			<input type="hidden" id="successMessage" value="Uspešno naručeno.">
             <input class="button-primary" type="submit" value="Pošalji" name="submit" />
             <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p> 
           </div>

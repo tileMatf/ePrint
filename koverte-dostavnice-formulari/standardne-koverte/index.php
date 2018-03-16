@@ -202,7 +202,7 @@ if(isset($_POST['submit'])) {
             <h2 class="section__heading">Standardne koverte</h2>
 
             <!-- OVDE POCINJE FORMA ** -->
-            <form method="POST" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
+            <form method="POST" name="orderForm" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
                 <div class="form-box">
 				<!-- Paragraf za povratnu poruku -->		
 				<?php
@@ -292,6 +292,8 @@ if(isset($_POST['submit'])) {
                         <span class="label-body">Pošalji kopiju sebi</span>
                         <input type="text" placeholder="Upišite Vas email" id="email" name="email" />
                     </label>
+					<input type="hidden" name="orderType" id="orderType" value="standarna-koverta">
+					<input type="hidden" id="successMessage" value="Standardna koverta je uspešno naručena.">
                     <!-- POSALJI DUGME -->
                     <input class="button-primary" type="submit" value="Pošalji" name="submit" />
                     <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
