@@ -93,19 +93,19 @@
 });
 
 	/*Ajax call on confirm*/
-	var orderConfirm = document.getElementById("paymentConfirm");
+	var paymentConfirm = document.getElementById("paymentConfirm");
 	
-	if(orderConfirm != null){
-		orderConfirm.addEventListener('click', function(event){
+	if(paymentConfirm != null){
+		paymentConfirm.addEventListener('click', function(event){
 			event.preventDefault();	
 			pictureModal.style.display = "none";
 			var form = document.forms.namedItem('orderForm');
-			var type = document.getElementById('orderType').getAttribute('value');
+			//var type = document.getElementById('orderType').getAttribute('value');
 			var successMessage = document.getElementById('successMessage').getAttribute('value');
 			var statusMessage = document.getElementById("statusMessage");
-			var formData = new FormData(form);
-			formData.append('type', type);
-			var xhttp = new XMLHttpRequest();
+			var formData = new FormData(form);		
+			
+			var xhttp = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
 		
 			let parameters = [...formData.entries()]
                      .map(e => encodeURIComponent(e[0]) + "=" + encodeURIComponent(e[1]))
@@ -113,8 +113,6 @@
 			xhttp.open("POST", "../../functions/confirm/", true);
 			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			xhttp.onload = function(e){
-				console.log(this.responseText);
-				
 				if(this.responseText == true){
 					statusMessage.innerHTML = successMessage;
 					statusMessage.style.color = "green";

@@ -225,7 +225,8 @@ if(isset($_POST['submit'])) {
 
                     <!--SIFRA PLACANJA ******************************-->
                     <label for="paymentCode" class="label__heading">Šifra plaćanja</label>
-                    <input class="u-full-width" type="text" placeholder="" name="paymentCode">
+                    <input class="u-full-width" type="text" placeholder="" name="paymentCode"
+						value="<?php echo isset($_POST['paymentCode']) ? $_POST['paymentCode'] : '' ?>>
                     <!-- ***************************** -->
 
                     <!--VALUTA ******************************-->
@@ -242,7 +243,8 @@ if(isset($_POST['submit'])) {
 
                     <!--RACUN PRIMAOCA ******************************-->
                     <label for="accountOfOrderer" class="label__heading">Račun nalogodavca</label>
-                    <input class="u-full-width" type="text" placeholder="" name="accountOfOrderer">
+                    <input class="u-full-width" type="text" placeholder="" name="accountOfOrderer"
+						value="<?php echo isset($_POST['accountOfOrderer']) ? $_POST['accountOfOrderer'] : '' ?>>
                     <!-- ***************************** -->
 
                     <!--MODEL ******************************-->
@@ -253,12 +255,14 @@ if(isset($_POST['submit'])) {
 
                     <!--POZIV NA BROJ ZADUZENJA ******************************--> <!-- OVO JE DRUGACIJE OD DRUGE DVE UPLATNICE -->
                     <label for="referenceNumber" class="label__heading">Poziv na broj zaduženja</label> <!-- referenceNumberObligation -->
-                    <input class="u-full-width" type="text" placeholder="" name="referenceNumber">
+                    <input class="u-full-width" type="text" placeholder="" name="referenceNumber"
+						value="<?php echo isset($_POST['referenceNumber']) ? $_POST['referenceNumber'] : '' ?>>
                     <!-- ***************************** -->
 
                     <!--RACUN PRIMAOCA ******************************-->
                     <label for="accountOfRecipient" class="label__heading">Račun primaoca</label>
-                    <input class="u-full-width" type="text" placeholder="" name="accountOfRecipient">
+                    <input class="u-full-width" type="text" placeholder="" name="accountOfRecipient"
+						value="<?php echo isset($_POST['accountOfRecipient']) ? $_POST['accountOfRecipient'] : '' ?>>
                     <!-- ***************************** -->
 
                     <!--MODEL ******************************-->
@@ -278,13 +282,13 @@ if(isset($_POST['submit'])) {
                     <!-- BROJ UPLATNICA U SETU ***************************** -->
                     <label for="" class="label__heading">Broj naloga za prenos u setu</label>
                     <label for="numOfPaySet"> <!-- number of transfer orders in set -->
-                        <input type="radio" name="numOfPaySet" value="1+1" checked 
-							<?php echo (isset($_POST['numOfPaySet']) && $_POST['numOfPaySet'] == '1+1') || !isset($_POST['numOfPaySet']) ? "checked" : "" ?> />
+                        <input type="radio" name="numOfPaySet" value="1+1" 
+							<?php echo (isset($_POST['numOfPaySet']) && $_POST['numOfPaySet'] == '1+1') || !isset($_POST['numOfPaySet']) ? "checked" : "" ?>>
                         <span>1+1</span>
                     </label>
                     <label for="numOfPaySet">
                         <input type="radio" name="numOfPaySet" value="1+2" 
-							<?php echo isset($_POST['numOfPaySet']) && $_POST['numOfPaySet'] == '1+2' ? "checked" : ""?> />
+							<?php echo isset($_POST['numOfPaySet']) && $_POST['numOfPaySet'] == '1+2' ? "checked" : ""?> >
                         <span>1+2</span>
                     </label>
                     <!-- ***************************** -->
@@ -306,14 +310,16 @@ if(isset($_POST['submit'])) {
 
                     <!--Krajnja poruka-->
                     <label for="message" class="label__heading">Poruka</label>
-                    <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"><?php echo isset($_POST['comment']) ? $_POST['comment'] : ''?></textarea>
+                    <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment">
+						<?php echo isset($_POST['comment']) ? $_POST['comment'] : ''?>
+					</textarea>
                     <!-- Varijabilni podaci i prihvatam uslove -->
                     <label for="varData">
                         <input type="checkbox" name="varData" <?php echo isset($_POST['varData']) ? 'checked' : ''?>>
                         <span class="label-body">Varijabilni podaci</span>
                     </label>
                     <label for="sendCopy">
-                        <input type="checkbox" name="sendCopy">
+                        <input type="checkbox" name="sendCopy" <?php echo isset($_POST['sendCopy']) ? 'checked' : ''?>>
                         <span class="label-body">Pošalji kopiju sebi</span>
                     </label>
 					<input type="hidden" name="orderType" id="orderType" value="nalog-za-prenos">

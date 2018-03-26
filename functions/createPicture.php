@@ -5,8 +5,10 @@ require 'stringFunctions.php';
 	function getEnvelopeReciver($input) {
 		if($input === 'Javni izvrsitelj')
 			$reciver = "ЈАВНИ ИЗВРШИТЕЉ";
-		else {
+		else if($input === 'Javni beleznik'){
 			$reciver = "ЈАВНИ БЕЛЕЖНИК";
+		} else if($input === 'Advokat') {
+			$reciver = "Адвокат";
 		}
 		return $reciver;
 	}
@@ -153,6 +155,12 @@ require 'stringFunctions.php';
 			imagettftext($image, 16, 0, 70, 100, $black, $font_path, $_GET['zipCode'] . " " . $_GET['location']);
 			break;
 		case 'formular-za-adresiranje':
+			break;
+		case 'omot-spisa':
+			imagettftext($image, 32, 0, 100, 80, $black, $font_path, "РЕПУБЛИКА СРБИЈА");
+			imagettftext($image, 30, 0, 100, 130, $black, $font_path, $envelopeReciver);
+			imagettftext($image, 30, 0, 100, 180, $black, $font_path, $_GET['nameLastname']);
+			imagettftext($image, 30, 0, 100, 230, $black, $font_path, $_GET['location'] . ", " . $_GET['address']);
 			break;
 	}
 

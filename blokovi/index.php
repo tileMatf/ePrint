@@ -7,8 +7,6 @@ require_once '../functions/functions.php';
 
 if(isset($_POST['submit'])) {
 	try{
-		//$db = new DB();
-
 		$status = 0;
 		$fileStatus = 0;
 		
@@ -220,55 +218,65 @@ if(isset($_POST['submit'])) {
 					}
 				?> 
                     <!--UPLOAD dugme-->
-                    <input type='file' name='fileToUpload' id="file" class="inputfile" accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf' required >
+                    <input type='file' name='fileToUpload' id="file" class="inputfile" accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf'
+						<?php echo (isset($_POST['fileToUpload']) ? "value='".$_POST['fileToUpload']['name']."'" : "") ?>>
                     <label for="file"><i class="fa-upload fas fa-upload"></i><span>Okačite fajl</span></label>
                     <div class="row">
 
                         <!-- BROJ SETOVA ***************************** -->
                         <label for="noOfSet" class="label__heading">Broj setova</label>
-                        <input class="u-full-width" type="number" name="noOfSet" value="1">
+                        <input class="u-full-width" type="number" name="noOfSet"
+							<?php echo (isset($_POST['noOfSet'])) ? "value='".$_POST['noOfSet']."'" : "value='1'" ?>>
                         <!-- ***************************** -->
 
                         <!-- BOJA ***************************** -->
                         <label for="" class="label__heading">Boja</label>
-                        <label for="blockColor">
-                            <input type="radio" name="blockColor" value="Crno-belo" checked />
+                        <label for="Crno-belo">
+                            <input type="radio" name="blockColor" id="Crno-belo" value="Crno-belo" 
+								<?php echo (isset($_POST['blockColor']) && $_POST['blockColor'] == 'Crno-belo') || !isset($_POST['blockColor']) ? "checked" : "" ?>>
                             <span>Crno belo</span>
                         </label>
-                        <label for="blockColor" class="label__heading">
-                            <input type="radio" name="blockColor" value="Plavo-belo" />
+                        <label for="Plavo-belo" class="label__heading">
+                            <input type="radio" name="blockColor" id="Plavo-belo" value="Plavo-belo" 
+								<?php echo isset($_POST['blockColor']) && $_POST['blockColor'] == 'Plavo-belo' ? "checked" : "" ?>>
                             <span>Plavo belo</span>
                         </label>
-                        <label for="blockColor" class="label__heading">
-                            <input type="radio" name="blockColor" value="U boji" />
+                        <label for="U boji" class="label__heading">
+                            <input type="radio" name="blockColor" id="U boji" value="U boji" 
+								<?php echo isset($_POST['blockColor']) && $_POST['blockColor'] == 'U boji' ? "checked" : "" ?>>
                             <span>U boji</span>
                         </label>
                         <!-- ***************************** -->
 
                         <!-- VELICINA BLOKA  ***************************** -->
                         <label for="" class="label__heading">Veličina bloka</label>
-                        <label for="blockSize">
-                            <input type="radio" name="blockSize" value="A4" checked/>
+                        <label for="A4">
+                            <input type="radio" name="blockSize" id="A4" value="A4"
+								<?php echo (isset($_POST['blockSize']) && $_POST['blockSize'] == 'A4') || !isset($_POST['blockSize']) ? "checked" : "" ?>>
                             <span>A4</span>
                         </label>
-                        <label for="blockSize">
-                            <input type="radio" name="blockSize" value="A5" />
+                        <label for="A5">
+                            <input type="radio" name="blockSize" id="A5" value="A5"
+								<?php echo isset($_POST['blockSize']) && $_POST['blockSize'] == 'A5' ? "checked" : "" ?>>
                             <span>A5</span>
                         </label>
                         <!-- ***************************** -->
 
                         <!-- SPAKOVANO -->
                         <label for="" class="label__heading">Spakovano</label>
-                        <label for="packing">
-                            <input type="radio" name="packing" value="Heftanjem gore" />
+                        <label for="Heftanjem gore">
+                            <input type="radio" name="packing" id="Heftanjem gore" value="Heftanjem gore" 
+								<?php echo (isset($_POST['packing']) && $_POST['packing'] == 'Heftanjem gore') || !isset($_POST['packing']) ? "checked" : "" ?>>
                             <span>Heftanjem gore</span>
                         </label>
-                        <label for="packing">
-                            <input type="radio" name="packing" value="Heftanjem levo" />
+                        <label for="Heftanjem levo">
+                            <input type="radio" name="packing" id="Heftanjem levo" value="Heftanjem levo" 
+								<?php echo isset($_POST['packing']) && $_POST['packing'] == 'Heftanjem gore' ? "checked" : "" ?>>
                             <span>Heftanjem levo</span>
                         </label>
-                        <label for="packing">
-                            <input type="radio" name="packing" value="U fasciklu" checked />
+                        <label for="U fasciklu">
+                            <input type="radio" name="packing" id="U fasciklu" value="U fasciklu" checked 
+								<?php echo isset($_POST['packing']) && $_POST['packing'] == 'U fasciklu' ? "checked" : "" ?>>
                             <span>U fasciklu</span>
                         </label>
                         <!-- ***************************** -->
@@ -277,7 +285,8 @@ if(isset($_POST['submit'])) {
                         <label for="message" class="label__heading">Poruka</label>
                         <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"></textarea>
                         <label for="sendCopy">
-                        <input type="checkbox" name="sendCopy">
+                        <input type="checkbox" name="sendCopy" 
+							<?php echo isset($_POST['sendCopy']) ? "checked" : "" ?>>
                         <span class="label-body">Pošalji kopiju sebi</span>
                         </label>
 						<input type="hidden" name="orderType" id="orderType" value="blokovi">
@@ -287,9 +296,6 @@ if(isset($_POST['submit'])) {
                     </div>
             </form>
         </section>
-
-
-
 
 
         <!--Footer-->

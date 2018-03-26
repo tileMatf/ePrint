@@ -3,7 +3,7 @@
 	require "../mail.php";
 		
 	$status = 0;
-	$message = makeMessage($_POST['type']);			
+	$message = makeMessage($_POST['orderType']);			
 	
 	if(!isset($_POST['sendCopy']))
 		$status = sendMail($message);			

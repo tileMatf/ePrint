@@ -44,7 +44,7 @@ function uploadFile($target_dir){
 			// Check if file already exists
 			if (file_exists($target_file)) {
 				unlink($target_file);
-				move_uploaded_file($_FILES["fileToUpload"]["tmp_name"]);
+				move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
 				$statusMessage = "Datoteka ". $_FILES["fileToUpload"]["name"] . " je otpremljena.";;
 				$fileStatus = 2;			
 			}
@@ -70,7 +70,7 @@ function generateMessage($status){
 	if($status === 1)
 		return "Greška, dozvoljene su samo PDF i JPG datoteke.";
 	else if($status === 2)
-		return "Datoteka ". $file["name"] . " je otpremljena.";
+		return "Datoteka ". basename($_FILES["fileToUpload"]["name"]) . " je otpremljena.";
 	else if($status === 3)
 		return "Datoteka ". basename($_FILES["fileToUpload"]["name"]). " je otpremljena.";
 	else if($status === 4)
@@ -92,16 +92,16 @@ function makeMessage($type){
 					<label> Datum: </label> '.date("d.m.Y.").' </br>
 					<label> Vreme: </label> '.date("h:i").' </br>
 					<label> Tip: </label> stampanje </br>
-					<label> Datoteka: </label> '.basename($files["fileToUpload"]["name"]).' </br>
+					<label> Datoteka: </label> '.basename($_FILES["fileToUpload"]["name"]).' </br>
 					<label> Izabrane opcije: </label> </br>
 					<ul>
-						<li>Broj primeraka: '.$data['noInput'].'</li>
-						<li>Redosled stampanja: '.$data['orderOfInput'].'</li>
-						<li>Boja: '.$data['colorOfInput'].'</li>
-						<li>Nacin stampanja: '.$data['typeOfPrint'].'</li>
-						<li>Veličina papira: '.$data['paperSize'].'</li>
-						<li>Debljina papira: '.$data['paperWidth'].'</li>
-						<li>Koričenje: '.$data['bindingType'].'</li>
+						<li>Broj primeraka: '.$_POST['noInput'].'</li>
+						<li>Redosled stampanja: '.$_POST['orderOfInput'].'</li>
+						<li>Boja: '.$_POST['colorOfInput'].'</li>
+						<li>Nacin stampanja: '.$_POST['typeOfPrint'].'</li>
+						<li>Veličina papira: '.$_POST['paperSize'].'</li>
+						<li>Debljina papira: '.$_POST['paperWidth'].'</li>
+						<li>Koričenje: '.$_POST['bindingType'].'</li>
 						<li>Dodate korice: ';
 				if(!empty($_FILES['bindingFileToUpload']['name'])){
 					$message = $message . 'DA</li>
@@ -112,9 +112,9 @@ function makeMessage($type){
 				
 				
 		$message = $message . '
-						<li>Heftanje: '.$data['heftingType'].'</li>
-						<li>Bušenje: '.$data['drillingType'].'</li>
-						<li>Komentar korisnika: '. test_input($data['comment']).'</li>
+						<li>Heftanje: '.$_POST['heftingType'].'</li>
+						<li>Bušenje: '.$_POST['drillingType'].'</li>
+						<li>Komentar korisnika: '. test_input($_POST['comment']).'</li>
 					</ul>
 				</body>
 			</html>';
@@ -183,11 +183,11 @@ function makeMessage($type){
 				<label> Datoteka: </label> '.basename( $_FILES["fileToUpload"]["name"]).' </br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>
-					<li>Broj setova: '.$data['noOfSet'].'</li>
-					<li>Boja: '.$data['blockColor'].'</li>
-					<li>Veličina: '.$data['blockSize'].'</li>
-					<li>Pakovanje: '.$data['packing'].'</li>
-					<li>Komentar korisnika: '. test_input($data['comment']).'</li>
+					<li>Broj setova: '.$_POST['noOfSet'].'</li>
+					<li>Boja: '.$_POST['blockColor'].'</li>
+					<li>Veličina: '.$_POST['blockSize'].'</li>
+					<li>Pakovanje: '.$_POST['packing'].'</li>
+					<li>Komentar korisnika: '. test_input($_POST['comment']).'</li>
 				</ul>
 			</body>
 		</html>';
@@ -204,32 +204,32 @@ function makeMessage($type){
 				<label> Datoteka: </label> '.basename( $_FILES["fileToUpload"]["name"]).' </br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>
-					<li>Veličina: '.$data['size'].'</li>
-					<li>Količina: '.$data['quantity'].'</li>
+					<li>Veličina: '.$_POST['size'].'</li>
+					<li>Količina: '.$_POST['quantity'].'</li>
 					<li>Štampanje na poleđini: 
 						<ul>
-							<li>Prvi red: '.$data['printingOnBack1'].'</li>
-							<li>Drugi red: '.$data['printingOnBack2'].'</li>
-							<li>Treći red: '.$data['printingOnBack3'].'</li>
-							<li>Četvrti red: '.$data['printingOnBack4'].'</li>							
+							<li>Prvi red: '.$_POST['printingOnBack1'].'</li>
+							<li>Drugi red: '.$_POST['printingOnBack2'].'</li>
+							<li>Treći red: '.$_POST['printingOnBack3'].'</li>
+							<li>Četvrti red: '.$_POST['printingOnBack4'].'</li>							
 						</ul>
 					</li>
 					<li>Štampanje na adresnoj strani: 
 						<ul>
-							<li>Prvi red: '.$data['printingOnAdressPage1'].'</li>
-							<li>Drugi red: '.$data['printingOnAdressPage2'].'</li>
-							<li>Treći red: '.$data['printingOnAdressPage3'].'</li>
-							<li>Četvrti red: '.$data['printingOnAdressPage4'].'</li>							
+							<li>Prvi red: '.$_POST['printingOnAdressPage1'].'</li>
+							<li>Drugi red: '.$_POST['printingOnAdressPage2'].'</li>
+							<li>Treći red: '.$_POST['printingOnAdressPage3'].'</li>
+							<li>Četvrti red: '.$_POST['printingOnAdressPage4'].'</li>							
 						</ul>
 					</li>
 					<li>Varijabilni podaci: ';
-					if(isset($data['varData']))
+					if(isset($_POST['varData']))
 						$message = $message . 'DA </li>';
 					else
 						$message = $message . 'NE </li>';					
 
 		$message = $message .
-					'<li>Komentar korisnika: '. test_input($data['comment']).'</li>
+					'<li>Komentar korisnika: '. test_input($_POST['comment']).'</li>
 				</ul>
 			</body>
 		</html>';
@@ -242,17 +242,16 @@ function makeMessage($type){
 				<label> Datum: </label> '.date("d.m.Y.").' </br>
 				<label> Vreme: </label> '.date("h:i").' </br>
 				<label> Tip: </label> Omot spisa </br>
-				<label> Datoteka: </label> '.basename( $_FILES["fileToUpload"]["name"]).' </br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>
-					<li>Za: '.$data['forInput'].'</li>
-					<li>Ime i prezime: '.test_input($data['nameLastname']).'</li>
-					<li>Ulica: '.test_input($data['adress']).'</li>
-					<li>Poštanski broj: '.test_input($data['zipCode']).'</li>
-					<li>Mesto: '.test_input($data['location']).'</li>
-					<li>Vrsta papira: '.$data['typeOfPaper'].'</li>
-					<li>Količina: '.$data['quantity'].'</li>
-					<li>Komentar korisnika: '. test_input($data['comment']).'</li>
+					<li>Za: '.$_POST['forInput'].'</li>
+					<li>Ime i prezime: '.test_input($_POST['nameLastname']).'</li>
+					<li>Ulica: '.test_input($_POST['address']).'</li>
+					<li>Mesto: '.test_input($_POST['location']).'</li>
+					<li>Vrsta papira: '.$_POST['typeOfPaper'].'</li>
+					<li>Količina: '.$_POST['quantity'].'</li>
+					<li>Komentar korisnika: '. test_input($_POST['comment']).'</li>
+					<li>Komentar korisnika: '. test_input($_POST['comment']).'</li>
 				</ul>
 			</body>
 		</html>';
@@ -267,8 +266,8 @@ function makeMessage($type){
 				<label> Tip: </label> Koverta sa povratnicom za štampanje</br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>
-					<li>Boja: '.$data['color'].'</li>
-					<li>Količina: '.$data['quantity'].'</li>
+					<li>Boja: '.$_POST['color'].'</li>
+					<li>Količina: '.$_POST['quantity'].'</li>
 				</ul>
 			</body>
 		</html>';
@@ -283,12 +282,12 @@ function makeMessage($type){
 				<label> Tip: </label> Dostavnica </br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>
-					<li>Za: '.$data['forInput'].'</li>
-					<li>Ime i prezime: '.test_input($data['nameLastname']).'</li>
-					<li>Ulica: '.test_input($data['adress']).'</li>
-					<li>Poštanski broj: '.test_input($data['zipCode']).'</li>
-					<li>Mesto: '.test_input($data['location']).'</li>
-					<li>Količina: '.$data['quantity'].'</li>
+					<li>Za: '.$_POST['forInput'].'</li>
+					<li>Ime i prezime: '.test_input($_POST['nameLastname']).'</li>
+					<li>Ulica: '.test_input($_POST['adress']).'</li>
+					<li>Poštanski broj: '.test_input($_POST['zipCode']).'</li>
+					<li>Mesto: '.test_input($_POST['location']).'</li>
+					<li>Količina: '.$_POST['quantity'].'</li>
 				</ul>
 			</body>
 		</html>';
@@ -303,15 +302,15 @@ function makeMessage($type){
 				<label> Tip: </label> Koverta sa dostavnicom za lično popunjavanje </br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>
-					<li>Za: '.$data['forInput'].'</li>
-					<li>Boja: '.$data['color'].'</li>
-					<li>Ime i prezime: '.test_input($data['nameLastname']).'</li>
-					<li>Ulica: '.test_input($data['adress']).'</li>
-					<li>Poštanski broj: '.test_input($data['zipCode']).'</li>
-					<li>Mesto: '.test_input($data['location']).'</li>
-					<li>Poštarina plaćena kod: '.test_input($data['postagePaid']).'</li>
-					<li>Tip koverte: '.test_input($data['envelopeType']).'</li>
-					<li>Količina: '.$data['quantity'].'</li>
+					<li>Za: '.$_POST['forInput'].'</li>
+					<li>Boja: '.$_POST['color'].'</li>
+					<li>Ime i prezime: '.test_input($_POST['nameLastname']).'</li>
+					<li>Ulica: '.test_input($_POST['adress']).'</li>
+					<li>Poštanski broj: '.test_input($_POST['zipCode']).'</li>
+					<li>Mesto: '.test_input($_POST['location']).'</li>
+					<li>Poštarina plaćena kod: '.test_input($_POST['postagePaid']).'</li>
+					<li>Tip koverte: '.test_input($_POST['envelopeType']).'</li>
+					<li>Količina: '.$_POST['quantity'].'</li>
 				</ul>
 			</body>
 		</html>';

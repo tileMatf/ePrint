@@ -219,30 +219,31 @@ if(isset($_POST['submit'])) {
 						}
 					}
 				?> 
-                    <!--UPLOAD dugme-->          
-                    <input type='file' name='fileToUpload' id="file" class="inputfile" accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf' required >
-                    <label for="file"><i class="fa-upload fas fa-upload"></i><span>Okačite fajl</span></label>	
-
                     <!-- VELICINA -->
                     <label class="label__heading">Veličina</label>
                     <label for="B6">
-                        <input type="radio" id="B6" name="size" value="B6" checked />
+                        <input type="radio" id="B6" name="size" value="B6"
+							<?php echo (isset($_POST['size']) && $_POST['size'] == 'B6') || !isset($_POST['size']) ? "checked" : "" ?>>
                         <span>B6</span>
                     </label>
                     <label for="B5">
-                        <input type="radio" id="B5" name="size" value="B5" />
+                        <input type="radio" id="B5" name="size" value="B5" 
+							<?php echo (isset($_POST['size']) && $_POST['size'] == 'B5') ? "checked" : "" ?>>
                         <span>B5</span>
                     </label>
                     <label for="C4">
-                        <input type="radio" id="C4" name="size" value="C4" />
+                        <input type="radio" id="C4" name="size" value="C4" 
+							<?php echo (isset($_POST['size']) && $_POST['size'] == 'C4') ? "checked" : "" ?>>
                         <span>C4</span>
                     </label>
                     <label for="American1">
-                        <input type="radio" id="American1" name="size" value="American sa prozorom desnim" />
+                        <input type="radio" id="American1" name="size" value="American sa prozorom desnim"
+							<?php echo (isset($_POST['size']) && $_POST['size'] == 'American sa prozorom desnim') ? "checked" : "" ?>>
                         <span>American sa prozorom desnim</span>
                     </label>
                     <label for="American2">
-                        <input type="radio" id="American2" name="size" value="American bez prozora" />
+                        <input type="radio" id="American2" name="size" value="American bez prozora" 
+							<?php echo (isset($_POST['size']) && $_POST['size'] == 'American bez prozora') ? "checked" : "" ?>>
                         <span>American bez prozora</span>
                     </label>
                     <!-- ***************************** -->
@@ -251,44 +252,54 @@ if(isset($_POST['submit'])) {
                     <label for="quantity" class="label__heading">Količina</label>
                     <select class="u-full-width" name="quantity">
                         <option value="1000" selected>1000</option>
-                        <option value="2000">2000</option>
-                        <option value="3000">3000</option>
-                        <option value="4000">4000</option>
-                        <option value="5000">5000</option>
-                        <option value="6000">6000</option>
-                        <option value="7000">7000</option>
-                        <option value="8000">8000</option>
-                        <option value="9000">9000</option>
-                        <option value="100000">10000</option>
+                        <option value="2000" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '2000' ? "selected" : "" ?>>2000</option>
+                        <option value="3000" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '3000' ? "selected" : "" ?>>3000</option>
+                        <option value="4000" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '4000' ? "selected" : "" ?>>4000</option>
+                        <option value="5000" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '5000' ? "selected" : "" ?>>5000</option>
+                        <option value="6000" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '6000' ? "selected" : "" ?>>6000</option>
+                        <option value="7000" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '7000' ? "selected" : "" ?>>7000</option>
+                        <option value="8000" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '8000' ? "selected" : "" ?>>8000</option>
+                        <option value="9000" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '9000' ? "selected" : "" ?>>9000</option>
+                        <option value="100000" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '10000' ? "selected" : "" ?>>10000</option>
                     </select>
                     <!-- ***************************** -->
 
                     <!--Stampanje na posledjini ******************************-->
                     <label class="label__heading">Štampanje na poledjini:</label>
-                    <input class="u-full-width" type="text" placeholder="Prvi red..." name="printingOnBack1" value="">
-                    <input class="u-full-width" type="text" placeholder="Drugi red..." name="printingOnBack2" value="">
-                    <input class="u-full-width" type="text" placeholder="Treći red..." name="printingOnBack3" value="">
-                    <input class="u-full-width" type="text" placeholder="Četvrti red..." name="printingOnBack4" value="">
+                    <input class="u-full-width" type="text" placeholder="Prvi red..." name="printingOnBack1" 
+						<?php echo isset($_POST['printingOnBack1']) ? "value='".$_POST['printingOnBack1']."'" : "" ?>>
+                    <input class="u-full-width" type="text" placeholder="Drugi red..." name="printingOnBack2"
+						<?php echo isset($_POST['printingOnBack2']) ? "value='".$_POST['printingOnBack2']."'" : "" ?>>
+                    <input class="u-full-width" type="text" placeholder="Treći red..." name="printingOnBack3" 
+						<?php echo isset($_POST['printingOnBack3']) ? "value='".$_POST['printingOnBack3']."'" : "" ?>>
+                    <input class="u-full-width" type="text" placeholder="Četvrti red..." name="printingOnBack4"
+						<?php echo isset($_POST['printingOnBack4']) ? "value='".$_POST['printingOnBack4']."'" : "" ?>>
                     <!-- ***************************** -->
 
                     <!--Stampanje na adresnoj strani ******************************-->
                     <label class="label__heading">Štampanje na adresnoj strani:</label>
-                    <input class="u-full-width" type="text" placeholder="Prvi red..." name="printingOnAdressPage1" value="">
-                    <input class="u-full-width" type="text" placeholder="Drugi red..." name="printingOnAdressPage2" value="">
-                    <input class="u-full-width" type="text" placeholder="Treći red..." name="printingOnAdressPage3" value="">
-                    <input class="u-full-width" type="text" placeholder="Četvrti red..." name="printingOnAdressPage4" value="">
+                    <input class="u-full-width" type="text" placeholder="Prvi red..." name="printingOnAdressPage1"
+						<?php echo isset($_POST['printingOnAdressPage1']) ? "value='".$_POST['printingOnAdressPage1']."'" : "" ?>>
+                    <input class="u-full-width" type="text" placeholder="Drugi red..." name="printingOnAdressPage2" 
+						<?php echo isset($_POST['printingOnAdressPage2']) ? "value='".$_POST['printingOnAdressPage2']."'" : "" ?>>
+                    <input class="u-full-width" type="text" placeholder="Treći red..." name="printingOnAdressPage3" 
+						<?php echo isset($_POST['printingOnAdressPage3']) ? "value='".$_POST['printingOnAdressPage3']."'" : "" ?>>
+                    <input class="u-full-width" type="text" placeholder="Četvrti red..." name="printingOnAdressPage4" 
+						<?php echo isset($_POST['printingOnAdressPage4']) ? "value='".$_POST['printingOnAdressPage4']."'" : "" ?>>
                     <!-- ***************************** -->
 
                     <!--Krajnja poruka-->
                     <label for="message" class="label__heading">Poruka</label>
-                    <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"></textarea>
+                    <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"><?php echo isset($_POST['comment']) ? $_POST['comment'] : "" ?></textarea>
                     <!-- Varijabilni podaci i prihvatam uslove -->
                     <label for="varData">
-                        <input type="checkbox" name="varData" id="varData">
+                        <input type="checkbox" name="varData" id="varData"
+							<?php echo isset($_POST['varData']) ? "checked" : ""?>>
                         <span class="label-body">Varijabilni podaci</span>
                     </label>
                     <label class="sendCopy">
-                        <input type="checkbox" id="sendCopy" name="sendCopy">
+                        <input type="checkbox" id="sendCopy" name="sendCopy"
+							<?php echo isset($_POST['sendCopy']) ? "checked" : ""?>>
                         <span class="label-body">Pošalji kopiju sebi</span>
                         <input type="text" placeholder="Upišite Vas email" id="email" name="email" />
                     </label>
