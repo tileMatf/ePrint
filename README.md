@@ -9,6 +9,7 @@ https://fontawesome.com/
 ### Plan
 
 Sone :baby_chick:
+- [] SKLONITI UPLOAD DUGME ZA KOD OMOTA SPISA I STANDARDNIH KOVERTI
 - [x] Push
 - [x] Zavrsi ostale usluge i njihove forme
 - [x] Dodaj navigaciju u uslugama 
