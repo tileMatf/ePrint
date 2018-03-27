@@ -201,7 +201,6 @@ function makeMessage($type){
 				<label> Datum: </label> '.date("d.m.Y.").' </br>
 				<label> Vreme: </label> '.date("h:i").' </br>
 				<label> Tip: </label> Standardne koverte </br>
-				<label> Datoteka: </label> '.basename( $_FILES["fileToUpload"]["name"]).' </br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>
 					<li>Veličina: '.$_POST['size'].'</li>

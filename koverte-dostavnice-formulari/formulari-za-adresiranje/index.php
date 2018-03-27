@@ -204,8 +204,8 @@ if(isset($_POST['submit'])) {
                         <input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail" 
 							value="<?php echo isset($_POST['sendCopyEmail']) ? $_POST['sendCopyEmail'] : '' ?>">
                     </label>
-					<input type="hidden" id="orderType" value="formular-za-adresiranje">
-					<input type="hidden" id="successMessage" value="Formulari za adresiranje su uspešno naručeni.">
+					<input type="hidden" id="orderType" name="orderType" value="formular-za-adresiranje">
+					<input type="hidden" id="successMessage" name="successMessage" value="Formulari za adresiranje su uspešno naručeni.">
                     <input class="button-primary" type="submit" value="Pošalji" name="submit" >
                     <!-- Smisli kako ovo lepse da izgleda -->
                     <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p> 

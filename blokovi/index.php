@@ -20,7 +20,7 @@ if(isset($_POST['submit'])) {
 		if(!isset($_POST['sendCopy']))
 			$mailStatus = sendMail($message);
 		else {
-			$mailStatus = sendMail($message, $_POST['userEmail']);		
+			$mailStatus = sendMail($message, $_POST['sendCopyEmail']);		
 		}
 		
 		$status = false;

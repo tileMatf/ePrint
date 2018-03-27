@@ -241,7 +241,7 @@ if(isset($_POST['submit'])) {
 							value="<?php echo isset($_POST['sendCopyEmail']) ? $_POST['sendCopyEmail'] : '' ?>">
                     </label>
 					<input type="hidden" name="orderType" id="orderType" value="dostavnica">
-					<input type="hidden" id="successMessage" value="Dostavnice su uspešno naručene.">
+					<input type="hidden" name="successMessage" id="successMessage" value="Dostavnice su uspešno naručene.">
                     <input class="button-primary" type="submit" value="Pošalji" name="submit" />
                     <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p> 
                 </div>

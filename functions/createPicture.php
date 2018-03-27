@@ -105,8 +105,11 @@ require 'stringFunctions.php';
 	$black = imagecolorallocate($image, 0, 0, 0);
 	$font_path = dirname(__FILE__) . '/Font/OpenSans-Regular.ttf';	
 	$name = isset($_GET['payer'])? $_GET['payer'] : '';
+	$name = isset($name) ? convertToCyrilic($name) : '';
 	$adress = isset($_GET['address']) ? $_GET['address'] . ", " . $_GET['location'] : '';
+	$address = isset($address) ? convertToCyrilic($address) : '';
 	$country = isset($_GET['country']) ? $_GET['country'] : '';	
+	$country = isset($country) ? convertToCyrilic($country) : '';
 
 	switch ($type) {
 		case 'nalog-za-uplatu':
@@ -131,38 +134,38 @@ require 'stringFunctions.php';
 			break;
 		case 'koverta-sa-dostavnicom':
 			imagettftext($image, 20, 0, 170, 1000, $black, $font_path, $envelopeReciver);
-			imagettftext($image, 20, 0, 445, 1000, $black, $font_path, strtoupper($_GET['nameLastname']));
-			imagettftext($image, 20, 0, 170, 1030, $black, $font_path, "Ул. ". $_GET['adress']);
-			imagettftext($image, 20, 0, 170, 1060, $black, $font_path, $_GET['zipCode']);
-			imagettftext($image, 20, 0, 280, 1060, $black, $font_path, strtoupper($_GET['location']));
+			imagettftext($image, 20, 0, 445, 1000, $black, $font_path, convertToCyrilic(strtoupper($_GET['nameLastname'])));
+			imagettftext($image, 20, 0, 170, 1030, $black, $font_path, "Ул. ". convertToCyrilic($_GET['adress']));
+			imagettftext($image, 20, 0, 170, 1060, $black, $font_path, convertToCyrilic($_GET['zipCode']));
+			imagettftext($image, 20, 0, 280, 1060, $black, $font_path, convertToCyrilic(strtoupper($_GET['location'])));
 			imagettftext($image, 19, 0, 680, 1000, $black, $font_path, "ПОШТАРИНА ПЛАЋЕНА КОД ПОШТЕ");
-			imagettftext($image, 20, 0, 800, 1030, $black, $font_path, strtoupper($_GET['postagePaid']));
-			imagettftext($image, 25, 0, 600, 1060, $black, $font_path, $_GET['envelopeType']);
+			imagettftext($image, 20, 0, 800, 1030, $black, $font_path, convertToCyrilic(strtoupper($_GET['postagePaid'])));
+			imagettftext($image, 25, 0, 600, 1060, $black, $font_path, convertToCyrilic($_GET['envelopeType']));
 			imagerectangle($image, 590, 1020, 650, 1070, $black);
 			if($_GET['forInput'] === 'Javni izvrsitelj')
 				imagettftext($image, 20, 0, 830, 1325, $black, $font_path, "ИЗВРШНИ ПОСТУПАК");
 			else 
 				imagettftext($image, 20, 0, 830, 1325, $black, $font_path, "УПРАВНИ ПОСТУПАК");			
 			imagettftext($image, 20, 0, 2050, 1400, $black, $font_path, $envelopeReciver);
-			imagettftext($image, 20, 0, 2050, 1450, $black, $font_path, $_GET['nameLastname']);
-			imagettftext($image, 20, 0, 2050, 1500, $black, $font_path, "Ул. " . $_GET['adress']);
-			imagettftext($image, 20, 0, 2050, 1550, $black, $font_path, $_GET['zipCode'] . " " . $_GET['location']);
+			imagettftext($image, 20, 0, 2050, 1450, $black, $font_path, convertToCyrilic($_GET['nameLastname']));
+			imagettftext($image, 20, 0, 2050, 1500, $black, $font_path, "Ул. " . convertToCyrilic($_GET['adress']));
+			imagettftext($image, 20, 0, 2050, 1550, $black, $font_path, $_GET['zipCode'] . " " . convertToCyrilic($_GET['location']));
 			break;
 		case 'dostavnica':			
 			imagettftext($image, 16, 0, 70, 50, $black, $font_path, $envelopeReciver);
-			imagettftext($image, 16, 0, 290, 50, $black, $font_path, strtoupper($_GET['nameLastname']));
-			imagettftext($image, 16, 0, 70, 75, $black, $font_path, "Ул. " . $_GET['adress']);
-			imagettftext($image, 16, 0, 70, 100, $black, $font_path, $_GET['zipCode'] . " " . $_GET['location']);
+			imagettftext($image, 16, 0, 290, 50, $black, $font_path, convertToCyrilic(strtoupper($_GET['nameLastname'])));
+			imagettftext($image, 16, 0, 70, 75, $black, $font_path, "Ул. " . convertToCyrilic($_GET['adress']));
+			imagettftext($image, 16, 0, 70, 100, $black, $font_path, $_GET['zipCode'] . " " . convertToCyrilic($_GET['location']));
 			break;
-		case 'formular-za-adresiranje':
+		case 'formular-za-adresiranje':			
 			break;
 		case 'omot-spisa':
 			imagettftext($image, 32, 0, 100, 80, $black, $font_path, "РЕПУБЛИКА СРБИЈА");
 			imagettftext($image, 30, 0, 100, 130, $black, $font_path, $envelopeReciver);
-			imagettftext($image, 30, 0, 100, 180, $black, $font_path, $_GET['nameLastname']);
-			imagettftext($image, 30, 0, 100, 230, $black, $font_path, $_GET['location'] . ", " . $_GET['address']);
+			imagettftext($image, 30, 0, 100, 180, $black, $font_path, convertToCyrilic($_GET['nameLastname']));
+			imagettftext($image, 30, 0, 100, 230, $black, $font_path, convertToCyrilic($_GET['location']) . ", " . convertToCyrilic($_GET['address']));
 			break;
-	}
+		}
 
 	header('Content-type: image/jpeg');
 	imagejpeg($image);

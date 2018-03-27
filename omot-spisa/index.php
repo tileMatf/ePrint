@@ -1,6 +1,4 @@
 <?php
-
-require_once '../functions/mail.php';
 require_once '../functions/functions.php';
 
 if(isset($_POST['submit'])) {
@@ -11,15 +9,6 @@ if(isset($_POST['submit'])) {
 				src='../functions/createPicture.php?". http_build_query($_POST) ."'>
 			 <button id='paymentConfirm'>Ok</button>
 			</div>";
-				
-		$fileStatus = uploadFile("uploaded_file/");
-		$fileStatusMessage = generateMessage($fileStatus); 
-	
-		if($fileStatus === 2 || $fileStatus === 3){
-			$fileStatus = true;
-		} else {
-			$fileStatus = false;
-		}
 	} catch(RuntimeException $e){
 		return $e->getMessage();
 	}

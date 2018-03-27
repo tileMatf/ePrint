@@ -44,7 +44,7 @@ if(isset($_POST['submit'])) {
 			if(!isset($post['sendCopy']))
 				$status = sendMail($message);
 			else {
-				$status = sendMail($message, $post['userEmail']);		
+				$status = sendMail($message, $_POST['sendCopyEmail']);		
 			}
 		}		
 	} catch(RuntimeException $e){

@@ -6,31 +6,36 @@ require_once "../../functions/functions.php";
 
 if(isset($_POST['submit'])) {
 	try{
-		//$db = new DB();
-		$target_dir = "uploaded_file/";
-		$status = 0;
+		/*$status = 0;
 		$fileStatus = 0;		
 		
 		$fileStatus = uploadFile("uploaded_file/");
 		$statusMessage = generateMessage($fileStatus);
 		if($fileStatus !== 2 && $fileStatus !== 3)
-			return false;
+			return false;*/
 
 		$message = makeMessage('standardne-koverte');
 
 		$status = false;
-		if($fileStatus === 2 || $fileStatus === 3){
+		/*if($fileStatus === 2 || $fileStatus === 3){
 			$status = true;
 		} else {
 			$status = false;
-		}		
+		}*/		
 
-		if($status === true){
+		//if($status === true){
 			if(!isset($_POST['sendCopy']))
 				$mailStatus = sendMail($message);
 			else {
-				$mailStatus = sendMail($message, $_POST['userEmail']);		
+				$mailStatus = sendMail($message, $_POST['sendCopyEmail']);		
 			}
+		//}
+		if($mailStatus === true){
+			$status = true;
+			$statusMessage = "Uspešno naručena koverta.";
+		} else {
+			$status = false;
+			$statusMessage = "Oprostite, došlo je do greške prilikom slanja, pokušajte ponovo.";
 		}
 	} catch(RuntimeException $e){
 		return $e->getMessage();
