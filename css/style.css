@@ -534,8 +534,8 @@ input[type="submit"].button-primary:hover {
 }
 
 
-/** pojavljivanje email inputa **/
-#email {
+/** pojavljivanje sendCopyEmail inputa **/
+#sendCopyEmail {
     display:none;
 }
 

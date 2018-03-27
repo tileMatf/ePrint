@@ -281,12 +281,13 @@ if(isset($_POST['submit'])) {
                     <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"><?php echo isset($_POST['comment']) ? $_POST['comment'] : ''?></textarea>
                     <!-- Varijabilni podaci i prihvatam uslove -->
                     <label for="varData">
-                        <input type="checkbox" name="varData" <?php echo isset($_POST['varData']) ? 'checked' : ''?>>
+                        <input type="checkbox" name="varData" id="varData"<?php echo isset($_POST['varData']) ? 'checked' : ''?>>
                         <span class="label-body">Varijabilni podaci</span>
                     </label>
                     <label for="sendCopy">
-                        <input type="checkbox" name="sendCopy">
+                        <input type="checkbox" name="sendCopy" id="sendCopy">
                         <span class="label-body">Pošalji kopiju sebi</span>
+						<input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail">
                     </label>
 					<input type="hidden" name="orderType" id="orderType" value="nalog-za-isplatu">
 					<input type="hidden" id="successMessage" value="Nalog za isplatu je uspešno naručen.">

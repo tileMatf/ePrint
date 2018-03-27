@@ -350,11 +350,11 @@ if(isset($_POST['submit'])) {
             <!-- Krajnja poruka -->
             <label for="message" class="label__heading">Poruka</label>
             <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"><?php echo isset($_POST['comment']) ? $_POST['comment'] : "" ?></textarea>
-            <label class="sendCopy">
+            <label class="sendCopy" for="sendCopy">
               <input type="checkbox" id="sendCopy" name="sendCopy" 
 				<?php echo isset($_POST['sendCopy']) ? "checked" : "" ?>>
               <span class="label-body">Pošalji kopiju sebi</span>
-              <input type="text" placeholder="Upišite Vas email" id="email" name="email" />
+              <input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail">
             </label>
 			<input type="hidden" name="orderType" id="orderType" value="stampanje">
 			<input type="hidden" id="successMessage" value="Uspešno naručeno.">

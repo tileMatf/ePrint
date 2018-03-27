@@ -190,104 +190,104 @@ if(isset($_POST['submit'])) {
                     <!--NAME AND SURNAME ******************************-->
                     <label for="payer" class="label__heading">Ime i prezime</label>
                     <input class="u-full-width" type="text" placeholder="" name="payer" 
-						value="<?php echo isset($_POST['payer']) ? $_POST['payer'] : '' ?>" >
+						<?php echo isset($_POST['payer']) ? "value=\"".$_POST['payer']."\"" : '' ?>" >
                     <!-- ***************************** -->
 
                     <!--ADRESA ******************************-->
                     <label for="address" class="label__heading">Adresa</label>
                     <input class="u-full-width" type="text" placeholder="" name="address"
-						value="<?php echo isset($_POST['address']) ? $_POST['address'] : '' ?>" >
+						<?php echo isset($_POST['address']) ? "value=\"".$_POST['address']."\"" : '' ?>" >
                     <!-- ***************************** -->                    
 
                     <!--MESTO ******************************-->
                     <label for="location" class="label__heading">Poštanski broj i mesto</label>
                     <input class="u-full-width" type="text" placeholder="" name="location"
-						value="<?php echo isset($_POST['location']) ? $_POST['location'] : '' ?>" >
+						<?php echo isset($_POST['location']) ? "value=\"".$_POST['location']."\"" : '' ?>" >
                     <!-- ***************************** -->
 
                     <!--DRZAVA ******************************-->
                     <label for="country" class="label__heading">Država</label>
                     <input class="u-full-width" type="text" placeholder="" name="country"
-						value="<?php echo isset($_POST['country']) ? $_POST['country'] : '' ?>" >
+						<?php echo isset($_POST['country']) ? "value=\"".$_POST['country']."\"" : '' ?>" >
                     <!-- ***************************** --> 
                     
                     <!--SVRHA UPLATE ******************************-->
                     <label for="purposeOfPayment" class="label__heading">Svrha uplate</label>
                     <input class="u-full-width" type="text" placeholder="" name="purposeOfPayment"
-						value="<?php echo isset($_POST['purposeOfPayment']) ? $_POST['purposeOfPayment'] : '' ?>" >
+						<?php echo isset($_POST['purposeOfPayment']) ? "value=\"".$_POST['purposeOfPayment']."\"" : '' ?>" >
                     <!-- ***************************** -->
 
                     <!--PRIMALAC ******************************-->
                     <label for="recipient" class="label__heading">Primalac</label>
                     <input class="u-full-width" type="text" placeholder="" name="recipient"
-						value="<?php echo isset($_POST['recipient']) ? $_POST['recipient'] : '' ?>" >
+						<?php echo isset($_POST['recipient']) ? "value=\"".$_POST['recipient']."\"" : '' ?>" >
                     <!-- ***************************** -->
 
                     <!--SIFRA PLACANJA ******************************-->
                     <label for="paymentCode" class="label__heading">Šifra plaćanja</label>
                     <input class="u-full-width" type="text" placeholder="" name="paymentCode"
-						value="<?php echo isset($_POST['paymentCode']) ? $_POST['paymentCode'] : '' ?>>
+						<?php echo isset($_POST['paymentCode']) ? "value=\"".$_POST['paymentCode']."\"" : '' ?>>
                     <!-- ***************************** -->
 
                     <!--VALUTA ******************************-->
                     <label for="currency" class="label__heading">Valuta</label>
                     <input class="u-full-width" type="text" placeholder="" name="currency"
-						value="<?php echo isset($_POST['currency']) ? $_POST['currency'] : '' ?>" >
+						<?php echo isset($_POST['currency']) ? "value=\"".$_POST['currency']."\"" : '' ?>" >
                     <!-- ***************************** -->
 
                     <!--IZNOS ******************************-->
                     <label for="amount" class="label__heading">Iznos</label>
                     <input class="u-full-width" type="text" placeholder="RSD" name="amount"
-						value="<?php echo isset($_POST['amount']) ? $_POST['amount'] : '' ?>" >
+						<?php echo isset($_POST['amount']) ? "value=\"".$_POST['amount']."\"" : '' ?>" >
                     <!-- ***************************** -->
 
                     <!--RACUN PRIMAOCA ******************************-->
                     <label for="accountOfOrderer" class="label__heading">Račun nalogodavca</label>
                     <input class="u-full-width" type="text" placeholder="" name="accountOfOrderer"
-						value="<?php echo isset($_POST['accountOfOrderer']) ? $_POST['accountOfOrderer'] : '' ?>>
+						<?php echo isset($_POST['accountOfOrderer']) ? "value=\"".$_POST['accountOfOrderer']."\"" : '' ?>>
                     <!-- ***************************** -->
 
                     <!--MODEL ******************************-->
                     <label for="mockUpDebit" class="label__heading">Model (zaduženje)</label>
                     <input class="u-full-width" type="text" placeholder="" name="mockUpDebit"
-						value="<?php echo isset($_POST['mockUpDebit']) ? $_POST['mockUpDebit'] : '' ?>" >
+						<?php echo isset($_POST['mockUpDebit']) ? "value=\"".$_POST['mockUpDebit']."\"" : '' ?>" >
                     <!-- ***************************** -->
 
                     <!--POZIV NA BROJ ZADUZENJA ******************************--> <!-- OVO JE DRUGACIJE OD DRUGE DVE UPLATNICE -->
                     <label for="referenceNumber" class="label__heading">Poziv na broj zaduženja</label> <!-- referenceNumberObligation -->
                     <input class="u-full-width" type="text" placeholder="" name="referenceNumber"
-						value="<?php echo isset($_POST['referenceNumber']) ? $_POST['referenceNumber'] : '' ?>>
+						<?php echo isset($_POST['referenceNumber']) ? "value=\"".$_POST['referenceNumber']."\"" : '' ?>>
                     <!-- ***************************** -->
 
                     <!--RACUN PRIMAOCA ******************************-->
                     <label for="accountOfRecipient" class="label__heading">Račun primaoca</label>
                     <input class="u-full-width" type="text" placeholder="" name="accountOfRecipient"
-						value="<?php echo isset($_POST['accountOfRecipient']) ? $_POST['accountOfRecipient'] : '' ?>>
+						<?php echo isset($_POST['accountOfRecipient']) ? "value=\"".$_POST['accountOfRecipient']."\"" : '' ?>>
                     <!-- ***************************** -->
 
                     <!--MODEL ******************************-->
                     <label for="mockUpApproval" class="label__heading">Model (odobrenje)</label>
                     <input class="u-full-width" type="text" placeholder="" name="mockUpApproval"
-						value="<?php echo isset($_POST['mockUpApproval']) ? $_POST['mockUpApproval'] : '' ?>">
+						<?php echo isset($_POST['mockUpApproval']) ? "value=\"".$_POST['mockUpApproval']."\"" : '' ?>">
                     <!-- ***************************** -->
 
                     <!--POZIV NA BROJ ODOBRENJA ******************************-->
                     <label for="referenceNumberApprovals" class="label__heading">Poziv na broj odobrenja</label>
                     <input class="u-full-width" type="text" placeholder="" name="referenceNumberApprovals"
-						value="<?php echo isset($_POST['referenceNumberApprovals']) ? $_POST['referenceNumberApprovals'] : '' ?>">
+						<?php echo isset($_POST['referenceNumberApprovals']) ? "value=\"".$_POST['referenceNumberApprovals']."\"" : '' ?>">
                     <!-- ***************************** -->
 
                     <!-- Kraj naloga za prenos u setu sledi radio buttons -->
 
                     <!-- BROJ UPLATNICA U SETU ***************************** -->
                     <label for="" class="label__heading">Broj naloga za prenos u setu</label>
-                    <label for="numOfPaySet"> <!-- number of transfer orders in set -->
-                        <input type="radio" name="numOfPaySet" value="1+1" 
+                    <label for="1+1"> <!-- number of transfer orders in set -->
+                        <input type="radio" name="numOfPaySet" value="1+1" id="1+1"
 							<?php echo (isset($_POST['numOfPaySet']) && $_POST['numOfPaySet'] == '1+1') || !isset($_POST['numOfPaySet']) ? "checked" : "" ?>>
                         <span>1+1</span>
                     </label>
-                    <label for="numOfPaySet">
-                        <input type="radio" name="numOfPaySet" value="1+2" 
+                    <label for="1+2">
+                        <input type="radio" name="numOfPaySet" value="1+2" id="1+2"
 							<?php echo isset($_POST['numOfPaySet']) && $_POST['numOfPaySet'] == '1+2' ? "checked" : ""?> >
                         <span>1+2</span>
                     </label>
@@ -315,12 +315,14 @@ if(isset($_POST['submit'])) {
 					</textarea>
                     <!-- Varijabilni podaci i prihvatam uslove -->
                     <label for="varData">
-                        <input type="checkbox" name="varData" <?php echo isset($_POST['varData']) ? 'checked' : ''?>>
+                        <input type="checkbox" name="varData" id="varData" <?php echo isset($_POST['varData']) ? 'checked' : ''?>>
                         <span class="label-body">Varijabilni podaci</span>
                     </label>
                     <label for="sendCopy">
-                        <input type="checkbox" name="sendCopy" <?php echo isset($_POST['sendCopy']) ? 'checked' : ''?>>
+                        <input type="checkbox" name="sendCopy" id="sendCopy"
+						<?php echo isset($_POST['sendCopy']) ? 'checked' : ''?>>
                         <span class="label-body">Pošalji kopiju sebi</span>
+						<input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail">
                     </label>
 					<input type="hidden" name="orderType" id="orderType" value="nalog-za-prenos">
 					<input type="hidden" id="successMessage" value="Nalog za prenos je uspešno naručen.">

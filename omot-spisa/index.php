@@ -256,7 +256,8 @@ if(isset($_POST['submit'])) {
                             <input type="checkbox" id="sendCopy" name="sendCopy" 
 								<?php echo isset($_POST['sendCopy']) ? 'checked' : ''?>>
                             <span class="label-body">Pošalji kopiju sebi</span>
-                            <input type="text" placeholder="Upišite Vas email" id="email" name="email" />
+                            <input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail" 
+							value="<?php echo isset($_POST['email']) ? $_POST['email'] : '' ?>">
                         </label>
 						<input type="hidden" name="orderType" id="orderType" value="omot-spisa">
 						<input type="hidden" id="successMessage" value="Omot spisa je uspešno naručen.">

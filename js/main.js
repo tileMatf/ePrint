@@ -58,7 +58,7 @@
 
     //Input for checked "send me copy"
     var checkbox = document.getElementById('sendCopy');
-    var input = document.getElementById('email');
+    var input = document.getElementById('sendCopyEmail');
     if(checkbox != null){
         checkbox.addEventListener('click', function () {
             if (input.style.display != 'block') {

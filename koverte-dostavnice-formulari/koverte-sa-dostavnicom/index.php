@@ -271,8 +271,8 @@ if(isset($_POST['submit'])) {
                     <label class="sendCopy">
                         <input type="checkbox" id="sendCopy" name="sendCopy">
                         <span class="label-body">Pošalji kopiju sebi</span>
-                        <input type="text" placeholder="Upišite Vas email" id="email" name="email" 
-							value="<?php echo isset($_POST['email']) ? $_POST['email'] : '' ?>">
+                        <input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail" 
+							value="<?php echo isset($_POST['sendCopyEmail']) ? $_POST['sendCopyEmail'] : '' ?>">
                     </label>
 					<input type="hidden" name="orderType" id="orderType" value="koverta-sa-dostavnicom">
 					<input type="hidden" id="successMessage" value="Koverte sa dostavnicom su uspešno naručene.">

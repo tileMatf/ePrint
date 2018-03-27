@@ -285,9 +285,10 @@ if(isset($_POST['submit'])) {
                         <label for="message" class="label__heading">Poruka</label>
                         <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"></textarea>
                         <label for="sendCopy">
-                        <input type="checkbox" name="sendCopy" 
+                        <input type="checkbox" name="sendCopy" id="sendCopy" 
 							<?php echo isset($_POST['sendCopy']) ? "checked" : "" ?>>
                         <span class="label-body">Pošalji kopiju sebi</span>
+						<input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail">
                         </label>
 						<input type="hidden" name="orderType" id="orderType" value="blokovi">
 						<input type="hidden" id="successMessage" value="Blokovi su uspešno naručeni.">
