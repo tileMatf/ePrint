@@ -57,41 +57,60 @@
     }
 
     //Input for checked "send me copy"
-    var checkbox = document.getElementById('sendCopy');
+    var sendCopyCheckbox = document.getElementById('sendCopy');
     var input = document.getElementById('sendCopyEmail');
-    if(checkbox != null){
-        checkbox.addEventListener('click', function () {
-            if (input.style.display != 'block') {
+	
+    if(sendCopyCheckbox != null){
+		if(sendCopyCheckbox.checked == true)
+			input.style.display = 'block';
+		sendCopyCheckbox.addEventListener('click', function () {            
+			if (input.style.display != 'block') {
                 input.style.display = 'block';
             } else {
                 input.style.display = '';
             }
         });
     }
+	
+	sendCopyCheckbox.onchange = function(event) {		
+		if(sendCopyCheckbox.checked == true)
+			input.setAttribute("required", "required");
+		else
+			input.removeAttribute("required");
+	}
 
     //Upload button
 
     var inputs = document.querySelectorAll( '.inputfile' );
     Array.prototype.forEach.call( inputs, function( input )
-{
-	var label	 = input.nextElementSibling,
-		labelVal = label.innerHTML;
-
-	input.addEventListener( 'change', function( e )
 	{
-		var fileName = '';
-        if( this.files && this.files.length > 1 );
-        
-		else
-			fileName = e.target.value.split( '\\' ).pop();
+		var label	 = input.nextElementSibling,
+			labelVal = label.innerHTML;
 
-		if( fileName )
-			label.querySelector( 'span' ).innerHTML = fileName;
-		else
-			label.innerHTML = labelVal;
+		input.addEventListener( 'change', function( e )
+		{
+			var fileName = '';
+			if( this.files && this.files.length > 1 );
+			
+			else
+				fileName = e.target.value.split( '\\' ).pop();
+
+			if( fileName )
+				label.querySelector( 'span' ).innerHTML = fileName;
+			else
+				label.innerHTML = labelVal;
+		});
 	});
-});
 
+	function validate(){
+		var file = document.getElementById('file');
+		if(file != null && file.files.length == 0){
+			alert("Kačenje fajla je obavezno.");
+		file.focus();
+		return false;
+		}
+	}
+	
 	/*Ajax call on confirm*/
 	var paymentConfirm = document.getElementById("paymentConfirm");
 	
@@ -110,7 +129,7 @@
 			let parameters = [...formData.entries()]
                      .map(e => encodeURIComponent(e[0]) + "=" + encodeURIComponent(e[1]))
 			
-			xhttp.open("POST", "../../functions/confirm/", true);
+			xhttp.open("POST",  window.location.origin + "/eprint/functions/confirm/", true);
 			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			xhttp.onload = function(e){
 				if(this.responseText == true){

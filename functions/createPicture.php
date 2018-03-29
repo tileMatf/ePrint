@@ -104,9 +104,11 @@ require 'stringFunctions.php';
 	$image = imagecreatefromjpeg($image_file);
 	$black = imagecolorallocate($image, 0, 0, 0);
 	$font_path = dirname(__FILE__) . '/Font/OpenSans-Regular.ttf';	
-	$name = isset($_GET['payer'])? $_GET['payer'] : '';
-	$name = isset($name) ? convertToCyrilic($name) : '';
-	$adress = isset($_GET['address']) ? $_GET['address'] . ", " . $_GET['location'] : '';
+	$name = isset($_GET['payer']) ? $_GET['payer'] : '';
+	$name = isset($name) && !empty($name) ? convertToCyrilic($name) : '';
+	$address = isset($_GET['address']) ? $_GET['address'] . ", " : '';
+	if(isset($_GET['location']))
+		$address .= $_GET['location'];
 	$address = isset($address) ? convertToCyrilic($address) : '';
 	$country = isset($_GET['country']) ? $_GET['country'] : '';	
 	$country = isset($country) ? convertToCyrilic($country) : '';
@@ -114,19 +116,19 @@ require 'stringFunctions.php';
 	switch ($type) {
 		case 'nalog-za-uplatu':
 			imagettftext($image, 11, 0, 30, 58, $black, $font_path, $name);
-			imagettftext($image, 11, 0, 30, 75, $black, $font_path, $adress);
+			imagettftext($image, 11, 0, 30, 75, $black, $font_path, $address);
 			imagettftext($image, 11, 0, 30, 92, $black, $font_path, $country);
 			fillPaymentData($image, $black, $font_path);
 			break;
 		case 'nalog-za-isplatu':
 			imagettftext($image, 15, 0, 75, 112, $black, $font_path, $name);
-			imagettftext($image, 15, 0, 75, 135, $black, $font_path, $adress);
+			imagettftext($image, 15, 0, 75, 135, $black, $font_path, $address);
 			imagettftext($image, 15, 0, 75, 158, $black, $font_path, $country);
 			fillPaymentData($image, $black, $font_path);
 			break;
 		case 'nalog-za-prenos':
 			imagettftext($image, 15, 0, 80, 130, $black, $font_path, $name);
-			imagettftext($image, 15, 0, 80, 152, $black, $font_path, $adress);
+			imagettftext($image, 15, 0, 80, 152, $black, $font_path, $address);
 			imagettftext($image, 15, 0, 80, 174, $black, $font_path, $country);
 			fillPaymentData($image, $black, $font_path);
 			break;

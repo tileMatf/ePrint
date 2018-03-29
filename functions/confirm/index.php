@@ -4,12 +4,11 @@
 		
 	$status = 0;
 	$message = makeMessage($_POST['orderType']);			
+
+	$status = sendMail($message);
 	
-	if(!isset($_POST['sendCopy']))
-		$status = sendMail($message);			
-	else {
-		$status = sendMail($message, $_POST['userEmail']);		
+	if(isset($_POST['sendCopy']) && isset($_POST['sendCopyEmail'])){		
+		$status = $status && sendMailWithPicture();
 	}
-	
 	echo $status;
 ?>

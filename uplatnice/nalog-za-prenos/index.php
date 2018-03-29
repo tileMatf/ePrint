@@ -310,9 +310,7 @@ if(isset($_POST['submit'])) {
 
                     <!--Krajnja poruka-->
                     <label for="message" class="label__heading">Poruka</label>
-                    <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment">
-						<?php echo isset($_POST['comment']) ? $_POST['comment'] : ''?>
-					</textarea>
+                    <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"><?php echo isset($_POST['comment']) ? $_POST['comment'] : ''?></textarea>
                     <!-- Varijabilni podaci i prihvatam uslove -->
                     <label for="varData">
                         <input type="checkbox" name="varData" id="varData" <?php echo isset($_POST['varData']) ? 'checked' : ''?>>
@@ -320,9 +318,10 @@ if(isset($_POST['submit'])) {
                     </label>
                     <label for="sendCopy">
                         <input type="checkbox" name="sendCopy" id="sendCopy"
-						<?php echo isset($_POST['sendCopy']) ? 'checked' : ''?>>
+							<?php echo isset($_POST['sendCopy']) ? 'checked' : ''?>>
                         <span class="label-body">Pošalji kopiju sebi</span>
-						<input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail">
+						<input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail"
+						value="<?php echo isset($_POST['sendCopyEmail']) ? $_POST['sendCopyEmail'] : ''?>">
                     </label>
 					<input type="hidden" name="orderType" id="orderType" value="nalog-za-prenos">
 					<input type="hidden" id="successMessage" value="Nalog za prenos je uspešno naručen.">

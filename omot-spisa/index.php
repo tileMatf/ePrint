@@ -1,3 +1,4 @@
+
 <?php
 require_once '../functions/functions.php';
 
@@ -238,19 +239,16 @@ if(isset($_POST['submit'])) {
 
                     <!-- Krajnja poruka -->
                         <label for="message" class="label__heading">Poruka</label>
-                        <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment">
-							<?php echo isset($_POST['comment']) ? $_POST['comment'] : ''?>
-						</textarea>
+                        <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"><?php if(isset($_POST['comment'])) { echo htmlentities($_POST['comment']); }?></textarea>
                         <label class="sendCopy">
                             <input type="checkbox" id="sendCopy" name="sendCopy" 
 								<?php echo isset($_POST['sendCopy']) ? 'checked' : ''?>>
                             <span class="label-body">Pošalji kopiju sebi</span>
                             <input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail" 
-							value="<?php echo isset($_POST['email']) ? $_POST['email'] : '' ?>">
+							value="<?php echo isset($_POST['sendCopyEmail']) ? $_POST['sendCopyEmail'] : '' ?>">
                         </label>
 						<input type="hidden" name="orderType" id="orderType" value="omot-spisa">
 						<input type="hidden" id="successMessage" value="Omot spisa je uspešno naručen.">
-						<input type="hidden" name="fileStatus" value="<?php if(isset($fileStatus)) echo $fileStatus;?>">
                         <input class="button-primary" type="submit" value="Pošalji" name="submit" >
                         <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
                 </div>

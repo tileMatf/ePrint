@@ -41,8 +41,9 @@ if(isset($_POST['submit'])) {
 		}
 
 		if($status === true) {
-			if(!isset($post['sendCopy']))
-				$status = sendMail($message);
+			if(isset($_POST['sendCopy']) && isset($_POST['sendCopyEmail'])){
+				$status = sendMail($message, $_POST['sendCopyEmail']);		
+			}
 			else {
 				$status = sendMail($message, $_POST['sendCopyEmail']);		
 			}
@@ -128,12 +129,12 @@ if(isset($_POST['submit'])) {
           <p>Popunite navedena polja.</p>
           <hr>
           <label for="email"><b>Email</b></label>
-          <input type="text" placeholder="Unesite email" name="email" required>
+          <input type="text" placeholder="Unesite email" name="email" id="email" required>
     
           <label for="psw"><b>Lozinka</b></label>
-          <input type="password" placeholder="Unesite lozinku" name="psw" required>
+          <input type="password" placeholder="Unesite lozinku" name="psw" id="psw" required>
             
-          <button type="submit" class="login-btn">Login</button>
+          <button type="submit" class="login-btn" name="login" >Login</button>
           <label>
             <input type="checkbox" checked="checked" name="remember"> Zapamti me
           </label>
@@ -161,13 +162,13 @@ if(isset($_POST['submit'])) {
                 <p>Popunite navedena polja.</p>
                 <hr>
                 <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Upišite Vašu email adresu" name="email" required>
+                <input type="text" placeholder="Upišite Vašu email adresu" name="email" id="email" required>
           
                 <label for="psw"><b>Lozinka</b></label>
-                <input type="password" placeholder="Upišite Vašu lozinku" name="psw" required>
+                <input type="password" placeholder="Upišite Vašu lozinku" name="psw" id="psw" required>
           
                 <label for="psw-repeat"><b>Potvrdite lozinku</b></label>
-                <input type="password" placeholder="Potvrdite Vašu lozinku" name="psw-repeat" required>
+                <input type="password" placeholder="Potvrdite Vašu lozinku" name="psw-repeat" id="psw-repeat" required>
                 
                 <label>
                   <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Zapamti me
@@ -177,7 +178,7 @@ if(isset($_POST['submit'])) {
           
                 <div class="clearfix">
                   <button type="button" class="cancelbtn">Nazad</button>
-                  <button type="submit" class="signupbtn">Registruj se</button>
+                  <button type="submit" class="signupbtn" name="register">Registruj se</button>
                 </div>
               </div>
             </form>
@@ -207,7 +208,8 @@ if(isset($_POST['submit'])) {
       </div>
 
       <!-- OVDE POCINJE FORMA ZA ***STAMPANJE*** -->
-      <form method="POST" name="orderType" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
+      <form method="POST" name="orderType" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data"
+			onsubmit="return(validate())";>
         <div class="form-box">
 		<!-- Paragraf za povratnu poruku -->		
 		<?php
@@ -225,7 +227,7 @@ if(isset($_POST['submit'])) {
 			}
 		?> 
           <!--UPLOAD dugme-->          
-            <input type='file' name='fileToUpload' id="file" class="inputfile" accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf' required>			
+            <input type='file' name='fileToUpload' id="file" class="inputfile" accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf'>			
             <label for="file"><i class="fa-upload fas fa-upload"></i><span>Okačite fajl</span></label>
             <!-- BROJ PRIMERAKA ***************************** -->
             <label for="noInput" class="label__heading">Broj primeraka</label>
@@ -238,7 +240,7 @@ if(isset($_POST['submit'])) {
               <span>1,2,3; 1,2,3; 1,2,3</span>
             <label for="orderOfInput2">
               <input type="radio" name="orderOfInput" id="1,1,1; 2,2,2; 3,3,3" value="1,1,1; 2,2,2; 3,3,3" 
-				<?php echo (isset($_POST['orderOfInput']) && $_POST['orderOfInput1'] == '1,1,1; 2,2,2; 3,3,3') ? "checked" : "" ?>>
+				<?php echo (isset($_POST['orderOfInput']) && $_POST['orderOfInput'] == '1,1,1; 2,2,2; 3,3,3') ? "checked" : "" ?>>
               <span>1,1,1; 2,2,2; 3,3,3</span>
             </label>
             <!-- ***************************** -->
@@ -354,7 +356,8 @@ if(isset($_POST['submit'])) {
               <input type="checkbox" id="sendCopy" name="sendCopy" 
 				<?php echo isset($_POST['sendCopy']) ? "checked" : "" ?>>
               <span class="label-body">Pošalji kopiju sebi</span>
-              <input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail">
+              <input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail"
+				value="<?php echo isset($_POST['sendCopyEmail']) ? $_POST['sendCopyEmail'] : ''?>">
             </label>
 			<input type="hidden" name="orderType" id="orderType" value="stampanje">
 			<input type="hidden" id="successMessage" value="Uspešno naručeno.">

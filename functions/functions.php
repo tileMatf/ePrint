@@ -250,7 +250,6 @@ function makeMessage($type){
 					<li>Vrsta papira: '.$_POST['typeOfPaper'].'</li>
 					<li>Količina: '.$_POST['quantity'].'</li>
 					<li>Komentar korisnika: '. test_input($_POST['comment']).'</li>
-					<li>Komentar korisnika: '. test_input($_POST['comment']).'</li>
 				</ul>
 			</body>
 		</html>';

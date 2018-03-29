@@ -7,20 +7,25 @@ require_once '../functions/functions.php';
 
 if(isset($_POST['submit'])) {
 	try{
+	
 		$status = 0;
 		$fileStatus = 0;
 		
 		$fileStatus = uploadFile("uploaded_file/");
 		$statusMessage = generateMessage($fileStatus);
-		if($fileStatus !== 2 && $fileStatus !== 3)
-			return false;
+		if($fileStatus !== 2 && $fileStatus !== 3){
+			$status = false;
+			$statusMessage = "Neodgovarajući fajl.";
+			return;
+		}
 		
 		$message = makeMessage('blokovi');
 
-		if(!isset($_POST['sendCopy']))
-			$mailStatus = sendMail($message);
-		else {
+		if(isset($_POST['sendCopy']) && isset($_POST['sendCopyEmail'])){
 			$mailStatus = sendMail($message, $_POST['sendCopyEmail']);		
+		}
+		else {
+			$mailStatus = sendMail($message);
 		}
 		
 		$status = false;
@@ -200,7 +205,8 @@ if(isset($_POST['submit'])) {
                 <h2 class="section__heading">Preslikavajući blokovi</h2>
             </div>
             <!-- OVDE POCINJE FORMA ZA ***BLOKOVE*** -->
-            <form method="POST" name="orderForm" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
+            <form method="POST" name="orderForm" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data"
+				onsubmit="return(validate());">
                 <div class="form-box">
 				<!-- Paragraf za povratnu poruku -->		
 				<?php
@@ -218,8 +224,7 @@ if(isset($_POST['submit'])) {
 					}
 				?> 
                     <!--UPLOAD dugme-->
-                    <input type='file' name='fileToUpload' id="file" class="inputfile" accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf'
-						<?php echo (isset($_POST['fileToUpload']) ? "value='".$_POST['fileToUpload']['name']."'" : "") ?>>
+                    <input type='file' name='fileToUpload' id="file" class="inputfile" accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf'>
                     <label for="file"><i class="fa-upload fas fa-upload"></i><span>Okačite fajl</span></label>
                     <div class="row">
 
@@ -283,12 +288,13 @@ if(isset($_POST['submit'])) {
 
                         <!-- Krajnja poruka -->
                         <label for="message" class="label__heading">Poruka</label>
-                        <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"></textarea>
+                        <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"><?php echo isset($_POST['comment']) ? $_POST['comment'] : ''?></textarea>
                         <label for="sendCopy">
                         <input type="checkbox" name="sendCopy" id="sendCopy" 
 							<?php echo isset($_POST['sendCopy']) ? "checked" : "" ?>>
                         <span class="label-body">Pošalji kopiju sebi</span>
-						<input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail">
+						<input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail"
+							value="<?php echo isset($_POST['sendCopyEmail']) ? $_POST['sendCopyEmail'] : ''?>">
                         </label>
 						<input type="hidden" name="orderType" id="orderType" value="blokovi">
 						<input type="hidden" id="successMessage" value="Blokovi su uspešno naručeni.">

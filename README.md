@@ -9,7 +9,7 @@ https://fontawesome.com/
 ### Plan
 
 Sone :baby_chick:
-- [] SKLONITI UPLOAD DUGME ZA KOD OMOTA SPISA I STANDARDNIH KOVERTI
+- [ ] SKLONITI UPLOAD DUGME ZA KOD OMOTA SPISA I STANDARDNIH KOVERTI
 - [x] Push
 - [x] Zavrsi ostale usluge i njihove forme
 - [x] Dodaj navigaciju u uslugama 
@@ -22,13 +22,13 @@ Sone :baby_chick:
 - [x] style css za sve browsere
 - [ ] Da moze da se klikne na ikonicu
 - [ ] 2 dugmeta u stampanje, upload za korice
-- [x/ ] Proveri metatagove, dodaj za Face/Twit, promeni favicon - URADI ZA SVAKU STRANICU
+- [x] Proveri metatagove, dodaj za Face/Twit, promeni favicon - URADI ZA SVAKU STRANICU
 - [ ] Za login forme dodati da se zatvara na ESC
 
 Tile :rabbit:
 - [x] Dodati da prilikom slanja, ako dodje do greske, ostanu zapamceni podaci iz forme
-- [ ] Zakljucavanje slike prilikom transakcije
-- [ ] Slanje kopije uplatnice korisniku
+- [x] Zakljucavanje slike prilikom transakcije -- nema vise skladistenja slike
+- [x] Slanje kopije uplatnice korisniku
 
 ##### Korisni linkovi za mene:
 http://formvalidation.io/examples/supporting-skeleton-framework/
