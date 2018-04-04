@@ -1,11 +1,26 @@
     // Get the modal
-    var modal = document.getElementById('modal1');
-    var modal2 = document.getElementById('modal2');
+    var modal = document.getElementById('loginModal');
+    var modal2 = document.getElementById('registerModal');
 	var pictureModal = document.getElementById('pictureModal');
 	var closeButtons = document.getElementsByClassName('close');
 	var cancelButtons = document.getElementsByClassName('cancelbtn');
 	var pictureClose = document.getElementsByClassName("picture-close")[0];
-
+	var loginModalButton = document.getElementById("loginButton");
+	var registerModalButton = document.getElementById("registerButton");
+	var registrationMessage = document.getElementById("registrationMsg");
+	
+	/*Add event listener for login and register modal open*/
+	if(loginModalButton != null){
+		loginModalButton.addEventListener('click', function(event){
+			modal.style.display = 'block';
+		});
+	}
+	if(registerModalButton != null){
+		registerModalButton.addEventListener('click', function(event){
+			modal2.style.display = 'block';
+		});
+	}	
+	
 	/*Closing picture preview on click*/
 	if(pictureClose != null){
 		pictureClose.onclick = function() { 
@@ -63,6 +78,7 @@
     if(sendCopyCheckbox != null){
 		if(sendCopyCheckbox.checked == true)
 			input.style.display = 'block';
+		
 		sendCopyCheckbox.addEventListener('click', function () {            
 			if (input.style.display != 'block') {
                 input.style.display = 'block';
@@ -70,14 +86,14 @@
                 input.style.display = '';
             }
         });
+		
+		sendCopyCheckbox.onchange = function(event) {		
+			if(sendCopyCheckbox.checked == true)
+				input.setAttribute("required", "required");
+			else
+				input.removeAttribute("required");
+			}
     }
-	
-	sendCopyCheckbox.onchange = function(event) {		
-		if(sendCopyCheckbox.checked == true)
-			input.setAttribute("required", "required");
-		else
-			input.removeAttribute("required");
-	}
 
     //Upload button
 
@@ -148,18 +164,114 @@
 			xhttp.send(parameters.join('&'));
 		});
 	}
- /*$(function() {
-	$(document).keydown(function(e) {
-	// ESCAPE key pressed
-		if (e.keyCode == 27) {
-			if(pictureModal != null)
-				pictureModal.style.display = 'none';
-			if(modal != null)
-				modal.style.display = 'none';
-			if(modal2 != null)
-				modal2.style.display = 'none';
+	
+	var loginButton = document.getElementsByName("login")[0];
+	
+	loginButton.addEventListener('click', function(event) {
+		event.preventDefault();
+		var errorMessage = document.getElementById("errorLoginMsg");
+		var form = document.forms.namedItem('loginForm');		
+		var formData = new FormData(form);					
+		var xhttp = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+
+		let parameters = [...formData.entries()]
+                    .map(e => encodeURIComponent(e[0]) + "=" + encodeURIComponent(e[1]))
+		
+		xhttp.open("POST",  window.location.origin + "/eprint/registration/login/", true);
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhttp.onreadystatechange = function(e){
+			if(xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200){
+				if(this.responseText == 0){
+					errorMessage.innerHTML = "Pogrešna lozinka, pokušajte ponovo.";
+					errorMessage.style.color = "red";
+					form.psw.focus();
+					modal.style.display = "block";
+				} else if(this.responseText == -1){
+					errorMessage.innerHTML = "Email adresa nije u bazi podataka, morate se prvo registrovati.";
+					errorMessage.style.color = "red";
+					modal.style.display = "block";
+				} else {				
+					var user = JSON.parse(this.responseText);
+					modal.style.display = "none";
+					location.reload();
+				}
+			}
+		};
+			
+		xhttp.onerror = function(e) {
+			errorMessage.innerHTML = "Oprostite, došlo je do greške prilikom logovanja. Molim Vas, pokušajte ponovo.";
+			errorMessage.style.color = "red";
 		}
-	});
-});*/
+		xhttp.send(parameters.join('&'));
+	});	
+	
+	var registerButton = document.getElementsByName("register")[0];
+	
+	registerButton.addEventListener('click', function(event) {
+		event.preventDefault();
+		//resetovati session message		
+		var form = document.forms.namedItem('registrationForm');
+		if(form.psw.value !== form.pswRepeat.value){
+			modal2.style.display = "block";
+			registrationMessage.innerHTML = "Unete lozinke nisu iste, pokušajte ponovo.";
+			form.pswRepeat.focus();
+			return;
+		}
+		var formData = new FormData(form);					
+		var xhttp = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+		let parameters = [...formData.entries()]
+                    .map(e => encodeURIComponent(e[0]) + "=" + encodeURIComponent(e[1]))
+		xhttp.open("POST",  window.location.origin + "/eprint/registration/register/", true);
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhttp.onreadystatechange = function(e){
+			if(xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200){
+				if(this.responseText == true){
+					modal2.style.display = "none";
+					location.reload();
+				} else {
+					if(this.responseText == 0){					
+						registrationMessage.innerHTML = "Konekcija ka bazi je izgubljena, trenutno nije moguć pristup bazi.";
+					} else if(this.responseText == -1){
+						registrationMessage.innerHTML = "Postoji registracija sa ovom email adresom. Pokušajte sa logovanjem ili registracijom druge adrese.";
+					} else {
+						registrationMessage.innerHTML = "Došlo je do greške, pokušajte ponovo."
+					}
+					modal2.style.display = "block";
+					form.email.focus();
+				}
+			}
+		};
+			
+		xhttp.onerror = function(e) {
+			errorMessage.innerHTML = "Oprostite, došlo je do greške prilikom registracije. Molim Vas, pokušajte ponovo.";
+			errorMessage.style.color = "red";
+		}
+		xhttp.send(parameters.join('&'));
+	});	
+	
+	var logoutButton = document.getElementsByName("logout")[0];
+	
+	if(logoutButton != null){
+		logoutButton.addEventListener('click', function(event) {
+			event.preventDefault();
+			var form = document.forms.namedItem('logoutForm');
+			var formData = new FormData(form);					
+
+			var xhttp = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+			xhttp.open("POST",  window.location.origin + "/eprint/registration/logout/", true);
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhttp.onreadystatechange = function(e){
+				if(xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200){
+					location.reload();
+				}
+			};
+				
+			xhttp.onerror = function(e) {
+				errorMessage.innerHTML = "Oprostite, došlo je do greške prilikom odjavljivanja. Molim Vas, pokušajte ponovo.";
+				errorMessage.style.color = "red";
+			}
+			xhttp.send();
+		});	
+	}
 
 

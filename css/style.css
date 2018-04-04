@@ -679,3 +679,22 @@ Media Queries
         font-size: 1.5em;
     }
 }
+
+/*Message status paragraf*/
+p.loginStatus {
+	font-style: italic;
+	float: right;
+	margin-right: 5%;
+}
+
+p.loggedStatus {
+	margin-top: 0%;
+	margin-right: 0%;
+	padding-right: 3%;
+	padding-top: 0%;
+	float: right;
+}
+
+p#registrationMsg {
+	color: red;
+}
