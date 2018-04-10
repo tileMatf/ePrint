@@ -6,7 +6,7 @@
         <div class="twelve columns">
             <ul class="nav1">
                 <li>
-                    <a class="tile" href="../index.html">
+                    <a class="tile" href="../">
                         <i class="fas fa-home" aria-hidden="true"></i>Početna</a>
                 </li>
                 <span class="line">/</span>
