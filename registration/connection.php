@@ -10,6 +10,7 @@ require_once("formular_za_adresiranje.php");
 require_once("standardna_koverta.php");
 require_once("omot_spisa.php");
 require_once("order.php");
+require_once("config.php");
 
 class DB {
     public static $connection;
@@ -104,7 +105,7 @@ class DB {
 		}
 	}
 		
-	public function insertStampanje($stampanje){
+	private function insertStampanje($stampanje){
 		try{
 			$query = self::$connection->prepare("INSERT INTO stampanje (OrderID, FileName, CopyNumber, PageOrder, Color, PagePrintType, PaperSize,
 				PaperWidth, BindingType, BindingFile, HeftingType, DrillingType, Comment, SendCopy) 
@@ -137,7 +138,7 @@ class DB {
 		}
 	}
 	
-	public function insertBlok($blok){
+	private function insertBlok($blok){
 		try{
 			$query = self::$connection->prepare("INSERT INTO blokovi (OrderID, FileName, Color, Size, Packing, Comment, SendCopy) 
 				VALUES (:orderID, :fileName, :color, :size, :packing, :comment, :sendCopy)");
@@ -161,7 +162,7 @@ class DB {
 		}
 	}
 	
-	public function insertNalog($nalog){
+	private function insertNalog($nalog){
 		try{
 			if($nalog->Type != null){
 				$query = self::$connection->prepare("INSERT INTO `uplate-isplate` (OrderID, Type, Name, Address, Location, Country, PaymentPurpose,
@@ -213,7 +214,7 @@ class DB {
 		}
 	}
 	
-	public function insertKovertaSaPovratnicom($koverta){
+	private function insertKovertaSaPovratnicom($koverta){
 		try{
 			$query = self::$connection->prepare("INSERT INTO `koverte-sa-povratnicom` (OrderID, Color, Quantity, SendCopy) 
 				VALUES (:orderID, :color, :quantity, :sendCopy)");
@@ -234,7 +235,7 @@ class DB {
 		}
 	}
 	
-	public function insertDostavnica($dostavnica){
+	private function insertDostavnica($dostavnica){
 		try{
 			$query = self::$connection->prepare("INSERT INTO `dostavnice` (OrderID, Recipient, Name, ZipCode, Location, Quantity, SendCopy) 
 				VALUES (:orderID, :recipient, :name, :zipCode, :location, :quantity, :sendCopy)");
@@ -258,7 +259,7 @@ class DB {
 		}
 	}
 	
-	public function insertKovertaSaDostavnicom($koverta){
+	private function insertKovertaSaDostavnicom($koverta){
 		try{
 			$query = self::$connection->prepare("INSERT INTO `koverte-sa-dostavnicom` (OrderID, Recipient, Color, Name, Address, ZipCode, Location,
 				PostagePaid, EnvelopeType, Quantity, SendCopy) 
@@ -286,7 +287,7 @@ class DB {
 			return false;
 		}
 	}
-	public function insertFormular($formular){
+	private function insertFormular($formular){
 		try{
 			$query = self::$connection->prepare("INSERT INTO `formulari-za-adresiranje` (OrderID, Quantity) 
 				VALUES (:orderID, :quantity)");
@@ -305,7 +306,7 @@ class DB {
 		}	
 	}
 	
-	public function insertStandardnaKoverta($koverta){
+	private function insertStandardnaKoverta($koverta){
 		try{
 			$query = self::$connection->prepare("INSERT INTO `standardne-koverte` (OrderID, Size, Quantity, BackPrintRow1, BackPrintRow2, 
 			BackPrintRow3, BackPrintRow4, AddressPrintRow1, AddressPrintRow2, AddressPrintRow3, AddressPrintRow4, Comment, VariableData, SendCopy) 
@@ -338,7 +339,7 @@ class DB {
 		}
 	}
 	
-	public function insertOmotSpisa($omot){
+	private function insertOmotSpisa($omot){
 		try{
 			$query = self::$connection->prepare("INSERT INTO `omot-spisa` (OrderID, Recipient, Name, Address, Location,
 				PaperType, Quantity, Comment, SendCopy) 
@@ -365,7 +366,7 @@ class DB {
 		}
 	}
 	
-	public function getOrdersOfType($userID, $type, $beforeDays, $nalogType = null) {
+	private function getOrdersOfType($userID, $type, $beforeDays, $nalogType = null) {
 		try{
 			if($nalogType != null){
 				$query = self::$connection->prepare("SELECT * FROM `". $type ."` WHERE UserID = :userID AND Type = :nalogType
@@ -814,7 +815,7 @@ class DB {
 		}
 	}
 
-	public function getUnseenOrder(){
+	public function getUnseenOrders(){
 		try{
 			$query = self::$connection->prepare("SELECT * FROM orders WHERE Seen = 0 ORDER BY OrderDate");
 			$query->execute();
@@ -847,6 +848,35 @@ class DB {
 			return false;
 		}	
 	}
+	
+	public function saveOrder($order) {
+		try{
+			$saved = false;
+			if($order instanceof Stampanje){
+				$saved = $this->insertStampanje($order);
+			} else if($order instanceof Blok){
+				$saved = $this->insertBlok($order);
+			} else if($order instanceof UplataIsplataPrenos){
+				$saved = $this->insertNalog($order);
+			} else if($order instanceof KovertaSaPovratnicom){
+				$saved = $this->insertKovertaSaDostavnicom($order);
+			} else if($order instanceof Dostavnica){
+				$saved = $this->insertDostavnica($order);
+			} else if($order instanceof KovertaSaDostavnicom){
+				$saved = $this->insertKovertaSaDostavnicom($order);
+			} else if($order instanceof FormularZaAdresiranje){
+				$saved = $this->insertFormular($order);
+			} else if($order instanceof StandardnaKoverta){
+				$saved = $this->insertStandardnaKoverta($order);
+			} else if($order instanceof OmotSpisa){
+				$saved = $this->insertOmotSpisa($order);
+			}
+			return $saved;
+		} catch(PDOException $e){
+			echo $e->getMessage();
+			return false;
+		}
+	}
 }	
 
 $conn = new DB();
@@ -855,22 +885,23 @@ $conn = new DB();
 //echo json_encode($conn->getOrdersOfType(21, 'uplateisplateorder', 10, 'Uplata'));
 //echo json_encode($conn->getOrders(21, 10));
 
-
-/*$stampanje = new Stampanje();
-$stampanje->OrderID = 2;
-$stampanje->FileName = 'ime fajla1';
-$stampanje->CopyNumber = 5;
-$stampanje->PageOrder = 2;
-$stampanje->Color = 'Crno belo';
+/*
+$stampanje = new Stampanje();
+$stampanje->OrderID = 3;
+$stampanje->FileName = 'ime fajla13';
+$stampanje->CopyNumber = 51;
+$stampanje->PageOrder = 1;
+$stampanje->Color = 'U boji';
 $stampanje->PagePrintType = 'Dvostrano';
 $stampanje->PaperSize = 'A4';
 $stampanje->PaperWidth = '80 gr/m2';
 $stampanje->BindingType = 'Tvrdo koricenje';
 $stampanje->HeftingType = 'Dole desno';
-$stampanje->DrillingType = 'Dve rupe za registrator desno';
-$stampanje->SendCopy = 1;*/
+$stampanje->DrillingType = 'Dve rupe za registrator levo';
+$stampanje->SendCopy = 0;*/
 //echo $conn->insertStampanje($stampanje);
 //echo $conn->updateOrderStampanje($stampanje);
+//echo $conn->saveOrder($stampanje);
 
 /*$uplata = new UplataIsplataPrenos();
 $uplata->OrderID = 2;
