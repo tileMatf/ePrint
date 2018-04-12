@@ -17,7 +17,7 @@ class DB {
     public function __construct(){
         if(!isset(self::$connection)){
             try{
-				self::$connection=new PDO("mysql:host=localhost;dbname=eprint", "tijana", "chadmajkl", 
+				self::$connection=new PDO("mysql:host=localhost;dbname=eprint", "root", "", 
 						array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION)); // uzimati podatke iz config.php
 			} catch(PDOException $e) {
 				echo $e->getMessage();
