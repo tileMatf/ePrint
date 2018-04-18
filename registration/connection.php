@@ -17,7 +17,7 @@ class DB {
     public function __construct(){
         if(!isset(self::$connection)){
             try{
-				self::$connection=new PDO("mysql:host=localhost;dbname=eprint", "root", "", 
+				self::$connection=new PDO("mysql:host=localhost;dbname=eprint", "tijana", "chadmajkl", 
 						array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION)); // uzimati podatke iz config.php
 			} catch(PDOException $e) {
 				echo $e->getMessage();
@@ -38,14 +38,13 @@ class DB {
         return $result;
 	}
 	
-	public function insertUser($email, $pass){
+	public function addUser($user){
 		try{
 			$query = self::$connection->prepare("insert into users (Email, Password, Role)
 					values (:email, :pass, :role);");
-			$role = 2;
-			$query->bindParam(':email',$email, PDO::PARAM_STR);
-			$query->bindParam(':pass',$pass, PDO::PARAM_STR);
-			$query->bindParam(':role', $role, PDO::PARAM_INT);
+			$query->bindParam(':email',$user->Email, PDO::PARAM_STR);
+			$query->bindParam(':pass',$user->Password, PDO::PARAM_STR);
+			$query->bindParam(':role', $user->Role, PDO::PARAM_INT);
 			$query->execute();
 			if($query->rowCount() > 0){
 				return true;
@@ -61,12 +60,12 @@ class DB {
 	
 	public function loginCheck($email, $pass){
 		try{
-			$query = self::$connection->prepare("select * from users where Email=:email;");
+			$query = self::$connection->prepare("select ID from users where Email=:email;");
 			$query->bindParam(':email',$email, PDO::PARAM_STR);
 			$query->execute();
 			$row_count = $query->rowCount();
 			if($row_count === 1){
-				$query = self::$connection->prepare("select * from users where Email=:email and Password=:pass;");
+				$query = self::$connection->prepare("select ID, Email, Role from users where Email=:email and Password=:pass;");
 				$query->bindParam(':email',$email, PDO::PARAM_STR);
 				$query->bindParam(':pass',$pass, PDO::PARAM_STR);
 				$query->execute();
@@ -85,7 +84,7 @@ class DB {
 		}		
 	}
 	
-	public function insertOrder($order){
+	private function insertOrder($order){
 		try{
 			$query = self::$connection->prepare("INSERT INTO orders (TypeID, UserID, OrderDate, Seen) 
 				VALUES (:typeID, :userID, NOW(), 0)");
@@ -94,10 +93,10 @@ class DB {
 			
 			$query->execute();
 			if($query->rowCount() > 0){
-					return true;
+					return self::$connection->lastInsertId();
 			} else {
 				print_r(self::$connection->errorInfo());
-				return false;
+				return -1;
 			}
 		} catch(PDOException $e) {
 			echo $e->getMessage();
@@ -105,31 +104,39 @@ class DB {
 		}
 	}
 		
-	private function insertStampanje($stampanje){
+	private function insertStampanje($stampanje, $userID){
 		try{
-			$query = self::$connection->prepare("INSERT INTO stampanje (OrderID, FileName, CopyNumber, PageOrder, Color, PagePrintType, PaperSize,
-				PaperWidth, BindingType, BindingFile, HeftingType, DrillingType, Comment, SendCopy) 
-				VALUES (:orderID, :fileName, :copyNumber, :pageOrder, :color, :pagePrintType, :paperSize, 
-						:paperWidth, :bindingType, :bindingFile, :heftingType, :drillingType, :comment, :sendCopy)");
-			$query->bindValue(":orderID", $stampanje->OrderID, PDO::PARAM_INT);
-			$query->bindValue(":fileName", $stampanje->FileName, PDO::PARAM_STR);
-			$query->bindValue(":copyNumber", $stampanje->CopyNumber, PDO::PARAM_INT);
-			$query->bindValue(":pageOrder", $stampanje->PageOrder, PDO::PARAM_INT);
-			$query->bindValue(":color", $stampanje->Color, PDO::PARAM_STR);
-			$query->bindValue(":pagePrintType", $stampanje->PagePrintType, PDO::PARAM_STR);
-			$query->bindValue(":paperSize", $stampanje->PaperSize, PDO::PARAM_STR);
-			$query->bindValue(":paperWidth", $stampanje->PaperWidth, PDO::PARAM_STR);
-			$query->bindValue(":bindingType", $stampanje->BindingType, PDO::PARAM_STR);
-			$query->bindValue(":bindingFile", $stampanje->BindingFile, PDO::PARAM_STR);
-			$query->bindValue(":heftingType", $stampanje->HeftingType, PDO::PARAM_STR);
-			$query->bindValue(":drillingType", $stampanje->DrillingType, PDO::PARAM_STR);
-			$query->bindValue(":comment", $stampanje->Comment, PDO::PARAM_STR);
-			$query->bindValue(":sendCopy", $stampanje->SendCopy, PDO::PARAM_INT);
-			$query->execute();
-			if($query->rowCount() > 0){
-					return true;
+			$order = new Order();
+			$order->TypeID = 1;
+			$order->UserID = $userID;
+			$orderID = $this->insertOrder($order);
+			if($orderID > 0){
+				$query = self::$connection->prepare("INSERT INTO stampanje (OrderID, FileName, CopyNumber, PageOrder, Color, PagePrintType, PaperSize,
+					PaperWidth, BindingType, BindingFile, HeftingType, DrillingType, Comment, SendCopy) 
+					VALUES (:orderID, :fileName, :copyNumber, :pageOrder, :color, :pagePrintType, :paperSize, 
+							:paperWidth, :bindingType, :bindingFile, :heftingType, :drillingType, :comment, :sendCopy)");
+				$query->bindValue(":orderID", $orderID, PDO::PARAM_INT);
+				$query->bindValue(":fileName", $stampanje->FileName, PDO::PARAM_STR);
+				$query->bindValue(":copyNumber", $stampanje->CopyNumber, PDO::PARAM_INT);
+				$query->bindValue(":pageOrder", $stampanje->PageOrder, PDO::PARAM_INT);
+				$query->bindValue(":color", $stampanje->Color, PDO::PARAM_STR);
+				$query->bindValue(":pagePrintType", $stampanje->PagePrintType, PDO::PARAM_STR);
+				$query->bindValue(":paperSize", $stampanje->PaperSize, PDO::PARAM_STR);
+				$query->bindValue(":paperWidth", $stampanje->PaperWidth, PDO::PARAM_STR);
+				$query->bindValue(":bindingType", $stampanje->BindingType, PDO::PARAM_STR);
+				$query->bindValue(":bindingFile", $stampanje->BindingFile, PDO::PARAM_STR);
+				$query->bindValue(":heftingType", $stampanje->HeftingType, PDO::PARAM_STR);
+				$query->bindValue(":drillingType", $stampanje->DrillingType, PDO::PARAM_STR);
+				$query->bindValue(":comment", $stampanje->Comment, PDO::PARAM_STR);
+				$query->bindValue(":sendCopy", $stampanje->SendCopy, PDO::PARAM_INT);
+				$query->execute();
+				if($query->rowCount() > 0){
+						return true;
+				} else {
+					print_r(self::$connection->errorInfo());
+					return false;
+				}
 			} else {
-				print_r(self::$connection->errorInfo());
 				return false;
 			}
 		} catch(PDOException $e) {
@@ -138,22 +145,31 @@ class DB {
 		}
 	}
 	
-	private function insertBlok($blok){
+	private function insertBlok($blok, $userID){
 		try{
-			$query = self::$connection->prepare("INSERT INTO blokovi (OrderID, FileName, Color, Size, Packing, Comment, SendCopy) 
-				VALUES (:orderID, :fileName, :color, :size, :packing, :comment, :sendCopy)");
-			$query->bindValue(":orderID", $blok->OrderID, PDO::PARAM_INT);
-			$query->bindValue(":fileName", $blok->FileName, PDO::PARAM_STR);
-			$query->bindValue(":color", $blok->Color, PDO::PARAM_STR);
-			$query->bindValue(":size", $blok->Size, PDO::PARAM_STR);
-			$query->bindValue(":packing", $blok->Packing, PDO::PARAM_STR);
-			$query->bindValue(":comment", $blok->Comment, PDO::PARAM_STR);
-			$query->bindValue(":sendCopy", $blok->SendCopy, PDO::PARAM_INT);
-			$query->execute();
-			if($query->rowCount() > 0){
-					return true;
+			$order = new Order();
+			$order->TypeID = 2;
+			$order->UserID = $userID;
+			$orderID = $this->insertOrder($order);
+			if($orderID > 0){
+				$query = self::$connection->prepare("INSERT INTO blokovi (OrderID, FileName, NumberOfSet, Color, Size, Packing, Comment, SendCopy) 
+					VALUES (:orderID, :fileName, :numberOfSet, :color, :size, :packing, :comment, :sendCopy)");
+				$query->bindValue(":orderID", $orderID, PDO::PARAM_INT);
+				$query->bindValue(":fileName", $blok->FileName, PDO::PARAM_STR);
+				$query->bindValue(":numberOfSet", $blok->NumberOfSet, PDO::PARAM_INT);
+				$query->bindValue(":color", $blok->Color, PDO::PARAM_STR);
+				$query->bindValue(":size", $blok->Size, PDO::PARAM_STR);
+				$query->bindValue(":packing", $blok->Packing, PDO::PARAM_STR);
+				$query->bindValue(":comment", $blok->Comment, PDO::PARAM_STR);
+				$query->bindValue(":sendCopy", $blok->SendCopy, PDO::PARAM_INT);
+				$query->execute();
+				if($query->rowCount() > 0){
+						return true;
+				} else {
+					print_r(self::$connection->errorInfo());
+					return false;
+				}
 			} else {
-				print_r(self::$connection->errorInfo());
 				return false;
 			}
 		} catch(PDOException $e) {
@@ -815,11 +831,96 @@ class DB {
 		}
 	}
 
-	public function getUnseenOrders(){
+	public function getUnseenOrders($type){
 		try{
-			$query = self::$connection->prepare("SELECT * FROM orders WHERE Seen = 0 ORDER BY OrderDate");
-			$query->execute();
+			switch($type){
+				case 'Stampanje':
+					$query = self::$connection->prepare("SELECT u.ID, u.Email, o.* FROM stampanjeorder o INNER JOIN users u ON u.ID = o.UserID WHERE Seen = 0 ORDER BY OrderDate");
+					break;
+				case 'Preslikavajuci blokovi':
+					$query = self::$connection->prepare("SELECT u.ID, u.Email, o.* FROM blokoviorder o INNER JOIN users u ON u.ID = o.UserID WHERE Seen = 0 ORDER BY OrderDate");
+					break;
+				case 'Uplate':
+					$query = self::$connection->prepare("SELECT u.ID, u.Email, o.* FROM uplateisplateorder o INNER JOIN users u ON u.ID = o.UserID WHERE Seen = 0 AND Type = 'Uplata' ORDER BY OrderDate");
+					break;
+				case 'Isplate':
+					$query = self::$connection->prepare("SELECT u.ID, u.Email, o.* FROM uplateisplateorder o INNER JOIN users u ON u.ID = o.UserID WHERE Seen = 0 AND Type = 'Isplata' ORDER BY OrderDate");
+					break;
+				case 'Prenos':
+					$query = self::$connection->prepare("SELECT u.ID, u.Email, o.* FROM prenosorder o INNER JOIN users u ON u.ID = o.UserID WHERE Seen = 0 ORDER BY OrderDate");
+					break;
+				case 'Koverta-sa-povratnicom':
+					$query = self::$connection->prepare("SELECT u.ID, u.Email, o.* FROM kovertesapovratnicomorder o INNER JOIN users u ON u.ID = o.UserID WHERE Seen = 0 ORDER BY OrderDate");
+					break;
+				case 'Dostavnica':
+					$query = self::$connection->prepare("SELECT u.ID, u.Email, o.* FROM dostavniceorder o INNER JOIN users u ON u.ID = o.UserID WHERE Seen = 0 ORDER BY OrderDate");
+					break;
+				case 'Koverta-sa-dostavnicom':
+					$query = self::$connection->prepare("SELECT u.ID, u.Email, o.* FROM kovertesadostavnicomorder o INNER JOIN users u ON u.ID = o.UserID WHERE Seen = 0 ORDER BY OrderDate");
+					break;
+				case 'Formular-za-adresiranje':
+					$query = self::$connection->prepare("SELECT u.ID, u.Email, o.* FROM formulariorder o INNER JOIN users u ON u.ID = o.UserID WHERE Seen = 0 ORDER BY OrderDate");
+					break;
+				case 'Standardna-koverta':
+					$query = self::$connection->prepare("SELECT u.ID, u.Email, o.* FROM standardnekoverteorder o INNER JOIN users u ON u.ID = o.UserID WHERE Seen = 0 ORDER BY OrderDate");
+					break;
+				case 'Omot-spisa':
+					$query = self::$connection->prepare("SELECT u.ID, u.Email, o.* FROM omotispisaorder o INNER JOIN users u ON u.ID = o.UserID WHERE Seen = 0 ORDER BY OrderDate");
+					break;
+			}
 			
+			$query->execute();			
+			if($query->rowCount() > 0){
+				return $query->fetchAll(PDO::FETCH_OBJ);
+			} else {
+				return null;
+			}
+		} catch(PDOException $e) {
+			echo $e->getMessage();
+			return false;
+		}
+	}
+	
+	public function getSavedOrders($userID, $type){
+		try{
+			switch($type){
+				case 'Stampanje':
+					$query = self::$connection->prepare("SELECT o.* FROM stampanjeorder o WHERE UserID = :userID ORDER BY OrderDate");
+					break;
+				case 'Preslikavajuci blokovi':
+					$query = self::$connection->prepare("SELECT o.* FROM blokoviorder o WHERE UserID = :userID ORDER BY OrderDate");
+					break;
+				case 'Uplate':
+					$query = self::$connection->prepare("SELECT o.* FROM uplateisplateorder o WHERE UserID = :userID AND Type = 'Uplata' ORDER BY OrderDate");
+					break;
+				case 'Isplate':
+					$query = self::$connection->prepare("SELECT o.* FROM uplateisplateorder o WHERE UserID = :userID AND Type = 'Isplata' ORDER BY OrderDate");
+					break;
+				case 'Prenos':
+					$query = self::$connection->prepare("SELECT o.* FROM prenosorder o D WHERE UserID = :userID ORDER BY OrderDate");
+					break;
+				case 'Koverta-sa-povratnicom':
+					$query = self::$connection->prepare("SELECT o.* FROM kovertesapovratnicomorder o WHERE UserID = :userID ORDER BY OrderDate");
+					break;
+				case 'Dostavnica':
+					$query = self::$connection->prepare("SELECT o.* FROM dostavniceorder o WHERE UserID = :userID ORDER BY OrderDate");
+					break;
+				case 'Koverta-sa-dostavnicom':
+					$query = self::$connection->prepare("SELECT o.* FROM kovertesadostavnicomorder o WHERE UserID = :userID ORDER BY OrderDate");
+					break;
+				case 'Formular-za-adresiranje':
+					$query = self::$connection->prepare("SELECT o.* FROM formulariorder o WHERE UserID = :userID ORDER BY OrderDate");
+					break;
+				case 'Standardna-koverta':
+					$query = self::$connection->prepare("SELECT o.* FROM standardnekoverteorder o WHERE UserID = :userID ORDER BY OrderDate");
+					break;
+				case 'Omot-spisa':
+					$query = self::$connection->prepare("SELECT o.* FROM omotispisaorder o WHERE UserID = :userID ORDER BY OrderDate");
+					break;
+			}
+			
+			$query->bindValue(":userID", $userID, PDO::PARAM_INT);
+			$query->execute();			
 			if($query->rowCount() > 0){
 				return $query->fetchAll(PDO::FETCH_OBJ);
 			} else {
@@ -849,13 +950,15 @@ class DB {
 		}	
 	}
 	
-	public function saveOrder($order) {
+	public function saveOrder($order, $userID) {
 		try{
 			$saved = false;
+			$orderParent = new Order();
+			$orderParent->UserID = $userID;
 			if($order instanceof Stampanje){
-				$saved = $this->insertStampanje($order);
+				$saved = $this->insertStampanje($order, $userID);
 			} else if($order instanceof Blok){
-				$saved = $this->insertBlok($order);
+				$saved = $this->insertBlok($order, $userID);
 			} else if($order instanceof UplataIsplataPrenos){
 				$saved = $this->insertNalog($order);
 			} else if($order instanceof KovertaSaPovratnicom){
@@ -872,6 +975,17 @@ class DB {
 				$saved = $this->insertOmotSpisa($order);
 			}
 			return $saved;
+		} catch(PDOException $e){
+			echo $e->getMessage();
+			return false;
+		}
+	}
+	
+	public function addAdmin($email, $pass){
+		try{
+			$admin = new User($email, $pass, 1);
+			$sql_result = $this->addUser($admin);
+			return $sql_result;
 		} catch(PDOException $e){
 			echo $e->getMessage();
 			return false;

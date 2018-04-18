@@ -10,9 +10,9 @@ function test_input($data) {
   return $data;
 }
 
-function uploadFile($target_dir){
+function uploadFile($target_dir, $file){
 
-	$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+	$target_file = $target_dir . basename($file['name']);
 	$uploadOk = 1;
 	$fileStatus = 0;
 	$fileType = pathinfo($target_file,PATHINFO_EXTENSION);	
@@ -29,10 +29,10 @@ function uploadFile($target_dir){
 	} 		
 	*/
 	
-	if(!empty($_FILES["fileToUpload"]['name'])){
+	if(!empty($file)){
 		// Allow certain file formats	
-		if($fileType != "pdf" && $fileType != "jpg") {
-			$statusMessage = "Greška, dozvoljene su samo PDF i JPG datoteke.";
+		if($fileType != "pdf" && $fileType != "jpg" && $fileType != "jpe" && $fileType != "jpeg" && $fileType != "png") {
+			$statusMessage = "Greška, dozvoljene su samo PDF, JPG, JPEG, JPE i PNG datoteke.";
 			$uploadOk = 0;
 			$fileStatus = 1;
 		}
@@ -44,14 +44,14 @@ function uploadFile($target_dir){
 			// Check if file already exists
 			if (file_exists($target_file)) {
 				unlink($target_file);
-				move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
-				$statusMessage = "Datoteka ". $_FILES["fileToUpload"]["name"] . " je otpremljena.";;
+				$k = move_uploaded_file($file["tmp_name"], $target_file);
+				$statusMessage = "Datoteka ". $file["name"] . " je otpremljena.";;
 				$fileStatus = 2;			
 			}
-			else if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+			else if (move_uploaded_file($file["tmp_name"], $target_file)) {
 				//$uploadOk = $db->uploadFile($target_file);
 				if($uploadOk == 1){
-					$statusMessage = "Datoteka ". basename($_FILES["fileToUpload"]["name"]). " je otpremljena.";
+					$statusMessage = "Datoteka ". basename($file["name"]). " je otpremljena.";
 					$fileStatus = 3;
 				} else {
 					$statusMessage = "Oprostite, došlo je do greške prilikom otpremanja Vaše datoteke u bazu podataka.";
@@ -66,13 +66,13 @@ function uploadFile($target_dir){
 	return $fileStatus;
 }
 
-function generateMessage($status){
+function generateMessage($status, $file){
 	if($status === 1)
-		return "Greška, dozvoljene su samo PDF i JPG datoteke.";
+		return "Greška, dozvoljene su samo PDF, JPG, JPEG, PNG i JPE datoteke.";
 	else if($status === 2)
-		return "Datoteka ". basename($_FILES["fileToUpload"]["name"]) . " je otpremljena.";
+		return "Datoteka ". basename($file["name"]) . " je otpremljena.";
 	else if($status === 3)
-		return "Datoteka ". basename($_FILES["fileToUpload"]["name"]). " je otpremljena.";
+		return "Datoteka ". basename($file["name"]). " je otpremljena.";
 	else if($status === 4)
 		return "Oprostite, došlo je do greške prilikom otpremanja Vaše datoteke u bazu podataka.";
 	else if($status === 5)

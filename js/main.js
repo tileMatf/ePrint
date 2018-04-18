@@ -166,88 +166,93 @@
 	}
 	
 	var loginButton = document.getElementsByName("login")[0];
-	
-	loginButton.addEventListener('click', function(event) {
-		event.preventDefault();
-		var errorMessage = document.getElementById("errorLoginMsg");
-		var form = document.forms.namedItem('loginForm');		
-		var formData = new FormData(form);					
-		var xhttp = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+	var errorMessage = document.getElementById("errorLoginMsg");
 
-		let parameters = [...formData.entries()]
-                    .map(e => encodeURIComponent(e[0]) + "=" + encodeURIComponent(e[1]))
-		
-		xhttp.open("POST",  window.location.origin + "/eprint/registration/login/", true);
-		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		xhttp.onreadystatechange = function(e){
-			if(xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200){
-				if(this.responseText == 0){
-					errorMessage.innerHTML = "Pogrešna lozinka, pokušajte ponovo.";
-					errorMessage.style.color = "red";
-					form.psw.focus();
-					modal.style.display = "block";
-				} else if(this.responseText == -1){
-					errorMessage.innerHTML = "Email adresa nije u bazi podataka, morate se prvo registrovati.";
-					errorMessage.style.color = "red";
-					modal.style.display = "block";
-				} else {				
-					var user = JSON.parse(this.responseText);
-					modal.style.display = "none";
-					location.reload();
-				}
-			}
-		};
+	if(loginButton != null){
+		loginButton.addEventListener('click', function(event) {
+			event.preventDefault();
+			var form = document.forms.namedItem('loginForm');		
+			var formData = new FormData(form);					
+			var xhttp = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+
+			let parameters = [...formData.entries()]
+						.map(e => encodeURIComponent(e[0]) + "=" + encodeURIComponent(e[1]))
 			
-		xhttp.onerror = function(e) {
-			errorMessage.innerHTML = "Oprostite, došlo je do greške prilikom logovanja. Molim Vas, pokušajte ponovo.";
-			errorMessage.style.color = "red";
-		}
-		xhttp.send(parameters.join('&'));
-	});	
+			xhttp.open("POST",  window.location.origin + "/eprint/registration/login/", true);
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhttp.onreadystatechange = function(e){
+				if(xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200){
+					if(this.responseText == 0){
+						errorMessage.innerHTML = "Pogrešna lozinka, pokušajte ponovo.";
+						errorMessage.style.color = "red";
+						form.psw.focus();
+						modal.style.display = "block";
+					} else if(this.responseText == -1){
+						errorMessage.innerHTML = "Email adresa nije u bazi podataka, morate se prvo registrovati.";
+						errorMessage.style.color = "red";
+						modal.style.display = "block";
+					} else {				
+						var user = JSON.parse(this.responseText);
+	//					alert(user.Email);
+						modal.style.display = "none";
+						location.reload();
+					}
+				}
+			};
+				
+			xhttp.onerror = function(e) {
+				errorMessage.innerHTML = "Oprostite, došlo je do greške prilikom logovanja. Molim Vas, pokušajte ponovo.";
+				errorMessage.style.color = "red";
+			}
+			xhttp.send(parameters.join('&'));
+		});	
+	}
 	
 	var registerButton = document.getElementsByName("register")[0];
 	
-	registerButton.addEventListener('click', function(event) {
-		event.preventDefault();
-		//resetovati session message		
-		var form = document.forms.namedItem('registrationForm');
-		if(form.psw.value !== form.pswRepeat.value){
-			modal2.style.display = "block";
-			registrationMessage.innerHTML = "Unete lozinke nisu iste, pokušajte ponovo.";
-			form.pswRepeat.focus();
-			return;
-		}
-		var formData = new FormData(form);					
-		var xhttp = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-		let parameters = [...formData.entries()]
-                    .map(e => encodeURIComponent(e[0]) + "=" + encodeURIComponent(e[1]))
-		xhttp.open("POST",  window.location.origin + "/eprint/registration/register/", true);
-		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		xhttp.onreadystatechange = function(e){
-			if(xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200){
-				if(this.responseText == true){
-					modal2.style.display = "none";
-					location.reload();
-				} else {
-					if(this.responseText == 0){					
-						registrationMessage.innerHTML = "Konekcija ka bazi je izgubljena, trenutno nije moguć pristup bazi.";
-					} else if(this.responseText == -1){
-						registrationMessage.innerHTML = "Postoji registracija sa ovom email adresom. Pokušajte sa logovanjem ili registracijom druge adrese.";
-					} else {
-						registrationMessage.innerHTML = "Došlo je do greške, pokušajte ponovo."
-					}
-					modal2.style.display = "block";
-					form.email.focus();
-				}
+	if(registerButton != null){
+		registerButton.addEventListener('click', function(event) {
+			event.preventDefault();
+			//resetovati session message		
+			var form = document.forms.namedItem('registrationForm');
+			if(form.psw.value !== form.pswRepeat.value){
+				modal2.style.display = "block";
+				registrationMessage.innerHTML = "Unete lozinke nisu iste, pokušajte ponovo.";
+				form.pswRepeat.focus();
+				return;
 			}
-		};
-			
-		xhttp.onerror = function(e) {
-			errorMessage.innerHTML = "Oprostite, došlo je do greške prilikom registracije. Molim Vas, pokušajte ponovo.";
-			errorMessage.style.color = "red";
-		}
-		xhttp.send(parameters.join('&'));
-	});	
+			var formData = new FormData(form);					
+			var xhttp = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+			let parameters = [...formData.entries()]
+						.map(e => encodeURIComponent(e[0]) + "=" + encodeURIComponent(e[1]))
+			xhttp.open("POST",  window.location.origin + "/eprint/registration/register/", true);
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhttp.onreadystatechange = function(e){
+				if(xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200){
+					if(this.responseText == true){
+						modal2.style.display = "none";
+						location.reload();
+					} else {
+						if(this.responseText == 0){					
+							registrationMessage.innerHTML = "Konekcija ka bazi je izgubljena, trenutno nije moguć pristup bazi.";
+						} else if(this.responseText == -1){
+							registrationMessage.innerHTML = "Postoji registracija sa ovom email adresom. Pokušajte sa logovanjem ili registracijom druge adrese.";
+						} else {
+							registrationMessage.innerHTML = "Došlo je do greške, pokušajte ponovo."
+						}
+						modal2.style.display = "block";
+						form.email.focus();
+					}
+				}
+			};
+				
+			xhttp.onerror = function(e) {
+				errorMessage.innerHTML = "Oprostite, došlo je do greške prilikom registracije. Molim Vas, pokušajte ponovo.";
+				errorMessage.style.color = "red";
+			}
+			xhttp.send(parameters.join('&'));
+		});	
+	}
 	
 	var logoutButton = document.getElementsByName("logout")[0];
 	
@@ -262,7 +267,14 @@
 			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			xhttp.onreadystatechange = function(e){
 				if(xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200){
-					location.reload();
+					form.reset();			
+					var submitForm = document.forms.namedItem("orderForm"); 
+					if(submitForm != null){
+						submitForm.reset();
+						window.location.replace(window.location.origin + "/eprint/" + submitForm.orderType.value);
+					} else {
+						window.location.reload();
+					}
 				}
 			};
 				
@@ -273,5 +285,62 @@
 			xhttp.send();
 		});	
 	}
+	
+	var ordersRows = document.getElementsByName("orderRow");
+	
+	if(ordersRows != null){
+		for(var i = 0; i < ordersRows.length; i++){
+			ordersRows[i].addEventListener('click', openOrder ,false)
+		}
+	}
+	
+	function openOrder(event){
+		event.preventDefault();
+		
+		var orderObjectField = this.querySelector("input[name='orderObject']");
+		var orderTypeField = this.querySelector("input[name='orderType']");
+		var form = document.createElement('form');
+		form.setAttribute("method", "POST");
+		form.setAttribute("action", window.location.origin + "/eprint/" + orderTypeField.value + "/");
+		
+		form.appendChild(orderObjectField);
+		form.appendChild(orderTypeField);
+		
+		//alert(this.querySelector("input[name='fileName']").value);
+		document.body.appendChild(form);
+		form.submit();
+	}
+	
+	var saveOrderButton = document.getElementById("saveOrder");
+	if(saveOrderButton != null){
+		saveOrder.addEventListener('click', function(event){
+			event.preventDefault();
+			
+			var form = document.forms.namedItem('orderForm');
+			var formData = new FormData(form);
+			
+			var xhttp = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+			let parameters = [...formData.entries()]
+						.map(e => encodeURIComponent(e[0]) + "=" + encodeURIComponent(e[1]));
+						
+			var xhttp = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+			xhttp.open("POST",  window.location.origin + "/eprint/save_order/", true);
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			
+			xhttp.onreadystatechange = function(e){
+				if(xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200){
+					if(this.responseText !== 0){
+						form.reset();
+						location.reload();
+					}					
+				}
+			};
 
-
+			xhttp.onerror = function(e) {
+				errorMessage.innerHTML = "Oprostite, došlo je do greške prilikom skladištenja Vaše narudžbine. Molim Vas, pokušajte ponovo.";
+				errorMessage.style.color = "red";
+				//location.reload();
+			}
+			xhttp.send(parameters.join('&'));
+		});
+	}

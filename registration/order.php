@@ -6,4 +6,5 @@ class Order {
 	var $OrderDate;
 	var $Seen;
 }
+
 ?>

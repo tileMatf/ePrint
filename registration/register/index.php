@@ -1,6 +1,7 @@
 <?php 
 	session_start();
 	include("../connection.php");
+	require_once("../user.php");
 	$db = new DB();
 
 	$_SESSION['registration'] = null;
@@ -9,10 +10,12 @@
 	if(isset($_POST['email']) && isset($_POST['psw']) && isset($_POST['pswRepeat'])){				
 		$sql_result = $db->checkMailOccupancy($_POST['email']);		
 		if(count($sql_result) == 0){
-			$sql_result = $db->insertUser($_POST['email'], $_POST['psw']);
+			$user = new User($_POST['email'], $_POST['psw'], 2);
+			$sql_result = $db->addUser($user);
 			$_SESSION['registration'] = $sql_result;
 			if($sql_result === true) {
-				$_SESSION['status_message'] = "Uspešno ste se registrovali.";			
+				$_SESSION['status_message'] = "Uspešno ste se registrovali.";
+				unset($_SESSION['error_message']);
 			} else {
 				$_SESSION['status_message'] = "Neuspešna registracija, pokušajte ponovo.";							
 			}

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 10, 2018 at 05:59 AM
+-- Generation Time: Apr 18, 2018 at 10:57 AM
 -- Server version: 5.7.14-log
 -- PHP Version: 5.6.31
 
@@ -34,6 +34,7 @@ DROP TABLE IF EXISTS `blokovi`;
 CREATE TABLE IF NOT EXISTS `blokovi` (
   `OrderID` int(11) NOT NULL,
   `FileName` varchar(1000) NOT NULL,
+  `NumberOfSet` int(11) NOT NULL,
   `Color` varchar(255) NOT NULL,
   `Size` varchar(255) NOT NULL,
   `Packing` varchar(255) NOT NULL,
@@ -46,9 +47,13 @@ CREATE TABLE IF NOT EXISTS `blokovi` (
 -- Dumping data for table `blokovi`
 --
 
-INSERT INTO `blokovi` (`OrderID`, `FileName`, `Color`, `Size`, `Packing`, `Comment`, `SendCopy`) VALUES
-(2, 'ime fajla', 'Plavo belo', 'A5', 'Heftanjem levo', NULL, 0),
-(2, 'ime fajla2', 'Plavo belo', 'A4', 'Heftanjem desno', NULL, 0);
+INSERT INTO `blokovi` (`OrderID`, `FileName`, `NumberOfSet`, `Color`, `Size`, `Packing`, `Comment`, `SendCopy`) VALUES
+(2, 'ime fajla', 0, 'Plavo belo', 'A5', 'Heftanjem levo', NULL, 0),
+(2, 'ime fajla2', 0, 'Plavo belo', 'A4', 'Heftanjem desno', NULL, 0),
+(55, 'KosticTijana.pdf', 1, 'Crno-belo', 'A4', 'U fasciklu', NULL, 0),
+(56, 'KosticTijana.pdf', 1, 'Plavo-belo', 'A4', 'U fasciklu', NULL, 0),
+(57, 'KosticTijana.pdf', 1, 'Plavo-belo', 'A4', 'U fasciklu', NULL, 0),
+(58, 'KosticZoranaCV.pdf', 1, 'U boji', 'A4', 'U fasciklu', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -60,6 +65,7 @@ DROP VIEW IF EXISTS `blokoviorder`;
 CREATE TABLE IF NOT EXISTS `blokoviorder` (
 `UserID` int(11)
 ,`OrderDate` date
+,`Seen` tinyint(1)
 ,`OrderID` int(11)
 ,`FileName` varchar(1000)
 ,`Color` varchar(255)
@@ -104,6 +110,7 @@ DROP VIEW IF EXISTS `dostavniceorder`;
 CREATE TABLE IF NOT EXISTS `dostavniceorder` (
 `UserID` int(11)
 ,`OrderDate` date
+,`Seen` tinyint(1)
 ,`OrderID` int(11)
 ,`Recipient` varchar(255)
 ,`Name` varchar(1000)
@@ -143,6 +150,7 @@ DROP VIEW IF EXISTS `formulariorder`;
 CREATE TABLE IF NOT EXISTS `formulariorder` (
 `UserID` int(11)
 ,`OrderDate` date
+,`Seen` tinyint(1)
 ,`OrderID` int(11)
 ,`Quantity` int(11)
 );
@@ -208,6 +216,7 @@ DROP VIEW IF EXISTS `kovertesadostavnicomorder`;
 CREATE TABLE IF NOT EXISTS `kovertesadostavnicomorder` (
 `UserID` int(11)
 ,`OrderDate` date
+,`Seen` tinyint(1)
 ,`OrderID` int(11)
 ,`Recipient` varchar(255)
 ,`Color` varchar(255)
@@ -231,6 +240,7 @@ DROP VIEW IF EXISTS `kovertesapovratnicomorder`;
 CREATE TABLE IF NOT EXISTS `kovertesapovratnicomorder` (
 `UserID` int(11)
 ,`OrderDate` date
+,`Seen` tinyint(1)
 ,`OrderID` int(11)
 ,`Color` varchar(255)
 ,`Quantity` int(11)
@@ -274,6 +284,7 @@ DROP VIEW IF EXISTS `omotispisaorder`;
 CREATE TABLE IF NOT EXISTS `omotispisaorder` (
 `UserID` int(11)
 ,`OrderDate` date
+,`Seen` tinyint(1)
 ,`OrderID` int(11)
 ,`Recipient` varchar(255)
 ,`Name` varchar(1000)
@@ -301,16 +312,19 @@ CREATE TABLE IF NOT EXISTS `orders` (
   PRIMARY KEY (`ID`),
   KEY `orders_user_fk` (`UserID`),
   KEY `orders_type_fk` (`TypeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `orders`
 --
 
 INSERT INTO `orders` (`ID`, `TypeID`, `UserID`, `OrderDate`, `Seen`) VALUES
-(1, 1, 3, '2018-04-05', 0),
 (2, 2, 21, '2018-04-07', 0),
-(3, 3, 22, '2018-04-07', 1);
+(3, 3, 22, '2018-04-07', 1),
+(55, 2, 3, '2018-04-17', 0),
+(56, 2, 3, '2018-04-18', 0),
+(57, 2, 3, '2018-04-18', 0),
+(58, 2, 3, '2018-04-18', 0);
 
 -- --------------------------------------------------------
 
@@ -391,6 +405,7 @@ DROP VIEW IF EXISTS `prenosorder`;
 CREATE TABLE IF NOT EXISTS `prenosorder` (
 `UserID` int(11)
 ,`OrderDate` date
+,`Seen` tinyint(1)
 ,`OrderID` int(11)
 ,`Name` varchar(1000)
 ,`Address` varchar(1000)
@@ -425,7 +440,7 @@ CREATE TABLE IF NOT EXISTS `stampanje` (
   `OrderID` int(11) NOT NULL,
   `FileName` varchar(1000) NOT NULL,
   `CopyNumber` tinyint(4) NOT NULL,
-  `PageOrder` tinyint(4) NOT NULL,
+  `PageOrder` varchar(255) NOT NULL,
   `Color` varchar(255) NOT NULL,
   `PagePrintType` varchar(255) NOT NULL,
   `PaperSize` varchar(255) NOT NULL,
@@ -439,14 +454,6 @@ CREATE TABLE IF NOT EXISTS `stampanje` (
   KEY `stampanje_orders_fk` (`OrderID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `stampanje`
---
-
-INSERT INTO `stampanje` (`OrderID`, `FileName`, `CopyNumber`, `PageOrder`, `Color`, `PagePrintType`, `PaperSize`, `PaperWidth`, `BindingType`, `BindingFile`, `HeftingType`, `DrillingType`, `Comment`, `SendCopy`) VALUES
-(1, 'imefajla', 4, 2, 'Bela', 'Jednostrano', 'A4', '80 gr/m2', 'Plastičnom spiralom', NULL, 'Gore desno', 'Dve rupe za registrator desno', NULL, 1),
-(2, 'ime fajla1', 5, 2, 'Crno belo', 'Dvostrano', 'A4', '80 gr/m2', 'Tvrdo koricenje', NULL, 'Dole desno', 'Dve rupe za registrator desno', NULL, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -457,10 +464,11 @@ DROP VIEW IF EXISTS `stampanjeorder`;
 CREATE TABLE IF NOT EXISTS `stampanjeorder` (
 `UserID` int(11)
 ,`OrderDate` date
+,`Seen` tinyint(1)
 ,`OrderID` int(11)
 ,`FileName` varchar(1000)
 ,`CopyNumber` tinyint(4)
-,`PageOrder` tinyint(4)
+,`PageOrder` varchar(255)
 ,`Color` varchar(255)
 ,`PagePrintType` varchar(255)
 ,`PaperSize` varchar(255)
@@ -515,6 +523,7 @@ DROP VIEW IF EXISTS `standardnekoverteorder`;
 CREATE TABLE IF NOT EXISTS `standardnekoverteorder` (
 `UserID` int(11)
 ,`OrderDate` date
+,`Seen` tinyint(1)
 ,`OrderID` int(11)
 ,`Size` varchar(255)
 ,`Quantity` int(11)
@@ -578,6 +587,7 @@ DROP VIEW IF EXISTS `uplateisplateorder`;
 CREATE TABLE IF NOT EXISTS `uplateisplateorder` (
 `UserID` int(11)
 ,`OrderDate` date
+,`Seen` tinyint(1)
 ,`OrderID` int(11)
 ,`Type` varchar(255)
 ,`Name` varchar(1000)
@@ -612,7 +622,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `Password` varchar(20) NOT NULL,
   `Role` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
@@ -621,7 +631,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`ID`, `Email`, `Password`, `Role`) VALUES
 (3, 'tijjana@hotmail.com', 'chadmajkl', 2),
 (21, 'zorana@hotmail.com', 'chadmajkl', 2),
-(22, 'tichko@yahoo.com', 'chadmajkl', 2);
+(22, 'tichko@yahoo.com', 'chadmajkl', 2),
+(23, 'ukicuki@gmail.com', 'tijana', 2),
+(24, 'admin@hotmail.com', 'admin', 1),
+(25, 'novi@hotmail.com', 'novi', 2);
 
 -- --------------------------------------------------------
 
@@ -630,7 +643,7 @@ INSERT INTO `users` (`ID`, `Email`, `Password`, `Role`) VALUES
 --
 DROP TABLE IF EXISTS `blokoviorder`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `blokoviorder`  AS  select `o`.`UserID` AS `UserID`,`o`.`OrderDate` AS `OrderDate`,`b`.`OrderID` AS `OrderID`,`b`.`FileName` AS `FileName`,`b`.`Color` AS `Color`,`b`.`Size` AS `Size`,`b`.`Packing` AS `Packing`,`b`.`Comment` AS `Comment`,`b`.`SendCopy` AS `SendCopy` from (`orders` `o` join `blokovi` `b` on((`o`.`ID` = `b`.`OrderID`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `blokoviorder`  AS  select `o`.`UserID` AS `UserID`,`o`.`OrderDate` AS `OrderDate`,`o`.`Seen` AS `Seen`,`b`.`OrderID` AS `OrderID`,`b`.`FileName` AS `FileName`,`b`.`Color` AS `Color`,`b`.`Size` AS `Size`,`b`.`Packing` AS `Packing`,`b`.`Comment` AS `Comment`,`b`.`SendCopy` AS `SendCopy` from (`orders` `o` join `blokovi` `b` on((`o`.`ID` = `b`.`OrderID`))) ;
 
 -- --------------------------------------------------------
 
@@ -639,7 +652,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `dostavniceorder`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `dostavniceorder`  AS  select `o`.`UserID` AS `UserID`,`o`.`OrderDate` AS `OrderDate`,`d`.`OrderID` AS `OrderID`,`d`.`Recipient` AS `Recipient`,`d`.`Name` AS `Name`,`d`.`ZipCode` AS `ZipCode`,`d`.`Location` AS `Location`,`d`.`Quantity` AS `Quantity`,`d`.`SendCopy` AS `SendCopy` from (`orders` `o` join `dostavnice` `d` on((`o`.`ID` = `d`.`OrderID`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `dostavniceorder`  AS  select `o`.`UserID` AS `UserID`,`o`.`OrderDate` AS `OrderDate`,`o`.`Seen` AS `Seen`,`b`.`OrderID` AS `OrderID`,`b`.`Recipient` AS `Recipient`,`b`.`Name` AS `Name`,`b`.`ZipCode` AS `ZipCode`,`b`.`Location` AS `Location`,`b`.`Quantity` AS `Quantity`,`b`.`SendCopy` AS `SendCopy` from (`orders` `o` join `dostavnice` `b` on((`o`.`ID` = `b`.`OrderID`))) ;
 
 -- --------------------------------------------------------
 
@@ -648,7 +661,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `formulariorder`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `formulariorder`  AS  select `o`.`UserID` AS `UserID`,`o`.`OrderDate` AS `OrderDate`,`f`.`OrderID` AS `OrderID`,`f`.`Quantity` AS `Quantity` from (`orders` `o` join `formulari-za-adresiranje` `f` on((`o`.`ID` = `f`.`OrderID`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `formulariorder`  AS  select `o`.`UserID` AS `UserID`,`o`.`OrderDate` AS `OrderDate`,`o`.`Seen` AS `Seen`,`b`.`OrderID` AS `OrderID`,`b`.`Quantity` AS `Quantity` from (`orders` `o` join `formulari-za-adresiranje` `b` on((`o`.`ID` = `b`.`OrderID`))) ;
 
 -- --------------------------------------------------------
 
@@ -657,7 +670,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `kovertesadostavnicomorder`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `kovertesadostavnicomorder`  AS  select `o`.`UserID` AS `UserID`,`o`.`OrderDate` AS `OrderDate`,`k`.`OrderID` AS `OrderID`,`k`.`Recipient` AS `Recipient`,`k`.`Color` AS `Color`,`k`.`Name` AS `Name`,`k`.`Address` AS `Address`,`k`.`ZipCode` AS `ZipCode`,`k`.`Location` AS `Location`,`k`.`PostagePaid` AS `PostagePaid`,`k`.`EnvelopeType` AS `EnvelopeType`,`k`.`Quantity` AS `Quantity`,`k`.`SendCopy` AS `SendCopy` from (`orders` `o` join `koverte-sa-dostavnicom` `k` on((`o`.`ID` = `k`.`OrderID`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `kovertesadostavnicomorder`  AS  select `o`.`UserID` AS `UserID`,`o`.`OrderDate` AS `OrderDate`,`o`.`Seen` AS `Seen`,`b`.`OrderID` AS `OrderID`,`b`.`Recipient` AS `Recipient`,`b`.`Color` AS `Color`,`b`.`Name` AS `Name`,`b`.`Address` AS `Address`,`b`.`ZipCode` AS `ZipCode`,`b`.`Location` AS `Location`,`b`.`PostagePaid` AS `PostagePaid`,`b`.`EnvelopeType` AS `EnvelopeType`,`b`.`Quantity` AS `Quantity`,`b`.`SendCopy` AS `SendCopy` from (`orders` `o` join `koverte-sa-dostavnicom` `b` on((`o`.`ID` = `b`.`OrderID`))) ;
 
 -- --------------------------------------------------------
 
@@ -666,7 +679,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `kovertesapovratnicomorder`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `kovertesapovratnicomorder`  AS  select `o`.`UserID` AS `UserID`,`o`.`OrderDate` AS `OrderDate`,`k`.`OrderID` AS `OrderID`,`k`.`Color` AS `Color`,`k`.`Quantity` AS `Quantity`,`k`.`SendCopy` AS `SendCopy` from (`orders` `o` join `koverte-sa-povratnicom` `k` on((`o`.`ID` = `k`.`OrderID`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `kovertesapovratnicomorder`  AS  select `o`.`UserID` AS `UserID`,`o`.`OrderDate` AS `OrderDate`,`o`.`Seen` AS `Seen`,`b`.`OrderID` AS `OrderID`,`b`.`Color` AS `Color`,`b`.`Quantity` AS `Quantity`,`b`.`SendCopy` AS `SendCopy` from (`orders` `o` join `koverte-sa-povratnicom` `b` on((`o`.`ID` = `b`.`OrderID`))) ;
 
 -- --------------------------------------------------------
 
@@ -675,7 +688,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `omotispisaorder`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `omotispisaorder`  AS  select `o`.`UserID` AS `UserID`,`o`.`OrderDate` AS `OrderDate`,`os`.`OrderID` AS `OrderID`,`os`.`Recipient` AS `Recipient`,`os`.`Name` AS `Name`,`os`.`Address` AS `Address`,`os`.`Location` AS `Location`,`os`.`PaperType` AS `PaperType`,`os`.`Quantity` AS `Quantity`,`os`.`Comment` AS `Comment`,`os`.`SendCopy` AS `SendCopy` from (`orders` `o` join `omot-spisa` `os` on((`o`.`ID` = `os`.`OrderID`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `omotispisaorder`  AS  select `o`.`UserID` AS `UserID`,`o`.`OrderDate` AS `OrderDate`,`o`.`Seen` AS `Seen`,`b`.`OrderID` AS `OrderID`,`b`.`Recipient` AS `Recipient`,`b`.`Name` AS `Name`,`b`.`Address` AS `Address`,`b`.`Location` AS `Location`,`b`.`PaperType` AS `PaperType`,`b`.`Quantity` AS `Quantity`,`b`.`Comment` AS `Comment`,`b`.`SendCopy` AS `SendCopy` from (`orders` `o` join `omot-spisa` `b` on((`o`.`ID` = `b`.`OrderID`))) ;
 
 -- --------------------------------------------------------
 
@@ -684,7 +697,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `prenosorder`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `prenosorder`  AS  select `o`.`UserID` AS `UserID`,`o`.`OrderDate` AS `OrderDate`,`p`.`OrderID` AS `OrderID`,`p`.`Name` AS `Name`,`p`.`Address` AS `Address`,`p`.`Location` AS `Location`,`p`.`Country` AS `Country`,`p`.`PaymentPurpose` AS `PaymentPurpose`,`p`.`Recipient` AS `Recipient`,`p`.`PaymentCode` AS `PaymentCode`,`p`.`Currency` AS `Currency`,`p`.`Amount` AS `Amount`,`p`.`OrdererAccount` AS `OrdererAccount`,`p`.`ModelDebit` AS `ModelDebit`,`p`.`ReferenceNumber` AS `ReferenceNumber`,`p`.`RecipientAccount` AS `RecipientAccount`,`p`.`ModelApproval` AS `ModelApproval`,`p`.`ReferenceNumberApprovals` AS `ReferenceNumberApprovals`,`p`.`PaymentSlipNumber` AS `PaymentSlipNumber`,`p`.`SetQuantity` AS `SetQuantity`,`p`.`Comment` AS `Comment`,`p`.`VariableData` AS `VariableData`,`p`.`SendCopy` AS `SendCopy` from (`orders` `o` join `prenos` `p` on((`o`.`ID` = `p`.`OrderID`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `prenosorder`  AS  select `o`.`UserID` AS `UserID`,`o`.`OrderDate` AS `OrderDate`,`o`.`Seen` AS `Seen`,`b`.`OrderID` AS `OrderID`,`b`.`Name` AS `Name`,`b`.`Address` AS `Address`,`b`.`Location` AS `Location`,`b`.`Country` AS `Country`,`b`.`PaymentPurpose` AS `PaymentPurpose`,`b`.`Recipient` AS `Recipient`,`b`.`PaymentCode` AS `PaymentCode`,`b`.`Currency` AS `Currency`,`b`.`Amount` AS `Amount`,`b`.`OrdererAccount` AS `OrdererAccount`,`b`.`ModelDebit` AS `ModelDebit`,`b`.`ReferenceNumber` AS `ReferenceNumber`,`b`.`RecipientAccount` AS `RecipientAccount`,`b`.`ModelApproval` AS `ModelApproval`,`b`.`ReferenceNumberApprovals` AS `ReferenceNumberApprovals`,`b`.`PaymentSlipNumber` AS `PaymentSlipNumber`,`b`.`SetQuantity` AS `SetQuantity`,`b`.`Comment` AS `Comment`,`b`.`VariableData` AS `VariableData`,`b`.`SendCopy` AS `SendCopy` from (`orders` `o` join `prenos` `b` on((`o`.`ID` = `b`.`OrderID`))) ;
 
 -- --------------------------------------------------------
 
@@ -693,7 +706,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `stampanjeorder`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `stampanjeorder`  AS  select `o`.`UserID` AS `UserID`,`o`.`OrderDate` AS `OrderDate`,`s`.`OrderID` AS `OrderID`,`s`.`FileName` AS `FileName`,`s`.`CopyNumber` AS `CopyNumber`,`s`.`PageOrder` AS `PageOrder`,`s`.`Color` AS `Color`,`s`.`PagePrintType` AS `PagePrintType`,`s`.`PaperSize` AS `PaperSize`,`s`.`PaperWidth` AS `PaperWidth`,`s`.`BindingType` AS `BindingType`,`s`.`BindingFile` AS `BindingFile`,`s`.`HeftingType` AS `HeftingType`,`s`.`DrillingType` AS `DrillingType`,`s`.`Comment` AS `Comment`,`s`.`SendCopy` AS `SendCopy` from (`orders` `o` join `stampanje` `s` on((`o`.`ID` = `s`.`OrderID`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `stampanjeorder`  AS  select `o`.`UserID` AS `UserID`,`o`.`OrderDate` AS `OrderDate`,`o`.`Seen` AS `Seen`,`b`.`OrderID` AS `OrderID`,`b`.`FileName` AS `FileName`,`b`.`CopyNumber` AS `CopyNumber`,`b`.`PageOrder` AS `PageOrder`,`b`.`Color` AS `Color`,`b`.`PagePrintType` AS `PagePrintType`,`b`.`PaperSize` AS `PaperSize`,`b`.`PaperWidth` AS `PaperWidth`,`b`.`BindingType` AS `BindingType`,`b`.`BindingFile` AS `BindingFile`,`b`.`HeftingType` AS `HeftingType`,`b`.`DrillingType` AS `DrillingType`,`b`.`Comment` AS `Comment`,`b`.`SendCopy` AS `SendCopy` from (`orders` `o` join `stampanje` `b` on((`o`.`ID` = `b`.`OrderID`))) ;
 
 -- --------------------------------------------------------
 
@@ -702,7 +715,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `standardnekoverteorder`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `standardnekoverteorder`  AS  select `o`.`UserID` AS `UserID`,`o`.`OrderDate` AS `OrderDate`,`k`.`OrderID` AS `OrderID`,`k`.`Size` AS `Size`,`k`.`Quantity` AS `Quantity`,`k`.`BackPrintRow1` AS `BackPrintRow1`,`k`.`BackPrintRow2` AS `BackPrintRow2`,`k`.`BackPrintRow3` AS `BackPrintRow3`,`k`.`BackPrintRow4` AS `BackPrintRow4`,`k`.`AddressPrintRow1` AS `AddressPrintRow1`,`k`.`AddressPrintRow2` AS `AddressPrintRow2`,`k`.`AddressPrintRow3` AS `AddressPrintRow3`,`k`.`AddressPrintRow4` AS `AddressPrintRow4`,`k`.`Comment` AS `Comment`,`k`.`VariableData` AS `VariableData`,`k`.`SendCopy` AS `SendCopy` from (`orders` `o` join `standardne-koverte` `k` on((`o`.`ID` = `k`.`OrderID`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `standardnekoverteorder`  AS  select `o`.`UserID` AS `UserID`,`o`.`OrderDate` AS `OrderDate`,`o`.`Seen` AS `Seen`,`b`.`OrderID` AS `OrderID`,`b`.`Size` AS `Size`,`b`.`Quantity` AS `Quantity`,`b`.`BackPrintRow1` AS `BackPrintRow1`,`b`.`BackPrintRow2` AS `BackPrintRow2`,`b`.`BackPrintRow3` AS `BackPrintRow3`,`b`.`BackPrintRow4` AS `BackPrintRow4`,`b`.`AddressPrintRow1` AS `AddressPrintRow1`,`b`.`AddressPrintRow2` AS `AddressPrintRow2`,`b`.`AddressPrintRow3` AS `AddressPrintRow3`,`b`.`AddressPrintRow4` AS `AddressPrintRow4`,`b`.`Comment` AS `Comment`,`b`.`VariableData` AS `VariableData`,`b`.`SendCopy` AS `SendCopy` from (`orders` `o` join `standardne-koverte` `b` on((`o`.`ID` = `b`.`OrderID`))) ;
 
 -- --------------------------------------------------------
 
@@ -711,7 +724,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `uplateisplateorder`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `uplateisplateorder`  AS  select `o`.`UserID` AS `UserID`,`o`.`OrderDate` AS `OrderDate`,`ui`.`OrderID` AS `OrderID`,`ui`.`Type` AS `Type`,`ui`.`Name` AS `Name`,`ui`.`Address` AS `Address`,`ui`.`Location` AS `Location`,`ui`.`Country` AS `Country`,`ui`.`PaymentPurpose` AS `PaymentPurpose`,`ui`.`Recipient` AS `Recipient`,`ui`.`PaymentCode` AS `PaymentCode`,`ui`.`Currency` AS `Currency`,`ui`.`Amount` AS `Amount`,`ui`.`RecipientAccount` AS `RecipientAccount`,`ui`.`Model` AS `Model`,`ui`.`ReferenceNumber` AS `ReferenceNumber`,`ui`.`PaymentSlipNumber` AS `PaymentSlipNumber`,`ui`.`SetQuantity` AS `SetQuantity`,`ui`.`Comment` AS `Comment`,`ui`.`VariableData` AS `VariableData`,`ui`.`SendCopy` AS `SendCopy` from (`orders` `o` join `uplate-isplate` `ui` on((`o`.`ID` = `ui`.`OrderID`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `uplateisplateorder`  AS  select `o`.`UserID` AS `UserID`,`o`.`OrderDate` AS `OrderDate`,`o`.`Seen` AS `Seen`,`b`.`OrderID` AS `OrderID`,`b`.`Type` AS `Type`,`b`.`Name` AS `Name`,`b`.`Address` AS `Address`,`b`.`Location` AS `Location`,`b`.`Country` AS `Country`,`b`.`PaymentPurpose` AS `PaymentPurpose`,`b`.`Recipient` AS `Recipient`,`b`.`PaymentCode` AS `PaymentCode`,`b`.`Currency` AS `Currency`,`b`.`Amount` AS `Amount`,`b`.`RecipientAccount` AS `RecipientAccount`,`b`.`Model` AS `Model`,`b`.`ReferenceNumber` AS `ReferenceNumber`,`b`.`PaymentSlipNumber` AS `PaymentSlipNumber`,`b`.`SetQuantity` AS `SetQuantity`,`b`.`Comment` AS `Comment`,`b`.`VariableData` AS `VariableData`,`b`.`SendCopy` AS `SendCopy` from (`orders` `o` join `uplate-isplate` `b` on((`o`.`ID` = `b`.`OrderID`))) ;
 
 --
 -- Constraints for dumped tables
@@ -783,4 +796,3 @@ ALTER TABLE `standardne-koverte`
 --
 ALTER TABLE `uplate-isplate`
   ADD CONSTRAINT `uplate_orders_fk` FOREIGN KEY (`OrderID`) REFERENCES `orders` (`ID`);
-

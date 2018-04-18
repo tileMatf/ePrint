@@ -17,22 +17,22 @@ include("header.php");
       <div class="container">
         <div class="row">
           <div class="one-third column">
-            <i class="fas fa-print fa-2x"></i>
             <a href="./stampanje" class="link">
-              <h3>Štampanje</h3>
+				<i class="fas fa-print fa-2x"></i>
+				<h3>Štampanje</h3>
             </a>
           </div>
 
           <div class="one-third column">
-            <i class="far fa-clone fa-2x"></i>
             <a href="./blokovi" class="link">
-              <h3>Preslikavajući blokovi</h3>
+				<i class="far fa-clone fa-2x"></i>
+				<h3>Preslikavajući blokovi</h3>
             </a>
           </div>
 
           <div class="one-third column">
-            <i class="far fa-file-alt fa-2x"></i>
             <a href="uplatnice/" class="link">
+              <i class="far fa-file-alt fa-2x"></i>
               <h3>Uplatnice</h3>
             </a>
           </div>
@@ -46,18 +46,26 @@ include("header.php");
         <!--second row-->
         <div class="row">
           <div class="one-third column">
-            <i class="far fa-envelope fa-2x"></i>
             <a href="./koverte-dostavnice-formulari" class="link">
+		      <i class="far fa-envelope fa-2x"></i>
               <h3>Koverte, Dostavnice, Formulari za adresiranje</h3>
             </a>
           </div>
 
           <div class="one-third column">
-            <i class="fas fa-file-alt fa-2x"></i>
             <a href="./omot-spisa" class="link">
+              <i class="fas fa-file-alt fa-2x"></i>
               <h3>Omot spisa</h3>
             </a>
           </div>
+		  		  
+		  <div class="one-third column">
+            <a <?php if(isset($_SESSION['user_info'])) echo 'href="./omot-spisa"'?> class="link<?php if(!isset($_SESSION['user_info'])) echo ' disabled-links'?>">
+              <i class="fas fa-file-alt fa-2x"></i>
+              <h3>Prethodne narudžbine</h3>
+            </a>
+          </div>
+		  
         </div>
         <!--end of row-->
       </div>

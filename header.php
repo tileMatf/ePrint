@@ -67,7 +67,12 @@
 						</ul>
 					</div>
 					<!--end of column-->';
-			} else {
+			} else if(isset($_SESSION['user_info']) && $_SESSION['user_info']->Role === '1') {				
+				$url = isset($_SERVER['HTTPS']) ? "https" : "http" . "://" . $_SERVER['HTTP_HOST'] . "/eprint/adminpanel/";
+				header("Location: ". $url);
+				exit();
+			}
+			else {
 				echo 
 					'<form name="logoutForm">
 					  <div class="six columns navigation__header navigation__header--nav">

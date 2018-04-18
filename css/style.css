@@ -698,3 +698,16 @@ p.loggedStatus {
 p#registrationMsg {
 	color: red;
 }
+
+a.disabled-links{
+	pointer-events: none;
+	cursor: default;
+	opacity:0.2;
+	filter: alpha(opacity=40);
+	color:inherit;
+}
+
+.clickable {
+	cursor: pointer;
+}
+

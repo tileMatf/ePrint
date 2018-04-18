@@ -1,47 +1,76 @@
 <?php
 
 @session_start();
-//error_reporting(0);
 
-include("../header.php");
-
-require_once '../functions/mail.php';
-require_once '../functions/functions.php';
-
-
-if(isset($_POST['submit'])) {
-	try{
+	if(isset($_POST['submit'])){
+		if(isset($_SESSION['status']) && $_SESSION['status'] == '1'){
+			header('Location: ' . $_SERVER['HTTP_REFERER']);
+			exit();
+		}
+	}	
 	
-		$status = 0;
-		$fileStatus = 0;
+	include("../header.php");
+	require_once '../functions/mail.php';
+	require_once '../functions/functions.php';
+	
+	if(isset($_POST['submit'])) {
+		try{
 		
-		$fileStatus = uploadFile("uploaded_file/");
-		$statusMessage = generateMessage($fileStatus);
-		if($fileStatus !== 2 && $fileStatus !== 3){
-			$status = false;
-			$statusMessage = "Neodgovarajući fajl.";
-			return;
-		}
-		
-		$message = makeMessage('blokovi');
+			$status = 0;
+			$fileStatus = 0;
+			
+			$fileStatus = uploadFile("uploaded_file/", $_FILES['fileToUpload']);
+			$statusMessage = generateMessage($fileStatus, $_FILES['fileToUpload']);
+			if($fileStatus !== 2 && $fileStatus !== 3){
+				$status = false;
+				$statusMessage = "Neodgovarajući fajl.";
+				return;
+			}
+			
+			$message = makeMessage('blokovi');
 
-		if(isset($_POST['sendCopy']) && isset($_POST['sendCopyEmail'])){
-			$mailStatus = sendMail($message, $_POST['sendCopyEmail']);		
-		}
-		else {
-			$mailStatus = sendMail($message);
-		}
-		
-		$status = false;
-		if(($fileStatus === 2 || $fileStatus === 3) && $mailStatus === true){
-			$status = true;
-		} else {
+			if(isset($_POST['sendCopy']) && isset($_POST['sendCopyEmail'])){
+				$mailStatus = sendMail($message, $_POST['sendCopyEmail']);		
+			}
+			else {
+				$mailStatus = sendMail($message);
+			}
+			
 			$status = false;
-		}		
-	} catch(RuntimeException $e){
-		return $e->getMessage();
-	} 
-}
+			if(($fileStatus === 2 || $fileStatus === 3) && $mailStatus === true){
+				$status = true;
+				if(isset($_SESSION['user_info'])){
+					$_POST['fileToUploadName'] = $_FILES['fileToUpload']['name'];
+				}
+			} else {
+				$status = false;
+			}
+		} catch(RuntimeException $e){
+			return $e->getMessage();
+		} 
+	}
+
+	if(isset($status)){
+		$_SESSION['status'] = $status;
+	} else {
+		$_SESSION['status'] = null;
+		unset($_SESSION['status']);
+	}
+	
+	if(isset($_SESSION['user_info']) && isset($_SESSION['orderSaved'])){
+		if($_SESSION['orderSaved'] == 1){
+			unset($_POST);
+			$_POST = array();
+			$status = true;
+			$statusMessage = "Uspešno sačuvana narudžbina.";
+			$_SESSION['orderSaved'] = null;
+			unset($_SESSION['orderSaved']);
+		} else if($_SESSION['orderSaved'] == 2){
+			$status = false;
+			$statusMessage = "Došlo je do greške prilikom upisa narudžbine u bazu, pokušajte ponovo.";
+		}
+	}
+	
 ?>
 
         <!-- Navigation -->
@@ -65,33 +94,34 @@ if(isset($_POST['submit'])) {
                 <h2 class="section__heading">Preslikavajući blokovi</h2>
             </div>
             <!-- OVDE POCINJE FORMA ZA ***BLOKOVE*** -->
-            <form method="POST" name="orderForm" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data"
-				onsubmit="return(validate());">
+            <form name="orderForm"  enctype="multipart/form-data" method="post" 
+				action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" onsubmit="return(validate());">
                 <div class="form-box">
 				<!-- Paragraf za povratnu poruku -->		
 				<?php
 					if(isset($status)){
 						if($status === true){
-							if(isset($statusMessage) && $statusMessage)
+							if(isset($status) && $status)
 								echo '<p id="statusMessage" style="font-size:2rem; font-style: italic; color: green">'.
-									htmlspecialchars($statusMessage) . '</p>';
+									htmlspecialchars($statusMessage) . '</p>';							
 						}
 						else {
 							if(isset($statusMessage) && $statusMessage)
 								echo '<p id="statusMessage" style="font-size:2rem; font-style: italic; color: red">'.
 									htmlspecialchars($statusMessage) . '</p>';						
 						}
+						if(isset($_SESSION['user_info']) && isset($_POST['submit']))
+								echo '<input type="button" value="Sačuvaj narudžbinu" id="saveOrder" title="Možete sačuvati narudžbinu u Vašem nalogu"><br><br>';
 					}
 				?> 
                     <!--UPLOAD dugme-->
-                    <input type='file' name='fileToUpload' id="file" class="inputfile" accept='.gif,.jpe,.jpg,.jpeg,.png,.pdf'>
+                    <input type='file' name='fileToUpload' id="file" class="inputfile" accept='.jpe,.jpg,.jpeg,.png,.pdf'>
                     <label for="file"><i class="fa-upload fas fa-upload"></i><span>Okačite fajl</span></label>
-                    <div class="row">
-
+					<input type="hidden" name="fileToUploadName" value="<?php echo isset($_FILES['fileToUpload']) ? $_FILES['fileToUpload']['name'] : ''?>">                    
+					<div class="row">
                         <!-- BROJ SETOVA ***************************** -->
                         <label for="noOfSet" class="label__heading">Broj setova</label>
-                        <input class="u-full-width" type="number" name="noOfSet"
-							<?php echo (isset($_POST['noOfSet'])) ? "value='".$_POST['noOfSet']."'" : "value='1'" ?>>
+                        <input class="u-full-width" type="number" name="noOfSet" value="<?php echo isset($_POST['noOfSet']) ? $_POST['noOfSet'] : '1'?>">
                         <!-- ***************************** -->
 
                         <!-- BOJA ***************************** -->
@@ -136,7 +166,7 @@ if(isset($_POST['submit'])) {
                         </label>
                         <label for="Heftanjem levo">
                             <input type="radio" name="packing" id="Heftanjem levo" value="Heftanjem levo" 
-								<?php echo isset($_POST['packing']) && $_POST['packing'] == 'Heftanjem gore' ? "checked" : "" ?>>
+								<?php echo isset($_POST['packing']) && $_POST['packing'] == 'Heftanjem levo' ? "checked" : "" ?>>
                             <span>Heftanjem levo</span>
                         </label>
                         <label for="U fasciklu">
