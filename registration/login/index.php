@@ -18,6 +18,7 @@
 			$_SESSION['status_message'] = "Ulogovani ste kao " . $_SESSION['user_info']->Email;
 			unset($_SESSION['registration']);
 			unset($_SESSION['error_message']);
+			unset($_SESSION['statusMessage']);
 			echo json_encode($sql_result[0]);
 		} else {
 			//	$_SESSION['error_message'] = "Email adresa nije u bazi podataka, morate se prvo registrovati.";

@@ -43,7 +43,7 @@ function sendMail($message, $cc = null){
 	}	
 }	
 
-function sendMailWithPicture(){
+function sendMailWithPicture($to){
 	date_default_timezone_set('Europe/Belgrade');
 	$mail = new PHPMailer;
 
@@ -62,7 +62,7 @@ function sendMailWithPicture(){
 	);
 	$mail->CharSet = 'UTF-8';
 	$mail->setFrom('tijjana0807@gmail.com', 'EPrint');
-	$mail->addAddress($_POST['sendCopyEmail']);   // Add a recipient	
+	$mail->addAddress($to);   // Add a recipient	
 	//$mail->isHTML(true);  // Set email format to HTML
 	$mail->Subject = 'EPrint - Vaša narudžbina';
 	$image = file_get_contents("http://localhost/eprint/functions/createPicture/createPicture.php?" . http_build_query($_POST));

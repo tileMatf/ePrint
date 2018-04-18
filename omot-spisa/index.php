@@ -1,22 +1,37 @@
 <?php
 
 @session_start();
-include("../header.php");
 
+include("../header.php");
 require_once '../functions/functions.php';
 
-if(isset($_POST['submit'])) {
-	try{
-		echo "<div id='pictureModal' class='picture-modal'>
-			 <span class='picture-close'>&times;</span>
-			  <img id='pictureContent' class='picture-modal-content' 
-				src='../functions/createPicture.php?". http_build_query($_POST) ."'>
-			 <button id='paymentConfirm'>Ok</button>
-			</div>";
-	} catch(RuntimeException $e){
-		return $e->getMessage();
+	if(isset($_POST['submit'])) {
+		try{
+			echo "<div id='pictureModal' class='picture-modal'>
+				 <span class='picture-close'>&times;</span>
+				  <img id='pictureContent' class='picture-modal-content' 
+					src='../functions/createPicture.php?". http_build_query($_POST) ."'>
+				 <button id='paymentConfirm'>Ok</button>
+				</div>";
+		} catch(RuntimeException $e){
+			return $e->getMessage();
+		}
 	}
-}
+	
+	if(isset($_SESSION['user_info']) && isset($_SESSION['orderSaved'])){
+		if($_SESSION['orderSaved'] == 1){
+			unset($_POST);
+			$_POST = array();
+			$status = true;
+			$statusMessage = "Uspešno sačuvana narudžbina.";
+			$_SESSION['orderSaved'] = null;
+			unset($_SESSION['orderSaved']);
+		} else if($_SESSION['orderSaved'] == 2){
+			$status = false;
+			$statusMessage = "Došlo je do greške prilikom upisa u bazu, pokušajte ponovo.";
+		}
+	}
+
 ?>
         <!-- Navigation -->
         <div class="twelve columns">
@@ -43,6 +58,20 @@ if(isset($_POST['submit'])) {
                 <div class="form-box">
 				<!-- Paragraf za povratnu poruku -->		
 				<p style="font-size:2rem; font-style: italic;" id="statusMessage"></p>
+				<?php
+					if(isset($status)){
+						if($status === true){
+							if(isset($status) && $status)
+								echo '<p id="statusMessage" style="font-size:2rem; font-style: italic; color: green">'.
+									htmlspecialchars($statusMessage) . '</p>';							
+						}
+						else {
+							if(isset($statusMessage) && $statusMessage)
+								echo '<p id="statusMessage" style="font-size:2rem; font-style: italic; color: red">'.
+									htmlspecialchars($statusMessage) . '</p>';						
+						}
+					}
+				?>
 
                     <!-- ZA -->
                     <label class="label__heading">Za</label>
@@ -118,11 +147,20 @@ if(isset($_POST['submit'])) {
 								<?php echo isset($_POST['sendCopy']) ? 'checked' : ''?>>
                             <span class="label-body">Pošalji kopiju sebi</span>
                             <input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail" 
-							value="<?php echo isset($_POST['sendCopyEmail']) ? $_POST['sendCopyEmail'] : '' ?>">
+								value="<?php if(isset($_SESSION['user_info'])) 
+											echo $_SESSION['user_info']->Email;
+										else if(isset($_POST['sendCopyEmail'])) 
+											echo $_POST['sendCopyEmail'];
+										else 
+											echo ''; ?>">
                         </label>
 						<input type="hidden" name="orderType" id="orderType" value="omot-spisa">
 						<input type="hidden" id="successMessage" value="Omot spisa je uspešno naručen.">
                         <input class="button-primary" type="submit" value="Pošalji" name="submit" >
+						<?php
+						if(isset($_SESSION['user_info']))
+							echo '<input type="button" value="Sačuvaj" id="saveOrder" title="Možete sačuvati narudžbinu u Vašem nalogu">';
+						?>
                         <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
                 </div>
             </form>

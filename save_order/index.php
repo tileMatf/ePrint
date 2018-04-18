@@ -14,6 +14,42 @@
 				include("../registration/blok.php");
 				$order = new Blok($_POST);
 				break;
+			case 'uplatnice/nalog-za-uplatu':
+				include("../registration/uplata_isplata_prenos.php");
+				$order = new UplataIsplataPrenos($_POST, 'Uplata');
+				break;
+			case 'uplatnice/nalog-za-isplatu':
+				include("../registration/uplata_isplata_prenos.php");
+				$order = new UplataIsplataPrenos($_POST, 'Isplata');
+				break;
+			case 'uplatnice/nalog-za-prenos':
+				include("../registration/uplata_isplata_prenos.php");
+				$order = new UplataIsplataPrenos($_POST, 'Prenos');
+				break;
+			case 'koverte-dostavnice-formulari/koverte-sa-povratnicom':
+				include("../registration/koverta_sa_povratnicom.php");
+				$order = new KovertaSaPovratnicom($_POST);
+				break;
+			case 'koverte-dostavnice-formulari/dostavnice':
+				include("../registration/dostavnica.php");
+				$order = new Dostavnica($_POST);
+				break;
+			case 'koverte-dostavnice-formulari/koverte-sa-dostavnicom':
+				include("../registration/koverta_sa_dostavnicom.php");
+				$order = new KovertaSaDostavnicom($_POST);
+				break;
+			case 'koverte-dostavnice-formulari/formulari-za-adresiranje':
+				include("../registration/formular_za_adresiranje.php");
+				$order = new FormularZaAdresiranje($_POST);
+				break;
+			case 'koverte-dostavnice-formulari/standardne-koverte':
+				include("../registration/standardna_koverta.php");
+				$order = new StandardnaKoverta($_POST);
+				break;
+			case 'omot-spisa':
+				include("../registration/omot_spisa.php");
+				$order = new OmotSpisa($_POST);
+				break;
 		}
 		
 		require_once("../registration/connection.php");
@@ -28,6 +64,6 @@
 			$_SESSION['orderSaved'] = 2;
 		}	
 		
-		return $status;
+		echo $status;
 	}
 ?>

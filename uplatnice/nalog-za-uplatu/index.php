@@ -3,21 +3,34 @@
 @session_start();
 
 include("../../header.php");
-
 require_once "../../functions/functions.php";
 
-if(isset($_POST['submit'])) {
-	try{
-		echo "<div id='pictureModal' class='picture-modal'>
-			 <span class='picture-close'>&times;</span>
-			  <img id='pictureContent' class='picture-modal-content' 
-				src='../../functions/createPicture.php?". http_build_query($_POST) . "'>
-			 <button id='paymentConfirm'>Ok</button>
-			</div>";
-	} catch(RuntimeException $e){
-		return $e->getMessage();
-	} 
-}
+	if(isset($_POST['submit'])) {
+		try{
+			echo "<div id='pictureModal' class='picture-modal'>
+				 <span class='picture-close'>&times;</span>
+				  <img id='pictureContent' class='picture-modal-content' 
+					src='../../functions/createPicture.php?". http_build_query($_POST) . "'>
+				 <button id='paymentConfirm'>Ok</button>
+				</div>";
+		} catch(RuntimeException $e){
+			return $e->getMessage();
+		} 
+	}
+
+	if(isset($_SESSION['user_info']) && isset($_SESSION['orderSaved'])){
+		if($_SESSION['orderSaved'] == 1){
+			unset($_POST);
+			$_POST = array();
+			$status = true;
+			$statusMessage = "Uspešno sačuvana koverta.";
+			$_SESSION['orderSaved'] = null;
+			unset($_SESSION['orderSaved']);
+		} else if($_SESSION['orderSaved'] == 2){
+			$status = false;
+			$statusMessage = "Došlo je do greške prilikom upisa u bazu, pokušajte ponovo.";
+		}
+	}
 ?>
         <!-- Navigation -->
         <div class="twelve columns">
@@ -49,7 +62,20 @@ if(isset($_POST['submit'])) {
                 <div class="form-box">
 				<!-- Paragraf za povratnu poruku -->		
 				<p style="font-size:2rem; font-style: italic;" id="statusMessage"></p>
-				
+				<?php
+					if(isset($status)){
+						if($status === true){
+							if(isset($status) && $status)
+								echo '<p id="statusMessage" style="font-size:2rem; font-style: italic; color: green">'.
+									htmlspecialchars($statusMessage) . '</p>';							
+						}
+						else {
+							if(isset($statusMessage) && $statusMessage)
+								echo '<p id="statusMessage" style="font-size:2rem; font-style: italic; color: red">'.
+									htmlspecialchars($statusMessage) . '</p>';						
+						}
+					}
+				?>
                     <!-- UNOS PODATAKA ***************************** -->
 
                     <!--NAME AND SURNAME ******************************-->
@@ -162,14 +188,25 @@ if(isset($_POST['submit'])) {
                         <span class="label-body">Varijabilni podaci</span>
                     </label>
                     <label class="sendCopy" for="sendCopy">
-                        <input type="checkbox" id="sendCopy" name="sendCopy">
+                        <input type="checkbox" id="sendCopy" name="sendCopy"
+							<?php echo isset($_POST['sendCopy']) ? "checked" : "" ?>>
                         <span class="label-body">Pošalji kopiju sebi</span>
-                        <input type="text" placeholder="Upišite Vaš email" id="sendCopyEmail" name="sendCopyEmail">
+                        <input type="text" placeholder="Upišite Vaš email" id="sendCopyEmail" name="sendCopyEmail"
+							value="<?php if(isset($_SESSION['user_info'])) 
+											echo $_SESSION['user_info']->Email;
+										else if(isset($_POST['sendCopyEmail'])) 
+											echo $_POST['sendCopyEmail'];
+										else 
+											echo ''; ?>">
                     </label>
-					<input type="hidden" name="orderType" id="orderType" value="nalog-za-uplatu">
+					<input type="hidden" name="orderType" id="orderType" value="uplatnice/nalog-za-uplatu">
 					<input type="hidden" id="successMessage" value="Nalog za uplatu je uspešno naručen.">
                     <!-- POSALJI DUGME -->
-                    <input class="button-primary" type="submit" value="Pošalji" name="submit" />
+                    <input class="button-primary" type="submit" value="Pošalji" name="submit">
+					<?php
+					if(isset($_SESSION['user_info']))
+						echo '<input type="button" value="Sačuvaj uplatnicu" id="saveOrder" title="Možete sačuvati uplatnicu u Vašem nalogu">';
+					?>
                     <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
                 </div>
             </form>

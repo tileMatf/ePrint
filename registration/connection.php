@@ -178,50 +178,63 @@ class DB {
 		}
 	}
 	
-	private function insertNalog($nalog){
+	private function insertNalog($nalog, $userID){
 		try{
-			if($nalog->Type != null){
-				$query = self::$connection->prepare("INSERT INTO `uplate-isplate` (OrderID, Type, Name, Address, Location, Country, PaymentPurpose,
-					Recipient, PaymentCode, Currency, Amount, RecipientAccount, Model, ReferenceNumber, PaymentSlipNumber, SetQuantity, Comment, 
-					VariableData, SendCopy) VALUES (:orderID, :type, :name, :address, :location, :country, :paymentPurpose, :recipient, 
-					:paymentCode, :currency, :amount, :recipientAccount, :model, :referenceNumber, :paymentSlipNumber, :setQuantity, :comment,
-					:variableData, :sendCopy)");
-				$query->bindValue(":type", $nalog->Type, PDO::PARAM_STR);
-				$query->bindValue(":model", $nalog->ModelApproval, PDO::PARAM_STR);
-			} else {
-				$query = self::$connection->prepare("INSERT INTO prenos (OrderID, Name, Address, Location, Country, PaymentPurpose,
-					Recipient, PaymentCode, Currency, Amount, RecipientAccount, ModelDebit, ReferenceNumber, PaymentSlipNumber, SetQuantity, Comment, 
-					VariableData, SendCopy, OrdererAccount, ModelApproval, ReferenceNumberApprovals) VALUES (:orderID, :name, :address, 
-					:location, :country, :paymentPurpose, :recipient, :paymentCode, :currency, :amount, :recipientAccount, :modelDebit, :referenceNumber,
-					:paymentSlipNumber, :setQuantity, :comment, :variableData, :sendCopy, :ordererAccount, :modelApproval, :refNumberApproval)");
-				$query->bindValue(":ordererAccount", $nalog->OrdererAccount, PDO::PARAM_INT);
-				$query->bindValue(":modelDebit", $nalog->ModelDebit, PDO::PARAM_STR);
-				$query->bindValue(":modelApproval", $nalog->ModelApproval, PDO::PARAM_STR);
-				$query->bindValue(":refNumberApproval", $nalog->ReferenceNumberApprovals, PDO::PARAM_STR);
-			}
+			$order = new Order();
+			if($nalog->Type == 'Uplata')
+				$order->TypeID = 3;
+			else if($nalog->Type == 'Isplata')
+				$order->TypeID = 4;
+			else 
+				$order->TypeID = 5;
+			$order->UserID = $userID;
+			$orderID = $this->insertOrder($order);
+			if($orderID > 0){
+				if($nalog->Type == 'Uplata' || $nalog->Type == 'Isplata'){
+					$query = self::$connection->prepare("INSERT INTO `uplate-isplate` (OrderID, Type, Name, Address, Location, Country, PaymentPurpose,
+						Recipient, PaymentCode, Currency, Amount, RecipientAccount, Model, ReferenceNumber, PaymentSlipNumber, SetQuantity, Comment, 
+						VariableData, SendCopy) VALUES (:orderID, :type, :name, :address, :location, :country, :paymentPurpose, :recipient, 
+						:paymentCode, :currency, :amount, :recipientAccount, :model, :referenceNumber, :paymentSlipNumber, :setQuantity, :comment,
+						:variableData, :sendCopy)");
+					$query->bindValue(":type", $nalog->Type, PDO::PARAM_STR);
+					$query->bindValue(":model", $nalog->Model, PDO::PARAM_STR);
+				} else if($nalog->Type == 'Prenos'){
+					$query = self::$connection->prepare("INSERT INTO prenos (OrderID, Name, Address, Location, Country, PaymentPurpose,
+						Recipient, PaymentCode, Currency, Amount, RecipientAccount, ModelDebit, ReferenceNumber, PaymentSlipNumber, SetQuantity, Comment, 
+						VariableData, SendCopy, OrdererAccount, ModelApproval, ReferenceNumberApprovals) VALUES (:orderID, :name, :address, 
+						:location, :country, :paymentPurpose, :recipient, :paymentCode, :currency, :amount, :recipientAccount, :modelDebit, :referenceNumber,
+						:paymentSlipNumber, :setQuantity, :comment, :variableData, :sendCopy, :ordererAccount, :modelApproval, :refNumberApproval)");
+					$query->bindValue(":ordererAccount", $nalog->OrdererAccount, PDO::PARAM_INT);
+					$query->bindValue(":modelDebit", $nalog->ModelDebit, PDO::PARAM_STR);
+					$query->bindValue(":modelApproval", $nalog->ModelApproval, PDO::PARAM_STR);
+					$query->bindValue(":refNumberApproval", $nalog->ReferenceNumberApprovals, PDO::PARAM_STR);
+				}
 
-			$query->bindValue(":orderID", $nalog->OrderID, PDO::PARAM_INT);
-			$query->bindValue(":name", $nalog->Name, PDO::PARAM_STR);
-			$query->bindValue(":address", $nalog->Address, PDO::PARAM_INT);
-			$query->bindValue(":location", $nalog->Location, PDO::PARAM_INT);
-			$query->bindValue(":country", $nalog->Country, PDO::PARAM_STR);
-			$query->bindValue(":paymentPurpose", $nalog->PaymentPurpose, PDO::PARAM_STR);
-			$query->bindValue(":recipient", $nalog->Recipient, PDO::PARAM_STR);
-			$query->bindValue(":paymentCode", $nalog->PaymentCode, PDO::PARAM_STR);
-			$query->bindValue(":currency", $nalog->Currency, PDO::PARAM_STR);
-			$query->bindValue(":amount", $nalog->Amount, PDO::PARAM_INT);
-			$query->bindValue(":recipientAccount", $nalog->RecipientAccount, PDO::PARAM_STR);
-			$query->bindValue(":referenceNumber", $nalog->ReferenceNumber, PDO::PARAM_STR);
-			$query->bindValue(":paymentSlipNumber", $nalog->PaymentSlipNumber, PDO::PARAM_INT);
-			$query->bindValue(":setQuantity", $nalog->SetQuantity, PDO::PARAM_STR);
-			$query->bindValue(":comment", $nalog->Comment, PDO::PARAM_STR);
-			$query->bindValue(":variableData", $nalog->VariableData, PDO::PARAM_INT);
-			$query->bindValue(":sendCopy", $nalog->SendCopy, PDO::PARAM_INT);
-			$query->execute();
-			if($query->rowCount() > 0){
-					return true;
+				$query->bindValue(":orderID", $orderID, PDO::PARAM_INT);
+				$query->bindValue(":name", $nalog->Name, PDO::PARAM_STR);
+				$query->bindValue(":address", $nalog->Address, PDO::PARAM_INT);
+				$query->bindValue(":location", $nalog->Location, PDO::PARAM_INT);
+				$query->bindValue(":country", $nalog->Country, PDO::PARAM_STR);
+				$query->bindValue(":paymentPurpose", $nalog->PaymentPurpose, PDO::PARAM_STR);
+				$query->bindValue(":recipient", $nalog->Recipient, PDO::PARAM_STR);
+				$query->bindValue(":paymentCode", $nalog->PaymentCode, PDO::PARAM_STR);
+				$query->bindValue(":currency", $nalog->Currency, PDO::PARAM_STR);
+				$query->bindValue(":amount", $nalog->Amount, PDO::PARAM_INT);
+				$query->bindValue(":recipientAccount", $nalog->RecipientAccount, PDO::PARAM_STR);
+				$query->bindValue(":referenceNumber", $nalog->ReferenceNumber, PDO::PARAM_STR);
+				$query->bindValue(":paymentSlipNumber", $nalog->PaymentSlipNumber, PDO::PARAM_INT);
+				$query->bindValue(":setQuantity", $nalog->SetQuantity, PDO::PARAM_STR);
+				$query->bindValue(":comment", $nalog->Comment, PDO::PARAM_STR);
+				$query->bindValue(":variableData", $nalog->VariableData, PDO::PARAM_INT);
+				$query->bindValue(":sendCopy", $nalog->SendCopy, PDO::PARAM_INT);
+				$query->execute();
+				if($query->rowCount() > 0){
+						return true;
+				} else {
+					print_r(self::$connection->errorInfo());
+					return false;
+				}
 			} else {
-				print_r(self::$connection->errorInfo());
 				return false;
 			}
 		} catch(PDOException $e) {
@@ -230,19 +243,27 @@ class DB {
 		}
 	}
 	
-	private function insertKovertaSaPovratnicom($koverta){
+	private function insertKovertaSaPovratnicom($koverta, $userID){
 		try{
-			$query = self::$connection->prepare("INSERT INTO `koverte-sa-povratnicom` (OrderID, Color, Quantity, SendCopy) 
-				VALUES (:orderID, :color, :quantity, :sendCopy)");
-			$query->bindValue(":orderID", $koverta->OrderID, PDO::PARAM_INT);
-			$query->bindValue(":color", $koverta->Color, PDO::PARAM_STR);
-			$query->bindValue(":quantity", $koverta->Quantity, PDO::PARAM_STR);
-			$query->bindValue(":sendCopy", $koverta->SendCopy, PDO::PARAM_INT);
-			$query->execute();
-			if($query->rowCount() > 0){
-					return true;
+			$order = new Order();
+			$order->TypeID = 6;
+			$order->UserID = $userID;
+			$orderID = $this->insertOrder($order);
+			if($orderID > 0){
+				$query = self::$connection->prepare("INSERT INTO `koverte-sa-povratnicom` (OrderID, Color, Quantity, SendCopy) 
+					VALUES (:orderID, :color, :quantity, :sendCopy)");
+				$query->bindValue(":orderID", $orderID, PDO::PARAM_INT);
+				$query->bindValue(":color", $koverta->Color, PDO::PARAM_STR);
+				$query->bindValue(":quantity", $koverta->Quantity, PDO::PARAM_STR);
+				$query->bindValue(":sendCopy", $koverta->SendCopy, PDO::PARAM_INT);
+				$query->execute();
+				if($query->rowCount() > 0){
+						return true;
+				} else {
+					print_r(self::$connection->errorInfo());
+					return false;
+				}
 			} else {
-				print_r(self::$connection->errorInfo());
 				return false;
 			}
 		} catch(PDOException $e) {
@@ -251,22 +272,31 @@ class DB {
 		}
 	}
 	
-	private function insertDostavnica($dostavnica){
+	private function insertDostavnica($dostavnica, $userID){
 		try{
-			$query = self::$connection->prepare("INSERT INTO `dostavnice` (OrderID, Recipient, Name, ZipCode, Location, Quantity, SendCopy) 
-				VALUES (:orderID, :recipient, :name, :zipCode, :location, :quantity, :sendCopy)");
-			$query->bindValue(":orderID", $dostavnica->OrderID, PDO::PARAM_INT);
-			$query->bindValue(":recipient", $dostavnica->Recipient, PDO::PARAM_STR);
-			$query->bindValue(":name", $dostavnica->Name, PDO::PARAM_STR);
-			$query->bindValue(":zipCode", $dostavnica->ZipCode, PDO::PARAM_INT);
-			$query->bindValue(":location", $dostavnica->Location, PDO::PARAM_STR);
-			$query->bindValue(":quantity", $dostavnica->Quantity, PDO::PARAM_INT);
-			$query->bindValue(":sendCopy", $dostavnica->SendCopy, PDO::PARAM_INT);
-			$query->execute();
-			if($query->rowCount() > 0){
-					return true;
+			$order = new Order();
+			$order->TypeID = 7;
+			$order->UserID = $userID;
+			$orderID = $this->insertOrder($order);
+			if($orderID > 0){
+				$query = self::$connection->prepare("INSERT INTO `dostavnice` (OrderID, Recipient, Name, Address, ZipCode, Location, Quantity, SendCopy) 
+					VALUES (:orderID, :recipient, :name, :address, :zipCode, :location, :quantity, :sendCopy)");
+				$query->bindValue(":orderID", $orderID, PDO::PARAM_INT);
+				$query->bindValue(":recipient", $dostavnica->Recipient, PDO::PARAM_STR);
+				$query->bindValue(":name", $dostavnica->Name, PDO::PARAM_STR);
+				$query->bindValue(":address", $dostavnica->Address, PDO::PARAM_STR);
+				$query->bindValue(":zipCode", $dostavnica->ZipCode, PDO::PARAM_INT);
+				$query->bindValue(":location", $dostavnica->Location, PDO::PARAM_STR);
+				$query->bindValue(":quantity", $dostavnica->Quantity, PDO::PARAM_INT);
+				$query->bindValue(":sendCopy", $dostavnica->SendCopy, PDO::PARAM_INT);
+				$query->execute();
+				if($query->rowCount() > 0){
+						return true;
+				} else {
+					print_r(self::$connection->errorInfo());
+					return false;
+				}
 			} else {
-				print_r(self::$connection->errorInfo());
 				return false;
 			}
 		} catch(PDOException $e) {
@@ -275,27 +305,35 @@ class DB {
 		}
 	}
 	
-	private function insertKovertaSaDostavnicom($koverta){
+	private function insertKovertaSaDostavnicom($koverta, $userID){
 		try{
-			$query = self::$connection->prepare("INSERT INTO `koverte-sa-dostavnicom` (OrderID, Recipient, Color, Name, Address, ZipCode, Location,
-				PostagePaid, EnvelopeType, Quantity, SendCopy) 
-				VALUES (:orderID, :recipient, :color, :name, :address, :zipCode, :location, :postagePaid, :envelopeType, :quantity, :sendCopy)");
-			$query->bindValue(":orderID", $koverta->OrderID, PDO::PARAM_INT);
-			$query->bindValue(":recipient", $koverta->Recipient, PDO::PARAM_STR);
-			$query->bindValue(":color", $koverta->Color, PDO::PARAM_STR);
-			$query->bindValue(":name", $koverta->Name, PDO::PARAM_STR);
-			$query->bindValue(":address", $koverta->Address, PDO::PARAM_STR);
-			$query->bindValue(":zipCode", $koverta->ZipCode, PDO::PARAM_INT);
-			$query->bindValue(":location", $koverta->Location, PDO::PARAM_STR);
-			$query->bindValue(":postagePaid", $koverta->PostagePaid, PDO::PARAM_STR);
-			$query->bindValue(":envelopeType", $koverta->EnvelopeType, PDO::PARAM_STR);
-			$query->bindValue(":quantity", $koverta->Quantity, PDO::PARAM_INT);
-			$query->bindValue(":sendCopy", $koverta->SendCopy, PDO::PARAM_INT);
-			$query->execute();
-			if($query->rowCount() > 0){
-					return true;
+			$order = new Order();
+			$order->TypeID = 8;
+			$order->UserID = $userID;
+			$orderID = $this->insertOrder($order);
+			if($orderID > 0){
+				$query = self::$connection->prepare("INSERT INTO `koverte-sa-dostavnicom` (OrderID, Recipient, Color, Name, Address, ZipCode, Location,
+					PostagePaid, EnvelopeType, Quantity, SendCopy) 
+					VALUES (:orderID, :recipient, :color, :name, :address, :zipCode, :location, :postagePaid, :envelopeType, :quantity, :sendCopy)");
+				$query->bindValue(":orderID", $orderID, PDO::PARAM_INT);
+				$query->bindValue(":recipient", $koverta->Recipient, PDO::PARAM_STR);
+				$query->bindValue(":color", $koverta->Color, PDO::PARAM_STR);
+				$query->bindValue(":name", $koverta->Name, PDO::PARAM_STR);
+				$query->bindValue(":address", $koverta->Address, PDO::PARAM_STR);
+				$query->bindValue(":zipCode", $koverta->ZipCode, PDO::PARAM_INT);
+				$query->bindValue(":location", $koverta->Location, PDO::PARAM_STR);
+				$query->bindValue(":postagePaid", $koverta->PostagePaid, PDO::PARAM_STR);
+				$query->bindValue(":envelopeType", $koverta->EnvelopeType, PDO::PARAM_STR);
+				$query->bindValue(":quantity", $koverta->Quantity, PDO::PARAM_INT);
+				$query->bindValue(":sendCopy", $koverta->SendCopy, PDO::PARAM_INT);
+				$query->execute();
+				if($query->rowCount() > 0){
+						return true;
+				} else {
+					print_r(self::$connection->errorInfo());
+					return false;
+				}
 			} else {
-				print_r(self::$connection->errorInfo());
 				return false;
 			}
 		} catch(PDOException $e) {
@@ -303,17 +341,26 @@ class DB {
 			return false;
 		}
 	}
-	private function insertFormular($formular){
+	private function insertFormular($formular, $userID){
 		try{
-			$query = self::$connection->prepare("INSERT INTO `formulari-za-adresiranje` (OrderID, Quantity) 
-				VALUES (:orderID, :quantity)");
-			$query->bindValue(":orderID", $formular->OrderID, PDO::PARAM_INT);
-			$query->bindValue(":quantity", $formular->Quantity, PDO::PARAM_INT);
-			$query->execute();
-			if($query->rowCount() > 0){
-					return true;
+			$order = new Order();
+			$order->TypeID = 9;
+			$order->UserID = $userID;
+			$orderID = $this->insertOrder($order);
+			if($orderID > 0){
+				$query = self::$connection->prepare("INSERT INTO `formulari-za-adresiranje` (OrderID, Quantity, SendCopy) 
+					VALUES (:orderID, :quantity, :sendCopy)");
+				$query->bindValue(":orderID", $orderID, PDO::PARAM_INT);
+				$query->bindValue(":quantity", $formular->Quantity, PDO::PARAM_INT);
+				$query->bindValue(":sendCopy", $formular->SendCopy, PDO::PARAM_INT);
+				$query->execute();
+				if($query->rowCount() > 0){
+						return true;
+				} else {
+					print_r(self::$connection->errorInfo());
+					return false;
+				}
 			} else {
-				print_r(self::$connection->errorInfo());
 				return false;
 			}
 		} catch(PDOException $e) {
@@ -322,31 +369,39 @@ class DB {
 		}	
 	}
 	
-	private function insertStandardnaKoverta($koverta){
+	private function insertStandardnaKoverta($koverta, $userID){
 		try{
-			$query = self::$connection->prepare("INSERT INTO `standardne-koverte` (OrderID, Size, Quantity, BackPrintRow1, BackPrintRow2, 
-			BackPrintRow3, BackPrintRow4, AddressPrintRow1, AddressPrintRow2, AddressPrintRow3, AddressPrintRow4, Comment, VariableData, SendCopy) 
-				VALUES (:orderID, :size, :quantity, :backPrintRow1, :backPrintRow2, :backPrintRow3, :backPrintRow4, :addressPrintRow1, 
-				:addressPrintRow2, :addressPrintRow3, :addressPrintRow4, :comment, :variableData, :sendCopy)");
-			$query->bindValue(":orderID", $koverta->OrderID, PDO::PARAM_INT);
-			$query->bindValue(":size", $koverta->Size, PDO::PARAM_STR);
-			$query->bindValue(":quantity", $koverta->Quantity, PDO::PARAM_INT);
-			$query->bindValue(":backPrintRow1", $koverta->BackPrintRow1, PDO::PARAM_STR);
-			$query->bindValue(":backPrintRow2", $koverta->BackPrintRow2, PDO::PARAM_STR);
-			$query->bindValue(":backPrintRow3", $koverta->BackPrintRow3, PDO::PARAM_STR);
-			$query->bindValue(":backPrintRow4", $koverta->BackPrintRow4, PDO::PARAM_STR);
-			$query->bindValue(":addressPrintRow1", $koverta->AddressPrintRow1, PDO::PARAM_STR);
-			$query->bindValue(":addressPrintRow2", $koverta->AddressPrintRow2, PDO::PARAM_STR);
-			$query->bindValue(":addressPrintRow3", $koverta->AddressPrintRow3, PDO::PARAM_STR);
-			$query->bindValue(":addressPrintRow4", $koverta->AddressPrintRow4, PDO::PARAM_STR);
-			$query->bindValue(":comment", $koverta->Comment, PDO::PARAM_STR);
-			$query->bindValue(":variableData", $koverta->VariableData, PDO::PARAM_INT);
-			$query->bindValue(":sendCopy", $koverta->SendCopy, PDO::PARAM_INT);
-			$query->execute();
-			if($query->rowCount() > 0){
-					return true;
+			$order = new Order();
+			$order->TypeID = 10;
+			$order->UserID = $userID;
+			$orderID = $this->insertOrder($order);
+			if($orderID > 0){
+				$query = self::$connection->prepare("INSERT INTO `standardne-koverte` (OrderID, Size, Quantity, BackPrintRow1, BackPrintRow2, 
+				BackPrintRow3, BackPrintRow4, AddressPrintRow1, AddressPrintRow2, AddressPrintRow3, AddressPrintRow4, Comment, VariableData, SendCopy) 
+					VALUES (:orderID, :size, :quantity, :backPrintRow1, :backPrintRow2, :backPrintRow3, :backPrintRow4, :addressPrintRow1, 
+					:addressPrintRow2, :addressPrintRow3, :addressPrintRow4, :comment, :variableData, :sendCopy)");
+				$query->bindValue(":orderID", $orderID, PDO::PARAM_INT);
+				$query->bindValue(":size", $koverta->Size, PDO::PARAM_STR);
+				$query->bindValue(":quantity", $koverta->Quantity, PDO::PARAM_INT);
+				$query->bindValue(":backPrintRow1", $koverta->BackPrintRow1, PDO::PARAM_STR);
+				$query->bindValue(":backPrintRow2", $koverta->BackPrintRow2, PDO::PARAM_STR);
+				$query->bindValue(":backPrintRow3", $koverta->BackPrintRow3, PDO::PARAM_STR);
+				$query->bindValue(":backPrintRow4", $koverta->BackPrintRow4, PDO::PARAM_STR);
+				$query->bindValue(":addressPrintRow1", $koverta->AddressPrintRow1, PDO::PARAM_STR);
+				$query->bindValue(":addressPrintRow2", $koverta->AddressPrintRow2, PDO::PARAM_STR);
+				$query->bindValue(":addressPrintRow3", $koverta->AddressPrintRow3, PDO::PARAM_STR);
+				$query->bindValue(":addressPrintRow4", $koverta->AddressPrintRow4, PDO::PARAM_STR);
+				$query->bindValue(":comment", $koverta->Comment, PDO::PARAM_STR);
+				$query->bindValue(":variableData", $koverta->VariableData, PDO::PARAM_INT);
+				$query->bindValue(":sendCopy", $koverta->SendCopy, PDO::PARAM_INT);
+				$query->execute();
+				if($query->rowCount() > 0){
+						return true;
+				} else {
+					print_r(self::$connection->errorInfo());
+					return false;
+				}
 			} else {
-				print_r(self::$connection->errorInfo());
 				return false;
 			}
 		} catch(PDOException $e) {
@@ -355,25 +410,33 @@ class DB {
 		}
 	}
 	
-	private function insertOmotSpisa($omot){
+	private function insertOmotSpisa($omot, $userID){
 		try{
-			$query = self::$connection->prepare("INSERT INTO `omot-spisa` (OrderID, Recipient, Name, Address, Location,
-				PaperType, Quantity, Comment, SendCopy) 
-				VALUES (:orderID, :recipient, :name, :address, :location, :paperType, :quantity, :comment, :sendCopy)");
-			$query->bindValue(":orderID", $omot->OrderID, PDO::PARAM_INT);
-			$query->bindValue(":recipient", $omot->Recipient, PDO::PARAM_STR);
-			$query->bindValue(":name", $omot->Name, PDO::PARAM_STR);
-			$query->bindValue(":address", $omot->Address, PDO::PARAM_STR);
-			$query->bindValue(":location", $omot->Location, PDO::PARAM_STR);
-			$query->bindValue(":paperType", $omot->PaperType, PDO::PARAM_STR);
-			$query->bindValue(":quantity", $omot->Quantity, PDO::PARAM_INT);
-			$query->bindValue(":comment", $omot->Comment, PDO::PARAM_STR);
-			$query->bindValue(":sendCopy", $omot->SendCopy, PDO::PARAM_INT);
-			$query->execute();
-			if($query->rowCount() > 0){
-					return true;
+			$order = new Order();
+			$order->TypeID = 11;
+			$order->UserID = $userID;
+			$orderID = $this->insertOrder($order);
+			if($orderID > 0){
+				$query = self::$connection->prepare("INSERT INTO `omot-spisa` (OrderID, Recipient, Name, Address, Location,
+					PaperType, Quantity, Comment, SendCopy) 
+					VALUES (:orderID, :recipient, :name, :address, :location, :paperType, :quantity, :comment, :sendCopy)");
+				$query->bindValue(":orderID", $orderID, PDO::PARAM_INT);
+				$query->bindValue(":recipient", $omot->Recipient, PDO::PARAM_STR);
+				$query->bindValue(":name", $omot->Name, PDO::PARAM_STR);
+				$query->bindValue(":address", $omot->Address, PDO::PARAM_STR);
+				$query->bindValue(":location", $omot->Location, PDO::PARAM_STR);
+				$query->bindValue(":paperType", $omot->PaperType, PDO::PARAM_STR);
+				$query->bindValue(":quantity", $omot->Quantity, PDO::PARAM_INT);
+				$query->bindValue(":comment", $omot->Comment, PDO::PARAM_STR);
+				$query->bindValue(":sendCopy", $omot->SendCopy, PDO::PARAM_INT);
+				$query->execute();
+				if($query->rowCount() > 0){
+						return true;
+				} else {
+					print_r(self::$connection->errorInfo());
+					return false;
+				}
 			} else {
-				print_r(self::$connection->errorInfo());
 				return false;
 			}
 		} catch(PDOException $e) {
@@ -960,19 +1023,19 @@ class DB {
 			} else if($order instanceof Blok){
 				$saved = $this->insertBlok($order, $userID);
 			} else if($order instanceof UplataIsplataPrenos){
-				$saved = $this->insertNalog($order);
+				$saved = $this->insertNalog($order, $userID);
 			} else if($order instanceof KovertaSaPovratnicom){
-				$saved = $this->insertKovertaSaDostavnicom($order);
+				$saved = $this->insertKovertaSaPovratnicom($order, $userID);
 			} else if($order instanceof Dostavnica){
-				$saved = $this->insertDostavnica($order);
+				$saved = $this->insertDostavnica($order, $userID);
 			} else if($order instanceof KovertaSaDostavnicom){
-				$saved = $this->insertKovertaSaDostavnicom($order);
+				$saved = $this->insertKovertaSaDostavnicom($order, $userID);
 			} else if($order instanceof FormularZaAdresiranje){
-				$saved = $this->insertFormular($order);
+				$saved = $this->insertFormular($order, $userID);
 			} else if($order instanceof StandardnaKoverta){
-				$saved = $this->insertStandardnaKoverta($order);
+				$saved = $this->insertStandardnaKoverta($order, $userID);
 			} else if($order instanceof OmotSpisa){
-				$saved = $this->insertOmotSpisa($order);
+				$saved = $this->insertOmotSpisa($order, $userID);
 			}
 			return $saved;
 		} catch(PDOException $e){

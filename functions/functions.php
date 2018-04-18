@@ -118,7 +118,7 @@ function makeMessage($type){
 					</ul>
 				</body>
 			</html>';
-	} else if($type === 'nalog-za-isplatu' || $type === 'nalog-za-uplatu' || $type === 'nalog-za-prenos'){
+	} else if($type === 'uplatnice/nalog-za-isplatu' || $type === 'uplatnice/nalog-za-uplatu' || $type === 'uplatnice/nalog-za-prenos'){
 		$message = 
 			'<html>
 				<head><title> </title></head>
@@ -126,13 +126,13 @@ function makeMessage($type){
 					<label> Korisnik: </label> korisnik123 </br>
 					<label> Datum: </label> '.date("d.m.Y.").' </br>
 					<label> Vreme: </label> '.date("h:i").' </br>';
-					if($type === 'nalog-za-uplatu')
+					if($type === 'uplatnice/nalog-za-uplatu')
 						$message .= '<label> Tip: </label> Nalog za uplatu </br>';
-					else if($type === 'nalog-za-prenos')
+					else if($type === 'uplatnice/nalog-za-prenos')
 						$message .= '<label> Tip: </label> Nalog za prenos </br>';
 					else
 						$message .= '<label> Tip: </label> Nalog za isplatu </br>';
-					if($type === 'nalog-za-uplatu' || $type === 'nalog-za-isplatu'){
+					if($type === 'uplatnice/nalog-za-uplatu' || $type === 'uplatnice/nalog-za-isplatu'){
 						$message .= '<label> Izabrane opcije: </label> </br>
 								<ul>
 									<li>Platilac: '.$_POST['payer'].'</li>
@@ -192,7 +192,7 @@ function makeMessage($type){
 			</body>
 		</html>';
 	}
-	else if($type === 'standardne-koverte'){
+	else if($type === 'koverte-dostavnice-formulari/standardne-koverte'){
 			$message = 
 		'<html>
 			<head><title> </title></head>
@@ -253,7 +253,7 @@ function makeMessage($type){
 				</ul>
 			</body>
 		</html>';
-	} else if($type === 'koverta-sa-povratnicom'){
+	} else if($type === 'koverte-dostavnice-formulari/koverte-sa-povratnicom'){
 		$message = 
 			'<html>
 			<head><title> </title></head>
@@ -289,7 +289,7 @@ function makeMessage($type){
 				</ul>
 			</body>
 		</html>';
-	} else if($type === 'koverta-sa-dostavnicom'){
+	} else if($type === 'koverte-dostavnice-formulari/koverte-sa-dostavnicom'){
 		$message = 
 			'<html>
 			<head><title> </title></head>
@@ -312,7 +312,7 @@ function makeMessage($type){
 				</ul>
 			</body>
 		</html>';
-	} else if($type === 'formular-za-adresiranje'){
+	} else if($type === 'koverte-dostavnice-formulari/formulari-za-adresiranje'){
 		$message = 
 			'<html>
 			<head><title> </title></head>

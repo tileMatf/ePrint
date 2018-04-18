@@ -5,7 +5,7 @@
 require_once '/functions/mail.php';
 require_once '/functions/functions.php';
 
-if(isset($_POST['submit']) && !isset($_SESSION['orderSaved'])) {
+if(isset($_POST['submit'])) {
 	try{
 	
 		$status = 0;
@@ -45,6 +45,9 @@ if(isset($_POST['submit']) && !isset($_SESSION['orderSaved'])) {
 		if($status === true) {
 			if(isset($_POST['sendCopy']) && isset($_POST['sendCopyEmail'])){
 				$status = sendMail($message, $_POST['sendCopyEmail']);		
+				if(isset($_SESSION['user_info'])){
+					$_POST['fileToUploadName'] = $_FILES['fileToUpload']['name'];
+				}
 			}
 			else {
 				$status = sendMail($message);		
@@ -52,7 +55,8 @@ if(isset($_POST['submit']) && !isset($_SESSION['orderSaved'])) {
 		}
 		
 		$_SESSION['status'] = $status;
-		$_SESSION['statusMessage'] = $statusMessage;
+		$_SESSION['statusMessage'] = $statusMessage;		
+
 		header('Location: ' . $_SERVER['HTTP_REFERER']);
 		exit();		
 	} catch(RuntimeException $e){

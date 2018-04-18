@@ -129,6 +129,7 @@
 	
 	/*Ajax call on confirm*/
 	var paymentConfirm = document.getElementById("paymentConfirm");
+	var statusMessage = document.getElementById("statusMessage");
 	
 	if(paymentConfirm != null){
 		paymentConfirm.addEventListener('click', function(event){
@@ -137,7 +138,6 @@
 			var form = document.forms.namedItem('orderForm');
 			//var type = document.getElementById('orderType').getAttribute('value');
 			var successMessage = document.getElementById('successMessage').getAttribute('value');
-			var statusMessage = document.getElementById("statusMessage");
 			var formData = new FormData(form);		
 			
 			var xhttp = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
@@ -195,6 +195,7 @@
 						var user = JSON.parse(this.responseText);
 	//					alert(user.Email);
 						modal.style.display = "none";
+						//window.location.replace(window.location.href.replace("index.php", ""));
 						location.reload();
 					}
 				}
@@ -270,7 +271,7 @@
 					form.reset();			
 					var submitForm = document.forms.namedItem("orderForm"); 
 					if(submitForm != null){
-						submitForm.reset();
+						//submitForm.reset();
 						window.location.replace(window.location.origin + "/eprint/" + submitForm.orderType.value);
 					} else {
 						window.location.reload();
@@ -313,7 +314,7 @@
 	
 	var saveOrderButton = document.getElementById("saveOrder");
 	if(saveOrderButton != null){
-		saveOrder.addEventListener('click', function(event){
+		saveOrderButton.addEventListener('click', function(event){
 			event.preventDefault();
 			
 			var form = document.forms.namedItem('orderForm');
@@ -330,16 +331,16 @@
 			xhttp.onreadystatechange = function(e){
 				if(xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200){
 					if(this.responseText !== 0){
-						form.reset();
-						location.reload();
+						//alert(this.responseText);
+						form.reset();						
+						window.location.replace(window.location.origin + "/eprint/" + form.orderType.value);
 					}					
 				}
 			};
 
 			xhttp.onerror = function(e) {
-				errorMessage.innerHTML = "Oprostite, došlo je do greške prilikom skladištenja Vaše narudžbine. Molim Vas, pokušajte ponovo.";
-				errorMessage.style.color = "red";
-				//location.reload();
+				statusMessage.innerHTML = "Oprostite, došlo je do greške prilikom skladištenja Vaše narudžbine. Molim Vas, pokušajte ponovo.";
+				statusMessage.style.color = "red";
 			}
 			xhttp.send(parameters.join('&'));
 		});

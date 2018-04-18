@@ -18,6 +18,5 @@ class Blok {
 		$this->Comment = isset($data['comment']) && !empty($data['comment']) ? $data['comment'] : null;
 		$this->SendCopy = isset($data['sendCopy']) ? 1 : 0;
 	}
-
 }
 ?>

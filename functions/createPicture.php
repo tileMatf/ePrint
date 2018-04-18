@@ -17,34 +17,34 @@ require 'stringFunctions.php';
 		$type = $_GET['orderType'];
 		$purposeOfPayment = $_GET['purposeOfPayment'];
 		$purposeOfPayment = readjustText($purposeOfPayment);
-		if($type === 'nalog-za-isplatu'){
+		if($type === 'uplatnice/nalog-za-isplatu'){
 			imagettftext($image, 15, 0, 75, 222, $black, $font_path, $purposeOfPayment);
-		} else if($type === 'nalog-za-uplatu') {
+		} else if($type === 'uplatnice/nalog-za-uplatu') {
 			imagettftext($image, 11, 0, 30, 138, $black, $font_path, $purposeOfPayment);
 		} else { 
 			imagettftext($image, 15, 0, 80, 240, $black, $font_path, $purposeOfPayment);
 		}
 		$recipient = $_GET['recipient'];
 		$recipient = readjustText($recipient);
-		if($type === 'nalog-za-isplatu'){
+		if($type === 'uplatnice/nalog-za-isplatu'){
 			imagettftext($image, 15, 0, 75, 332, $black, $font_path, $recipient);
-		} else if($type === 'nalog-za-uplatu'){
+		} else if($type === 'uplatnice/nalog-za-uplatu'){
 			imagettftext($image, 11, 0, 30, 215, $black, $font_path, $recipient);
 		} else { 
 			imagettftext($image, 15, 0, 80, 343, $black, $font_path, $recipient);
 		}
 		$paymentCode = $_GET['paymentCode'];
-		if($type === 'nalog-za-isplatu'){
+		if($type === 'uplatnice/nalog-za-isplatu'){
 			imagettftext($image, 18, 0, 685, 144, $black, $font_path, $paymentCode);
-		} else if($type === 'nalog-za-uplatu'){
+		} else if($type === 'uplatnice/nalog-za-uplatu'){
 			imagettftext($image, 12, 0, 437, 72, $black, $font_path, $paymentCode);
 		} else { 
 			imagettftext($image, 18, 0, 690, 145, $black, $font_path, $paymentCode);
 		}
 		$currency = "RSD";//$_GET['currency'];
-		if($type === 'nalog-za-isplatu'){
+		if($type === 'uplatnice/nalog-za-isplatu'){
 			imagettftext($image, 18, 0, 781, 144, $black, $font_path, $currency);
-		} else if($type === 'nalog-za-uplatu'){
+		} else if($type === 'uplatnice/nalog-za-uplatu'){
 			imagettftext($image, 12, 0, 505, 72, $black, $font_path, $currency);
 		} else { 
 			imagettftext($image, 18, 0, 785, 145, $black, $font_path, $currency);
@@ -54,31 +54,31 @@ require 'stringFunctions.php';
 				$amount = readjustAmount($amount);
 			if($type === 'nalog-za-isplatu'){
 				imagettftext($image, 18, 0, 882, 144, $black, $font_path, $amount);
-			} else if($type === 'nalog-za-uplatu'){ 
+			} else if($type === 'uplatnice/nalog-za-uplatu'){ 
 				imagettftext($image, 12, 0, 572, 72, $black, $font_path, $amount);
 			} else { 
 				imagettftext($image, 18, 0, 890, 145, $black, $font_path, $amount);
 			}
 		}
 		$accountOfRecipient = $_GET['accountOfRecipient'];
-		if($type === 'nalog-za-isplatu'){
+		if($type === 'uplatnice/nalog-za-isplatu'){
 			imagettftext($image, 18, 0, 780, 210, $black, $font_path, $accountOfRecipient);
-		} else if($type === 'nalog-za-uplatu'){
+		} else if($type === 'uplatnice/nalog-za-uplatu'){
 			imagettftext($image, 12, 0, 437, 125, $black, $font_path, $accountOfRecipient);
 		} else { 
 			imagettftext($image, 18, 0, 690, 339, $black, $font_path, $accountOfRecipient);
 		}
-		if($type !== 'nalog-za-prenos'){
+		if($type !== 'uplatnice/nalog-za-prenos'){
 			$mockUp = $_GET['mockUp'];
-			if($type === 'nalog-za-isplatu'){
+			if($type === 'uplatnice/nalog-za-isplatu'){
 				imagettftext($image, 18, 0, 687, 280, $black, $font_path, $mockUp);
-			} else if($type === 'nalog-za-uplatu'){
+			} else if($type === 'uplatnice/nalog-za-uplatu'){
 				imagettftext($image, 12, 0, 436, 171, $black, $font_path, $mockUp);
 			}
 			$referenceNumber = $_GET['referenceNumber'];
-			if($type === 'nalog-za-isplatu'){
+			if($type === 'uplatnice/nalog-za-isplatu'){
 				imagettftext($image, 18, 0, 777, 280, $black, $font_path, $referenceNumber);
-			} else if($type === 'nalog-za-uplatu'){
+			} else if($type === 'uplatnice/nalog-za-uplatu'){
 				imagettftext($image, 12, 0, 505, 171, $black, $font_path, $referenceNumber);
 			}
 		} else { //nalog-za-prenos
@@ -114,27 +114,27 @@ require 'stringFunctions.php';
 	$country = isset($country) ? convertToCyrilic($country) : '';
 
 	switch ($type) {
-		case 'nalog-za-uplatu':
+		case 'uplatnice/nalog-za-uplatu':
 			imagettftext($image, 11, 0, 30, 58, $black, $font_path, $name);
 			imagettftext($image, 11, 0, 30, 75, $black, $font_path, $address);
 			imagettftext($image, 11, 0, 30, 92, $black, $font_path, $country);
 			fillPaymentData($image, $black, $font_path);
 			break;
-		case 'nalog-za-isplatu':
+		case 'uplatnice/nalog-za-isplatu':
 			imagettftext($image, 15, 0, 75, 112, $black, $font_path, $name);
 			imagettftext($image, 15, 0, 75, 135, $black, $font_path, $address);
 			imagettftext($image, 15, 0, 75, 158, $black, $font_path, $country);
 			fillPaymentData($image, $black, $font_path);
 			break;
-		case 'nalog-za-prenos':
+		case 'uplatnice/nalog-za-prenos':
 			imagettftext($image, 15, 0, 80, 130, $black, $font_path, $name);
 			imagettftext($image, 15, 0, 80, 152, $black, $font_path, $address);
 			imagettftext($image, 15, 0, 80, 174, $black, $font_path, $country);
 			fillPaymentData($image, $black, $font_path);
 			break;
-		case 'koverta-sa-povratnicom':
+		case 'koverte-dostavnice-formulari/koverte-sa-povratnicom':
 			break;
-		case 'koverta-sa-dostavnicom':
+		case 'koverte-dostavnice-formulari/koverte-sa-dostavnicom':
 			imagettftext($image, 20, 0, 170, 1000, $black, $font_path, $envelopeReciver);
 			imagettftext($image, 20, 0, 445, 1000, $black, $font_path, convertToCyrilic(strtoupper($_GET['nameLastname'])));
 			imagettftext($image, 20, 0, 170, 1030, $black, $font_path, "Ул. ". convertToCyrilic($_GET['adress']));
@@ -153,13 +153,13 @@ require 'stringFunctions.php';
 			imagettftext($image, 20, 0, 2050, 1500, $black, $font_path, "Ул. " . convertToCyrilic($_GET['adress']));
 			imagettftext($image, 20, 0, 2050, 1550, $black, $font_path, $_GET['zipCode'] . " " . convertToCyrilic($_GET['location']));
 			break;
-		case 'dostavnica':			
+		case 'koverte-dostavnice-formulari/dostavnice':			
 			imagettftext($image, 16, 0, 70, 50, $black, $font_path, $envelopeReciver);
 			imagettftext($image, 16, 0, 290, 50, $black, $font_path, convertToCyrilic(strtoupper($_GET['nameLastname'])));
 			imagettftext($image, 16, 0, 70, 75, $black, $font_path, "Ул. " . convertToCyrilic($_GET['adress']));
 			imagettftext($image, 16, 0, 70, 100, $black, $font_path, $_GET['zipCode'] . " " . convertToCyrilic($_GET['location']));
 			break;
-		case 'formular-za-adresiranje':			
+		case 'koverte-dostavnice-formulari/formulari-za-adresiranje':			
 			break;
 		case 'omot-spisa':
 			imagettftext($image, 32, 0, 100, 80, $black, $font_path, "РЕПУБЛИКА СРБИЈА");

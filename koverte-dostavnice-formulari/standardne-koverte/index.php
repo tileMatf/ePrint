@@ -1,47 +1,61 @@
 <?php
 @session_start();
-include("../../header.php");
 
-require_once "../../functions/mail.php";
-require_once "../../functions/functions.php";
+	if(isset($_POST['submit'])){
+		if(isset($_SESSION['status']) && $_SESSION['status'] == '1'){
+			header('Location: ' . $_SERVER['HTTP_REFERER']);
+			exit();
+		}
+	}	
 
-if(isset($_POST['submit'])) {
-	try{
-		/*$status = 0;
-		$fileStatus = 0;		
-		
-		$fileStatus = uploadFile("uploaded_file/");
-		$statusMessage = generateMessage($fileStatus);
-		if($fileStatus !== 2 && $fileStatus !== 3)
-			return false;*/
+	include("../../header.php");
+	require_once "../../functions/mail.php";
+	require_once "../../functions/functions.php";
 
-		$message = makeMessage('standardne-koverte');
+	if(isset($_POST['submit'])) {
+		try{
+			$message = makeMessage('koverte-dostavnice-formulari/standardne-koverte');
 
-		$status = false;
-		/*if($fileStatus === 2 || $fileStatus === 3){
-			$status = true;
-		} else {
 			$status = false;
-		}*/		
-
-		//if($status === true){
-			if(!isset($_POST['sendCopy']))
+			if(!isset($_POST['sendCopy'])){
 				$mailStatus = sendMail($message);
-			else {
+			} else {
 				$mailStatus = sendMail($message, $_POST['sendCopyEmail']);		
 			}
-		//}
-		if($mailStatus === true){
+			
+			if($mailStatus === true){
+				$status = true;
+				$statusMessage = "Uspešno naručena koverta.";
+			} else {
+				$status = false;
+				$statusMessage = "Oprostite, došlo je do greške prilikom slanja, pokušajte ponovo.";
+			}
+		} catch(RuntimeException $e){
+			return $e->getMessage();
+		} 
+	}
+	
+	if(isset($status)){
+		$_SESSION['status'] = $status;
+	} else {
+		$_SESSION['status'] = null;
+		unset($_SESSION['status']);
+	}
+	
+	if(isset($_SESSION['user_info']) && isset($_SESSION['orderSaved'])){
+		if($_SESSION['orderSaved'] == 1){
+			unset($_POST);
+			$_POST = array();
 			$status = true;
-			$statusMessage = "Uspešno naručena koverta.";
-		} else {
+			$statusMessage = "Uspešno sačuvana koverta.";
+			$_SESSION['orderSaved'] = null;
+			unset($_SESSION['orderSaved']);
+		} else if($_SESSION['orderSaved'] == 2){
 			$status = false;
-			$statusMessage = "Oprostite, došlo je do greške prilikom slanja, pokušajte ponovo.";
+			$statusMessage = "Došlo je do greške prilikom upisa narudžbine u bazu, pokušajte ponovo.";
 		}
-	} catch(RuntimeException $e){
-		return $e->getMessage();
-	} 
-}
+	}
+	
 ?>
         <!-- Navigation -->
         <div class="twelve columns">
@@ -131,7 +145,7 @@ if(isset($_POST['submit'])) {
                     <!-- ***************************** -->
 
                     <!--Stampanje na posledjini ******************************-->
-                    <label class="label__heading">Štampanje na poledjini:</label>
+                    <label class="label__heading">Štampanje na poleđini:</label>
                     <input class="u-full-width" type="text" placeholder="Prvi red..." name="printingOnBack1" 
 						<?php echo isset($_POST['printingOnBack1']) ? "value='".$_POST['printingOnBack1']."'" : "" ?>>
                     <input class="u-full-width" type="text" placeholder="Drugi red..." name="printingOnBack2"
@@ -168,12 +182,21 @@ if(isset($_POST['submit'])) {
 							<?php echo isset($_POST['sendCopy']) ? "checked" : ""?>>
                         <span class="label-body">Pošalji kopiju sebi</span>
                         <input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail" 
-							value="<?php echo isset($_POST['email']) ? $_POST['email'] : '' ?>">
+							value="<?php if(isset($_SESSION['user_info'])) 
+											echo $_SESSION['user_info']->Email;
+										else if(isset($_POST['sendCopyEmail'])) 
+											echo $_POST['sendCopyEmail'];
+										else 
+											echo ''; ?>">
                     </label>
-					<input type="hidden" name="orderType" id="orderType" value="standarna-koverta">
+					<input type="hidden" name="orderType" id="orderType" value="koverte-dostavnice-formulari/standardne-koverte">
 					<input type="hidden" id="successMessage" value="Standardna koverta je uspešno naručena.">
                     <!-- POSALJI DUGME -->
-                    <input class="button-primary" type="submit" value="Pošalji" name="submit" />
+                    <input class="button-primary" type="submit" value="Pošalji" name="submit">
+					<?php
+						if(isset($_SESSION['user_info']))
+							echo '<input type="button" value="Sačuvaj kovertu" id="saveOrder" title="Možete sačuvati narudžbinu u Vašem nalogu">';
+					?>
                     <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
                 </div>
             </form>

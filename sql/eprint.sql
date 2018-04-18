@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 18, 2018 at 10:57 AM
+-- Generation Time: Apr 18, 2018 at 04:58 PM
 -- Server version: 5.7.14-log
 -- PHP Version: 5.6.31
 
@@ -53,7 +53,10 @@ INSERT INTO `blokovi` (`OrderID`, `FileName`, `NumberOfSet`, `Color`, `Size`, `P
 (55, 'KosticTijana.pdf', 1, 'Crno-belo', 'A4', 'U fasciklu', NULL, 0),
 (56, 'KosticTijana.pdf', 1, 'Plavo-belo', 'A4', 'U fasciklu', NULL, 0),
 (57, 'KosticTijana.pdf', 1, 'Plavo-belo', 'A4', 'U fasciklu', NULL, 0),
-(58, 'KosticZoranaCV.pdf', 1, 'U boji', 'A4', 'U fasciklu', NULL, 0);
+(58, 'KosticZoranaCV.pdf', 1, 'U boji', 'A4', 'U fasciklu', NULL, 0),
+(59, 'KosticTijana.pdf', 1, 'Crno-belo', 'A4', 'U fasciklu', NULL, 0),
+(60, 'KosticTijana.pdf', 1, 'Crno-belo', 'A4', 'U fasciklu', NULL, 0),
+(67, 'KosticTijana.pdf', 1, 'Crno-belo', 'A4', 'U fasciklu', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -85,10 +88,11 @@ DROP TABLE IF EXISTS `dostavnice`;
 CREATE TABLE IF NOT EXISTS `dostavnice` (
   `OrderID` int(11) NOT NULL,
   `Recipient` varchar(255) NOT NULL,
-  `Name` varchar(1000) NOT NULL,
-  `ZipCode` int(4) NOT NULL,
-  `Location` varchar(1000) NOT NULL,
-  `Quantity` int(11) NOT NULL,
+  `Name` varchar(1000) DEFAULT NULL,
+  `Address` varchar(512) DEFAULT NULL,
+  `ZipCode` int(4) DEFAULT NULL,
+  `Location` varchar(1000) DEFAULT NULL,
+  `Quantity` int(11) DEFAULT NULL,
   `SendCopy` tinyint(1) NOT NULL,
   KEY `dostavnica_orders_fk` (`OrderID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -97,8 +101,9 @@ CREATE TABLE IF NOT EXISTS `dostavnice` (
 -- Dumping data for table `dostavnice`
 --
 
-INSERT INTO `dostavnice` (`OrderID`, `Recipient`, `Name`, `ZipCode`, `Location`, `Quantity`, `SendCopy`) VALUES
-(2, 'Javni beleznik', 'Zorana Kostic', 26000, '26000', 1000, 1);
+INSERT INTO `dostavnice` (`OrderID`, `Recipient`, `Name`, `Address`, `ZipCode`, `Location`, `Quantity`, `SendCopy`) VALUES
+(2, 'Javni beleznik', 'Zorana Kostic', '', 26000, '26000', 1000, 1),
+(78, 'Javni beleznik', 'Tijana Kostic', NULL, NULL, NULL, 1000, 0);
 
 -- --------------------------------------------------------
 
@@ -130,6 +135,7 @@ DROP TABLE IF EXISTS `formulari-za-adresiranje`;
 CREATE TABLE IF NOT EXISTS `formulari-za-adresiranje` (
   `OrderID` int(11) NOT NULL,
   `Quantity` int(11) NOT NULL,
+  `SendCopy` tinyint(1) NOT NULL,
   KEY `formulari_orders_fk` (`OrderID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -137,8 +143,9 @@ CREATE TABLE IF NOT EXISTS `formulari-za-adresiranje` (
 -- Dumping data for table `formulari-za-adresiranje`
 --
 
-INSERT INTO `formulari-za-adresiranje` (`OrderID`, `Quantity`) VALUES
-(2, 1000);
+INSERT INTO `formulari-za-adresiranje` (`OrderID`, `Quantity`, `SendCopy`) VALUES
+(2, 1000, 0),
+(80, 7000, 1);
 
 -- --------------------------------------------------------
 
@@ -166,11 +173,11 @@ CREATE TABLE IF NOT EXISTS `koverte-sa-dostavnicom` (
   `OrderID` int(11) NOT NULL,
   `Recipient` varchar(255) NOT NULL,
   `Color` varchar(255) NOT NULL,
-  `Name` varchar(1000) NOT NULL,
-  `Address` varchar(1000) NOT NULL,
-  `ZipCode` int(11) NOT NULL,
-  `Location` varchar(1000) NOT NULL,
-  `PostagePaid` varchar(1000) NOT NULL,
+  `Name` varchar(1000) DEFAULT NULL,
+  `Address` varchar(1000) DEFAULT NULL,
+  `ZipCode` int(11) DEFAULT NULL,
+  `Location` varchar(1000) DEFAULT NULL,
+  `PostagePaid` varchar(1000) DEFAULT NULL,
   `EnvelopeType` varchar(10) NOT NULL,
   `Quantity` int(11) NOT NULL,
   `SendCopy` tinyint(1) NOT NULL,
@@ -182,7 +189,8 @@ CREATE TABLE IF NOT EXISTS `koverte-sa-dostavnicom` (
 --
 
 INSERT INTO `koverte-sa-dostavnicom` (`OrderID`, `Recipient`, `Color`, `Name`, `Address`, `ZipCode`, `Location`, `PostagePaid`, `EnvelopeType`, `Quantity`, `SendCopy`) VALUES
-(2, 'Javni izvrsitelj', 'Plave', 'Zorana Kostic', 'Adresa', 26000, 'Cara Dusana 16a', 'Posta', 'S0', 1000, 1);
+(2, 'Javni izvrsitelj', 'Plave', 'Zorana Kostic', 'Adresa', 26000, 'Cara Dusana 16a', 'Posta', 'S0', 1000, 1),
+(79, 'Javni beleznik', 'bela', 'Tijana Kost', NULL, NULL, NULL, NULL, 'S0', 1000, 0);
 
 -- --------------------------------------------------------
 
@@ -204,7 +212,9 @@ CREATE TABLE IF NOT EXISTS `koverte-sa-povratnicom` (
 --
 
 INSERT INTO `koverte-sa-povratnicom` (`OrderID`, `Color`, `Quantity`, `SendCopy`) VALUES
-(2, 'Bela', 9000, 0);
+(2, 'Bela', 9000, 0),
+(75, 'bela', 1000, 0),
+(76, 'plava', 5000, 0);
 
 -- --------------------------------------------------------
 
@@ -272,7 +282,8 @@ CREATE TABLE IF NOT EXISTS `omot-spisa` (
 --
 
 INSERT INTO `omot-spisa` (`OrderID`, `Recipient`, `Name`, `Address`, `Location`, `PaperType`, `Quantity`, `Comment`, `SendCopy`) VALUES
-(2, 'Javni izvrsitelj', 'Zorana Kostic', 'Adresa', NULL, '100 gr/m2', 1000, 'Komentarkomentar...', 1);
+(2, 'Javni izvrsitelj', 'Zorana Kostic', 'Adresa', NULL, '100 gr/m2', 1000, 'Komentarkomentar...', 1),
+(82, 'Javni beleznik', 'Tijana Kosti', NULL, NULL, '100gr/m2', 1000, 'Komentar', 0);
 
 -- --------------------------------------------------------
 
@@ -312,7 +323,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   PRIMARY KEY (`ID`),
   KEY `orders_user_fk` (`UserID`),
   KEY `orders_type_fk` (`TypeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `orders`
@@ -324,7 +335,26 @@ INSERT INTO `orders` (`ID`, `TypeID`, `UserID`, `OrderDate`, `Seen`) VALUES
 (55, 2, 3, '2018-04-17', 0),
 (56, 2, 3, '2018-04-18', 0),
 (57, 2, 3, '2018-04-18', 0),
-(58, 2, 3, '2018-04-18', 0);
+(58, 2, 3, '2018-04-18', 0),
+(59, 2, 3, '2018-04-18', 0),
+(60, 2, 3, '2018-04-18', 0),
+(61, 5, 3, '2018-04-18', 0),
+(62, 3, 3, '2018-04-18', 0),
+(63, 3, 3, '2018-04-18', 0),
+(64, 3, 3, '2018-04-18', 0),
+(65, 3, 3, '2018-04-18', 0),
+(66, 3, 3, '2018-04-18', 0),
+(67, 2, 3, '2018-04-18', 0),
+(68, 4, 3, '2018-04-18', 0),
+(74, 5, 3, '2018-04-18', 0),
+(75, 6, 3, '2018-04-18', 0),
+(76, 6, 3, '2018-04-18', 0),
+(77, 7, 3, '2018-04-18', 0),
+(78, 7, 3, '2018-04-18', 0),
+(79, 8, 3, '2018-04-18', 0),
+(80, 9, 3, '2018-04-18', 0),
+(81, 10, 3, '2018-04-18', 0),
+(82, 11, 3, '2018-04-18', 0);
 
 -- --------------------------------------------------------
 
@@ -393,7 +423,8 @@ CREATE TABLE IF NOT EXISTS `prenos` (
 --
 
 INSERT INTO `prenos` (`OrderID`, `Name`, `Address`, `Location`, `Country`, `PaymentPurpose`, `Recipient`, `PaymentCode`, `Currency`, `Amount`, `OrdererAccount`, `ModelDebit`, `ReferenceNumber`, `RecipientAccount`, `ModelApproval`, `ReferenceNumberApprovals`, `PaymentSlipNumber`, `SetQuantity`, `Comment`, `VariableData`, `SendCopy`) VALUES
-(2, 'Tijana Kostic', NULL, NULL, NULL, NULL, 'Matematicki fakultet', NULL, NULL, 232, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0);
+(2, 'Tijana Kostic', NULL, NULL, NULL, NULL, 'Matematicki fakultet', NULL, NULL, 232, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0),
+(74, 'Tijana Kostic', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1+1', '900', NULL, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -511,7 +542,8 @@ CREATE TABLE IF NOT EXISTS `standardne-koverte` (
 --
 
 INSERT INTO `standardne-koverte` (`OrderID`, `Size`, `Quantity`, `BackPrintRow1`, `BackPrintRow2`, `BackPrintRow3`, `BackPrintRow4`, `AddressPrintRow1`, `AddressPrintRow2`, `AddressPrintRow3`, `AddressPrintRow4`, `Comment`, `VariableData`, `SendCopy`) VALUES
-(2, 'B6', 2000, 'Prvi red', 'Drugi red', NULL, 'Cetvrti', 'hihihihi', NULL, NULL, NULL, NULL, 0, 1);
+(2, 'B6', 2000, 'Prvi red', 'Drugi red', NULL, 'Cetvrti', 'hihihihi', NULL, NULL, NULL, NULL, 0, 1),
+(81, 'B5', 1000, 'Prvi red poledjine', '', '', '', '', '', '', '', NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -575,7 +607,12 @@ CREATE TABLE IF NOT EXISTS `uplate-isplate` (
 --
 
 INSERT INTO `uplate-isplate` (`OrderID`, `Type`, `Name`, `Address`, `Location`, `Country`, `PaymentPurpose`, `Recipient`, `PaymentCode`, `Currency`, `Amount`, `RecipientAccount`, `Model`, `ReferenceNumber`, `PaymentSlipNumber`, `SetQuantity`, `Comment`, `VariableData`, `SendCopy`) VALUES
-(2, 'Uplata', 'Tijana Kostic', NULL, NULL, NULL, NULL, 'Matematicki fakultet', NULL, NULL, 232, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0);
+(2, 'Uplata', 'Tijana Kostic', NULL, NULL, NULL, NULL, 'Matematicki fakultet', NULL, NULL, 232, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0),
+(63, 'Uplata', 'Tijana Kostic', 'Cara Dusana', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '938091', NULL, '1+1', '900', NULL, 1, 0),
+(64, 'Uplata', 'Tijana Kostic', 'Cara Dusana', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '938091', NULL, '1+1', '900', NULL, 1, 0),
+(65, 'Uplata', 'Tijana Kostic', 'Cara Dusana', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1+1', '900', NULL, 1, 0),
+(66, 'Uplata', 'Tijana Kostic', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1+1', '900', NULL, 1, 0),
+(68, 'Isplata', 'Tijana ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1+1', '900', 'komentar', 1, 1);
 
 -- --------------------------------------------------------
 

@@ -29,8 +29,14 @@
 			
 			$message = makeMessage('blokovi');
 
-			if(isset($_POST['sendCopy']) && isset($_POST['sendCopyEmail'])){
-				$mailStatus = sendMail($message, $_POST['sendCopyEmail']);		
+			if(isset($_POST['sendCopy'])){
+				if(isset($_POST['sendCopyEmail'])){
+					$mailStatus = sendMail($message, $_POST['sendCopyEmail']);		
+				} else if(isset($_SESSION['user_info'])){
+					$mailStatus = sendMail($message, $_SESSION['user_info']->Email);
+				} else {
+					$mailStatus = sendMail($message);
+				}
 			}
 			else {
 				$mailStatus = sendMail($message);
@@ -184,7 +190,12 @@
 							<?php echo isset($_POST['sendCopy']) ? "checked" : "" ?>>
                         <span class="label-body">Pošalji kopiju sebi</span>
 						<input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail"
-							value="<?php echo isset($_POST['sendCopyEmail']) ? $_POST['sendCopyEmail'] : ''?>">
+							value="<?php if(isset($_SESSION['user_info'])) 
+											echo $_SESSION['user_info']->Email;
+										else if(isset($_POST['sendCopyEmail'])) 
+											echo $_POST['sendCopyEmail'];
+										else 
+											echo ''; ?>">
                         </label>
 						<input type="hidden" name="orderType" id="orderType" value="blokovi">
 						<input type="hidden" id="successMessage" value="Blokovi su uspešno naručeni.">
