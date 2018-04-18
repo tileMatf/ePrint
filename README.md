@@ -8,6 +8,11 @@ https://fontawesome.com/
 
 ### Plan
 
+Shone, izvrsi sql script ako umes u phpmyadmin-u (kucas u browseru localhost/phpmyadmin), a skript je u folderu sql/eprint.sql
+(to je za kreiranje nove baze). I trebalo bi sve da ti radi. Moram da promenis i user name i pass u fajlu /registration/connection.php..
+Na pocetku fajla je, videces. 
+I dalje bi mozes da radis kako izgleda ona stranica kada se otvori history u nalogu, ja sam nesto uradila, to je fajl /naridzbine/index.php
+
 Sone :baby_chick:
 - [ ] SKLONITI UPLOAD DUGME ZA KOD OMOTA SPISA I STANDARDNIH KOVERTI
 - [ ] Promeni font style i testiraj font size (pogotovo naslov i navigacija u headeru)
