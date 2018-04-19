@@ -73,32 +73,31 @@
 
     //Input for checked "send me copy"
     var sendCopyCheckbox = document.getElementById('sendCopy');
-    var input = document.getElementById('sendCopyEmail');
+    var sendCopyEmail = document.getElementById('sendCopyEmail');
 	
     if(sendCopyCheckbox != null){
 		if(sendCopyCheckbox.checked == true)
-			input.style.display = 'block';
+			sendCopyEmail.style.display = 'block';
 		
 		sendCopyCheckbox.addEventListener('click', function () {            
-			if (input.style.display != 'block') {
-                input.style.display = 'block';
+			if (sendCopyEmail.style.display != 'block') {
+                sendCopyEmail.style.display = 'block';
             } else {
-                input.style.display = '';
+                sendCopyEmail.style.display = '';
             }
         });
 		
 		sendCopyCheckbox.onchange = function(event) {		
 			if(sendCopyCheckbox.checked == true)
-				input.setAttribute("required", "required");
+				sendCopyEmail.setAttribute("required", "required");
 			else
-				input.removeAttribute("required");
-			}
+				sendCopyEmail.removeAttribute("required");
+		}
     }
 
-    //Upload button
-
-    var inputs = document.querySelectorAll( '.inputfile' );
-    Array.prototype.forEach.call( inputs, function( input )
+    //Upload file button
+    var fileInputs = document.querySelectorAll( '.inputfile' );
+    Array.prototype.forEach.call(fileInputs, function(input)
 	{
 		var label	 = input.nextElementSibling,
 			labelVal = label.innerHTML;
@@ -127,7 +126,7 @@
 		}
 	}
 	
-	/*Ajax call on confirm*/
+	/*Ajax call on confirm of order*/
 	var paymentConfirm = document.getElementById("paymentConfirm");
 	var statusMessage = document.getElementById("statusMessage");
 	
@@ -136,7 +135,6 @@
 			event.preventDefault();	
 			pictureModal.style.display = "none";
 			var form = document.forms.namedItem('orderForm');
-			//var type = document.getElementById('orderType').getAttribute('value');
 			var successMessage = document.getElementById('successMessage').getAttribute('value');
 			var formData = new FormData(form);		
 			
@@ -192,10 +190,9 @@
 						errorMessage.style.color = "red";
 						modal.style.display = "block";
 					} else {				
-						var user = JSON.parse(this.responseText);
-	//					alert(user.Email);
+//						var user = JSON.parse(this.responseText);
+//						alert(user.Email);
 						modal.style.display = "none";
-						//window.location.replace(window.location.href.replace("index.php", ""));
 						location.reload();
 					}
 				}
@@ -214,7 +211,6 @@
 	if(registerButton != null){
 		registerButton.addEventListener('click', function(event) {
 			event.preventDefault();
-			//resetovati session message		
 			var form = document.forms.namedItem('registrationForm');
 			if(form.psw.value !== form.pswRepeat.value){
 				modal2.style.display = "block";
@@ -248,8 +244,8 @@
 			};
 				
 			xhttp.onerror = function(e) {
-				errorMessage.innerHTML = "Oprostite, došlo je do greške prilikom registracije. Molim Vas, pokušajte ponovo.";
-				errorMessage.style.color = "red";
+				registrationMessage.innerHTML = "Oprostite, došlo je do greške prilikom registracije. Molim Vas, pokušajte ponovo.";
+				registrationMessage.style.color = "red";
 			}
 			xhttp.send(parameters.join('&'));
 		});	
@@ -280,21 +276,20 @@
 			};
 				
 			xhttp.onerror = function(e) {
-				errorMessage.innerHTML = "Oprostite, došlo je do greške prilikom odjavljivanja. Molim Vas, pokušajte ponovo.";
-				errorMessage.style.color = "red";
+				statusMessage.innerHTML = "Oprostite, došlo je do greške prilikom odjavljivanja. Molim Vas, pokušajte ponovo.";
+				statusMessage.style.color = "red";
 			}
 			xhttp.send();
 		});	
 	}
 	
-	var ordersRows = document.getElementsByName("orderRow");
-	
+	/**/
+	var ordersRows = document.getElementsByName("orderRow");	
 	if(ordersRows != null){
 		for(var i = 0; i < ordersRows.length; i++){
 			ordersRows[i].addEventListener('click', openOrder ,false)
 		}
-	}
-	
+	}	
 	function openOrder(event){
 		event.preventDefault();
 		

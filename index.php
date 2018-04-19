@@ -60,9 +60,9 @@ include("header.php");
           </div>
 		  		  
 		  <div class="one-third column">
-            <a <?php if(isset($_SESSION['user_info'])) echo 'href="./omot-spisa"'?> class="link<?php if(!isset($_SESSION['user_info'])) echo ' disabled-links'?>">
-              <i class="fas fa-file-alt fa-2x"></i>
-              <h3>Prethodne narudžbine</h3>
+            <a <?php if(isset($_SESSION['user_info'])) echo 'href="./narudzbine/"'?> class="link<?php if(!isset($_SESSION['user_info'])) echo ' disabled-links'?>">
+              <i class="fas fa-list-ol fa-2x"></i>
+              <h3>Sačuvane narudžbine</h3>
             </a>
           </div>
 		  

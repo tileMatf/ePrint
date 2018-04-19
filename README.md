@@ -22,12 +22,13 @@ Sone :baby_chick:
 
 Tile :rabbit:
 - [ ] Admin panel - dodatni prikazi narudzbina?
-- [ ] Probati sa prebacivanjem php-a u 1 fajl 
 - [ ] Brisanje narudzbine kod korisnika?
-- [ ] Uredjivanje JS-a
+- [x] Uredjivanje JS-a
 - [ ] Testiranje
 - [ ] Kod admina - opcija dodavanja admina (sql je napisan)?
 - [x] Podeljeni folderi za upload fajlova po userima
+- [ ] Probati sa prebacivanjem php-a u 1 fajl 
+
 
 ##### Korisni linkovi za mene:
 http://formvalidation.io/examples/supporting-skeleton-framework/

@@ -8,6 +8,26 @@
 	include("../header.php");
 	require_once("../registration/connection.php");
 ?>
+<!-- Navigation -->
+        <div class="twelve columns">
+            <ul class="nav1">
+                <li>
+                    <a class="tile" href="../">
+                        <i class="fas fa-home" aria-hidden="true"></i>Početna</a>
+                </li>
+                <span class="line">/</span>
+                <li>
+                    <a class="tile" href="./" style="font-size: 1.6rem;">Sačuvane narudžbine</a>
+                </li>
+            </ul>
+        </div>
+        <!-- End of navigation -->
+
+
+        <!--Stampanje section-->
+        <section class="section__stampanje">
+            <h2 class="section__heading">Sačuvane narudžbine</h2>
+
 	<div class="12 columns">
       <h3>Štampanje</h3>
     </div>
@@ -68,7 +88,7 @@
 		?>
       </tbody>
     </table>
-
+</section>
 
 <?php
 include("../footer.php");
