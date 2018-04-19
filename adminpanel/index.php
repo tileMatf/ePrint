@@ -1,6 +1,6 @@
 ﻿<?php
-	@session_start();
-	if(isset($_SESSION['user_info']) && $_SESSION['user_info']->Role === '1'){
+	//@session_start();
+	//if(isset($_SESSION['user_info']) && $_SESSION['user_info']->Role === '1'){
 ?>
 
 <!DOCTYPE html>
@@ -499,8 +499,8 @@
 
 </html>
 <?php
-	} else {
-		header('Location: ../');
-		exit();
-	}
+	//} else {
+	//	header('Location: ../');
+	//	exit();
+	//}
 ?>

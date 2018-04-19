@@ -96,7 +96,7 @@ require_once '../../functions/functions.php';
                     <!-- ***************************** -->
 
                     <!--Ulica ******************************-->
-                    <label for="adress" class="label__heading">Ulica</label>
+                    <label for="adress" class="label__heading">Adresa</label>
                     <input name="adress" class="u-full-width" type="text" 
 						value="<?php echo isset($_POST['adress']) ? $_POST['adress'] : '' ?>">
                     <!-- ***************************** -->
@@ -129,6 +129,24 @@ require_once '../../functions/functions.php';
                     </select>
                     <!-- ***************************** -->
 
+                    <!-- Adresa isporuka-->
+					<label for="deliveryAddress" class="label__heading">Adresa isporuke</label>
+					<input class="u-full-width" type="text" placeholder="" name="deliveryAddress" required
+                        value="<?php echo isset($_POST['deliveryAddress']) ? $_POST['deliveryAddress'] : '' ?>">
+					<!-- ****************************** -->
+
+					<!-- Zip kod isporuka -->
+					<label for="deliveryZipCode" class="label__heading">Poštanski broj isporuke</label>
+					<input class="u-full-width" type="text" placeholder="" name="deliveryZipCode" required
+                        value="<?php echo isset($_POST['deliveryZipCode']) ? $_POST['deliveryZipCode'] : '' ?>">
+					<!-- ****************************** -->
+
+					<!-- Mesto isporuke -->
+					<label for="deliveryLocation" class="label__heading">Mesto isporuke</label>
+					<input class="u-full-width" type="text" placeholder="" name="deliveryLocation" required
+                        value="<?php echo isset($_POST['deliveryLocation']) ? $_POST['deliveryLocation'] : '' ?>">
+					<!-- ****************************** -->
+                    
                     <label class="sendCopy">
                         <input type="checkbox" id="sendCopy" name="sendCopy" <?php echo isset($_POST['sendCopy']) ? "checked" : ""?>>
                         <span class="label-body">Pošalji kopiju sebi</span>

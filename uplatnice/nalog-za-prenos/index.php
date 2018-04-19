@@ -200,6 +200,24 @@ require_once "../../functions/functions.php";
                     </select>
                     <!-- ***************************** -->
 
+					<!-- Adresa isporuka-->
+					<label for="deliveryAddress" class="label__heading">Adresa isporuke</label>
+					<input class="u-full-width" type="text" placeholder="" name="deliveryAddress" required
+                        value="<?php echo isset($_POST['deliveryAddress']) ? $_POST['deliveryAddress'] : '' ?>">
+					<!-- ****************************** -->
+
+					<!-- Zip kod isporuka -->
+					<label for="deliveryZipCode" class="label__heading">Poštanski broj isporuke</label>
+					<input class="u-full-width" type="text" placeholder="" name="deliveryZipCode" required
+                        value="<?php echo isset($_POST['deliveryZipCode']) ? $_POST['deliveryZipCode'] : '' ?>">
+					<!-- ****************************** -->
+
+					<!-- Mesto isporuke -->
+					<label for="deliveryLocation" class="label__heading">Mesto isporuke</label>
+					<input class="u-full-width" type="text" placeholder="" name="deliveryLocation" required
+                        value="<?php echo isset($_POST['deliveryLocation']) ? $_POST['deliveryLocation'] : '' ?>">
+					<!-- ****************************** -->
+                    
                     <!--Krajnja poruka-->
                     <label for="message" class="label__heading">Poruka</label>
                     <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"><?php echo isset($_POST['comment']) ? $_POST['comment'] : ''?></textarea>
