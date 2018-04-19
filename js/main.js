@@ -149,7 +149,6 @@
 			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			xhttp.onload = function(e){
 				if(this.responseText == true){
-					alert(this.responseText);
 					statusMessage.innerHTML = successMessage;
 					statusMessage.style.color = "green";
 				} else {
