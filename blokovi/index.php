@@ -19,7 +19,13 @@
 			$status = 0;
 			$fileStatus = 0;
 			
-			$fileStatus = uploadFile("uploaded_file/", $_FILES['fileToUpload']);
+			if(isset($_SESSION['user_info'])){
+				$directory = "uploaded_file/". $_SESSION['user_info']->Email . "/";
+				$fileStatus = uploadFile($directory, $_FILES["fileToUpload"]);
+			}
+			else {
+				$fileStatus = uploadFile("uploaded_file/", $_FILES["fileToUpload"]);
+			}
 			$statusMessage = generateMessage($fileStatus, $_FILES['fileToUpload']);
 			if($fileStatus !== 2 && $fileStatus !== 3){
 				$status = false;
@@ -27,7 +33,10 @@
 				return;
 			}
 			
-			$message = makeMessage('blokovi');
+			if(isset($_SESSION['user_info']))
+				$message = makeMessage('blokovi', $_SESSION['user_info']->Email);
+			else 
+				$message = makeMessage('blokovi');
 
 			if(isset($_POST['sendCopy'])){
 				if(isset($_POST['sendCopyEmail'])){

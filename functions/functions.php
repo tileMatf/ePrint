@@ -12,6 +12,13 @@ function test_input($data) {
 
 function uploadFile($target_dir, $file){
 
+	$target_dir = remove_special_char($target_dir);
+	if(!file_exists($target_dir)){
+		$success = mkdir($target_dir, true);
+	}
+	if($success  === false)
+		return false;
+		
 	$target_file = $target_dir . basename($file['name']);
 	$uploadOk = 1;
 	$fileStatus = 0;
@@ -79,19 +86,21 @@ function generateMessage($status, $file){
 		return "Oprostite, došlo je do greške prilikom otpremanja Vaše datoteke u sistem datoteka.";
 }
 
-function makeMessage($type){
+function makeMessage($type, $user = null){
 	//$data = $_POST['data'];	
 	//parse_str($data, $data);
-	
-	if($type === 'stampanje'){
-		$message = 
-			'<html>
+	$message = '<html>
 				<head><title> </title></head>
 				<body>
-					<label> Korisnik: </label> korisnik123 </br>
-					<label> Datum: </label> '.date("d.m.Y.").' </br>
-					<label> Vreme: </label> '.date("h:i").' </br>
-					<label> Tip: </label> stampanje </br>
+					<label> Korisnik: </label> ';
+				if($user != null && !empty($user))
+					$message .= $user . '</br>';
+				else 
+					$message .= 'Neregistrovan korisnik </br>';
+	$message .= '<label> Datum: </label> '.date("d.m.Y.").' </br>
+				<label> Vreme: </label> '.date("h:i").' </br>';
+	if($type === 'stampanje'){
+		$message .= '<label> Tip: </label> stampanje </br>
 					<label> Datoteka: </label> '.basename($_FILES["fileToUpload"]["name"]).' </br>
 					<label> Izabrane opcije: </label> </br>
 					<ul>
@@ -110,7 +119,6 @@ function makeMessage($type){
 					$message = $message . 'NE</li>';
 				}
 				
-				
 		$message = $message . '
 						<li>Heftanje: '.$_POST['heftingType'].'</li>
 						<li>Bušenje: '.$_POST['drillingType'].'</li>
@@ -119,13 +127,7 @@ function makeMessage($type){
 				</body>
 			</html>';
 	} else if($type === 'uplatnice/nalog-za-isplatu' || $type === 'uplatnice/nalog-za-uplatu' || $type === 'uplatnice/nalog-za-prenos'){
-		$message = 
-			'<html>
-				<head><title> </title></head>
-				<body>
-					<label> Korisnik: </label> korisnik123 </br>
-					<label> Datum: </label> '.date("d.m.Y.").' </br>
-					<label> Vreme: </label> '.date("h:i").' </br>';
+
 					if($type === 'uplatnice/nalog-za-uplatu')
 						$message .= '<label> Tip: </label> Nalog za uplatu </br>';
 					else if($type === 'uplatnice/nalog-za-prenos')
@@ -173,13 +175,7 @@ function makeMessage($type){
 		</html>';		
 	}
 	else if($type === 'blokovi'){
-		$message = 
-		'<html>
-			<head><title> </title></head>
-			<body>
-				<label> Korisnik: </label> korisnik123 </br>
-				<label> Vreme: </label> '.date("h:i").' </br>
-				<label> Tip: </label> Preslikavajući blokovi </br>
+		$message .= '<label> Tip: </label> Preslikavajući blokovi </br>
 				<label> Datoteka: </label> '.basename( $_FILES["fileToUpload"]["name"]).' </br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>
@@ -193,14 +189,7 @@ function makeMessage($type){
 		</html>';
 	}
 	else if($type === 'koverte-dostavnice-formulari/standardne-koverte'){
-			$message = 
-		'<html>
-			<head><title> </title></head>
-			<body>
-				<label> Korisnik: </label> korisnik123 </br>
-				<label> Datum: </label> '.date("d.m.Y.").' </br>
-				<label> Vreme: </label> '.date("h:i").' </br>
-				<label> Tip: </label> Standardne koverte </br>
+			$message .= '<label> Tip: </label> Standardne koverte </br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>
 					<li>Veličina: '.$_POST['size'].'</li>
@@ -233,14 +222,7 @@ function makeMessage($type){
 			</body>
 		</html>';
 	} else if($type === 'omot-spisa'){
-		$message = 
-			'<html>
-			<head><title> </title></head>
-			<body>
-				<label> Korisnik: </label> korisnik123 </br>
-				<label> Datum: </label> '.date("d.m.Y.").' </br>
-				<label> Vreme: </label> '.date("h:i").' </br>
-				<label> Tip: </label> Omot spisa </br>
+		$message .= '<label> Tip: </label> Omot spisa </br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>
 					<li>Za: '.$_POST['forInput'].'</li>
@@ -254,14 +236,7 @@ function makeMessage($type){
 			</body>
 		</html>';
 	} else if($type === 'koverte-dostavnice-formulari/koverte-sa-povratnicom'){
-		$message = 
-			'<html>
-			<head><title> </title></head>
-			<body>
-				<label> Korisnik: </label> korisnik123 </br>
-				<label> Datum: </label> '.date("d.m.Y.").' </br>
-				<label> Vreme: </label> '.date("h:i").' </br>
-				<label> Tip: </label> Koverta sa povratnicom za štampanje</br>
+		$message .= '<label> Tip: </label> Koverta sa povratnicom za štampanje</br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>
 					<li>Boja: '.$_POST['color'].'</li>
@@ -270,14 +245,7 @@ function makeMessage($type){
 			</body>
 		</html>';
 	} else if($type === 'dostavnica'){
-		$message = 
-			'<html>
-			<head><title> </title></head>
-			<body>
-				<label> Korisnik: </label> korisnik123 </br>
-				<label> Datum: </label> '.date("d.m.Y.").' </br>
-				<label> Vreme: </label> '.date("h:i").' </br>
-				<label> Tip: </label> Dostavnica </br>
+		$message .= '<label> Tip: </label> Dostavnica </br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>
 					<li>Za: '.$_POST['forInput'].'</li>
@@ -290,14 +258,7 @@ function makeMessage($type){
 			</body>
 		</html>';
 	} else if($type === 'koverte-dostavnice-formulari/koverte-sa-dostavnicom'){
-		$message = 
-			'<html>
-			<head><title> </title></head>
-			<body>
-				<label> Korisnik: </label> korisnik123 </br>
-				<label> Datum: </label> '.date("d.m.Y.").' </br>
-				<label> Vreme: </label> '.date("h:i").' </br>
-				<label> Tip: </label> Koverta sa dostavnicom za lično popunjavanje </br>
+		$message .= '<label> Tip: </label> Koverta sa dostavnicom za lično popunjavanje </br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>
 					<li>Za: '.$_POST['forInput'].'</li>
@@ -313,14 +274,7 @@ function makeMessage($type){
 			</body>
 		</html>';
 	} else if($type === 'koverte-dostavnice-formulari/formulari-za-adresiranje'){
-		$message = 
-			'<html>
-			<head><title> </title></head>
-			<body>
-				<label> Korisnik: </label> korisnik123 </br>
-				<label> Datum: </label> '.date("d.m.Y.").' </br>
-				<label> Vreme: </label> '.date("h:i").' </br>
-				<label> Tip: </label> Formular za adresiranje </br>
+		$message .= '<label> Tip: </label> Formular za adresiranje </br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>					
 					<li>Količina: '.$_POST['quantity'].'</li>

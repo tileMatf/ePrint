@@ -21,11 +21,13 @@ Sone :baby_chick:
 - [ ] Za login forme dodati da se zatvara na ESC
 
 Tile :rabbit:
-- [ ] Admin panel - provera i opcija brisanja
-- [ ] Proveriti klasu za konekciju
+- [ ] Admin panel - dodatni prikazi narudzbina?
 - [ ] Probati sa prebacivanjem php-a u 1 fajl 
-- [ ] Brisanje narudzbine kod korisnika
+- [ ] Brisanje narudzbine kod korisnika?
+- [ ] Uredjivanje JS-a
 - [ ] Testiranje
+- [ ] Kod admina - opcija dodavanja admina (sql je napisan)?
+- [x] Podeljeni folderi za upload fajlova po userima
 
 ##### Korisni linkovi za mene:
 http://formvalidation.io/examples/supporting-skeleton-framework/

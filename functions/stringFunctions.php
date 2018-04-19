@@ -1,3 +1,4 @@
+
 <?php
 
 	function readjustText($text) {
@@ -85,5 +86,15 @@
         $input = str_replace($lat, $cyr, $input);
 		return $input;
 	}
-
+	
+	function remove_special_char($input){
+		if($input === null || $input === '')
+			return $input;
+		
+		$special_char = ['\\', '*', '?', '|', '<', '>', '"', ':'];
+		
+		$input = str_replace($special_char, '', $input);
+		return $input;
+	}
+	
 ?>

@@ -10,15 +10,15 @@ require_once("formular_za_adresiranje.php");
 require_once("standardna_koverta.php");
 require_once("omot_spisa.php");
 require_once("order.php");
-require_once("config.php");
 
 class DB {
+	protected $config;
     public static $connection;
     public function __construct(){
         if(!isset(self::$connection)){
             try{
 				self::$connection=new PDO("mysql:host=localhost;dbname=eprint", "tijana", "chadmajkl", 
-						array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION)); // uzimati podatke iz config.php
+						array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
 			} catch(PDOException $e) {
 				echo $e->getMessage();
 			}
@@ -1043,6 +1043,7 @@ class DB {
 			return false;
 		}
 	}
+	
 	
 	public function addAdmin($email, $pass){
 		try{

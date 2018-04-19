@@ -18,20 +18,34 @@
 			$fileStatus = 0;
 			$bindingFileStatus = 0;	
 			
-			$fileStatus = uploadFile("uploaded_file/", $_FILES["fileToUpload"]);
+			if(isset($_SESSION['user_info'])){
+				$directory = "uploaded_file/". $_SESSION['user_info']->Email . "/";
+				$fileStatus = uploadFile($directory, $_FILES["fileToUpload"]);
+			}
+			else {
+				$fileStatus = uploadFile("uploaded_file/", $_FILES["fileToUpload"]);
+			}
 			$statusMessage = generateMessage($fileStatus, $_FILES['fileToUpload']);
 			if($fileStatus !== 2 && $fileStatus !== 3)
 				return false;
 		
 			if(!empty($_FILES['bindingFileToUpload']['name'])){
-				$bindingFileStatus = uploadFile("uploaded_binding_file/", $_FILES["bindingFileToUpload"]);
+				if(isset($_SESSION['user_info'])){
+					$directory = "uploaded_binding_file/". $_SESSION['user_info']->Email . "/";
+					$bindingFileStatus = uploadFile($directory, $_FILES["bindingFileToUpload"]);
+				} else {
+					$bindingFileStatus = uploadFile("uploaded_binding_file/", $_FILES["bindingFileToUpload"]);
+				}
 				$statusMessage .= " " . generateMessage($bindingFileStatus, $_FILES['bindingFileToUpload']);
 				if($bindingFileStatus !== 2 && $bindingFileStatus !== 3){
 					return false;
 				}
 			}
 		
-			$message = makeMessage('stampanje');
+			if(isset($_SESSION['user_info']))
+				$message = makeMessage('stampanje', $_SESSION['user_info']->Email);
+			else 
+				$message = makeMessage('stampanje');
 			
 			$status = false;
 			if($fileStatus === 2 || $fileStatus === 3){

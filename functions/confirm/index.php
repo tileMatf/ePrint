@@ -6,7 +6,11 @@
 	require_once "../mail.php";
 		
 	$status = 0;
-	$message = makeMessage($_POST['orderType']);			
+	
+	if(isset($_SESSION['user_info']))
+		$message = makeMessage($_POST['orderType'], $_SESSION['user_info']->Email);
+	else 
+		$message = makeMessage($_POST['orderType']);
 
 	$status = sendMail($message);
 	
