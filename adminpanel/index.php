@@ -34,17 +34,34 @@
     }
 
     header {
-      background-color: #33C3F0;
+      background-color: #4CAF50;
       text-align: center;
       margin-bottom: 40px;
       padding: 10px 10px;
     }
 
     h3 {
-      color: maroon;
+			font-size: 24px;
+			font-weight: bold;
+      color: #444;
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
+			margin-top: 100px;
     }
+
+		        h3::after {
+                background: #a5faa9;
+                content: "";
+                display: block;
+                height: 1px;
+								padding-top: 2px;
+                width: 200px;
+                margin-top: 10px;
+								margin-left: auto;
+								margin-right: auto;
+            }
+
+		.first { margin-top: 0 !important; margin-bottom: 30px !important; }
 
     p {
       color: #FFF;
@@ -58,8 +75,18 @@
     }
 
     a:hover {
-      color:blueviolet;
+      color:#a7f3a7;
     }
+
+		 button.admin-button {
+			 background-color: #4CAF50;
+			 border: none;
+		 }
+
+		 button.admin-button:hover{
+			 background-color: #4CBA51;
+		 }
+
   </style>
 </head>
 
@@ -80,7 +107,7 @@
   <div class="container">
     <!-- stampanje naslov iznad tabele -->
     <div class="12 columns">
-      <h3>Štampanje</h3>
+      <h3 class="first">Štampanje</h3>
     </div>
     <!-- tabela -->
     <table class="u-full-width">
@@ -105,7 +132,7 @@
 							<td>'.$orders[$i]->FileName.'</td>
 							<td>
 								<input type="hidden" name="orderID" value="'.$orders[$i]->OrderID.'">
-								<button class="button-primary" name="checkOrder" title = "Označiti kao završenu narudžbinu">
+								<button class="button-primary admin-button" name="checkOrder" title = "Označiti kao završenu narudžbinu">
 									Urađeno
 								</button>
 							 </td>
@@ -144,7 +171,7 @@
 							  <td>'.$orders[$i]->FileName.'</td>
 							  <td>
 									<input type="hidden" name="orderID" value="'.$orders[$i]->OrderID.'">
-									<button class="button-primary" name="checkOrder" title = "Označiti kao završenu narudžbinu">
+									<button class="button-primary admin-button" name="checkOrder" title = "Označiti kao završenu narudžbinu">
 										Urađeno
 									</button>
 							  </td>
@@ -181,7 +208,7 @@
 							  <td>'.$orders[$i]->Email.'</td>
 							  <td>
 									<input type="hidden" name="orderID" value="'.$orders[$i]->OrderID.'">
-									<button class="button-primary" name="checkOrder" title = "Označiti kao završenu narudžbinu">
+									<button class="button-primary admin-button" name="checkOrder" title = "Označiti kao završenu narudžbinu">
 										Urađeno
 									</button>
 							  </td>
@@ -218,7 +245,7 @@
 							  <td>'.$orders[$i]->Email.'</td>
 							  <td>
 									<input type="hidden" name="orderID" value="'.$orders[$i]->OrderID.'">
-									<button class="button-primary" name="checkOrder" title = "Označiti kao završenu narudžbinu">
+									<button class="button-primary admin-button" name="checkOrder" title = "Označiti kao završenu narudžbinu">
 										Urađeno
 									</button>
 							  </td>
@@ -255,7 +282,7 @@
 							  <td>'.$orders[$i]->Email.'</td>
 							  <td>
 								<input type="hidden" name="orderID" value="'.$orders[$i]->OrderID.'">
-								<button class="button-primary" name="checkOrder" title = "Označiti kao završenu narudžbinu">
+								<button class="button-primary admin-button" name="checkOrder" title = "Označiti kao završenu narudžbinu">
 									Urađeno
 								</button>
     						 </td>
@@ -292,7 +319,7 @@
 							  <td>'.$orders[$i]->Email.'</td>
 							  <td>
 								<input type="hidden" name="orderID" value="'.$orders[$i]->OrderID.'">
-								<button class="button-primary" name="checkOrder" title = "Označiti kao završenu narudžbinu">
+								<button class="button-primary admin-button" name="checkOrder" title = "Označiti kao završenu narudžbinu">
 									Urađeno
 								</button>
 							  </td>
@@ -329,7 +356,7 @@
 							  <td>'.$orders[$i]->Email.'</td>
 							  <td>								
 								<input type="hidden" name="orderID" value="'.$orders[$i]->OrderID.'">
-								<button class="button-primary" name="checkOrder" title = "Označiti kao završenu narudžbinu">
+								<button class="button-primary admin-button" name="checkOrder" title = "Označiti kao završenu narudžbinu">
 									Urađeno
 								</button>
 							  </td>
@@ -366,7 +393,7 @@
 							  <td>'.$orders[$i]->Email.'</td>
 							  <td>
 								<input type="hidden" name="orderID" value="'.$orders[$i]->OrderID.'">
-								<button class="button-primary" name="checkOrder" title = "Označiti kao završenu narudžbinu">
+								<button class="button-primary admin-button" name="checkOrder" title = "Označiti kao završenu narudžbinu">
 									Urađeno
 								</button>
 							  </td>
@@ -403,7 +430,7 @@
 							  <td>'.$orders[$i]->Email.'</td>
 							  <td>
 								<input type="hidden" name="orderID" value="'.$orders[$i]->OrderID.'">
-								<button class="button-primary" name="checkOrder" title = "Označiti kao završenu narudžbinu">
+								<button class="button-primary admin-button" name="checkOrder" title = "Označiti kao završenu narudžbinu">
 									Urađeno
 								</button>
 							  </form>
@@ -441,7 +468,7 @@
 							  <td>'.$orders[$i]->Email.'</td>
 							  <td>
 								<input type="hidden" name="orderID" value="'.$orders[$i]->OrderID.'">
-								<button class="button-primary" name="checkOrder" title = "Označiti kao završenu narudžbinu">
+								<button class="button-primary admin-button" name="checkOrder" title = "Označiti kao završenu narudžbinu">
 									Urađeno
 								</button>
 							  </td>
@@ -478,7 +505,7 @@
 							  <td>'.$orders[$i]->Email.'</td>
 							  <td>
 								<input type="hidden" name="orderID" value="'.$orders[$i]->OrderID.'">
-								<button class="button-primary" name="checkOrder" title = "Označiti kao završenu narudžbinu">
+								<button class="button-primary admin-button" name="checkOrder" title = "Označiti kao završenu narudžbinu">
 									Urađeno
 								</button>
 							  </td>
