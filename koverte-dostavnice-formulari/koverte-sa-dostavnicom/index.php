@@ -91,13 +91,13 @@ require_once '../../functions/functions.php';
                     <!-- BOJA -->
                     <label class="label__heading">Boja</label>
                     <label for="plava">
-                        <input type="radio" id="plava" name="color" value="Plave" checked 
-							<?php echo (isset($_POST['color']) && $_POST['color'] == 'Plave') || !isset($_POST['color']) ? "checked" : "" ?>>
+                        <input type="radio" id="plava" name="color" value="plava"
+							<?php echo (isset($_POST['color']) && $_POST['color'] == 'plava') || !isset($_POST['color']) ? "checked" : "" ?>>
                         <span>Plave</span>
                     </label>
                     <label for="bela">
-                        <input type="radio" id="bela" name="color" value="Bele" 
-							<?php echo isset($_POST['color']) && $_POST['color'] == 'Bele' ? "checked" : ""?>>
+                        <input type="radio" id="bela" name="color" value="bela" 
+							<?php echo isset($_POST['color']) && $_POST['color'] == 'bela' ? "checked" : ""?>>
                         <span>Bele</span>
                     </label>
 

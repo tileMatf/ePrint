@@ -136,12 +136,12 @@ require 'stringFunctions.php';
 			break;
 		case 'koverte-dostavnice-formulari/koverte-sa-dostavnicom':
 			imagettftext($image, 20, 0, 170, 1000, $black, $font_path, $envelopeReciver);
-			imagettftext($image, 20, 0, 445, 1000, $black, $font_path, convertToCyrilic(strtoupper($_GET['nameLastname'])));
-			imagettftext($image, 20, 0, 170, 1030, $black, $font_path, "Ул. ". convertToCyrilic($_GET['adress']));
-			imagettftext($image, 20, 0, 170, 1060, $black, $font_path, convertToCyrilic($_GET['zipCode']));
-			imagettftext($image, 20, 0, 280, 1060, $black, $font_path, convertToCyrilic(strtoupper($_GET['location'])));
+			imagettftext($image, 20, 0, 445, 1000, $black, $font_path, convertToCyrilic(strtoupper(isset($_GET['nameLastname']) ? $_GET['nameLastname'] : '')));
+			imagettftext($image, 20, 0, 170, 1030, $black, $font_path, "Ул. ". convertToCyrilic(isset($_GET['adress']) ? $_GET['adress'] : ''));
+			imagettftext($image, 20, 0, 170, 1060, $black, $font_path, convertToCyrilic(isset($_GET['zipCode']) ? $_GET['zipCode'] : ''));
+			imagettftext($image, 20, 0, 280, 1060, $black, $font_path, convertToCyrilic(strtoupper(isset($_GET['location']) ? $_GET['location'] : '')));
 			imagettftext($image, 19, 0, 680, 1000, $black, $font_path, "ПОШТАРИНА ПЛАЋЕНА КОД ПОШТЕ");
-			imagettftext($image, 20, 0, 800, 1030, $black, $font_path, convertToCyrilic(strtoupper($_GET['postagePaid'])));
+			imagettftext($image, 20, 0, 800, 1030, $black, $font_path, convertToCyrilic(strtoupper(isset($_GET['postagePaid']) ? $_GET['postagePaid'] : '')));
 			imagettftext($image, 25, 0, 600, 1060, $black, $font_path, convertToCyrilic($_GET['envelopeType']));
 			imagerectangle($image, 590, 1020, 650, 1070, $black);
 			if($_GET['forInput'] === 'Javni izvrsitelj')

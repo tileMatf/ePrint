@@ -711,3 +711,7 @@ a.disabled-links{
 	cursor: pointer;
 }
 
+#paymentConfirm {
+	margin:2% 25% auto auto;
+	display: block;
+}

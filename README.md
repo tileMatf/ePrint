@@ -21,7 +21,11 @@ Sone :baby_chick:
 - [ ] Za login forme dodati da se zatvara na ESC
 
 Tile :rabbit:
-- [ ]
+- [ ] Admin panel - provera i opcija brisanja
+- [ ] Proveriti klasu za konekciju
+- [ ] Probati sa prebacivanjem php-a u 1 fajl 
+- [ ] Brisanje narudzbine kod korisnika
+- [ ] Testiranje
 
 ##### Korisni linkovi za mene:
 http://formvalidation.io/examples/supporting-skeleton-framework/
