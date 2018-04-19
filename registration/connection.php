@@ -86,10 +86,13 @@ class DB {
 	
 	private function insertOrder($order){
 		try{
-			$query = self::$connection->prepare("INSERT INTO orders (TypeID, UserID, OrderDate, Seen) 
-				VALUES (:typeID, :userID, NOW(), 0)");
+			$query = self::$connection->prepare("INSERT INTO orders (TypeID, UserID, OrderDate, Seen, DeliveryAddress, DeliveryZipCode, DeliveryLocation) 
+				VALUES (:typeID, :userID, NOW(), 0, :address, :zipCode, :location)");
 			$query->bindValue(":typeID", $order->TypeID, PDO::PARAM_INT);
 			$query->bindValue(":userID", $order->UserID, PDO::PARAM_INT);
+			$query->bindValue(":address", $order->DeliveryAddress, PDO::PARAM_STR);
+			$query->bindValue(":zipCode", $order->DeliveryZipCode, PDO::PARAM_STR);
+			$query->bindValue(":location", $order->DeliveryLocation, PDO::PARAM_STR);
 			
 			$query->execute();
 			if($query->rowCount() > 0){

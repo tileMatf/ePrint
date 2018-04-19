@@ -283,30 +283,6 @@
 		});	
 	}
 	
-	/**/
-	var ordersRows = document.getElementsByName("orderRow");	
-	if(ordersRows != null){
-		for(var i = 0; i < ordersRows.length; i++){
-			ordersRows[i].addEventListener('click', openOrder ,false)
-		}
-	}	
-	function openOrder(event){
-		event.preventDefault();
-		
-		var orderObjectField = this.querySelector("input[name='orderObject']");
-		var orderTypeField = this.querySelector("input[name='orderType']");
-		var form = document.createElement('form');
-		form.setAttribute("method", "POST");
-		form.setAttribute("action", window.location.origin + "/eprint/" + orderTypeField.value + "/");
-		
-		form.appendChild(orderObjectField);
-		form.appendChild(orderTypeField);
-		
-		//alert(this.querySelector("input[name='fileName']").value);
-		document.body.appendChild(form);
-		form.submit();
-	}
-	
 	var saveOrderButton = document.getElementById("saveOrder");
 	if(saveOrderButton != null){
 		saveOrderButton.addEventListener('click', function(event){
@@ -340,3 +316,30 @@
 			xhttp.send(parameters.join('&'));
 		});
 	}
+	
+	/*Make table rows of order clickable*/
+	var ordersRows = document.getElementsByName('orderRow');
+	if(ordersRows != null){
+		for(var i = 0; i < ordersRows.length; i++){
+			ordersRows[i].addEventListener('click', openOrder);
+		}
+	}	
+	function openOrder(event){
+		event.preventDefault();
+		
+		/*var orderObjectField = this.querySelector("input[name='orderObject']");
+		var orderTypeField = this.querySelector("input[name='orderType']");
+		var form = document.createElement('form');
+		form.setAttribute("method", "POST");
+		form.setAttribute("action", window.location.origin + "/eprint/" + orderTypeField.value + "/");
+				
+		form.appendChild(orderObjectField);
+		form.appendChild(orderTypeField);
+
+		//document.body.appendChild(form);*/
+		
+		var form = this.form;
+		
+		form.submit();
+	}
+	

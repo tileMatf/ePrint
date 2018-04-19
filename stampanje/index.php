@@ -411,7 +411,7 @@
                 <option value="Dve rupe za registrator dole" <?php echo isset($_POST['drillingType']) && $_POST['drillingType'] == 'Dve rupe za registrator dole' ? "selected" : "" ?>>Dve rupe za registrator dole</option>
               </select>
             <!-- ***************************** -->
-
+			
             <!-- Krajnja poruka -->
             <label for="message" class="label__heading">Poruka</label>
             <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"><?php echo isset($_POST['comment']) ? $_POST['comment'] : "" ?></textarea>
