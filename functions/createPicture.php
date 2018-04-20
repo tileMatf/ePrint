@@ -1,6 +1,6 @@
 <?php
 
-require 'stringFunctions.php';
+require_once("stringFunctions.php");
 
 	function getEnvelopeReciver($input) {
 		if($input === 'Javni izvrsitelj')
@@ -12,7 +12,7 @@ require 'stringFunctions.php';
 		}
 		return $reciver;
 	}
-
+	
 	function fillPaymentData(&$image, $black, $font_path) {
 		$type = $_GET['orderType'];
 		$purposeOfPayment = isset($_GET['purposeOfPayment']) ? $_GET['purposeOfPayment'] : '';
@@ -100,8 +100,8 @@ require 'stringFunctions.php';
 	$type = $_GET['orderType'];
 	$envelopeReciver = isset($_GET['forInput']) ? getEnvelopeReciver($_GET['forInput']) : '';
 	$colorOfDocument = isset($_GET['color']) ? '-' . $_GET['color'] : '';
-	$image_file = dirname(__FILE__) . '/Image/' . $type . $colorOfDocument . '.jpg';
-	$image = imagecreatefromjpeg($image_file);
+	$image_file = dirname(__FILE__) . '/Image/' .$type . $colorOfDocument . '.jpg';
+	$image = @imagecreatefromjpeg($image_file);
 	$black = imagecolorallocate($image, 0, 0, 0);
 	$font_path = dirname(__FILE__) . '/Font/OpenSans-Regular.ttf';	
 	$name = isset($_GET['payer']) ? $_GET['payer'] : '';
@@ -109,10 +109,10 @@ require 'stringFunctions.php';
 	$address = isset($_GET['address']) ? $_GET['address'] . ", " : '';
 	if(isset($_GET['location']))
 		$address .= $_GET['location'];
-	$address = isset($address) ? convertToCyrilic($address) : '';
+	$address = isset($address) && !empty($address) ? convertToCyrilic($address) : '';
 	$country = isset($_GET['country']) ? $_GET['country'] : '';	
-	$country = isset($country) ? convertToCyrilic($country) : '';
-
+	$country = isset($country) && !empty($country) ? convertToCyrilic($country) : '';
+	
 	switch ($type) {
 		case 'uplatnice/nalog-za-uplatu':
 			imagettftext($image, 11, 0, 30, 58, $black, $font_path, $name);
@@ -169,9 +169,11 @@ require 'stringFunctions.php';
 			break;
 		}
 
-	header('Content-type: image/jpeg');
-	
-	imagejpeg($image);
-	imagedestroy($image);
-	
+	if($image !== false){
+		header('Content-Type: image/jpeg');
+		imagejpeg($image);
+		imagedestroy($image);
+	} else {
+		echo "Error";
+	}
 ?>
