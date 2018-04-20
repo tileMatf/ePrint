@@ -54,7 +54,8 @@
 		
 		require_once("../registration/connection.php");
 		$db = new DB();
-		$status = $db->saveOrder($order, $_SESSION['user_info']->ID);
+		$order->UserId = $_SESSION['user_info']->ID;
+		$status = $db->saveOrder($order);
 		if($status === true){
 			unset($_POST);
 			$_POST = array();

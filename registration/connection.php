@@ -1,6 +1,6 @@
 <?php
 
-require_once("blok.php");
+/*require_once("blok.php");
 require_once("stampanje.php");
 require_once("uplata_isplata_prenos.php");
 require_once("koverta_sa_povratnicom.php");
@@ -8,7 +8,7 @@ require_once("dostavnica.php");
 require_once("koverta_sa_dostavnicom.php");
 require_once("formular_za_adresiranje.php");
 require_once("standardna_koverta.php");
-require_once("omot_spisa.php");
+require_once("omot_spisa.php");*/
 require_once("order.php");
 
 class DB {
@@ -17,7 +17,7 @@ class DB {
     public function __construct(){
         if(!isset(self::$connection)){
             try{
-				self::$connection=new PDO("mysql:host=localhost;dbname=eprint", "root", "", 
+				self::$connection=new PDO("mysql:host=localhost;dbname=eprint", "tijana", "chadmajkl", 
 						array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
 			} catch(PDOException $e) {
 				echo $e->getMessage();
@@ -89,14 +89,14 @@ class DB {
 			$query = self::$connection->prepare("INSERT INTO orders (TypeID, UserID, OrderDate, Seen, DeliveryAddress, DeliveryZipCode, DeliveryLocation) 
 				VALUES (:typeID, :userID, NOW(), 0, :address, :zipCode, :location)");
 			$query->bindValue(":typeID", $order->TypeID, PDO::PARAM_INT);
+			$query->bindValue(":typeID", $order->TypeID, PDO::PARAM_INT);
 			$query->bindValue(":userID", $order->UserID, PDO::PARAM_INT);
 			$query->bindValue(":address", $order->DeliveryAddress, PDO::PARAM_STR);
 			$query->bindValue(":zipCode", $order->DeliveryZipCode, PDO::PARAM_STR);
 			$query->bindValue(":location", $order->DeliveryLocation, PDO::PARAM_STR);
-			
 			$query->execute();
-			if($query->rowCount() > 0){
-					return self::$connection->lastInsertId();
+			if($query->rowCount() > 0){	
+				return self::$connection->lastInsertId();
 			} else {
 				print_r(self::$connection->errorInfo());
 				return -1;
@@ -107,12 +107,10 @@ class DB {
 		}
 	}
 		
-	private function insertStampanje($stampanje, $userID){
+	private function insertStampanje($stampanje){
 		try{
-			$order = new Order();
-			$order->TypeID = 1;
-			$order->UserID = $userID;
-			$orderID = $this->insertOrder($order);
+			$stampanje->TypeID = 1;
+			$orderID = $this->insertOrder($stampanje);
 			if($orderID > 0){
 				$query = self::$connection->prepare("INSERT INTO stampanje (OrderID, FileName, CopyNumber, PageOrder, Color, PagePrintType, PaperSize,
 					PaperWidth, BindingType, BindingFile, HeftingType, DrillingType, Comment, SendCopy) 
@@ -148,12 +146,10 @@ class DB {
 		}
 	}
 	
-	private function insertBlok($blok, $userID){
+	private function insertBlok($blok){
 		try{
-			$order = new Order();
-			$order->TypeID = 2;
-			$order->UserID = $userID;
-			$orderID = $this->insertOrder($order);
+			$blok->TypeID = 2;
+			$orderID = $this->insertOrder($blok);
 			if($orderID > 0){
 				$query = self::$connection->prepare("INSERT INTO blokovi (OrderID, FileName, NumberOfSet, Color, Size, Packing, Comment, SendCopy) 
 					VALUES (:orderID, :fileName, :numberOfSet, :color, :size, :packing, :comment, :sendCopy)");
@@ -181,17 +177,15 @@ class DB {
 		}
 	}
 	
-	private function insertNalog($nalog, $userID){
+	private function insertNalog($nalog){
 		try{
-			$order = new Order();
 			if($nalog->Type == 'Uplata')
-				$order->TypeID = 3;
+				$nalog->TypeID = 3;
 			else if($nalog->Type == 'Isplata')
-				$order->TypeID = 4;
+				$nalog->TypeID = 4;
 			else 
-				$order->TypeID = 5;
-			$order->UserID = $userID;
-			$orderID = $this->insertOrder($order);
+				$nalog->TypeID = 5;
+			$orderID = $this->insertOrder($nalog);
 			if($orderID > 0){
 				if($nalog->Type == 'Uplata' || $nalog->Type == 'Isplata'){
 					$query = self::$connection->prepare("INSERT INTO `uplate-isplate` (OrderID, Type, Name, Address, Location, Country, PaymentPurpose,
@@ -246,12 +240,10 @@ class DB {
 		}
 	}
 	
-	private function insertKovertaSaPovratnicom($koverta, $userID){
+	private function insertKovertaSaPovratnicom($koverta){
 		try{
-			$order = new Order();
-			$order->TypeID = 6;
-			$order->UserID = $userID;
-			$orderID = $this->insertOrder($order);
+			$koverta->TypeID = 6;
+			$orderID = $this->insertOrder($koverta);
 			if($orderID > 0){
 				$query = self::$connection->prepare("INSERT INTO `koverte-sa-povratnicom` (OrderID, Color, Quantity, SendCopy) 
 					VALUES (:orderID, :color, :quantity, :sendCopy)");
@@ -275,12 +267,10 @@ class DB {
 		}
 	}
 	
-	private function insertDostavnica($dostavnica, $userID){
+	private function insertDostavnica($dostavnica){
 		try{
-			$order = new Order();
-			$order->TypeID = 7;
-			$order->UserID = $userID;
-			$orderID = $this->insertOrder($order);
+			$dostavnica->TypeID = 7;
+			$orderID = $this->insertOrder($dostavnica);
 			if($orderID > 0){
 				$query = self::$connection->prepare("INSERT INTO `dostavnice` (OrderID, Recipient, Name, Address, ZipCode, Location, Quantity, SendCopy) 
 					VALUES (:orderID, :recipient, :name, :address, :zipCode, :location, :quantity, :sendCopy)");
@@ -308,13 +298,11 @@ class DB {
 		}
 	}
 	
-	private function insertKovertaSaDostavnicom($koverta, $userID){
+	private function insertKovertaSaDostavnicom($koverta){
 		try{
-			$order = new Order();
-			$order->TypeID = 8;
-			$order->UserID = $userID;
-			$orderID = $this->insertOrder($order);
-			if($orderID > 0){
+			$koverta->TypeID = 8;
+			$orderID = $this->insertOrder($koverta);
+			if($orderID > 0){				
 				$query = self::$connection->prepare("INSERT INTO `koverte-sa-dostavnicom` (OrderID, Recipient, Color, Name, Address, ZipCode, Location,
 					PostagePaid, EnvelopeType, Quantity, SendCopy) 
 					VALUES (:orderID, :recipient, :color, :name, :address, :zipCode, :location, :postagePaid, :envelopeType, :quantity, :sendCopy)");
@@ -344,12 +332,10 @@ class DB {
 			return false;
 		}
 	}
-	private function insertFormular($formular, $userID){
+	private function insertFormular($formular){
 		try{
-			$order = new Order();
-			$order->TypeID = 9;
-			$order->UserID = $userID;
-			$orderID = $this->insertOrder($order);
+			$formular->TypeID = 9;
+			$orderID = $this->insertOrder($formular);
 			if($orderID > 0){
 				$query = self::$connection->prepare("INSERT INTO `formulari-za-adresiranje` (OrderID, Quantity, SendCopy) 
 					VALUES (:orderID, :quantity, :sendCopy)");
@@ -372,12 +358,10 @@ class DB {
 		}	
 	}
 	
-	private function insertStandardnaKoverta($koverta, $userID){
+	private function insertStandardnaKoverta($koverta){
 		try{
-			$order = new Order();
-			$order->TypeID = 10;
-			$order->UserID = $userID;
-			$orderID = $this->insertOrder($order);
+			$koverta->TypeID = 10;
+			$orderID = $this->insertOrder($koverta);
 			if($orderID > 0){
 				$query = self::$connection->prepare("INSERT INTO `standardne-koverte` (OrderID, Size, Quantity, BackPrintRow1, BackPrintRow2, 
 				BackPrintRow3, BackPrintRow4, AddressPrintRow1, AddressPrintRow2, AddressPrintRow3, AddressPrintRow4, Comment, VariableData, SendCopy) 
@@ -413,12 +397,10 @@ class DB {
 		}
 	}
 	
-	private function insertOmotSpisa($omot, $userID){
+	private function insertOmotSpisa($omot){
 		try{
-			$order = new Order();
-			$order->TypeID = 11;
-			$order->UserID = $userID;
-			$orderID = $this->insertOrder($order);
+			$omot->TypeID = 11;
+			$orderID = $this->insertOrder($omot);
 			if($orderID > 0){
 				$query = self::$connection->prepare("INSERT INTO `omot-spisa` (OrderID, Recipient, Name, Address, Location,
 					PaperType, Quantity, Comment, SendCopy) 
@@ -509,7 +491,6 @@ class DB {
 			return false;
 		}
 	}
-	
 	
 	public function updateOrderStampanje($stampanje){
 		try{
@@ -1016,29 +997,28 @@ class DB {
 		}	
 	}
 	
-	public function saveOrder($order, $userID) {
+	public function saveOrder($order) {
 		try{
 			$saved = false;
-			$orderParent = new Order();
-			$orderParent->UserID = $userID;
+
 			if($order instanceof Stampanje){
-				$saved = $this->insertStampanje($order, $userID);
+				$saved = $this->insertStampanje($order);
 			} else if($order instanceof Blok){
-				$saved = $this->insertBlok($order, $userID);
+				$saved = $this->insertBlok($order);
 			} else if($order instanceof UplataIsplataPrenos){
-				$saved = $this->insertNalog($order, $userID);
+				$saved = $this->insertNalog($order);
 			} else if($order instanceof KovertaSaPovratnicom){
-				$saved = $this->insertKovertaSaPovratnicom($order, $userID);
+				$saved = $this->insertKovertaSaPovratnicom($order);
 			} else if($order instanceof Dostavnica){
-				$saved = $this->insertDostavnica($order, $userID);
+				$saved = $this->insertDostavnica($order);
 			} else if($order instanceof KovertaSaDostavnicom){
-				$saved = $this->insertKovertaSaDostavnicom($order, $userID);
+				$saved = $this->insertKovertaSaDostavnicom($order);
 			} else if($order instanceof FormularZaAdresiranje){
-				$saved = $this->insertFormular($order, $userID);
+				$saved = $this->insertFormular($order);
 			} else if($order instanceof StandardnaKoverta){
-				$saved = $this->insertStandardnaKoverta($order, $userID);
+				$saved = $this->insertStandardnaKoverta($order);
 			} else if($order instanceof OmotSpisa){
-				$saved = $this->insertOmotSpisa($order, $userID);
+				$saved = $this->insertOmotSpisa($order);
 			}
 			return $saved;
 		} catch(PDOException $e){
@@ -1112,8 +1092,13 @@ $dostavnica->Quantity = 1000;
 $dostavnica->SendCopy = 1;
 echo $conn->updateOrderDostavnica($dostavnica);*/
 
-/*$dostavnica = new KovertaSaDostavnicom();
-$dostavnica->OrderID = 2;
+/*$k = array('forInput' => 'Javni izvrsitelj', 'color' => 'Plave', 'nameLastname' => 'Zorana', 'adress' => 'Adresa',
+	'zipCode' => '26000', 'location' => 'Cara Dusana 16a', 'postagePaid' => '...', 'quantity' => '1000', 'envelopeType' => 'S0', 
+	'sendCopy' => 0, 'deliveryAddress' => 'deliveryAddress', 'deliveryZipCode' => 'deliveryZipCode', 'deliveryLocation' => 'deliveryLocation');
+$dostavnica = new KovertaSaDostavnicom($k);
+$dostavnica->UserID = 3;
+$dostavnica->TypeID = 1;*/
+/*$dostavnica->ID = 2;
 $dostavnica->Recipient = 'Javni izvrsitelj';
 $dostavnica->Color = 'Plave';
 $dostavnica->Name = 'Zorana Kostic';
@@ -1124,7 +1109,10 @@ $dostavnica->PostagePaid = 'Posta';
 $dostavnica->EnvelopeType = 'S0';
 $dostavnica->Quantity = 1000;
 $dostavnica->SendCopy = 1;
-echo $conn->updateOrderKovertaSaDostavnicom($dostavnica);*/
+$dostavnica->DeliveryAddress = "adresa isporuke";
+$dostavnica->DeliveryZipCode = "zip isporuke";
+$dostavnica->DeliveryLocation = "mesto isporuke";*/
+//echo $conn->saveOrder($dostavnica);
 
 /*echo $conn->insertFormular(2, 1000);*/
 

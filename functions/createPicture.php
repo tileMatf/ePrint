@@ -15,7 +15,7 @@ require 'stringFunctions.php';
 
 	function fillPaymentData(&$image, $black, $font_path) {
 		$type = $_GET['orderType'];
-		$purposeOfPayment = $_GET['purposeOfPayment'];
+		$purposeOfPayment = isset($_GET['purposeOfPayment']) ? $_GET['purposeOfPayment'] : '';
 		$purposeOfPayment = readjustText($purposeOfPayment);
 		if($type === 'uplatnice/nalog-za-isplatu'){
 			imagettftext($image, 15, 0, 75, 222, $black, $font_path, $purposeOfPayment);
@@ -24,7 +24,7 @@ require 'stringFunctions.php';
 		} else { 
 			imagettftext($image, 15, 0, 80, 240, $black, $font_path, $purposeOfPayment);
 		}
-		$recipient = $_GET['recipient'];
+		$recipient = isset($_GET['recipient']) ? $_GET['recipient'] : '';
 		$recipient = readjustText($recipient);
 		if($type === 'uplatnice/nalog-za-isplatu'){
 			imagettftext($image, 15, 0, 75, 332, $black, $font_path, $recipient);
@@ -33,7 +33,7 @@ require 'stringFunctions.php';
 		} else { 
 			imagettftext($image, 15, 0, 80, 343, $black, $font_path, $recipient);
 		}
-		$paymentCode = $_GET['paymentCode'];
+		$paymentCode = isset($_GET['paymentCode']) ? $_GET['paymentCode'] : '';
 		if($type === 'uplatnice/nalog-za-isplatu'){
 			imagettftext($image, 18, 0, 685, 144, $black, $font_path, $paymentCode);
 		} else if($type === 'uplatnice/nalog-za-uplatu'){
@@ -49,7 +49,7 @@ require 'stringFunctions.php';
 		} else { 
 			imagettftext($image, 18, 0, 785, 145, $black, $font_path, $currency);
 		}
-		$amount = $_GET['amount'];
+		$amount = isset($_GET['amount']) ? $_GET['amount'] : '';
 		if($amount != ''){
 				$amount = readjustAmount($amount);
 			if($type === 'nalog-za-isplatu'){
@@ -60,7 +60,7 @@ require 'stringFunctions.php';
 				imagettftext($image, 18, 0, 890, 145, $black, $font_path, $amount);
 			}
 		}
-		$accountOfRecipient = $_GET['accountOfRecipient'];
+		$accountOfRecipient = isset($_GET['accountOfRecipient']) ? $_GET['accountOfRecipient'] : '';
 		if($type === 'uplatnice/nalog-za-isplatu'){
 			imagettftext($image, 18, 0, 780, 210, $black, $font_path, $accountOfRecipient);
 		} else if($type === 'uplatnice/nalog-za-uplatu'){
@@ -69,13 +69,13 @@ require 'stringFunctions.php';
 			imagettftext($image, 18, 0, 690, 339, $black, $font_path, $accountOfRecipient);
 		}
 		if($type !== 'uplatnice/nalog-za-prenos'){
-			$mockUp = $_GET['mockUp'];
+			$mockUp = isset($_GET['mockUp']) ? $_GET['mockUp'] : '';
 			if($type === 'uplatnice/nalog-za-isplatu'){
 				imagettftext($image, 18, 0, 687, 280, $black, $font_path, $mockUp);
 			} else if($type === 'uplatnice/nalog-za-uplatu'){
 				imagettftext($image, 12, 0, 436, 171, $black, $font_path, $mockUp);
 			}
-			$referenceNumber = $_GET['referenceNumber'];
+			$referenceNumber = isset($_GET['referenceNumber']) ? $_GET['referenceNumber'] : '';
 			if($type === 'uplatnice/nalog-za-isplatu'){
 				imagettftext($image, 18, 0, 777, 280, $black, $font_path, $referenceNumber);
 			} else if($type === 'uplatnice/nalog-za-uplatu'){
@@ -170,6 +170,7 @@ require 'stringFunctions.php';
 		}
 
 	header('Content-type: image/jpeg');
+	
 	imagejpeg($image);
 	imagedestroy($image);
 	

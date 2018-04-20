@@ -15,9 +15,9 @@ function uploadFile($target_dir, $file){
 	$target_dir = remove_special_char($target_dir);
 	if(!file_exists($target_dir)){
 		$success = mkdir($target_dir, true);
+		if($success  === false)
+			return false;
 	}
-	if($success  === false)
-		return false;
 		
 	$target_file = $target_dir . basename($file['name']);
 	$uploadOk = 1;
@@ -123,9 +123,7 @@ function makeMessage($type, $user = null){
 						<li>Heftanje: '.$_POST['heftingType'].'</li>
 						<li>Bušenje: '.$_POST['drillingType'].'</li>
 						<li>Komentar korisnika: '. test_input($_POST['comment']).'</li>
-					</ul>
-				</body>
-			</html>';
+					</ul>';
 	} else if($type === 'uplatnice/nalog-za-isplatu' || $type === 'uplatnice/nalog-za-uplatu' || $type === 'uplatnice/nalog-za-prenos'){
 
 					if($type === 'uplatnice/nalog-za-uplatu')
@@ -170,9 +168,7 @@ function makeMessage($type, $user = null){
 					else
 						$message = $message . 'NE </li>';
 					$message .= '<li>Komentar korisnika: ' . test_input($_POST['comment']) . '</li>
-				</ul>
-			</body>
-		</html>';		
+				</ul>';
 	}
 	else if($type === 'blokovi'){
 		$message .= '<label> Tip: </label> Preslikavajući blokovi </br>
@@ -184,9 +180,7 @@ function makeMessage($type, $user = null){
 					<li>Veličina: '.$_POST['blockSize'].'</li>
 					<li>Pakovanje: '.$_POST['packing'].'</li>
 					<li>Komentar korisnika: '. test_input($_POST['comment']).'</li>
-				</ul>
-			</body>
-		</html>';
+				</ul>';
 	}
 	else if($type === 'koverte-dostavnice-formulari/standardne-koverte'){
 			$message .= '<label> Tip: </label> Standardne koverte </br>
@@ -218,9 +212,7 @@ function makeMessage($type, $user = null){
 
 		$message = $message .
 					'<li>Komentar korisnika: '. test_input($_POST['comment']).'</li>
-				</ul>
-			</body>
-		</html>';
+				</ul>';
 	} else if($type === 'omot-spisa'){
 		$message .= '<label> Tip: </label> Omot spisa </br>
 				<label> Izabrane opcije: </label> </br>
@@ -232,18 +224,14 @@ function makeMessage($type, $user = null){
 					<li>Vrsta papira: '.$_POST['typeOfPaper'].'</li>
 					<li>Količina: '.$_POST['quantity'].'</li>
 					<li>Komentar korisnika: '. test_input($_POST['comment']).'</li>
-				</ul>
-			</body>
-		</html>';
+				</ul>';
 	} else if($type === 'koverte-dostavnice-formulari/koverte-sa-povratnicom'){
 		$message .= '<label> Tip: </label> Koverta sa povratnicom za štampanje</br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>
 					<li>Boja: '.$_POST['color'].'</li>
 					<li>Količina: '.$_POST['quantity'].'</li>
-				</ul>
-			</body>
-		</html>';
+				</ul>';
 	} else if($type === 'dostavnica'){
 		$message .= '<label> Tip: </label> Dostavnica </br>
 				<label> Izabrane opcije: </label> </br>
@@ -254,9 +242,7 @@ function makeMessage($type, $user = null){
 					<li>Poštanski broj: '.test_input($_POST['zipCode']).'</li>
 					<li>Mesto: '.test_input($_POST['location']).'</li>
 					<li>Količina: '.$_POST['quantity'].'</li>
-				</ul>
-			</body>
-		</html>';
+				</ul>';
 	} else if($type === 'koverte-dostavnice-formulari/koverte-sa-dostavnicom'){
 		$message .= '<label> Tip: </label> Koverta sa dostavnicom za lično popunjavanje </br>
 				<label> Izabrane opcije: </label> </br>
@@ -270,18 +256,23 @@ function makeMessage($type, $user = null){
 					<li>Poštarina plaćena kod: '.test_input($_POST['postagePaid']).'</li>
 					<li>Tip koverte: '.test_input($_POST['envelopeType']).'</li>
 					<li>Količina: '.$_POST['quantity'].'</li>
-				</ul>
-			</body>
-		</html>';
+				</ul>';
 	} else if($type === 'koverte-dostavnice-formulari/formulari-za-adresiranje'){
 		$message .= '<label> Tip: </label> Formular za adresiranje </br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>					
 					<li>Količina: '.$_POST['quantity'].'</li>
-				</ul>
+				</ul>';
+	}
+	
+	$message .= '</br></br><label>Dostava: </label> </br>
+					<ul>
+						<li>Adresa: '.$_POST['deliveryAddress'].'</li>
+						<li>Mesto: '.$_POST['deliveryZipCode'] . ' ' . $_POST['deliveryLocation'].'</li>
+					</ul>
 			</body>
 		</html>';
-	}
+	
 	return $message;		
 }
 

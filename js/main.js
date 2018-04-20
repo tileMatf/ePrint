@@ -299,10 +299,10 @@
 			xhttp.open("POST",  window.location.origin + "/eprint/save_order/", true);
 			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			
-			xhttp.onreadystatechange = function(e){
+			alert(formData);
+			xhttp.onreadystatechange = function(e){			
 				if(xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200){
-					if(this.responseText !== 0){
-						//alert(this.responseText);
+					if(this.responseText !== 0){						
 						form.reset();						
 						window.location.replace(window.location.origin + "/eprint/" + form.orderType.value);
 					}					
@@ -310,6 +310,7 @@
 			};
 
 			xhttp.onerror = function(e) {
+				//alert(this.responseText);
 				statusMessage.innerHTML = "Oprostite, došlo je do greške prilikom skladištenja Vaše narudžbine. Molim Vas, pokušajte ponovo.";
 				statusMessage.style.color = "red";
 			}
