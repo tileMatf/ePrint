@@ -16,7 +16,7 @@ require_once("stringFunctions.php");
 	function fillPaymentData(&$image, $black, $font_path) {
 		$type = $_GET['orderType'];
 		$purposeOfPayment = isset($_GET['purposeOfPayment']) ? $_GET['purposeOfPayment'] : '';
-		$purposeOfPayment = readjustText($purposeOfPayment);
+		$purposeOfPayment = convertToCyrilic(readjustText($purposeOfPayment));
 		if($type === 'uplatnice/nalog-za-isplatu'){
 			imagettftext($image, 15, 0, 75, 222, $black, $font_path, $purposeOfPayment);
 		} else if($type === 'uplatnice/nalog-za-uplatu') {
@@ -25,7 +25,7 @@ require_once("stringFunctions.php");
 			imagettftext($image, 15, 0, 80, 240, $black, $font_path, $purposeOfPayment);
 		}
 		$recipient = isset($_GET['recipient']) ? $_GET['recipient'] : '';
-		$recipient = readjustText($recipient);
+		$recipient = convertToCyrilic(readjustText($recipient));
 		if($type === 'uplatnice/nalog-za-isplatu'){
 			imagettftext($image, 15, 0, 75, 332, $black, $font_path, $recipient);
 		} else if($type === 'uplatnice/nalog-za-uplatu'){

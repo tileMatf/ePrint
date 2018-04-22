@@ -133,7 +133,8 @@
 	if(paymentConfirm != null){
 		paymentConfirm.addEventListener('click', function(event){
 			event.preventDefault();	
-			pictureModal.style.display = "none";
+			if(pictureModal != null)
+				pictureModal.style.display = "none";
 			var form = document.forms.namedItem('orderForm');
 			var successMessage = document.getElementById('successMessage').getAttribute('value');
 			var formData = new FormData(form);		
@@ -146,11 +147,24 @@
 			xhttp.open("POST",  window.location.origin + "/eprint/functions/confirm/", true);
 			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			xhttp.onload = function(e){
-				if(this.responseText == true){
+				//alert(this.responseText);
+				if(this.responseText === '1'){
+					statusMessage.innerHTML = "Greška prilikom skladištenja dodatog fajla. Molim Vas, pokušajte ponovo.";
+					statusMessage.style.color = "red";
+				} else if(this.responseText === '2'){
+					statusMessage.innerHTML = "Greška prilikom skladištenja dodatog fajla za korice. Molim Vas, pokušajte ponovo.";
+					statusMessage.style.color = "red";
+				} else if(this.responseText === '3'){
+					statusMessage.innerHTML = "Greška prilikom upisa narudžbine u bazu podataka. Molim Vas, pokušajte ponovo.";
+					statusMessage.style.color = "red";
+				} else if(this.responseText === '4'){
+					statusMessage.innerHTML = "Oprostite, došlo je do greške prilikom slanja i naručivanja porudžbine. Molim Vas, pokušajte ponovo.";
+					statusMessage.style.color = "red";
+				} else if(this.responseText === '5'){
 					statusMessage.innerHTML = successMessage;
 					statusMessage.style.color = "green";
 				} else {
-					statusMessage.innerHTML = "Oprostite, došlo je do greške prilikom slanja. Molim Vas, pokušajte ponovo.";
+					statusMessage.innerHTML = "Došlo je do greške prilikom naručivanja. Molim Vas, pokušajte ponovo."
 					statusMessage.style.color = "red";
 				}
 			};
@@ -299,10 +313,10 @@
 			xhttp.open("POST",  window.location.origin + "/eprint/save_order/", true);
 			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			
-			alert(formData);
 			xhttp.onreadystatechange = function(e){			
 				if(xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200){
-					if(this.responseText !== 0){						
+					if(this.responseText !== 0){	
+						alert(this.responseText);
 						form.reset();						
 						window.location.replace(window.location.origin + "/eprint/" + form.orderType.value);
 					}					

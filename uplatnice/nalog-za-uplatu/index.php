@@ -23,7 +23,7 @@ require_once "../../functions/functions.php";
 			unset($_POST);
 			$_POST = array();
 			$status = true;
-			$statusMessage = "Uspešno sačuvana koverta.";
+			$statusMessage = "Uspešno sačuvana uplatnica.";
 			$_SESSION['orderSaved'] = null;
 			unset($_SESSION['orderSaved']);
 		} else if($_SESSION['orderSaved'] == 2){
@@ -116,7 +116,8 @@ require_once "../../functions/functions.php";
 
                     <!--SIFRA PLACANJA ******************************-->
                     <label for="paymentCode" class="label__heading">Šifra plaćanja</label>
-                    <input class="u-full-width" type="text" placeholder="" name="paymentCode">
+                    <input class="u-full-width" type="text" placeholder="" name="paymentCode"
+						value="<?php echo isset($_POST['paymentCode']) ? $_POST['paymentCode'] : '' ?>">
                     <!-- ***************************** -->
 
                     <!--VALUTA ******************************-->
@@ -133,7 +134,8 @@ require_once "../../functions/functions.php";
 
                     <!--RACUN PRIMAOCA ******************************-->
                     <label for="accountOfRecipient" class="label__heading">Račun primaoca</label>
-                    <input class="u-full-width" type="text" placeholder="" name="accountOfRecipient">
+                    <input class="u-full-width" type="text" placeholder="" name="accountOfRecipient"
+						value="<?php echo isset($_POST['accountOfRecipient']) ? $_POST['accountOfRecipient'] : '' ?>">
                     <!-- ***************************** -->
 
                     <!--MODEL ******************************-->
@@ -216,13 +218,19 @@ require_once "../../functions/functions.php";
 										else 
 											echo ''; ?>">
                     </label>
-					<input type="hidden" name="orderType" id="orderType" value="uplatnice/nalog-za-uplatu">
+					<?php if(isset($_SESSION['user_info'])) {?> 
+						<label for="savedOrder">
+							<input type="checkbox" name="savedOrder" id="saveOrder" <?php echo isset($_POST['savedOrder']) ? 'checked' : ''?>>
+							<span class="label-body">Prikaži u sačuvanim narudžbinama</span>
+						</label>
+					<?php }?>
+					<input type="hidden" name="orderType" id="orderType" value="uplatnice/nalog-za-uplatu">					
 					<input type="hidden" id="successMessage" value="Nalog za uplatu je uspešno naručen.">
                     <!-- POSALJI DUGME -->
                     <input class="button-primary" type="submit" value="Pošalji" name="submit">
 					<?php
-					if(isset($_SESSION['user_info']))
-						echo '<input type="button" value="Sačuvaj uplatnicu" id="saveOrder" title="Možete sačuvati uplatnicu u Vašem nalogu">';
+					//if(isset($_SESSION['user_info']))
+					//	echo '<input type="button" value="Sačuvaj uplatnicu" id="saveOrder" title="Možete sačuvati uplatnicu u Vašem nalogu">';
 					?>
                     <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
                 </div>

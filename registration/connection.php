@@ -1,14 +1,5 @@
 <?php
 
-/*require_once("blok.php");
-require_once("stampanje.php");
-require_once("uplata_isplata_prenos.php");
-require_once("koverta_sa_povratnicom.php");
-require_once("dostavnica.php");
-require_once("koverta_sa_dostavnicom.php");
-require_once("formular_za_adresiranje.php");
-require_once("standardna_koverta.php");
-require_once("omot_spisa.php");*/
 require_once("order.php");
 
 class DB {
@@ -34,7 +25,6 @@ class DB {
 		$query->bindParam(':email',$email, PDO::PARAM_STR);
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_OBJ);
-		echo "COUNT: " . count($result) . "<br>Compare:" . count($result) == 0 . "<br>";
         return $result;
 	}
 	
@@ -86,15 +76,16 @@ class DB {
 	
 	private function insertOrder($order){
 		try{
-			$query = self::$connection->prepare("INSERT INTO orders (TypeID, UserID, OrderDate, Seen, DeliveryAddress, DeliveryZipCode, DeliveryLocation) 
-				VALUES (:typeID, :userID, NOW(), 0, :address, :zipCode, :location)");
-			$query->bindValue(":typeID", $order->TypeID, PDO::PARAM_INT);
+			$query = self::$connection->prepare("INSERT INTO orders (TypeID, UserID, OrderDate, Seen, SavedOrder, DeliveryAddress, DeliveryZipCode, DeliveryLocation) 
+				VALUES (:typeID, :userID, NOW(), 0, :savedOrder, :address, :zipCode, :location)");
 			$query->bindValue(":typeID", $order->TypeID, PDO::PARAM_INT);
 			$query->bindValue(":userID", $order->UserID, PDO::PARAM_INT);
+			$query->bindValue(":savedOrder", $order->SavedOrder, PDO::PARAM_INT);
 			$query->bindValue(":address", $order->DeliveryAddress, PDO::PARAM_STR);
 			$query->bindValue(":zipCode", $order->DeliveryZipCode, PDO::PARAM_STR);
-			$query->bindValue(":location", $order->DeliveryLocation, PDO::PARAM_STR);
+			$query->bindValue(":location", $order->DeliveryLocation, PDO::PARAM_STR);			
 			$query->execute();
+			
 			if($query->rowCount() > 0){	
 				return self::$connection->lastInsertId();
 			} else {
@@ -434,11 +425,13 @@ class DB {
 		try{
 			if($nalogType != null){
 				$query = self::$connection->prepare("SELECT * FROM `". $type ."` WHERE UserID = :userID AND Type = :nalogType
-							AND DATE(OrderDate) >= DATE(DATE_SUB(NOW(), INTERVAL ". $beforeDays ." DAY))");
+							AND DATE(OrderDate) >= DATE(DATE_SUB(NOW(), INTERVAL ". $beforeDays ." DAY))
+							AND SavedOrder = 1");
 				$query->bindValue(":nalogType", $nalogType, PDO::PARAM_STR);
 			} else {
 				$query = self::$connection->prepare("SELECT * FROM `". $type ."` WHERE UserID = :userID 
-							AND DATE(OrderDate) >= DATE(DATE_SUB(NOW(), INTERVAL ". $beforeDays ." DAY))");
+							AND DATE(OrderDate) >= DATE(DATE_SUB(NOW(), INTERVAL ". $beforeDays ." DAY))
+							AND SavedOrder = 1");
 			}
 			
 			$query->bindValue(":userID", $userID, PDO::PARAM_INT);
@@ -1038,9 +1031,24 @@ class DB {
 			return false;
 		}
 	}
-}	
+	
+	public function getIdOfUnregisterUser(){
+		try{
+			$query = self::$connection->prepare("SELECT ID FROM users WHERE Role = 3");
+			$query->execute();
+			if($query->rowCount() > 0){
+				return $query->fetchAll(PDO::FETCH_OBJ);
+			} else {
+				return false;
+			}
+		} catch(PDOException $e){
+			echo $e->getMessage();
+			return false;
+		}
+	}
+}
 
-$conn = new DB();
+//$conn = new DB();
 
 //echo json_encode($conn->getOrdersOfType(21, 'standardnekoverteorder', 10)[0]);
 //echo json_encode($conn->getOrdersOfType(21, 'uplateisplateorder', 10, 'Uplata'));
@@ -1158,4 +1166,5 @@ echo $conn->insertOrder($order);*/
 //echo json_encode($conn->getUnseenOrder());
 //echo $conn->checkOrder(3);
 
+	
 ?>

@@ -132,10 +132,11 @@
       </div>
 
       <!-- OVDE POCINJE FORMA ZA ***STAMPANJE*** -->
-      <form method="POST" name="orderForm" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data"
+      <form method="POST" name="orderForm" enctype="multipart/form-data"
 			onsubmit="return(validate())";>
         <div class="form-box">
 		<!-- Paragraf za povratnu poruku -->		
+		<p style="font-size:2rem; font-style: italic;" id="statusMessage"></p>
 		<?php
 			if(isset($status)){
 				if($status === true){
@@ -449,7 +450,7 @@
 			
 			<input type="hidden" name="orderType" id="orderType" value="stampanje">
 			<input type="hidden" id="successMessage" value="Uspešno naručeno.">
-            <input class="button-primary" type="submit" value="Pošalji" name="submit" />
+            <input class="button-primary" type="submit" value="Pošalji" name="submit" id="paymentConfirm">
             <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p> 
           </div>
       </form>

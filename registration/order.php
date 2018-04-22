@@ -8,12 +8,14 @@ class Order {
 	var $DeliveryAddress;
 	var $DeliveryZipCode;
 	var $DeliveryLocation;
+	var $SavedOrder;
 	
 	function __construct($data){
 		$this->ID = isset($data['ID']) && !empty($data['ID']) ? $data['ID'] : null;
 		$this->DeliveryAddress = isset($data['deliveryAddress']) && !empty($data['deliveryAddress']) ? $data['deliveryAddress'] : null;
 		$this->DeliveryZipCode = isset($data['deliveryZipCode']) && !empty($data['deliveryZipCode']) ? $data['deliveryZipCode'] : null;
 		$this->DeliveryLocation = isset($data['deliveryLocation']) && !empty($data['deliveryLocation']) ? $data['deliveryLocation'] : null;
+		$this->SavedOrder = isset($data['savedOrder']) ? 1 : 0;
 	}
 }
 
@@ -184,7 +186,7 @@ class StandardnaKoverta extends Order{
 	}
 }
 
-class UplataIsplataPrenos {
+class UplataIsplataPrenos extends Order {
 	//var $OrderID;
 	var $Type;
 	var $Name;
@@ -228,7 +230,7 @@ class UplataIsplataPrenos {
 		$this->PaymentSlipNumber = isset($data['numOfPaySet']) && !empty($data['numOfPaySet']) ? $data['numOfPaySet'] : null;
 		$this->SetQuantity = isset($data['quantity']) && !empty($data['quantity']) ? $data['quantity'] : null;		
 		$this->Comment = isset($data['comment']) && !empty($data['comment']) ? $data['comment'] : null;
-		$this->VariableData = isset($data['numOfPaySet']) ? 1 : 0;
+		$this->VariableData = isset($data['varData']) ? 1 : 0;
 		$this->SendCopy = isset($data['sendCopy']) ? 1 : 0;
 
 		$this->OrdererAccount = isset($data['accountOfOrderer']) && !empty($data['accountOfOrderer']) ? $data['accountOfOrderer'] : null;
