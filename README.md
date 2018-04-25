@@ -22,12 +22,10 @@ Sone :baby_chick:
 
 Tile :rabbit:
 - [ ] Admin panel - dodatni prikazi narudzbina?
-- [ ] Brisanje narudzbine kod korisnika?
-- [x] Uredjivanje JS-a
-- [ ] Testiranje
+- [ ] Brisanje narudzbine kod korisnika? Brisanje narudzbina? Kada?
+- [ ] Ukoliko korisnik nesto izmeni u sacuvanoj narudzbini i naruci opet, da li se updatuje sacuvana?
 - [ ] Kod admina - opcija dodavanja admina (sql je napisan)?
-- [x] Podeljeni folderi za upload fajlova po userima
-- [ ] Probati sa prebacivanjem php-a u 1 fajl 
+- [ ] Testiranje
 
 
 ##### Korisni linkovi za mene:
