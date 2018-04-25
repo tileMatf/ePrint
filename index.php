@@ -79,22 +79,22 @@ include("header.php");
         <!--second row-->
         <div class="row">
           <div class="one-third column">
-            <i class="far fa-money-bill-alt fa-2x"></i>
             <a href="./cenovnik" class="link">
+			  <i class="far fa-money-bill-alt fa-2x"></i>
               <h3>Cenovnik</h3>
             </a>
           </div>
 
-          <div class="one-third column">
-            <i class="fas fa-users fa-2x"></i>
+          <div class="one-third column">            
             <a href="./o-nama" class="link">
+			  <i class="fas fa-users fa-2x"></i>
               <h3>O nama</h3>
             </a>
           </div>
 
-          <div class="one-third column">
-            <i class="far fa-comment fa-2x"></i>
+          <div class="one-third column">            
             <a href="./kontakt" class="link">
+			  <i class="far fa-comment fa-2x"></i>
               <h3>Kontakt</h3>
             </a>
           </div>
