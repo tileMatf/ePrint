@@ -59,7 +59,7 @@ include("header.php");
             </a>
           </div>
 		  		  
-		  <div class="one-third column">
+		  <div class="one-third column" <?php if(!isset($_SESSION['user_info'])) echo 'title="Opcija samo za registrovane korisnike"';?>>
             <a <?php if(isset($_SESSION['user_info'])) echo 'href="./narudzbine/"'?> class="link<?php if(!isset($_SESSION['user_info'])) echo ' disabled-links'?>">
               <i class="fas fa-list-ol fa-2x"></i>
               <h3>Sačuvane narudžbine</h3>
