@@ -101,7 +101,7 @@ function makeMessage($type, $user = null){
 				<label> Vreme: </label> '.date("h:i").' </br>';
 	if($type === 'stampanje'){
 		$message .= '<label> Tip: </label> stampanje </br>
-					<label> Datoteka: </label> '.basename($_FILES["fileToUpload"]["name"]).' </br>
+					<label> Datoteka: </label> '.$_FILES["fileToUpload"]["name"].' </br>
 					<label> Izabrane opcije: </label> </br>
 					<ul>
 						<li>Broj primeraka: '.$_POST['noInput'].'</li>

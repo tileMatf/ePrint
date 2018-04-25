@@ -8,7 +8,6 @@
 	if(isset($_POST['email']) && isset($_POST['psw'])){
 		$sql_result = $db->loginCheck($_POST['email'], $_POST['psw']);
 		if($sql_result === 0){
-			//$_SESSION['error_message'] = "Pogrešna lozinka, pokušajte ponovo.";
 			$_SESSION['user_info'] = null;
 			unset($_SESSION['user_info']);
 			echo 0;
@@ -19,9 +18,9 @@
 			unset($_SESSION['registration']);
 			unset($_SESSION['error_message']);
 			unset($_SESSION['statusMessage']);
+			unset($statusMessage);
 			echo json_encode($sql_result[0]);
 		} else {
-			//	$_SESSION['error_message'] = "Email adresa nije u bazi podataka, morate se prvo registrovati.";
 			$_SESSION['user_info'] = null;
 			unset($_SESSION['user_info']);
 			echo -1;

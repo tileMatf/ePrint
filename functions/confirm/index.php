@@ -14,6 +14,7 @@
 	$status = 0;
 	$fileStatus = 0;
 	
+	
 	/*Upload main file*/
 	if(isset($_FILES['fileToUpload']) && !empty($_FILES['fileToUpload'])){
 		if(isset($_SESSION['user_info'])){

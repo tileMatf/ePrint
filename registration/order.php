@@ -43,6 +43,28 @@ class OmotSpisa extends Order {
 	}	
 }
 
+class Blok extends Order{
+	//var $OrderID;
+	var $FileName;
+	var $NumberOfSet;
+	var $Color;
+	var $Size;
+	var $Packing;
+	var $Comment;
+	var $SendCopy;
+	
+	function __construct($data, $files){
+		parent::__construct($data);
+		$this->FileName = isset($files['fileToUpload']) ? $files['fileToUpload']['name'] : null;
+		$this->NumberOfSet = $data['noOfSet'];
+		$this->Color = $data['blockColor'];
+		$this->Size = $data['blockSize'];
+		$this->Packing = $data['packing'];
+		$this->Comment = isset($data['comment']) && !empty($data['comment']) ? $data['comment'] : null;
+		$this->SendCopy = isset($data['sendCopy']) ? 1 : 0;
+	}
+}
+
 class Dostavnica extends Order{
 	//var $OrderID;
 	var $Recipient;
@@ -134,9 +156,9 @@ class Stampanje extends Order{
 	var $Comment;
 	var $SendCopy;
 	
-	function __construct($data){
+	function __construct($data, $files){
 		parent::__construct($data);
-		$this->FileName = isset($data['fileToUploadName']) ? $data['fileToUploadName'] : null; 
+		$this->FileName = isset($files['fileToUpload']) ? $files['fileToUpload']['name'] : null; 
 		$this->CopyNumber = $data['noInput'];
 		$this->PageOrder = $data['orderOfInput'];
 		$this->Color = $data['colorOfInput'];
@@ -144,7 +166,7 @@ class Stampanje extends Order{
 		$this->PaperSize = $data['paperSize'];
 		$this->PaperWidth = $data['paperWidth'];
 		$this->BindingType = $data['bindingType'];
-		$this->BindingFile = isset($data['bindingFileToUploadName']) ? $data['bindingFileToUploadName'] : null;
+		$this->BindingFile = isset($files['bindingFileToUpload']['name']) ? $files['bindingFileToUpload']['name'] : null;
 		$this->HeftingType = $data['heftingType'];
 		$this->DrillingType = $data['drillingType'];
 		$this->Comment = isset($data['comment']) && !empty($data['comment']) ? $data['comment'] : null;

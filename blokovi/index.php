@@ -55,11 +55,31 @@
 			if(($fileStatus === 2 || $fileStatus === 3) && $mailStatus === true){
 				$status = true;
 				if(isset($_SESSION['user_info'])){
-					$_POST['fileToUploadName'] = $_FILES['fileToUpload']['name'];
+					$_POST['fileToUploadName'] = $_FILES['fileToUpload']['name'];  //pogledati ovaj deo
 				}
 			} else {
 				$status = false;
 			}
+
+			if($status === true){
+				$order = new Blok($_POST, $_FILES);
+				
+				if(!isset($order) || !is_object($order)){
+					header("Location: ../");
+					exit();
+				}
+			
+				$db = new DB();
+				if(isset($_SESSION['user_info'])){
+					$order->UserID = $_SESSION['user_info']->ID;	
+				} else {
+					$unregisterUserID = $db->getIdOfUnregisterUser()[0]->ID;
+					$order->UserID = $unregisterUserID;
+				}
+			
+				$status = $db->saveOrder($order);
+				
+			} 			
 		} catch(RuntimeException $e){
 			return $e->getMessage();
 		} 
@@ -72,17 +92,13 @@
 		unset($_SESSION['status']);
 	}
 	
-	if(isset($_SESSION['user_info']) && isset($_SESSION['orderSaved'])){
-		if($_SESSION['orderSaved'] == 1){
+	if(isset($status)){
+		if($status === true) {
 			unset($_POST);
 			$_POST = array();
-			$status = true;
-			$statusMessage = "Uspešno sačuvana narudžbina.";
-			$_SESSION['orderSaved'] = null;
-			unset($_SESSION['orderSaved']);
-		} else if($_SESSION['orderSaved'] == 2){
-			$status = false;
-			$statusMessage = "Došlo je do greške prilikom upisa narudžbine u bazu, pokušajte ponovo.";
+			$statusMessage = "Uspešno poslata narudžbina.";
+		} else {
+			$statusMessage .= " Došlo je do greške prilikom upisa narudžbine u bazu, pokušajte ponovo.";
 		}
 	}
 	
@@ -108,15 +124,16 @@
             <div class="container">
                 <h2 class="section__heading">Preslikavajući blokovi</h2>
             </div>
-            <!-- OVDE POCINJE FORMA ZA ***BLOKOVE*** -->
-            <form name="orderForm"  enctype="multipart/form-data" method="post" 
-				action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" onsubmit="return(validate());">
+			
+            <!-- OVDE POCINJE FORMA ZA ***BLOKOVE*** echo htmlspecialchars($_SERVER['PHP_SELF']);-->
+            <form name="orderForm" id="orderForm" enctype="multipart/form-data" method="post" 
+				action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" onsubmit="return(validate());">
                 <div class="form-box">
-				<!-- Paragraf za povratnu poruku -->		
+				<!-- Paragraf za povratnu poruku -->	
 				<?php
 					if(isset($status)){
 						if($status === true){
-							if(isset($status) && $status)
+							if(isset($statusMessage) && $statusMessage)
 								echo '<p id="statusMessage" style="font-size:2rem; font-style: italic; color: green">'.
 									htmlspecialchars($statusMessage) . '</p>';							
 						}
@@ -125,10 +142,109 @@
 								echo '<p id="statusMessage" style="font-size:2rem; font-style: italic; color: red">'.
 									htmlspecialchars($statusMessage) . '</p>';						
 						}
-						if(isset($_SESSION['user_info']) && isset($_POST['submit']))
-								echo '<input type="button" value="Sačuvaj narudžbinu" id="saveOrder" title="Možete sačuvati narudžbinu u Vašem nalogu"><br><br>';
 					}
 				?> 
+				<?php 
+					if(isset($_POST['orderObject'])){
+						$order = json_decode($_POST['orderObject'], true);
+				?>
+					<!--UPLOAD dugme-->
+                    <input type='file' name='fileToUpload' id="file" class="inputfile" accept='.jpe,.jpg,.jpeg,.png,.pdf'>
+                    <label for="file"><i class="fa-upload fas fa-upload"></i><span>Okačite fajl</span></label>
+					<input type="hidden" name="fileToUploadName" value="<?php echo isset($order['FileName']) ? $order['FileName'] : ''?>">                    
+					<div class="row">
+                        <!-- BROJ SETOVA ***************************** -->
+                        <label for="noOfSet" class="label__heading">Broj setova</label>
+                        <input class="u-full-width" type="number" name="noOfSet" value="<?php echo isset($order['NumberOfSet']) ? $order['NumberOfSet'] : '1'?>">
+                        <!-- ***************************** -->
+
+                        <!-- BOJA ***************************** -->
+                        <label for="" class="label__heading">Boja</label>
+                        <label for="Crno-belo">
+                            <input type="radio" name="blockColor" id="Crno-belo" value="Crno-belo" 
+								<?php echo (isset($order['Color']) && $order['Color'] == 'Crno-belo') || !isset($order['Color']) ? "checked" : "" ?>>
+                            <span>Crno belo</span>
+                        </label>
+                        <label for="Plavo-belo" class="label__heading">
+                            <input type="radio" name="blockColor" id="Plavo-belo" value="Plavo-belo" 
+								<?php echo isset($order['Color']) && $order['Color'] == 'Plavo-belo' ? "checked" : "" ?>>
+                            <span>Plavo belo</span>
+                        </label>
+                        <label for="U boji" class="label__heading">
+                            <input type="radio" name="blockColor" id="U boji" value="U boji" 
+								<?php echo isset($order['Color']) && $order['Color'] == 'U boji' ? "checked" : "" ?>>
+                            <span>U boji</span>
+                        </label>
+                        <!-- ***************************** -->
+
+                        <!-- VELICINA BLOKA  ***************************** -->
+                        <label for="" class="label__heading">Veličina bloka</label>
+                        <label for="A4">
+                            <input type="radio" name="blockSize" id="A4" value="A4"
+								<?php echo (isset($order['Size']) && $order['Size'] == 'A4') || !isset($order['Size']) ? "checked" : "" ?>>
+                            <span>A4</span>
+                        </label>
+                        <label for="A5">
+                            <input type="radio" name="blockSize" id="A5" value="A5"
+								<?php echo isset($order['Size']) && $order['Size'] == 'A5' ? "checked" : "" ?>>
+                            <span>A5</span>
+                        </label>
+                        <!-- ***************************** -->
+
+                        <!-- SPAKOVANO -->
+                        <label for="" class="label__heading">Spakovano</label>
+                        <label for="Heftanjem gore">
+                            <input type="radio" name="packing" id="Heftanjem gore" value="Heftanjem gore" 
+								<?php echo isset($order['Packing']) && $order['Packing'] == 'Heftanjem gore' ? "checked" : "" ?>>
+                            <span>Heftanjem gore</span>
+                        </label>
+                        <label for="Heftanjem levo">
+                            <input type="radio" name="packing" id="Heftanjem levo" value="Heftanjem levo" 
+								<?php echo isset($order['Packing']) && $order['Packing'] == 'Heftanjem levo' ? "checked" : "" ?>>
+                            <span>Heftanjem levo</span>
+                        </label>
+                        <label for="U fasciklu">
+                            <input type="radio" name="packing" id="U fasciklu" value="U fasciklu" 
+								<?php echo isset($order['Packing']) && $order['Packing'] == 'U fasciklu' ? "checked" : "" ?>>
+                            <span>U fasciklu</span>
+                        </label>
+                        <!-- ***************************** -->
+
+						<!-- Adresa isporuka-->
+						<label for="deliveryAddress" class="label__heading">Adresa isporuke</label>
+						<input class="u-full-width" type="text" placeholder="" name="deliveryAddress" required
+							value="<?php echo $order['DeliveryAddress'] ?>">
+						<!-- ****************************** -->
+
+						<!-- Zip kod isporuka -->
+						<label for="deliveryZipCode" class="label__heading">Poštanski broj isporuke</label>
+						<input class="u-full-width" type="text" placeholder="" name="deliveryZipCode" required
+							value="<?php echo $order['DeliveryZipCode'] ?>">
+						<!-- ****************************** -->
+
+						<!-- Mesto isporuke -->
+						<label for="deliveryLocation" class="label__heading">Mesto isporuke</label>
+						<input class="u-full-width" type="text" placeholder="" name="deliveryLocation" required
+							value="<?php echo $order['DeliveryLocation'] ?>">
+						<!-- ****************************** -->
+
+                        <!-- Krajnja poruka -->
+                        <label for="message" class="label__heading">Poruka</label>
+                        <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"><?php echo isset($order['Comment']) ? $order['Comment'] : ''?></textarea>
+                        <label for="sendCopy">
+                        <input type="checkbox" name="sendCopy" id="sendCopy" 
+							<?php echo isset($order['SendCopy']) && $order['SendCopy'] === '1' ? "checked" : "" ?>>
+                        <span class="label-body">Pošalji kopiju sebi</span>
+						<input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail"
+							value="<?php if(isset($_SESSION['user_info'])) 
+											echo $_SESSION['user_info']->Email;
+										else if(isset($_POST['sendCopyEmail'])) 
+											echo $_POST['sendCopyEmail'];
+										else 
+											echo ''; ?>">
+                        </label>
+					<?php } else {?>
+				
                     <!--UPLOAD dugme-->
                     <input type='file' name='fileToUpload' id="file" class="inputfile" accept='.jpe,.jpg,.jpeg,.png,.pdf'>
                     <label for="file"><i class="fa-upload fas fa-upload"></i><span>Okačite fajl</span></label>
@@ -224,9 +340,16 @@
 										else 
 											echo ''; ?>">
                         </label>
+						<?php if(isset($_SESSION['user_info'])) {?> 
+							<label for="savedOrder">
+								<input type="checkbox" name="savedOrder" id="savedOrder" <?php echo isset($_POST['savedOrder']) ? 'checked' : ''?>>
+								<span class="label-body">Prikaži u sačuvanim narudžbinama</span>
+							</label>
+						<?php } ?>
+						<?php }?>
 						<input type="hidden" name="orderType" id="orderType" value="blokovi">
 						<input type="hidden" id="successMessage" value="Blokovi su uspešno naručeni.">
-                        <input class="button-primary" type="submit" value="Pošalji" name="submit" />
+                        <input class="button-primary" type="submit" value="Pošalji" name="submit">
                         <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
                     </div>
             </form>

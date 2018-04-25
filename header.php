@@ -53,6 +53,10 @@
                 </div>
                 <!--NAVIGATION-->
                 <?php 
+				
+			require_once("/registration/order.php");
+			require_once("/registration/connection.php");	
+				
 			if(!isset($_SESSION['user_info'])){
 				echo 
 					'<div class="six columns navigation__header navigation__header--nav">

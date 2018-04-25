@@ -4,17 +4,17 @@
 	if(!isset($_POST['submit']) && !isset($_POST['orderType'])){
 		header("Location: ../");	
 		exit();
-	} 
+	}	
 	
 	require_once("../../registration/order.php");
-	require_once("../../registration/connection.php");		
+	require_once("../../registration/connection.php");
 	
 		switch($_POST['orderType']){
 			case 'stampanje':
-				$order = new Stampanje($_POST);
+				$order = new Stampanje($_POST, $_FILES);
 				break;
 			case 'blokovi':
-				$order = new Blok($_POST);
+				$order = new Blok($_POST, $_FILES);
 				break;
 			case 'uplatnice/nalog-za-uplatu':
 				$order = new UplataIsplataPrenos($_POST, 'Uplata');

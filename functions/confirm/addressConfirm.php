@@ -2,11 +2,6 @@
 
 @session_start();
 
-if(!isset($_POST['orderType']) && !isset($_POST['submit'])){
-	header("Location: ../../");
-	exit();
-}
-
 include("../../header.php")
 ?>
 
@@ -32,6 +27,9 @@ include("../../header.php")
 									htmlspecialchars($statusMessage) . '</p>';						
 						}
 					}
+					foreach ($_POST as $a => $b) {
+						echo '<input type="hidden" name="'.htmlentities($a).'" value="'.htmlentities($b).'">';
+					}
 				?>
                     <!-- UNOS PODATAKA ***************************** -->
 
@@ -54,7 +52,7 @@ include("../../header.php")
 					<!-- ****************************** -->
 
                     <!-- POSALJI DUGME -->
-                    <input class="button-primary" type="submit" value="Pošalji" name="submit">					
+                    <input class="button-primary" type="submit" value="Pošalji" name="submit" id="paymentConfirm">					
                     <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
                 </div>
             </form>

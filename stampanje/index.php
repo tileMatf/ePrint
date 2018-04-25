@@ -83,6 +83,25 @@
 				}
 			}
 			
+			if($status === true){
+				$order = new Stampanje($_POST, $_FILES);
+				
+				if(!isset($order) || !is_object($order)){
+					header("Location: ../");
+					exit();
+				}
+			
+				$db = new DB();
+				if(isset($_SESSION['user_info'])){
+					$order->UserID = $_SESSION['user_info']->ID;	
+				} else {
+					$unregisterUserID = $db->getIdOfUnregisterUser()[0]->ID;
+					$order->UserID = $unregisterUserID;
+				}
+			
+				$status = $db->saveOrder($order);
+			}
+			
 		} catch(RuntimeException $e){
 			return $e->getMessage();
 		}
@@ -95,16 +114,12 @@
 		unset($_SESSION['status']);
 	}
 	
-	if(isset($_SESSION['user_info']) && isset($_SESSION['orderSaved'])){
-		if($_SESSION['orderSaved'] == 1){
+	if(isset($status)){
+		if($status === true){
 			unset($_POST);
 			$_POST = array();
-			$status = true;
-			$statusMessage = "Uspešno sačuvana narudžbina.";
-			$_SESSION['orderSaved'] = null;
-			unset($_SESSION['orderSaved']);
+			$statusMessage = "Uspešno poslata narudžbina.";
 		} else {
-			$status = false;
 			$statusMessage = "Došlo je do greške prilikom upisa narudžbine u bazu, pokušajte ponovo.";
 		}
 	}	
@@ -132,11 +147,10 @@
       </div>
 
       <!-- OVDE POCINJE FORMA ZA ***STAMPANJE*** -->
-      <form method="POST" name="orderForm" enctype="multipart/form-data"
-			onsubmit="return(validate())";>
+      <form method="POST" name="orderForm" enctype="multipart/form-data" onsubmit="return(validate())";
+		action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
         <div class="form-box">
 		<!-- Paragraf za povratnu poruku -->		
-		<p style="font-size:2rem; font-style: italic;" id="statusMessage"></p>
 		<?php
 			if(isset($status)){
 				if($status === true){
@@ -155,7 +169,7 @@
 		?> 		
 		<?php 
 			if(isset($_POST['orderObject'])){
-				$order = json_decode($_POST['orderObject'], true);
+				$order = json_decode($_POST['orderObject'], true);				
 		?>
 			<!--UPLOAD dugme-->  
             <input type='file' name='fileToUpload' id="file" class="inputfile" accept='.jpe,.jpg,.jpeg,.png,.pdf'>			
@@ -280,11 +294,39 @@
               </select>
             <!-- ***************************** -->
 
+			<!-- Adresa isporuka-->
+			<label for="deliveryAddress" class="label__heading">Adresa isporuke</label>
+			<input class="u-full-width" type="text" placeholder="" name="deliveryAddress" required
+                 value="<?php echo $order['DeliveryAddress']; ?>">
+			<!-- ****************************** -->
+
+			<!-- Zip kod isporuka -->
+			<label for="deliveryZipCode" class="label__heading">Poštanski broj isporuke</label>
+			<input class="u-full-width" type="text" placeholder="" name="deliveryZipCode" required
+                value="<?php echo $order['DeliveryZipCode']; ?>">
+			<!-- ****************************** -->
+
+			<!-- Mesto isporuke -->
+			<label for="deliveryLocation" class="label__heading">Mesto isporuke</label>
+			<input class="u-full-width" type="text" placeholder="" name="deliveryLocation" required
+                value="<?php echo $order['DeliveryLocation']; ?>">
+			<!-- ****************************** -->
+			
             <!-- Krajnja poruka -->
             <label for="message" class="label__heading">Poruka</label>
             <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"><?php echo isset($order['Comment']) ? $order['Comment'] : "" ?></textarea>
             <label class="sendCopy" for="sendCopy">
-            <input type="checkbox" id="sendCopy" name="sendCopy" 
+              <input type="checkbox" id="sendCopy" name="sendCopy"
+				<?php echo isset($order['SendCopy']) && $order['SendCopy'] === '1' ? "checked" : "" ?>>
+              <span class="label-body">Pošalji kopiju sebi</span>
+              <input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail"
+				value="<?php if(isset($_SESSION['user_info'])) 
+											echo $_SESSION['user_info']->Email;
+										else if(isset($_POST['sendCopyEmail'])) 
+											echo $_POST['sendCopyEmail'];
+										else 
+											echo ''; ?>">
+            </label>
 			
 		<?php } else { ?>
 			
@@ -445,12 +487,17 @@
 											echo $_POST['sendCopyEmail'];
 										else 
 											echo ''; ?>">
-            </label>			
-			<?php } ?>
-			
+            </label>
+			<?php if(isset($_SESSION['user_info'])) {?> 
+				<label for="savedOrder">
+					<input type="checkbox" name="savedOrder" id="savedOrder" <?php echo isset($_POST['savedOrder']) ? 'checked' : ''?>>
+					<span class="label-body">Prikaži u sačuvanim narudžbinama</span>
+				</label>
+			<?php }?>			
+			<?php } ?>			
 			<input type="hidden" name="orderType" id="orderType" value="stampanje">
 			<input type="hidden" id="successMessage" value="Uspešno naručeno.">
-            <input class="button-primary" type="submit" value="Pošalji" name="submit" id="paymentConfirm">
+            <input class="button-primary" type="submit" value="Pošalji" name="submit">
             <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p> 
           </div>
       </form>

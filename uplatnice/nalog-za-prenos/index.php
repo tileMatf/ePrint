@@ -5,7 +5,7 @@
 include("../../header.php");
 require_once "../../functions/functions.php";
 
-	if(isset($_POST['submit'])) {
+	if(isset($_POST['submit']) && !isset($_SESSION['orderSaved'])) {
 		try{
 			echo "<div id='pictureModal' class='picture-modal'>
 				 <span class='picture-close'>&times;</span>
@@ -22,13 +22,11 @@ require_once "../../functions/functions.php";
 		if($_SESSION['orderSaved'] == 1){
 			unset($_POST);
 			$_POST = array();
-			$status = true;
-			$statusMessage = "Uspešno sačuvan nalog za prenos.";
 			$_SESSION['orderSaved'] = null;
 			unset($_SESSION['orderSaved']);
 		} else if($_SESSION['orderSaved'] == 2){
-			$status = false;
-			$statusMessage = "Došlo je do greške prilikom upisa u bazu, pokušajte ponovo.";
+//			$status = false;
+//			$statusMessage = "Došlo je do greške prilikom upisa u bazu, pokušajte ponovo.";
 		}
 	}
 
@@ -78,7 +76,174 @@ require_once "../../functions/functions.php";
 					}
 				?>
                     <!-- UNOS PODATAKA ***************************** -->
+				<?php 
+					if(isset($_POST['orderObject'])){
+						$order = json_decode($_POST['orderObject'], true);
+				?> 
+					<!--NAME AND SURNAME ******************************-->
+                    <label for="payer" class="label__heading">Ime i prezime</label>
+                    <input class="u-full-width" type="text" placeholder="" name="payer" 
+						<?php echo isset($order['Name']) ? "value=\"".$order['Name']."\"" : '' ?>" >
+                    <!-- ***************************** -->
 
+                    <!--ADRESA ******************************-->
+                    <label for="address" class="label__heading">Adresa</label>
+                    <input class="u-full-width" type="text" placeholder="" name="address"
+						<?php echo isset($order['Address']) ? "value=\"".$order['Address']."\"" : '' ?>" >
+                    <!-- ***************************** -->                    
+
+                    <!--MESTO ******************************-->
+                    <label for="location" class="label__heading">Poštanski broj i mesto</label>
+                    <input class="u-full-width" type="text" placeholder="" name="location"
+						<?php echo isset($order['Location']) ? "value=\"".$order['Location']."\"" : '' ?>" >
+                    <!-- ***************************** -->
+
+                    <!--DRZAVA ******************************-->
+                    <label for="country" class="label__heading">Država</label>
+                    <input class="u-full-width" type="text" placeholder="" name="country"
+						<?php echo isset($order['Country']) ? "value=\"".$order['Country']."\"" : '' ?>" >
+                    <!-- ***************************** --> 
+                    
+                    <!--SVRHA UPLATE ******************************-->
+                    <label for="purposeOfPayment" class="label__heading">Svrha uplate</label>
+                    <input class="u-full-width" type="text" placeholder="" name="purposeOfPayment"
+						<?php echo isset($order['PaymentPurpose']) ? "value=\"".$order['PaymentPurpose']."\"" : '' ?>" >
+                    <!-- ***************************** -->
+
+                    <!--PRIMALAC ******************************-->
+                    <label for="recipient" class="label__heading">Primalac</label>
+                    <input class="u-full-width" type="text" placeholder="" name="recipient"
+						<?php echo isset($order['Recipient']) ? "value=\"".$order['Recipient']."\"" : '' ?>" >
+                    <!-- ***************************** -->
+
+                    <!--SIFRA PLACANJA ******************************-->
+                    <label for="paymentCode" class="label__heading">Šifra plaćanja</label>
+                    <input class="u-full-width" type="text" placeholder="" name="paymentCode"
+						<?php echo isset($order['PaymentCode']) ? "value=\"".$order['PaymentCode']."\"" : '' ?>>
+                    <!-- ***************************** -->
+
+                    <!--VALUTA ******************************-->
+                    <label for="currency" class="label__heading">Valuta</label>
+                    <input class="u-full-width" type="text" placeholder="" name="currency"
+						<?php echo isset($order['Currency']) ? "value=\"".$order['Currency']."\"" : '' ?>" readonly>
+                    <!-- ***************************** -->
+
+                    <!--IZNOS ******************************-->
+                    <label for="amount" class="label__heading">Iznos</label>
+                    <input class="u-full-width" type="text" placeholder="RSD" name="amount"
+						<?php echo isset($order['Amount']) ? "value=\"".$order['Amount']."\"" : '' ?>" >
+                    <!-- ***************************** -->
+
+                    <!--RACUN PRIMAOCA ******************************-->
+                    <label for="accountOfOrderer" class="label__heading">Račun nalogodavca</label>
+                    <input class="u-full-width" type="text" placeholder="" name="accountOfOrderer"
+						<?php echo isset($order['OrdererAccount']) ? "value=\"".$order['OrdererAccount']."\"" : '' ?>>
+                    <!-- ***************************** -->
+
+                    <!--MODEL ******************************-->
+                    <label for="mockUpDebit" class="label__heading">Model (zaduženje)</label>
+                    <input class="u-full-width" type="text" placeholder="" name="mockUpDebit"
+						<?php echo isset($order['ModelDebit']) ? "value=\"".$order['ModelDebit']."\"" : '' ?>" >
+                    <!-- ***************************** -->
+
+                    <!--POZIV NA BROJ ZADUZENJA ******************************--> <!-- OVO JE DRUGACIJE OD DRUGE DVE UPLATNICE -->
+                    <label for="referenceNumber" class="label__heading">Poziv na broj zaduženja</label> <!-- referenceNumberObligation -->
+                    <input class="u-full-width" type="text" placeholder="" name="referenceNumber"
+						<?php echo isset($order['ReferenceNumber']) ? "value=\"".$order['ReferenceNumber']."\"" : '' ?>>
+                    <!-- ***************************** -->
+
+                    <!--RACUN PRIMAOCA ******************************-->
+                    <label for="accountOfRecipient" class="label__heading">Račun primaoca</label>
+                    <input class="u-full-width" type="text" placeholder="" name="accountOfRecipient"
+						<?php echo isset($order['RecipientAccount']) ? "value=\"".$order['RecipientAccount']."\"" : '' ?>>
+                    <!-- ***************************** -->
+
+                    <!--MODEL ******************************-->
+                    <label for="mockUpApproval" class="label__heading">Model (odobrenje)</label>
+                    <input class="u-full-width" type="text" placeholder="" name="mockUpApproval"
+						<?php echo isset($order['ModelApproval']) ? "value=\"".$order['ModelApproval']."\"" : '' ?>">
+                    <!-- ***************************** -->
+
+                    <!--POZIV NA BROJ ODOBRENJA ******************************-->
+                    <label for="referenceNumberApprovals" class="label__heading">Poziv na broj odobrenja</label>
+                    <input class="u-full-width" type="text" placeholder="" name="referenceNumberApprovals"
+						<?php echo isset($order['ReferenceNumberApprovals']) ? "value=\"".$order['ReferenceNumberApprovals']."\"" : '' ?>">
+                    <!-- ***************************** -->
+
+                    <!-- Kraj naloga za prenos u setu sledi radio buttons -->
+
+                    <!-- BROJ UPLATNICA U SETU ***************************** -->
+                    <label for="" class="label__heading">Broj naloga za prenos u setu</label>
+                    <label for="1+1"> <!-- number of transfer orders in set -->
+                        <input type="radio" name="numOfPaySet" value="1+1" id="1+1"
+							<?php echo (isset($order['PaymentSlipNumber']) && $order['PaymentSlipNumber'] == '1+1') ? "checked" : "" ?>>
+                        <span>1+1</span>
+                    </label>
+                    <label for="1+2">
+                        <input type="radio" name="numOfPaySet" value="1+2" id="1+2"
+							<?php echo isset($order['PaymentSlipNumber']) && $order['PaymentSlipNumber'] == '1+2' ? "checked" : ""?> >
+                        <span>1+2</span>
+                    </label>
+                    <!-- ***************************** -->
+
+                    <!-- KOLICINA SETOVA --> <!-- -->
+                    <label for="quantity" class="label__heading">Količina setova</label>
+                    <select class="u-full-width" name="quantity">
+                        <option value="100" <?php echo isset($order['SetQuantity']) && $order['SetQuantity'] == '100' ? "selected" : "" ?>>100</option>
+                        <option value="200" <?php echo isset($order['SetQuantity']) && $order['SetQuantity'] == '200' ? "selected" : "" ?>>200</option>
+                        <option value="500" <?php echo isset($order['SetQuantity']) && $order['SetQuantity'] == '500' ? "selected" : "" ?>>500</option>
+                        <option value="900" selected>900</option>
+                        <option value="1800" <?php echo isset($order['SetQuantity']) && $order['SetQuantity'] == '1800' ? "selected" : "" ?>>1800</option>
+                        <option value="2700" <?php echo isset($order['SetQuantity']) && $order['SetQuantity'] == '2700' ? "selected" : "" ?>>2700</option>
+                        <option value="5400" <?php echo isset($order['SetQuantity']) && $order['SetQuantity'] == '5400' ? "selected" : "" ?>>5400</option>
+                        <option value="8100" <?php echo isset($order['SetQuantity']) && $order['SetQuantity'] == '8100' ? "selected" : "" ?>>8100</option>
+                        <option value="10800" <?php echo isset($order['SetQuantity']) && $order['SetQuantity'] == '10800' ? "selected" : "" ?>>10800</option>
+                    </select>
+                    <!-- ***************************** -->
+
+					<!-- Adresa isporuka-->
+					<label for="deliveryAddress" class="label__heading">Adresa isporuke</label>
+					<input class="u-full-width" type="text" placeholder="" name="deliveryAddress" required
+                        value="<?php echo isset($order['DeliveryAddress']) ? $order['DeliveryAddress'] : '' ?>">
+					<!-- ****************************** -->
+
+					<!-- Zip kod isporuka -->
+					<label for="deliveryZipCode" class="label__heading">Poštanski broj isporuke</label>
+					<input class="u-full-width" type="text" placeholder="" name="deliveryZipCode" required
+                        value="<?php echo isset($order['DeliveryZipCode']) ? $order['DeliveryZipCode'] : '' ?>">
+					<!-- ****************************** -->
+
+					<!-- Mesto isporuke -->
+					<label for="deliveryLocation" class="label__heading">Mesto isporuke</label>
+					<input class="u-full-width" type="text" placeholder="" name="deliveryLocation" required
+                        value="<?php echo isset($order['DeliveryLocation']) ? $order['DeliveryLocation'] : '' ?>">
+					<!-- ****************************** -->
+                    
+                    <!--Krajnja poruka-->
+                    <label for="message" class="label__heading">Poruka</label>
+                    <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"><?php echo isset($order['Comment']) ? $order['Comment'] : ''?></textarea>
+                    <!-- Varijabilni podaci i prihvatam uslove -->
+                    <label for="varData">
+                        <input type="checkbox" name="varData" id="varData" 
+							<?php echo isset($order['VariableData']) && $order['VariableData'] === '1' ? 'checked' : ''?>>
+                        <span class="label-body">Varijabilni podaci</span>
+                    </label>
+                    <label for="sendCopy">
+                        <input type="checkbox" name="sendCopy" id="sendCopy"
+							<?php echo isset($order['SendCopy']) && $order['SendCopy'] === '1' ? 'checked' : ''?>>
+                        <span class="label-body">Pošalji kopiju sebi</span>
+						<input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail"
+							value="<?php if(isset($_SESSION['user_info'])) 
+											echo $_SESSION['user_info']->Email;
+										else if(isset($_POST['sendCopyEmail'])) 
+											echo $_POST['sendCopyEmail'];
+										else 
+											echo ''; ?>">
+                    </label>
+					
+					<?php
+						} else {
+					?>
                     <!--NAME AND SURNAME ******************************-->
                     <label for="payer" class="label__heading">Ime i prezime</label>
                     <input class="u-full-width" type="text" placeholder="" name="payer" 
@@ -124,7 +289,7 @@ require_once "../../functions/functions.php";
                     <!--VALUTA ******************************-->
                     <label for="currency" class="label__heading">Valuta</label>
                     <input class="u-full-width" type="text" placeholder="" name="currency"
-						<?php echo isset($_POST['currency']) ? "value=\"".$_POST['currency']."\"" : '' ?>" >
+						value="RSD" readonly>
                     <!-- ***************************** -->
 
                     <!--IZNOS ******************************-->
@@ -238,13 +403,16 @@ require_once "../../functions/functions.php";
 										else 
 											echo ''; ?>">
                     </label>
+					<?php if(isset($_SESSION['user_info'])) {?> 
+						<label for="savedOrder">
+							<input type="checkbox" name="savedOrder" id="savedOrder" <?php echo isset($_POST['savedOrder']) ? 'checked' : ''?>>
+							<span class="label-body">Prikaži u sačuvanim narudžbinama</span>
+						</label>
+					<?php }?>
+					<?php }?>
 					<input type="hidden" name="orderType" id="orderType" value="uplatnice/nalog-za-prenos">
 					<input type="hidden" id="successMessage" value="Nalog za prenos je uspešno naručen.">
                     <input class="button-primary" type="submit" value="Pošalji" name="submit">
-					<?php
-					if(isset($_SESSION['user_info']))
-						echo '<input type="button" value="Sačuvaj nalog" id="saveOrder" title="Možete sačuvati nalog za prenos u Vašem nalogu">';
-					?>
                     <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
                 </div>
             </form>

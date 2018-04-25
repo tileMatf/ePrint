@@ -1,4 +1,4 @@
-    // Get the modal
+   // Get the modal
     var modal = document.getElementById('loginModal');
     var modal2 = document.getElementById('registerModal');
 	var pictureModal = document.getElementById('pictureModal');
@@ -132,17 +132,17 @@
 	
 	if(paymentConfirm != null){
 		paymentConfirm.addEventListener('click', function(event){
-			event.preventDefault();	
+			event.preventDefault();
 			if(pictureModal != null)
 				pictureModal.style.display = "none";
 			var form = document.forms.namedItem('orderForm');
 			var successMessage = document.getElementById('successMessage').getAttribute('value');
-			var formData = new FormData(form);		
+			var formData = new FormData(form);
 			
 			var xhttp = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
 		
 			let parameters = [...formData.entries()]
-                     .map(e => encodeURIComponent(e[0]) + "=" + encodeURIComponent(e[1]))
+                     .map(e => encodeURIComponent(e[0]) + "=" + encodeURIComponent(e[1]));
 			
 			xhttp.open("POST",  window.location.origin + "/eprint/functions/confirm/", true);
 			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -161,6 +161,7 @@
 					statusMessage.innerHTML = "Oprostite, došlo je do greške prilikom slanja i naručivanja porudžbine. Molim Vas, pokušajte ponovo.";
 					statusMessage.style.color = "red";
 				} else if(this.responseText === '5'){
+					form.reset();
 					statusMessage.innerHTML = successMessage;
 					statusMessage.style.color = "green";
 				} else {
@@ -173,37 +174,11 @@
 				statusMessage.innerHTML = "Oprostite, došlo je do greške na serveru prilikom slanja. Molim Vas, pokušajte ponovo.";
 				statusMessage.style.color = "red";
 			}
-			xhttp.send(parameters.join('&'));
+			xhttp.send(parameters.join("&"));		
 		});
+			
 	}
-	
-	//var deliveryConfirm = document.getElementById("deliveryConfirm");
-	
-	function post(params) {
-		method = method || "post"; // Set method to post by default if not specified.
-
-		// The rest of this code assumes you are not using a library.
-		// It can be made less wordy if you use one.
-		/*var form = document.createElement("form");
-		form.setAttribute("method", method);
-		form.setAttribute("action", path);
-
-		for(var key in params) {
-			if(params.hasOwnProperty(key)) {
-				var hiddenField = document.createElement("input");
-				hiddenField.setAttribute("type", "hidden");
-				hiddenField.setAttribute("name", key);
-				hiddenField.setAttribute("value", params[key]);
-
-				form.appendChild(hiddenField);
-			}
-		}
-
-		document.body.appendChild(form);
-		form.submit();*/
-		alert(params);
-	}
-	
+		
 	var loginButton = document.getElementsByName("login")[0];
 	var errorMessage = document.getElementById("errorLoginMsg");
 
@@ -231,8 +206,7 @@
 						errorMessage.style.color = "red";
 						modal.style.display = "block";
 					} else {				
-//						var user = JSON.parse(this.responseText);
-//						alert(user.Email);
+//						var user = JSON.parse(this.responseText);						
 						modal.style.display = "none";
 						location.reload();
 					}
@@ -323,44 +297,10 @@
 			xhttp.send();
 		});	
 	}
-	
-	var saveOrderButton = document.getElementById("saveOrder");
-	if(saveOrderButton != null){
-		saveOrderButton.addEventListener('click', function(event){
-			event.preventDefault();
-			
-			var form = document.forms.namedItem('orderForm');
-			var formData = new FormData(form);
-			
-			var xhttp = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-			let parameters = [...formData.entries()]
-						.map(e => encodeURIComponent(e[0]) + "=" + encodeURIComponent(e[1]));
-						
-			var xhttp = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-			xhttp.open("POST",  window.location.origin + "/eprint/save_order/", true);
-			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			
-			xhttp.onreadystatechange = function(e){			
-				if(xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200){
-					if(this.responseText !== 0){	
-						alert(this.responseText);
-						form.reset();						
-						window.location.replace(window.location.origin + "/eprint/" + form.orderType.value);
-					}					
-				}
-			};
-
-			xhttp.onerror = function(e) {
-				//alert(this.responseText);
-				statusMessage.innerHTML = "Oprostite, došlo je do greške prilikom skladištenja Vaše narudžbine. Molim Vas, pokušajte ponovo.";
-				statusMessage.style.color = "red";
-			}
-			xhttp.send(parameters.join('&'));
-		});
-	}
+		
 	
 	/*Make table rows of order clickable*/
-	var ordersRows = document.getElementsByName('orderRow');
+	/*var ordersRows = document.getElementsByName('orderRow');
 	if(ordersRows != null){
 		for(var i = 0; i < ordersRows.length; i++){
 			ordersRows[i].addEventListener('click', openOrder);
@@ -369,7 +309,7 @@
 	function openOrder(event){
 		event.preventDefault();
 		
-		/*var orderObjectField = this.querySelector("input[name='orderObject']");
+		var orderObjectField = this.querySelector("input[name='orderObject']");
 		var orderTypeField = this.querySelector("input[name='orderType']");
 		var form = document.createElement('form');
 		form.setAttribute("method", "POST");
@@ -378,10 +318,34 @@
 		form.appendChild(orderObjectField);
 		form.appendChild(orderTypeField);
 
-		//document.body.appendChild(form);*/
-		
-		var form = this.form;
-		
-		form.submit();
-	}
+		document.body.appendChild(form);
+		alert(form);
+		//form.submit();
+	}*/
 	
+	/*For new page for delivery data*/
+	/*var deliveryConfirm = document.getElementById("deliveryConfirm");	
+	function post(params) {
+		//method = method || "post"; // Set method to post by default if not specified.
+
+		// The rest of this code assumes you are not using a library.
+		// It can be made less wordy if you use one.
+		var form = document.createElement("form");
+		form.setAttribute("method", method);
+		form.setAttribute("action", path);
+
+		for(var key in params) {
+			if(params.hasOwnProperty(key)) {
+				var hiddenField = document.createElement("input");
+				hiddenField.setAttribute("type", "hidden");
+				hiddenField.setAttribute("name", key);
+				hiddenField.setAttribute("value", params[key]);
+
+				form.appendChild(hiddenField);
+			}
+		}
+
+		document.body.appendChild(form);
+		form.submit();
+		//alert(params);
+	}*/
