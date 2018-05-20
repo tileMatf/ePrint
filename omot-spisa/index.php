@@ -139,24 +139,10 @@ require_once '../functions/functions.php';
                         <option value="9000" <?php echo isset($order['Quantity']) && $order['Quantity'] == '9000' ? "selected" : "" ?>>9000</option>
                     </select>
                     <!-- ***************************** -->
-                    
-					<!-- Adresa isporuka-->
-					<label for="deliveryAddress" class="label__heading">Adresa isporuke</label>
-					<input class="u-full-width" type="text" placeholder="" name="deliveryAddress" required
-                        value="<?php echo $order['DeliveryAddress'] ?>">
-					<!-- ****************************** -->
 
-					<!-- Zip kod isporuka -->
-					<label for="deliveryZipCode" class="label__heading">Poštanski broj isporuke</label>
-					<input class="u-full-width" type="text" placeholder="" name="deliveryZipCode" required
-                        value="<?php echo $order['DeliveryZipCode'] ?>">
-					<!-- ****************************** -->
-
-					<!-- Mesto isporuke -->
-					<label for="deliveryLocation" class="label__heading">Mesto isporuke</label>
-					<input class="u-full-width" type="text" placeholder="" name="deliveryLocation" required
-                        value="<?php echo $order['DeliveryLocation'] ?>">
-					<!-- ****************************** -->
+					<?php
+						include("../delivery_fields.php");
+					?>                    
                     
                     <!-- Krajnja poruka -->
                         <label for="message" class="label__heading">Poruka</label>
@@ -242,24 +228,10 @@ require_once '../functions/functions.php';
                     </select>
                     <!-- ***************************** -->
                     
-					<!-- Adresa isporuka-->
-					<label for="deliveryAddress" class="label__heading">Adresa isporuke</label>
-					<input class="u-full-width" type="text" placeholder="" name="deliveryAddress" required
-                        value="<?php echo isset($_POST['deliveryAddress']) ? $_POST['deliveryAddress'] : '' ?>">
-					<!-- ****************************** -->
-
-					<!-- Zip kod isporuka -->
-					<label for="deliveryZipCode" class="label__heading">Poštanski broj isporuke</label>
-					<input class="u-full-width" type="text" placeholder="" name="deliveryZipCode" required
-                        value="<?php echo isset($_POST['deliveryZipCode']) ? $_POST['deliveryZipCode'] : '' ?>">
-					<!-- ****************************** -->
-
-					<!-- Mesto isporuke -->
-					<label for="deliveryLocation" class="label__heading">Mesto isporuke</label>
-					<input class="u-full-width" type="text" placeholder="" name="deliveryLocation" required
-                        value="<?php echo isset($_POST['deliveryLocation']) ? $_POST['deliveryLocation'] : '' ?>">
-					<!-- ****************************** -->
-                    
+					<?php
+						include("../delivery_fields.php");
+					?>
+					
                     <!-- Krajnja poruka -->
                         <label for="message" class="label__heading">Poruka</label>
                         <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"><?php if(isset($_POST['comment'])) { echo htmlentities($_POST['comment']); }?></textarea>

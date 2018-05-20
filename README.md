@@ -21,11 +21,16 @@ Sone :baby_chick:
 - [ ] Za login forme dodati da se zatvara na ESC
 
 Tile :rabbit:
-- [ ] Admin panel - dodatni prikazi narudzbina?
+- [ ] Ukoliko korisnik nesto izmeni u sacuvanoj narudzbini i naruci opet, da li se updatuje sacuvana narudzbina ili se ubacuje nova?
+		Ukoliko se updatuje, sta se desava sa fajlom koji je bio u prvoj verziji sacuvane narudzbine kod stampanja, tj. da li 
+		se i on updatuje? (nestaje podatak o prethodnom)<--- !!!!
+- [] Da li treba delivery mail?
 - [ ] Brisanje narudzbine kod korisnika? Brisanje narudzbina? Kada?
-- [ ] Ukoliko korisnik nesto izmeni u sacuvanoj narudzbini i naruci opet, da li se updatuje sacuvana?
 - [ ] Kod admina - opcija dodavanja admina (sql je napisan)?
 - [ ] Testiranje
+- [ ] Napomenuti Filipu da u sacuvanim narudzbinama se prikazuju narudzbine u poslednjih 100 dana
+- [ ] Napomenuti Filipu da ce kod logovanih korisnika fajlovi tog usera biti smesteni u poseban folder koji ce nositi ime
+		kao korisnikov mail
 
 
 ##### Korisni linkovi za mene:

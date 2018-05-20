@@ -182,33 +182,19 @@
 						<?php echo isset($order['AddressPrintRow4']) ? "value='".$order['AddressPrintRow4']."'" : "" ?>>
                     <!-- ***************************** -->
                     
-					<!-- Adresa isporuka-->
-					<label for="deliveryAddress" class="label__heading">Adresa isporuke</label>
-					<input class="u-full-width" type="text" placeholder="" name="deliveryAddress" required
-                        value="<?php echo $order['DeliveryAddress'] ?>">
-					<!-- ****************************** -->
-
-					<!-- Zip kod isporuka -->
-					<label for="deliveryZipCode" class="label__heading">Poštanski broj isporuke</label>
-					<input class="u-full-width" type="text" placeholder="" name="deliveryZipCode" required
-                        value="<?php echo $order['DeliveryZipCode'] ?>">
-					<!-- ****************************** -->
-
-					<!-- Mesto isporuke -->
-					<label for="deliveryLocation" class="label__heading">Mesto isporuke</label>
-					<input class="u-full-width" type="text" placeholder="" name="deliveryLocation" required
-                        value="<?php echo $order['DeliveryLocation'] ?>">
-					<!-- ****************************** -->
+					<?php
+						include("../../delivery_fields.php");
+					?>
                     
                     <!--Krajnja poruka-->
                     <label for="message" class="label__heading">Poruka</label>
                     <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"><?php echo isset($order['Comment']) ? $order['Comment'] : "" ?></textarea>
-                    <!-- Varijabilni podaci i prihvatam uslove -->
+                    <!-- Varijabilni podaci i prihvatam uslove
                     <label for="varData">
                         <input type="checkbox" name="varData" id="varData"
-							<?php echo isset($order['VariableData']) && $order['VariableData'] === '1' ? "checked" : ""?>>
+							<?php //echo isset($order['VariableData']) && $order['VariableData'] === '1' ? "checked" : ""?>>
                         <span class="label-body">Varijabilni podaci</span>
-                    </label>
+                    </label> -->
                     <label class="sendCopy">
                         <input type="checkbox" id="sendCopy" name="sendCopy"
 							<?php echo isset($order['SendCopy']) && $order['SendCopy'] === '1' ? "checked" : ""?>>
@@ -293,33 +279,19 @@
 						<?php echo isset($_POST['printingOnAdressPage4']) ? "value='".$_POST['printingOnAdressPage4']."'" : "" ?>>
                     <!-- ***************************** -->
                     
-					<!-- Adresa isporuka-->
-					<label for="deliveryAddress" class="label__heading">Adresa isporuke</label>
-					<input class="u-full-width" type="text" placeholder="" name="deliveryAddress" required
-                        value="<?php echo isset($_POST['deliveryAddress']) ? $_POST['deliveryAddress'] : '' ?>">
-					<!-- ****************************** -->
-
-					<!-- Zip kod isporuka -->
-					<label for="deliveryZipCode" class="label__heading">Poštanski broj isporuke</label>
-					<input class="u-full-width" type="text" placeholder="" name="deliveryZipCode" required
-                        value="<?php echo isset($_POST['deliveryZipCode']) ? $_POST['deliveryZipCode'] : '' ?>">
-					<!-- ****************************** -->
-
-					<!-- Mesto isporuke -->
-					<label for="deliveryLocation" class="label__heading">Mesto isporuke</label>
-					<input class="u-full-width" type="text" placeholder="" name="deliveryLocation" required
-                        value="<?php echo isset($_POST['deliveryLocation']) ? $_POST['deliveryLocation'] : '' ?>">
-					<!-- ****************************** -->
+					<?php
+						include("../../delivery_fields.php");
+					?>
                     
                     <!--Krajnja poruka-->
                     <label for="message" class="label__heading">Poruka</label>
                     <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"><?php echo isset($_POST['comment']) ? $_POST['comment'] : "" ?></textarea>
-                    <!-- Varijabilni podaci i prihvatam uslove -->
+                    <!-- Varijabilni podaci i prihvatam uslove
                     <label for="varData">
                         <input type="checkbox" name="varData" id="varData"
-							<?php echo isset($_POST['varData']) ? "checked" : ""?>>
+							<?php //echo isset($_POST['varData']) ? "checked" : ""?>>
                         <span class="label-body">Varijabilni podaci</span>
-                    </label>
+                    </label> -->
                     <label class="sendCopy">
                         <input type="checkbox" id="sendCopy" name="sendCopy"
 							<?php echo isset($_POST['sendCopy']) ? "checked" : ""?>>

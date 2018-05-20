@@ -46,7 +46,7 @@
 					//$orders = $db->getSavedOrders($_SESSION['user_info']->ID, 'Stampanje');
 					if($orders != null){
 						for($i = 0; $i < count($orders[0]); $i++){
-							echo '<tr class="" name="orderRow">							
+							echo '<tr name="orderRow">							
 									<td>'.$orders[0][$i]->OrderDate.'</td>
 									<td>'.$orders[0][$i]->FileName.'</td>
 									<td>'.$orders[0][$i]->BindingFile.'</td>
@@ -82,7 +82,7 @@
 					//$orders = $db->getSavedOrders($_SESSION['user_info']->ID, 'Preslikavajuci blokovi');
 					if($orders != null){
 						for($i = 0; $i < count($orders[1]); $i++){
-							echo '<tr class="clickable" name="orderRow">
+							echo '<tr name="orderRow">
 										<td>'.$orders[1][$i]->OrderDate.'</td>
 										<td>'.$orders[1][$i]->FileName.'</td>
 										<td>
@@ -117,7 +117,7 @@
 				<?php
 					if($orders != null){
 						for($i = 0; $i < count($orders[2]); $i++){
-							echo '<tr class="clickable" name="orderRow">
+							echo '<tr name="orderRow">
 									<td>'.$orders[2][$i]->OrderDate.'</td>
 									<td>'.$orders[2][$i]->Name.'</td>
 									<td>
@@ -151,7 +151,7 @@
 				<?php
 					if($orders != null){
 						for($i = 0; $i < count($orders[3]); $i++){
-							echo '<tr class="clickable" name="orderRow">
+							echo '<tr name="orderRow">
 									<td>'.$orders[3][$i]->OrderDate.'</td>
 									<td>'.$orders[3][$i]->Name.'</td>
 									<td>
@@ -185,7 +185,7 @@
 				<?php
 					if($orders != null){
 						for($i = 0; $i < count($orders[4]); $i++){
-							echo '<tr class="clickable" name="orderRow">
+							echo '<tr name="orderRow">
 									<td>'.$orders[4][$i]->OrderDate.'</td>
 									<td>'.$orders[4][$i]->Name.'</td>
 									<td>
@@ -219,7 +219,7 @@
 				<?php
 					if($orders != null){
 						for($i = 0; $i < count($orders[5]); $i++){
-							echo '<tr class="clickable" name="orderRow">
+							echo '<tr name="orderRow">
 									<td>'.$orders[5][$i]->OrderDate.'</td>
 									<td>'.$orders[5][$i]->Quantity.'</td>
 									<td>
@@ -253,7 +253,7 @@
 				<?php
 					if($orders != null){
 						for($i = 0; $i < count($orders[6]); $i++){
-							echo '<tr class="clickable" name="orderRow">
+							echo '<tr name="orderRow">
 									<td>'.$orders[6][$i]->OrderDate.'</td>
 									<td>'.$orders[6][$i]->Name.'</td>
 									<td>
@@ -288,7 +288,7 @@
 				<?php
 					if($orders != null){
 						for($i = 0; $i < count($orders[7]); $i++){
-							echo '<tr class="clickable" name="orderRow">
+							echo '<tr name="orderRow">
 									<td>'.$orders[7][$i]->OrderDate.'</td>
 									<td>'.$orders[7][$i]->Name.'</td>
 									<td>'.$orders[7][$i]->EnvelopeType.'</td>
@@ -323,7 +323,7 @@
 				<?php
 					if($orders != null){
 						for($i = 0; $i < count($orders[8]); $i++){
-							echo '<tr class="clickable" name="orderRow">
+							echo '<tr name="orderRow">
 									<td>'.$orders[8][$i]->OrderDate.'</td>
 									<td>'.$orders[8][$i]->Quantity.'</td>
 									<td>
@@ -358,7 +358,7 @@
 				<?php
 					if($orders != null){
 						for($i = 0; $i < count($orders[9]); $i++){
-							echo '<tr class="clickable" name="orderRow">
+							echo '<tr name="orderRow">
 									<td>'.$orders[9][$i]->OrderDate.'</td>
 									<td>'.$orders[9][$i]->Size.'</td>
 									<td>'.$orders[9][$i]->Quantity.'</td>
@@ -394,7 +394,7 @@
 				<?php
 					if($orders != null){
 						for($i = 0; $i < count($orders[10]); $i++){
-							echo '<tr class="clickable" name="orderRow">
+							echo '<tr name="orderRow">
 									<td>'.$orders[10][$i]->OrderDate.'</td>
 									<td>'.$orders[10][$i]->Name.'</td>
 									<td>'.$orders[10][$i]->Quantity.'</td>

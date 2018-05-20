@@ -5,6 +5,8 @@ class Order {
 	var $UserID;
 	var $OrderDate;
 	var $Seen;
+	var $DeliveryName;
+	var $DeliveryEmail;
 	var $DeliveryAddress;
 	var $DeliveryZipCode;
 	var $DeliveryLocation;
@@ -12,6 +14,8 @@ class Order {
 	
 	function __construct($data){
 		$this->ID = isset($data['ID']) && !empty($data['ID']) ? $data['ID'] : null;
+		$this->DeliveryName = isset($data['deliveryName']) && !empty($data['deliveryName']) ? $data['deliveryName'] : null;
+		$this->DeliveryEmail = isset($data['deliveryEmail']) && !empty($data['deliveryEmail']) ? $data['deliveryEmail'] : null;
 		$this->DeliveryAddress = isset($data['deliveryAddress']) && !empty($data['deliveryAddress']) ? $data['deliveryAddress'] : null;
 		$this->DeliveryZipCode = isset($data['deliveryZipCode']) && !empty($data['deliveryZipCode']) ? $data['deliveryZipCode'] : null;
 		$this->DeliveryLocation = isset($data['deliveryLocation']) && !empty($data['deliveryLocation']) ? $data['deliveryLocation'] : null;

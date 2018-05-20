@@ -131,24 +131,10 @@ require_once '../../functions/functions.php';
                     </select>
                     <!-- ***************************** -->
 
-                    <!-- Adresa isporuka-->
-					<label for="deliveryAddress" class="label__heading">Adresa isporuke</label>
-					<input class="u-full-width" type="text" placeholder="" name="deliveryAddress" required
-                        value="<?php echo isset($order['DeliveryAddress']) ? $order['DeliveryAddress'] : '' ?>">
-					<!-- ****************************** -->
-
-					<!-- Zip kod isporuka -->
-					<label for="deliveryZipCode" class="label__heading">Poštanski broj isporuke</label>
-					<input class="u-full-width" type="text" placeholder="" name="deliveryZipCode" required
-                        value="<?php echo isset($order['DeliveryZipCode']) ? $order['DeliveryZipCode'] : '' ?>">
-					<!-- ****************************** -->
-
-					<!-- Mesto isporuke -->
-					<label for="deliveryLocation" class="label__heading">Mesto isporuke</label>
-					<input class="u-full-width" type="text" placeholder="" name="deliveryLocation" required
-                        value="<?php echo isset($order['DeliveryLocation']) ? $order['DeliveryLocation'] : '' ?>">
-					<!-- ****************************** -->
-                    
+					<?php
+						include("../../delivery_fields.php");
+					?>
+					
                     <label class="sendCopy">
                         <input type="checkbox" id="sendCopy" name="sendCopy" 
 							<?php echo isset($order['SendCopy']) && $order['SendCopy'] === '1' ? "checked" : ""?>>
@@ -217,24 +203,10 @@ require_once '../../functions/functions.php';
                     </select>
                     <!-- ***************************** -->
 
-                    <!-- Adresa isporuka-->
-					<label for="deliveryAddress" class="label__heading">Adresa isporuke</label>
-					<input class="u-full-width" type="text" placeholder="" name="deliveryAddress" required
-                        value="<?php echo isset($_POST['deliveryAddress']) ? $_POST['deliveryAddress'] : '' ?>">
-					<!-- ****************************** -->
-
-					<!-- Zip kod isporuka -->
-					<label for="deliveryZipCode" class="label__heading">Poštanski broj isporuke</label>
-					<input class="u-full-width" type="text" placeholder="" name="deliveryZipCode" required
-                        value="<?php echo isset($_POST['deliveryZipCode']) ? $_POST['deliveryZipCode'] : '' ?>">
-					<!-- ****************************** -->
-
-					<!-- Mesto isporuke -->
-					<label for="deliveryLocation" class="label__heading">Mesto isporuke</label>
-					<input class="u-full-width" type="text" placeholder="" name="deliveryLocation" required
-                        value="<?php echo isset($_POST['deliveryLocation']) ? $_POST['deliveryLocation'] : '' ?>">
-					<!-- ****************************** -->
-                    
+					<?php
+						include("../../delivery_fields.php");
+					?>
+					
                     <label class="sendCopy">
                         <input type="checkbox" id="sendCopy" name="sendCopy" <?php echo isset($_POST['sendCopy']) ? "checked" : ""?>>
                         <span class="label-body">Pošalji kopiju sebi</span>

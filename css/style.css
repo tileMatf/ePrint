@@ -715,3 +715,16 @@ a.disabled-links{
 	margin:2% 25% auto auto;
 	display: block;
 }
+
+.silver {
+	color: rgb(180, 180, 180);
+}
+
+.non-bottom-space {
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+
+hr {
+	margin-top: 0em;
+}
