@@ -297,6 +297,55 @@
 			xhttp.send();
 		});	
 	}
+	
+	/*CHANGE PASSWORD*/
+	var changePassButton = document.getElementsByName("changePass")[0];
+	
+	if(changePassButton != null){
+		changePassButton.addEventListener('click', function(event) {
+			event.preventDefault();
+			
+			var password = document.getElementById("newPassword"), confirm_password = document.getElementById("confirmPassword");
+			if(password.value != confirm_password.value){
+				statusMessage.innerHTML = "Lozinke se ne podudaraju!"
+				confirm_password.focus();
+				return;
+			}
+			var form = document.forms.namedItem('changePassForm');
+			var formData = new FormData(form);					
+
+			let parameters = [...formData.entries()]
+						.map(e => encodeURIComponent(e[0]) + "=" + encodeURIComponent(e[1]))
+			
+			var xhttp = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+			xhttp.open("POST",  window.location.origin + "/eprint/registration/change_pass/", true);
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhttp.onreadystatechange = function(e){
+				
+				if(xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200){					
+					if(this.responseText == true){
+						statusMessage.innerHTML = "Uspešno izmenjena lozinka!";
+						statusMessage.style.color = "green";
+						form.reset();
+					} else if(this.responseText == false){
+						statusMessage.innerHTML = "Pogrešna stara lozinka, probajte ponovo.";
+						statusMessage.style.color = "red";
+					} else {
+						statusMessage.innerHTML = this.responseText;
+						statusMessage.style.color = "red";
+					}
+				} else {
+					statusMessage.innerHTML = "Došlo je do greške prilikom promene lozinke, pokušajte ponovo.";
+					statusMessage.style.color = "red";
+				}				
+			};
+				
+			xhttp.onerror = function(e) {
+				statusMessage.innerHTML = "Došlo je do greške prilikom promene lozinke, pokušajte ponovo.";
+			}
+			xhttp.send(parameters.join('&'));
+		});	
+	}
 		
 	
 	/*Make table rows of order clickable*/

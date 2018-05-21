@@ -84,22 +84,22 @@
 			}
 			
 			if($status === true){
-				$order = new Stampanje($_POST, $_FILES);
+				$stampanje_order = new Stampanje($_POST, $_FILES);
 				
-				if(!isset($order) || !is_object($order)){
+				if(!isset($stampanje_order) || !is_object($stampanje_order)){
 					header("Location: ../");
 					exit();
 				}
 			
 				$db = new DB();
 				if(isset($_SESSION['user_info'])){
-					$order->UserID = $_SESSION['user_info']->ID;	
+					$stampanje_order->UserID = $_SESSION['user_info']->ID;	
 				} else {
 					$unregisterUserID = $db->getIdOfUnregisterUser()[0]->ID;
-					$order->UserID = $unregisterUserID;
+					$stampanje_order->UserID = $unregisterUserID;
 				}
 			
-				$status = $db->saveOrder($order);
+				$status = $db->saveOrder($stampanje_order);
 			}
 			
 		} catch(RuntimeException $e){

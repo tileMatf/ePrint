@@ -1050,21 +1050,29 @@ class DB {
 		}
 	}
 	
-	public function changePass($id, $pass){
+	public function changePass($id, $old_pass, $new_pass){
 		try{
-			$query = self::$connection->prepare("UPDATE users SET Password = :pass WHERE ID = :id");
-			$query->bindValue(":pass", $pass, PDO::PARAM_STR);
+			$query = self::$connection->prepare("SELECT * FROM users WHERE ID = :id AND Password = :pass");
 			$query->bindValue(":id", $id, PDO::PARAM_INT);
+			$query->bindValue(":pass", $old_pass, PDO::PARAM_STR);
 			$query->execute();
 			if($query->rowCount() === 1){
-				return true;
+				$query = self::$connection->prepare("UPDATE users SET Password = :pass WHERE ID = :id");
+				$query->bindValue(":pass", $new_pass, PDO::PARAM_STR);
+				$query->bindValue(":id", $id, PDO::PARAM_INT);
+				$query->execute();
+				if($query->rowCount() === 1){
+					return true;
+				} else {
+					//echo $query->mysql_info();
+					return $query->mysql_info();
+				}
 			} else {
-				echo $query->mysql_info();
 				return false;
 			}
 		} catch(PDOException $e){
-			echo $e->getMessage();
-			return false;
+			//echo $e->getMessage();
+			return $e->getMessage();
 		}
 	}
 }

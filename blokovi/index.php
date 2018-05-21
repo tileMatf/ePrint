@@ -62,19 +62,19 @@
 			}
 
 			if($status === true){
-				$order = new Blok($_POST, $_FILES);
+				$blok_order = new Blok($_POST, $_FILES);
 				
-				if(!isset($order) || !is_object($order)){
+				if(!isset($blok_order) || !is_object($blok_order)){
 					header("Location: ../");
 					exit();
 				}
 			
 				$db = new DB();
 				if(isset($_SESSION['user_info'])){
-					$order->UserID = $_SESSION['user_info']->ID;	
+					$blok_order->UserID = $_SESSION['user_info']->ID;	
 				} else {
 					$unregisterUserID = $db->getIdOfUnregisterUser()[0]->ID;
-					$order->UserID = $unregisterUserID;
+					$blok_order->UserID = $unregisterUserID;
 				}
 				
 				//if(isset($_POST['openOrderButton'])){
@@ -82,7 +82,7 @@
 				//		update
 				//}
 				//else {
-					$status = $db->saveOrder($order);
+					$status = $db->saveOrder($blok_order);
 				//}
 			} 			
 		} catch(RuntimeException $e){
