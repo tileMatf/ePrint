@@ -24,7 +24,7 @@ Tile :rabbit:
 - [ ] Ukoliko korisnik nesto izmeni u sacuvanoj narudzbini i naruci opet, da li se updatuje sacuvana narudzbina ili se ubacuje nova?
 		Ukoliko se updatuje, sta se desava sa fajlom koji je bio u prvoj verziji sacuvane narudzbine kod stampanja, tj. da li 
 		se i on updatuje? (nestaje podatak o prethodnom)<--- !!!!
-- [] Da li treba delivery mail?
+- [ ] Da li treba delivery mail?
 - [ ] Brisanje narudzbine kod korisnika? Brisanje narudzbina? Kada?
 - [ ] Kod admina - opcija dodavanja admina (sql je napisan)?
 - [ ] Testiranje
