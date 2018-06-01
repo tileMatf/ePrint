@@ -8,6 +8,22 @@
 										 else if(isset($_POST['deliveryName']))
 											echo $_POST['deliveryName']; ?>">
 						<!-- ****************************** -->
+						
+						<!-- Email adresa -->
+						<input class="u-full-width" type="text" placeholder="Email adresa" name="deliveryEmail" required
+							value="<?php if(isset($order)) 
+											echo $order['DeliveryEmail'];
+										 else if(isset($_POST['deliveryEmail']))
+											echo $_POST['deliveryEmail']; ?>">
+						<!-- ****************************** -->
+						
+						<!-- Telefon -->
+						<input class="u-full-width" type="text" placeholder="Broj telefona" name="deliveryPhone" required
+							value="<?php if(isset($order)) 
+											echo $order['DeliveryPhone'];
+										 else if(isset($_POST['deliveryPhone']))
+											echo $_POST['deliveryPhone']; ?>">
+						<!-- ****************************** -->
 
 						<!-- Adresa isporuka-->
 						<input class="u-full-width" type="text" placeholder="Adresa isporuke" name="deliveryAddress" required

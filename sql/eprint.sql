@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 25, 2018 at 06:31 PM
+-- Generation Time: Jun 01, 2018 at 06:22 PM
 -- Server version: 5.7.14-log
 -- PHP Version: 5.6.31
 
@@ -53,7 +53,10 @@ INSERT INTO `blokovi` (`OrderID`, `FileName`, `NumberOfSet`, `Color`, `Size`, `P
 (146, 'KosticTijana.pdf', 12, 'Plavo-belo', 'A4', 'U fasciklu', NULL, 0),
 (148, 'KosticTijana.pdf', 12, 'Crno-belo', 'A4', 'U fasciklu', NULL, 0),
 (149, 'KosticTijana.pdf', 5, 'Plavo-belo', 'A4', 'Heftanjem gore', 'Tijana', 0),
-(167, 'KosticTijana.pdf', 5, 'Plavo-belo', 'A4', 'Heftanjem gore', 'Tijana', 0);
+(167, 'KosticTijana.pdf', 5, 'Plavo-belo', 'A4', 'Heftanjem gore', 'Tijana', 0),
+(171, 'KosticTijana.pdf', 1, 'Crno-belo', 'A4', 'U fasciklu', 'k', 0),
+(173, 'KosticTijana.pdf', 51, 'Plavo-belo', 'A4', 'Heftanjem gore', 'Tijana', 0),
+(174, 'KosticTijana.pdf', 5, 'Plavo-belo', 'A4', 'Heftanjem gore', 'Tijana', 0);
 
 -- --------------------------------------------------------
 
@@ -145,6 +148,7 @@ DROP TABLE IF EXISTS `formulari-za-adresiranje`;
 CREATE TABLE IF NOT EXISTS `formulari-za-adresiranje` (
   `OrderID` int(11) NOT NULL,
   `Quantity` int(11) NOT NULL,
+  `Type` varchar(10) NOT NULL,
   `SendCopy` tinyint(1) NOT NULL,
   KEY `formulari_orders_fk` (`OrderID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -153,8 +157,10 @@ CREATE TABLE IF NOT EXISTS `formulari-za-adresiranje` (
 -- Dumping data for table `formulari-za-adresiranje`
 --
 
-INSERT INTO `formulari-za-adresiranje` (`OrderID`, `Quantity`, `SendCopy`) VALUES
-(80, 7000, 1);
+INSERT INTO `formulari-za-adresiranje` (`OrderID`, `Quantity`, `Type`, `SendCopy`) VALUES
+(80, 7000, '', 1),
+(182, 1230, 'S6', 0),
+(183, 1000, 'S6', 0);
 
 -- --------------------------------------------------------
 
@@ -309,7 +315,8 @@ CREATE TABLE IF NOT EXISTS `omot-spisa` (
 
 INSERT INTO `omot-spisa` (`OrderID`, `Recipient`, `Name`, `Address`, `Location`, `PaperType`, `Quantity`, `Comment`, `SendCopy`) VALUES
 (113, 'Javni beleznik', 'Tijana Kostić', 'Cara Dušana 16a', 'Pančevo', '100gr/m2', 1000, NULL, 0),
-(114, 'Javni beleznik', 'Tijana Kostić', 'Cara Dušana 16a', 'Pančevo', '300gr/m2', 2000, NULL, 0);
+(114, 'Javni beleznik', 'Tijana Kostić', 'Cara Dušana 16a', 'Pančevo', '300gr/m2', 2000, NULL, 0),
+(172, 'Javni beleznik', 'Tijana Kostić', 'Cara Dušana 16a', 'Pančevo', '300gr/m2', 2000, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -353,44 +360,54 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `OrderDate` date NOT NULL,
   `Seen` tinyint(1) NOT NULL DEFAULT '0',
   `SavedOrder` tinyint(1) NOT NULL,
-  `DeliveryName` varchar(255) NOT NULL,
-  `DeliveryEmail` varchar(255) NOT NULL,
+  `DeliveryName` varchar(255) DEFAULT NULL,
+  `DeliveryEmail` varchar(255) DEFAULT NULL,
+  `DeliveryPhone` varchar(255) NOT NULL,
   `DeliveryAddress` varchar(255) NOT NULL,
   `DeliveryZipCode` varchar(255) NOT NULL,
   `DeliveryLocation` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `orders_user_fk` (`UserID`),
   KEY `orders_type_fk` (`TypeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=169 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=192 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`ID`, `TypeID`, `UserID`, `OrderDate`, `Seen`, `SavedOrder`, `DeliveryName`, `DeliveryEmail`, `DeliveryAddress`, `DeliveryZipCode`, `DeliveryLocation`) VALUES
-(74, 5, 3, '2018-04-18', 0, 1, '', '', 'Cara', '', ''),
-(75, 6, 3, '2018-04-18', 0, 0, '', '', '', '', ''),
-(76, 6, 3, '2018-04-18', 0, 1, '', '', '', '', ''),
-(78, 7, 3, '2018-04-18', 0, 1, '', '', '', '', ''),
-(80, 9, 3, '2018-04-18', 0, 1, '', '', '', '', ''),
-(91, 8, 3, '2018-04-20', 0, 1, '', '', 'deliveryAddress', 'deliveryZipCode', 'deliveryLocation'),
-(92, 3, 3, '2018-04-20', 0, 1, '', '', 'Cara Dusana 16a', '2600', 'Pancevo'),
-(104, 3, 26, '2018-04-22', 0, 0, '', '', 'Adresa isporuke', '26000', 'Mesto isporuke'),
-(107, 5, 26, '2018-04-22', 0, 0, '', '', 'Adresa isporuke 2', '25000 2', 'Mesto isporuke 2'),
-(113, 11, 26, '2018-04-24', 0, 0, '', '', 'Adresa', '24000', 'Pančevo'),
-(114, 11, 3, '2018-04-24', 0, 1, '', '', 'Adresa', '24000', 'Pančevo'),
-(141, 2, 26, '2018-04-24', 0, 0, '', '', 'Adresa isporuke', 'post', 'Pancevo'),
-(143, 2, 26, '2018-04-24', 0, 0, '', '', 'ad', 'ad', 'ad'),
-(144, 1, 26, '2018-04-25', 0, 0, '', '', 'adresa', 'adresa broj', 'mesto'),
-(145, 1, 26, '2018-04-25', 0, 0, '', '', 'adresa', 'pos broj', 'mesto isp'),
-(146, 2, 26, '2018-04-25', 0, 0, '', '', 'adresa', 'pos broj', 'mesto'),
-(147, 1, 26, '2018-04-25', 0, 1, '', '', 'adresa', 'pos broj', 'mesto'),
-(148, 2, 3, '2018-04-25', 0, 0, '', '', 'adresa', 'pos', 'mesto'),
-(149, 2, 3, '2018-04-25', 0, 1, '', '', 'Cara Dusana 16a', '26000', 'Pancevo'),
-(150, 1, 3, '2018-04-25', 0, 1, '', '', 'adresa', 'po', 'me'),
-(151, 10, 3, '2018-04-25', 0, 1, '', '', 'adresa', 'm', 'm'),
-(167, 2, 3, '2018-04-25', 0, 0, '', '', 'Cara Dusana 16a', '26000', 'Pancevo'),
-(168, 4, 3, '2018-04-25', 0, 1, '', '', 'Adresa ', '26000', 'Pančevo');
+INSERT INTO `orders` (`ID`, `TypeID`, `UserID`, `OrderDate`, `Seen`, `SavedOrder`, `DeliveryName`, `DeliveryEmail`, `DeliveryPhone`, `DeliveryAddress`, `DeliveryZipCode`, `DeliveryLocation`) VALUES
+(74, 5, 3, '2018-04-18', 0, 1, '', '', '', 'Cara', '', ''),
+(75, 6, 3, '2018-04-18', 0, 0, '', '', '', '', '', ''),
+(76, 6, 3, '2018-04-18', 0, 1, '', '', '', '', '', ''),
+(78, 7, 3, '2018-04-18', 0, 1, '', '', '', '', '', ''),
+(80, 9, 3, '2018-04-18', 0, 1, '', '', '', '', '', ''),
+(91, 8, 3, '2018-04-20', 0, 1, '', '', '', 'deliveryAddress', 'deliveryZipCode', 'deliveryLocation'),
+(92, 3, 3, '2018-04-20', 0, 1, '', '', '', 'Cara Dusana 16a', '2600', 'Pancevo'),
+(104, 3, 26, '2018-04-22', 0, 0, '', '', '', 'Adresa isporuke', '26000', 'Mesto isporuke'),
+(107, 5, 26, '2018-04-22', 0, 0, '', '', '', 'Adresa isporuke 2', '25000 2', 'Mesto isporuke 2'),
+(113, 11, 26, '2018-04-24', 0, 0, '', '', '', 'Adresa', '24000', 'Pančevo'),
+(114, 11, 3, '2018-04-24', 0, 1, 'deliverrrrrrry', '', '', 'Adresa', '24000', 'Pančevo'),
+(141, 2, 26, '2018-04-24', 0, 0, '', '', '', 'Adresa isporuke', 'post', 'Pancevo'),
+(143, 2, 26, '2018-04-24', 0, 0, '', '', '', 'ad', 'ad', 'ad'),
+(144, 1, 26, '2018-04-25', 0, 0, '', '', '', 'adresa', 'adresa broj', 'mesto'),
+(145, 1, 26, '2018-04-25', 0, 0, '', '', '', 'adresa', 'pos broj', 'mesto isp'),
+(146, 2, 26, '2018-04-25', 0, 0, '', '', '', 'adresa', 'pos broj', 'mesto'),
+(147, 1, 26, '2018-04-25', 0, 1, '', '', '', 'adresa', 'pos broj', 'mesto'),
+(148, 2, 3, '2018-04-25', 0, 0, '', '', '', 'adresa', 'pos', 'mesto'),
+(149, 2, 3, '2018-04-25', 0, 1, '', '', '', 'Cara Dusana 16a', '26000', 'Pancevo'),
+(150, 1, 3, '2018-04-25', 0, 1, '', '', '', 'adresa', 'po', 'me'),
+(151, 10, 3, '2018-04-25', 0, 1, '', '', '', 'adresa', 'm', 'm'),
+(167, 2, 3, '2018-04-25', 0, 0, '', '', '', 'Cara Dusana 16a', '26000', 'Pancevo'),
+(168, 4, 3, '2018-04-25', 0, 1, '', '', '', 'Adresa ', '26000', 'Pančevo'),
+(169, 1, 26, '2018-05-08', 0, 0, NULL, NULL, '', 'Adresa isporuke', '00329032', 'mesto isprotuke'),
+(170, 1, 26, '2018-05-08', 0, 0, NULL, NULL, '', 'k', 'k', 'k'),
+(171, 2, 3, '2018-05-08', 0, 1, NULL, NULL, '', 'k', 'k', 'k'),
+(172, 11, 3, '2018-05-19', 0, 0, 'deliverrrrrrry update', NULL, '', 'Adresa', '24000', 'Pančevo'),
+(173, 2, 3, '2018-05-20', 0, 0, 'ime', NULL, '', 'Cara Dusana 16a', '26000', 'Pancevo'),
+(174, 2, 3, '2018-05-20', 0, 0, 'tijana', NULL, '', 'Cara Dusana 16a', '26000', 'Pancevo'),
+(178, 10, 26, '2018-05-30', 0, 0, 'a', NULL, '', 'a', 'a', 'a'),
+(182, 9, 3, '2018-05-30', 0, 0, 'dd', 'bb', '', 'aa', 'ee', 'cc'),
+(183, 9, 26, '2018-05-30', 0, 0, 'tijana', NULL, '', 'adresa', 'pos', 'me');
 
 -- --------------------------------------------------------
 
@@ -534,7 +551,9 @@ CREATE TABLE IF NOT EXISTS `stampanje` (
 INSERT INTO `stampanje` (`OrderID`, `FileName`, `CopyNumber`, `PageOrder`, `Color`, `PagePrintType`, `PaperSize`, `PaperWidth`, `BindingType`, `BindingFile`, `HeftingType`, `DrillingType`, `Comment`, `SendCopy`) VALUES
 (145, 'KosticTijana.pdf', 12, '1,2,3; 1,2,3; 1,2,3', 'Crno-belo', 'Jednostrano', 'A4', '80gr/m2', 'Tvrdo koricenje', 'KosticZoranaCV.pdf', 'Gore levo', 'Dve rupe za registrator levo', NULL, 0),
 (147, 'KosticTijana.pdf', 1, '1,2,3; 1,2,3; 1,2,3', 'U boji', 'Jednostrano', 'A4', '80gr/m2', 'Plasticnom spiralom', '', 'Gore levo', 'Dve rupe za registrator levo', NULL, 0),
-(150, 'KosticTijana.pdf', 5, '1,2,3; 1,2,3; 1,2,3', 'U boji', 'Jednostrano', 'A4', '100gr/m2', 'Plasticnom spiralom', '', 'Gore desno', 'Dve rupe za registrator desno', 'Tijana', 1);
+(150, 'KosticTijana.pdf', 5, '1,2,3; 1,2,3; 1,2,3', 'U boji', 'Jednostrano', 'A4', '100gr/m2', 'Plasticnom spiralom', '', 'Gore desno', 'Dve rupe za registrator desno', 'Tijana', 1),
+(169, 'KosticTijana.pdf', 2, '1,1,1; 2,2,2; 3,3,3', 'Crno-belo', 'Jednostrano', 'A3', '80gr/m2', 'Plasticnom spiralom', '', 'Gore levo', 'Dve rupe za registrator levo', 'komentar korisnika', 0),
+(170, 'KosticTijana.pdf', 1, '1,2,3; 1,2,3; 1,2,3', 'Crno-belo', 'Jednostrano', 'A4', '80gr/m2', 'Plasticnom spiralom', '', 'Gore levo', 'Dve rupe za registrator levo', 'k', 0);
 
 -- --------------------------------------------------------
 
@@ -599,7 +618,8 @@ CREATE TABLE IF NOT EXISTS `standardne-koverte` (
 --
 
 INSERT INTO `standardne-koverte` (`OrderID`, `Size`, `Quantity`, `BackPrintRow1`, `BackPrintRow2`, `BackPrintRow3`, `BackPrintRow4`, `AddressPrintRow1`, `AddressPrintRow2`, `AddressPrintRow3`, `AddressPrintRow4`, `Comment`, `VariableData`, `SendCopy`) VALUES
-(151, 'C4', 2000, 'prvi', '', '', '', '', '', '', '', NULL, 1, 0);
+(151, 'C4', 2000, 'prvi', '', '', '', '', '', '', '', NULL, 1, 0),
+(178, 'B6', 1000, '', '', '', '', '', '', '', '', NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -897,3 +917,4 @@ ALTER TABLE `standardne-koverte`
 --
 ALTER TABLE `uplate-isplate`
   ADD CONSTRAINT `uplate_orders_fk` FOREIGN KEY (`OrderID`) REFERENCES `orders` (`ID`);
+
