@@ -8,7 +8,7 @@ require_once("stringFunctions.php");
 		else if($input === 'Javni beleznik'){
 			$reciver = "ЈАВНИ БЕЛЕЖНИК";
 		} else if($input === 'Advokat') {
-			$reciver = "Адвокат";
+			$reciver = "АДВОКАТ";
 		}
 		return $reciver;
 	}
@@ -162,10 +162,11 @@ require_once("stringFunctions.php");
 		case 'koverte-dostavnice-formulari/formulari-za-adresiranje':			
 			break;
 		case 'omot-spisa':
-			imagettftext($image, 32, 0, 100, 100, $black, $font_path, "РЕПУБЛИКА СРБИЈА");
-			imagettftext($image, 30, 0, 100, 165, $black, $font_path, $envelopeReciver);
-			imagettftext($image, 30, 0, 100, 180, $black, $font_path, convertToCyrilic($_GET['nameLastname']));
-			imagettftext($image, 30, 0, 100, 230, $black, $font_path, convertToCyrilic($_GET['location']) . ", " . convertToCyrilic($_GET['address']));
+			//imagettftext($image, 32, 0, 100, 100, $black, $font_path, "РЕПУБЛИКА СРБИЈА");
+			imagettftext($image, 30, 0, 100, 100, $black, $font_path, $envelopeReciver);
+			imagettftext($image, 30, 0, 100, 165, $black, $font_path, convertToCyrilic($_GET['nameLastname']));
+			imagettftext($image, 30, 0, 100, 230, $black, $font_path, convertToCyrilic($_GET['address']));
+			imagettftext($image, 30, 0, 100, 293, $black, $font_path, convertToCyrilic($_GET['location']));
 			break;
 		}
 

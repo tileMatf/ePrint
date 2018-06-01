@@ -4,22 +4,29 @@
 include("../../header.php");
 require_once '../../functions/functions.php';
 
-	if(isset($_POST['submit']) && !isset($_SESSION['orderSaved'])) {
-		try{		
-			echo "<div id='pictureModal' class='picture-modal'>
-				 <span class='picture-close'>&times;</span>
-				  <img id='pictureContent' class='picture-modal-content' 
-					src='../../functions/createPicture.php?". http_build_query($_POST) . "'>
-				 <button id='paymentConfirm'>Ok</button>
-				</div>";
-		} catch(RuntimeException $e){
-			return $e->getMessage();
+	
+
+	if(isset($_POST['submit'])) {
+		if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
+			unset($_POST['submit']);
+			unset($_SESSION['login']);
+		} else {
+			try{
+				echo "<div id='pictureModal' class='picture-modal'>
+					 <span class='picture-close'>&times;</span>
+					  <img id='pictureContent' class='picture-modal-content' 
+						src='../../functions/createPicture.php?". http_build_query($_POST) . "'>
+					 <button id='paymentConfirm'>Ok</button>
+					</div>";
+			} catch(RuntimeException $e){
+				return $e->getMessage();
+			}
 		}
 	}
 	
-	if(isset($_SESSION['user_info']) && isset($_SESSION['orderSaved'])){
+	if(isset($_SESSION['orderSaved'])){
 		if($_SESSION['orderSaved'] == 1){
-			unset($_POST);
+			//unset($_POST);
 			$_POST = array();
 			$_SESSION['orderSaved'] = null;
 			unset($_SESSION['orderSaved']);
@@ -93,6 +100,20 @@ require_once '../../functions/functions.php';
                     </select>
                     <!-- ***************************** -->
 					
+					<!-- Vrsta formulara-->
+					<label class="label__heading">Vrsta koverte</label>
+                    <label for="S5">
+                        <input type="radio" name="typeOfEnvelope" id="S5" value="S5" 
+							<?php echo isset($order['Type']) && $order['Type'] == 'S5' ? "checked" : "" ?>>
+                        <span>S5</span>
+                    </label>
+	                <label for="S6">
+                        <input type="radio" name="typeOfEnvelope" id="S6" value="S6" 
+							<?php echo isset($order['Type']) && $order['Type'] == 'S6' ? "checked" : "" ?>>
+                        <span>S6</span>
+                    </label>
+					<!-- ***************************** -->
+					
 					<?php
 						include("../../delivery_fields.php");
 					?>
@@ -127,6 +148,22 @@ require_once '../../functions/functions.php';
                         <option value="10000" <?php echo isset($_POST['quantity']) && $_POST['quantity'] == '10000' ? "selected" : ""?>>10000</option>
                     </select>
                     <!-- ***************************** -->
+					
+					<!-- Vrsta formulara-->
+					<label class="label__heading">Vrsta koverte</label>
+                    <label for="S5">
+                        <input type="radio" name="typeOfEnvelope" id="S5" value="S5"
+							<?php echo (isset($_POST['typeOfEnvelope']) && $_POST['typeOfEnvelope'] == 'S5') 
+								|| !isset($_POST['typeOfEnvelope']) ? "checked" : "" ?>>
+                        <span>S5</span>
+                    </label>
+	                <label for="S6">
+                        <input type="radio" name="typeOfEnvelope" id="S6" value="S6" 
+							<?php echo isset($_POST['typeOfEnvelope']) && $_POST['typeOfEnvelope'] == 'S6' ? "checked" : "" ?>>
+                        <span>S6</span>
+                    </label>
+					<!-- ***************************** -->
+
 					
 					<?php
 						include("../../delivery_fields.php");

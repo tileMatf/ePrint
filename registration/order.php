@@ -94,11 +94,13 @@ class FormularZaAdresiranje extends Order{
 	//var $OrderID;
 	var $Quantity;
 	var $SendCopy;
+	var $Type;
 	
 	function __construct($data){
 		parent::__construct($data);
 		$this->Quantity = $data['quantity'];
 		$this->SendCopy = isset($data['sendCopy']) ? 1 : 0;
+		$this->Type = $data['typeOfEnvelope'];
 	}
 }
 

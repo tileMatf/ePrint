@@ -61,8 +61,6 @@
 		$status = $db->saveOrder($order);
 		
 		if($status === true){
-			unset($_POST);
-			$_POST = array();
 			unset($statusMessage);			
 			$_SESSION['orderSaved'] = 1;
 		} else {

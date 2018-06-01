@@ -26,7 +26,7 @@
 		
 		$statusMessage = generateMessage($fileStatus, $_FILES['fileToUpload']);		
 		if($fileStatus !== 2 && $fileStatus !== 3)
-			echo "1";
+			exit("1");
 	}
 	
 	/*Upload binding file*/
@@ -39,7 +39,7 @@
 		}
 		$statusMessage .= " " . generateMessage($bindingFileStatus, $_FILES['bindingFileToUpload']);
 		if($bindingFileStatus !== 2 && $bindingFileStatus !== 3){
-			echo "2";
+			exit("2");
 		}
 	}
 	
@@ -62,14 +62,27 @@
 		$status = true;
 	}
 	
-	/*Create mail message*/
-	if(isset($_SESSION['user_info']))
-		$message = makeMessage($_POST['orderType'], $_SESSION['user_info']->Email);
-	else 
-		$message = makeMessage($_POST['orderType']);
-	
-	/*Sending mail*/
+	/*Save order*/
 	if($status === true){
+		ob_start();
+		include('../../save_order/index.php');
+		$status = ob_get_contents();
+		ob_end_clean();
+		if($status === false)
+			exit("3");
+	} else {
+		exit("4");
+	}		
+	
+
+	/*Sending mail*/
+	if($status == true){
+		/*Create mail message*/		
+		if(isset($_SESSION['user_info']))
+			$message = makeMessage($_POST['orderType'], $_SESSION['user_info']->Email);
+		else 
+			$message = makeMessage($_POST['orderType']);
+		
 		if($_POST['orderType'] === 'stampanje' || $_POST['orderType'] == 'blokovi'){
 			if(isset($_POST['sendCopy'])) {
 				if(isset($_POST['sendCopyEmail'])){
@@ -93,16 +106,6 @@
 				}
 			}
 		}
-	}
-
-	/*Save order*/
-	if($status === true){
-		ob_start();
-		include('../../save_order/index.php');
-		$status = ob_get_contents();
-		ob_end_clean();
-		if($status === false)
-			echo "3";
 	}
 	
 	/*Echo status*/

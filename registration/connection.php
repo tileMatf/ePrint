@@ -329,12 +329,14 @@ class DB {
 	private function insertFormular($formular){
 		try{
 			$formular->TypeID = 9;
+//			$this->beginTransaction();
 			$orderID = $this->insertOrder($formular);
 			if($orderID > 0){
-				$query = self::$connection->prepare("INSERT INTO `formulari-za-adresiranje` (OrderID, Quantity, SendCopy) 
-					VALUES (:orderID, :quantity, :sendCopy)");
+				$query = self::$connection->prepare("INSERT INTO `formulari-za-adresiranje` (OrderID, Quantity, Type, SendCopy) 
+					VALUES (:orderID, :quantity, :type, :sendCopy)");
 				$query->bindValue(":orderID", $orderID, PDO::PARAM_INT);
 				$query->bindValue(":quantity", $formular->Quantity, PDO::PARAM_INT);
+				$query->bindValue(":type", $formular->Type, PDO::PARAM_STR);
 				$query->bindValue(":sendCopy", $formular->SendCopy, PDO::PARAM_INT);
 				$query->execute();
 				if($query->rowCount() > 0){
@@ -344,6 +346,7 @@ class DB {
 					return false;
 				}
 			} else {
+//				$this->rollBack();
 				return false;
 			}
 		} catch(PDOException $e) {
@@ -1151,7 +1154,16 @@ $dostavnica->DeliveryZipCode = "zip isporuke";
 $dostavnica->DeliveryLocation = "mesto isporuke";*/
 //echo $conn->saveOrder($dostavnica);
 
-/*echo $conn->insertFormular(2, 1000);*/
+/*$a['deliveryAddress'] = 'aa';
+$a['deliveryEmail'] = 'bb';
+$a['deliveryLocation'] = 'cc';
+$a['deliveryName'] = 'dd';
+$a['deliveryZipCode'] = 'ee';
+$a['quantity'] = '1230';
+$a['typeOfEnvelope'] = 'S6';
+$formular = new FormularZaAdresiranje($a);
+$formular->UserID = 3;
+echo $conn->insertFormular($formular);*/
 
 /*$koverta = new StandardnaKoverta();
 $koverta->OrderID = 2;

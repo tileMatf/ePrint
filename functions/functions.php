@@ -260,7 +260,8 @@ function makeMessage($type, $user = null){
 	} else if($type === 'koverte-dostavnice-formulari/formulari-za-adresiranje'){
 		$message .= '<label> Tip: </label> Formular za adresiranje </br>
 				<label> Izabrane opcije: </label> </br>
-				<ul>					
+				<ul>
+					<li>Tip: '.$_POST['typeOfEnvelope'].'</li>
 					<li>Količina: '.$_POST['quantity'].'</li>
 				</ul>';
 	}

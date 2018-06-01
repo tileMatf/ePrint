@@ -5,20 +5,25 @@
 include("../../header.php");
 require_once '../../functions/functions.php';
 
-	if(isset($_POST['submit']) && !isset($_SESSION['orderSaved'])) {
-		try{		
-			echo "<div id='pictureModal' class='picture-modal'>
-				 <span class='picture-close'>&times;</span>
-				  <img id='pictureContent' class='picture-modal-content' 
-					src='../../functions/createPicture.php?". http_build_query($_POST) ."'>
-				 <button id='paymentConfirm'>Ok</button>
-				</div>";
-		} catch(RuntimeException $e){
-			return $e->getMessage();
+	if(isset($_POST['submit'])) {
+		if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
+			unset($_POST['submit']);
+			unset($_SESSION['login']);
+		} else {
+			try{		
+				echo "<div id='pictureModal' class='picture-modal'>
+					 <span class='picture-close'>&times;</span>
+					  <img id='pictureContent' class='picture-modal-content' 
+						src='../../functions/createPicture.php?". http_build_query($_POST) ."'>
+					 <button id='paymentConfirm'>Ok</button>
+					</div>";
+			} catch(RuntimeException $e){
+				return $e->getMessage();
+			}
 		}
 	}
 	
-	if(isset($_SESSION['user_info']) && isset($_SESSION['orderSaved'])){
+	if(isset($_SESSION['orderSaved'])){
 		if($_SESSION['orderSaved'] == 1){
 			unset($_POST);
 			$_POST = array();
