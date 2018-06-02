@@ -269,6 +269,8 @@ function makeMessage($type, $user = null){
 	$message .= '</br></br><label>Dostava: </label> </br>
 					<ul>
 						<li>Ime i prezime: '. $_POST['deliveryName'] .'</li>
+						<li>Email: '. $_POST['deliveryEmail'] .'</li>
+						<li>Telefon: '. $_POST['deliveryPhone'] .'</li>
 						<li>Adresa: '.$_POST['deliveryAddress'].'</li>
 						<li>Mesto: '.$_POST['deliveryZipCode'] . ' ' . $_POST['deliveryLocation'].'</li>
 					</ul>
