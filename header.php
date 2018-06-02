@@ -47,7 +47,7 @@
 			</p>
             <div class="row">
                 <div class="six columns">
-                    <a href="../">
+                    <a href="http://localhost/eprint/">
                         <img class="logo" src="http://localhost/eprint/images/eprint1.png" />
                     </a>
                 </div>

@@ -65,6 +65,7 @@ include('../../header.php');
             <!-- OVDE POCINJE FORMA -->
             <form method="POST" name="orderForm" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                 <div class="form-box">
+				<img src="../../images/loader.gif" class="gif_image" id="gif_image">
 				<!-- Paragraf za povratnu poruku -->		
 				<p style="font-size:2rem; font-style: italic;" id="statusMessage"></p>			
 				<?php

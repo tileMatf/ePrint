@@ -1,4 +1,3 @@
-
 <?php
 
 @session_start();
@@ -12,14 +11,12 @@ require_once "../../functions/functions.php";
 			unset($_SESSION['login']);
 		} else {
 			try{
-				$path = "../../functions/confirm/addressConfirm.php";
-				$post_data = json_encode($_POST);
 				echo "<div id='pictureModal' class='picture-modal'>
-						 <span class='picture-close'>&times;</span>
-						  <img id='pictureContent' class='picture-modal-content' 
+						<span class='picture-close'>&times;</span>
+							<img id='pictureContent' class='picture-modal-content' 
 							src='../../functions/createPicture.php?". http_build_query($_POST) . "'>
-							<button id='deliveryConfirm' onclick=\"post('".$post_data."')\">Ok</button>
-						</div>"; //'".$path."', 'post'
+						<button id='paymentConfirm'>Ok</button>
+					</div>"; 
 			} catch(RuntimeException $e){
 				return $e->getMessage();
 			} 
@@ -30,8 +27,6 @@ require_once "../../functions/functions.php";
 		if($_SESSION['orderSaved'] == 1){
 			unset($_POST);
 			$_POST = array();
-			//$status = true;
-			//$statusMessage = "Uspešno sačuvana uplatnica.";
 			$_SESSION['orderSaved'] = null;
 			unset($_SESSION['orderSaved']);
 		} else if($_SESSION['orderSaved'] == 2){
@@ -68,6 +63,7 @@ require_once "../../functions/functions.php";
             <!-- OVDE POCINJE FORMA -->
             <form method="POST" name="orderForm" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">				
                 <div class="form-box">
+				<img src="../../images/loader.gif" class="gif_image" id="gif_image">
 				<!-- Paragraf za povratnu poruku -->		
 				<p style="font-size:2rem; font-style: italic;" id="statusMessage"></p>
 				<?php

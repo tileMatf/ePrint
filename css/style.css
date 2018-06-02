@@ -755,3 +755,10 @@ a.disabled-links{
 hr {
 	margin-top: 0em;
 }
+
+.gif_image {
+	display: none;
+	margin-left: auto;
+	margin-right: auto;
+	width: 4%;
+}

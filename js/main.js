@@ -147,7 +147,7 @@
 			xhttp.open("POST",  window.location.origin + "/eprint/functions/confirm/", true);
 			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			xhttp.onload = function(e){
-				//alert(this.responseText);
+				document.getElementById("gif_image").style.display = "none";
 				if(this.responseText === '1'){
 					statusMessage.innerHTML = "Greška prilikom skladištenja dodatog fajla. Molim Vas, pokušajte ponovo.";
 					statusMessage.style.color = "red";
@@ -174,11 +174,13 @@
 				statusMessage.innerHTML = "Oprostite, došlo je do greške na serveru prilikom slanja. Molim Vas, pokušajte ponovo.";
 				statusMessage.style.color = "red";
 			}
-			xhttp.send(parameters.join("&"));		
+			xhttp.send(parameters.join("&"));
+			document.getElementById("gif_image").style.display = "block";
+			
 		});
 			
 	}
-		
+			
 	var loginButton = document.getElementsByName("login")[0];
 	var errorMessage = document.getElementById("errorLoginMsg");
 

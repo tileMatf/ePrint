@@ -64,8 +64,9 @@ require_once '../../functions/functions.php';
             <!-- OVDE POCINJE FORMA ** -->
             <form method="POST" name="orderForm" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" name="orderForm">
                 <div class="form-box">
+				<img src="../../images/loader.gif" class="gif_image" id="gif_image">
                 <!-- Paragraf za povratnu poruku -->		
-				<p style="font-size:2rem; font-style: italic;" id="statusMessage"></p>
+				<p style="font-size:2rem; font-style: italic;" id="statusMessage"></p>				
 				<?php
 					if(isset($status)){
 						if($status === true){
@@ -101,7 +102,7 @@ require_once '../../functions/functions.php';
                     <!-- ***************************** -->
 					
 					<!-- Vrsta formulara-->
-					<label class="label__heading">Vrsta koverte</label>
+					<label class="label__heading">Tip</label>
                     <label for="S5">
                         <input type="radio" name="typeOfEnvelope" id="S5" value="S5" 
 							<?php echo isset($order['Type']) && $order['Type'] == 'S5' ? "checked" : "" ?>>
@@ -150,7 +151,7 @@ require_once '../../functions/functions.php';
                     <!-- ***************************** -->
 					
 					<!-- Vrsta formulara-->
-					<label class="label__heading">Vrsta koverte</label>
+					<label class="label__heading">Tip</label>
                     <label for="S5">
                         <input type="radio" name="typeOfEnvelope" id="S5" value="S5"
 							<?php echo (isset($_POST['typeOfEnvelope']) && $_POST['typeOfEnvelope'] == 'S5') 
