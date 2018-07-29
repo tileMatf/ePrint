@@ -1,13 +1,12 @@
 <?php
 	@session_start();
 	include("../header.php");
-?>  
+?>      
         <!-- Navigation -->
         <div class="twelve columns">
             <ul class="nav1">
                 <li>
-                    <a class="tile" href="../">
-                        <i class="fas fa-home" aria-hidden="true"></i>Početna</a>
+                    <a class="tile" href="../">Početna</a>
                 </li>
                 <span class="line">/</span>
                 <li>
@@ -21,48 +20,52 @@
 
         <!--MAIN PAGE SECTION-->
         <section class="section__main">
-            <div class="container" style="padding-top:70px; padding-bottom: 70px;">
-                <!--first row-->
-                <div class="row">
-                    <div class="one-half column">
-                        <i class="far fa-envelope fa-2x"></i>
+        <div class="container">
+            <div class="row">
+                <h2 class="section__heading-second">Koverte, dostavnice, formulari za adresiranje</h2>
+            </div>
+        </div>
+            <div class="container">
+                <!--first row-->      
+                <div class="row row-padding-main-page">
+                    <div class="one-third column">
+                        <a href="./koverte-sa-dostavnicom" class="link">
+                            <img class="" src="../images/icons/koverta-rucno.png">
+                            <h3 style="display: inline-block;">Koverte sa dostavnicom za ručno popunjavanje</h3>
+                        </a>
+                    </div>
+
+                    <div class="one-third column">
                         <a href="./koverte-sa-povratnicom" class="link">
+                            <img class="" src="../images/icons/koverta-sa-povratnicom.png">
                             <h3>Koverte sa povratnicom za štampanje</h3>
                         </a>
                     </div>
 
-                    <div class="one-half column">
-                        <i class="far fa-envelope fa-2x"></i>
-                        <a href="./dostavnice" class="link">
-                            <h3>Dostavnice</h3>
-                        </a>
-                    </div>
-                </div>
-                <!--second row-->
-                <div class="row">
-                    <div class="one-half column">
-                        <i class="far fa-envelope fa-2x"></i>
-                        <a href="./koverte-sa-dostavnicom" class="link">
-                            <h3>Koverte sa dostavnicom za ručno popunjavanje</h3>
-                        </a>
-                    </div>
-
-                    <div class="one-half column">
-                        <i class="far fa-envelope fa-2x"></i>
-                        <a href="./formulari-za-adresiranje" class="link">
-                            <h3>Formulari za adresiranje</h3>
-                        </a>
-                    </div>
-                </div>
-                <!-- third row-->
-                <div class="row">
-                    <div class="one-half column">
-                        <i class="far fa-envelope fa-2x"></i>
+                    <div class="one-third column">
                         <a href="./standardne-koverte" class="link">
+                            <img class="" src="../images/icons/koverta.png">
                             <h3>Standardne koverte</h3>
                         </a>
                     </div>
                 </div>
+                <!--second row-->
+                <div class="row row-padding-main-page">
+                    <div class="one-third column">
+                        <a href="./koverte-sa-dostavnicom" class="link">
+                         <img class="" src="../images/icons/dostavnice.png">
+                            <h3>Dostavnice</h3>
+                        </a>
+                    </div>
+
+                    <div class="one-third column">
+                        <a href="./formulari-za-adresiranje" class="link">
+                          <img class="" src="../images/icons/adresiranje.png">
+                            <h3>Formulari za adresiranje</h3>
+                        </a>
+                    </div>
+                </div>
+               
                 <!--end of three rows-->
             </div>
             <!--end of container-->

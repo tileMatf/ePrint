@@ -173,7 +173,7 @@
 		?>
 			<!--UPLOAD dugme-->  
             <input type='file' name='fileToUpload' id="file" class="inputfile" accept='.jpe,.jpg,.jpeg,.png,.pdf'>			
-            <label for="file"><i class="fa-upload fas fa-upload"></i><span>Okačite fajl</span></label>
+            <label for="file"><span>Okačite fajl</span></label>
             <!-- BROJ PRIMERAKA ***************************** -->
             <label for="noInput" class="label__heading">Broj primeraka</label>
             <input name="noInput" type="number" value="<?php echo isset($order['CopyNumber']) ? $order['CopyNumber'] : '1'?>" class="u-full-width">
@@ -471,9 +471,9 @@
 			<input type="hidden" id="successMessage" value="Uspešno naručeno.">
             <input class="button-primary" type="submit" value="Pošalji" name="submit">
             <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p> 
-          </div>
       </form>
-    </section>
+    </div>
+  </section>
 
 <?php
 include("../footer.php");

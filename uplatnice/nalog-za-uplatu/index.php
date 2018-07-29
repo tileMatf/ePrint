@@ -39,8 +39,7 @@ require_once "../../functions/functions.php";
         <div class="twelve columns">
             <ul class="nav1">
                 <li>
-                    <a class="tile" href="../../">
-                        <i class="fas fa-home" aria-hidden="true"></i>Početna</a>
+                    <a class="tile" href="../../">Početna</a>
                 </li>
                 <span class="line">/</span>
                 <li>
@@ -57,8 +56,9 @@ require_once "../../functions/functions.php";
 
         <!--Stampanje section-->
         <section class="section__stampanje">
-            <div class="container">
+            <div class="container container-form">
                 <h2 class="section__heading">Nalog za uplatu</h2>
+                <img class="slike-forma" src="../../images/nalog-za-uplatu.jpg"/>
             </div>
             <!-- OVDE POCINJE FORMA -->
             <form method="POST" name="orderForm" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">				
@@ -87,13 +87,13 @@ require_once "../../functions/functions.php";
 				?>                
 
 					<!--NAME AND SURNAME ******************************-->
-                    <label for="payer" class="label__heading">Ime i prezime</label>
+                    <label for="payer" class="label__heading">Ime i prezime uplatioca</label>
                     <input class="u-full-width" type="text" placeholder="" name="payer" 
 						value="<?php echo isset($order['Name']) ? $order['Name'] : '' ?>">
                     <!-- ***************************** -->
 
                     <!--ADRESA ******************************-->
-                    <label for="address" class="label__heading">Adresa</label>
+                    <label for="address" class="label__heading">Ulica i broj uplatioca</label>
                     <input class="u-full-width" type="text" placeholder="" name="address"
 						value="<?php echo isset($order['Address']) ? $order['Address'] : '' ?>">
                     <!-- ***************************** -->                    
@@ -219,13 +219,13 @@ require_once "../../functions/functions.php";
 					?>
 					
                     <!--NAME AND SURNAME ******************************-->
-                    <label for="payer" class="label__heading">Ime i prezime</label>
+                    <label for="payer" class="label__heading">Ime i prezime uplatioca</label>
                     <input class="u-full-width" type="text" placeholder="" name="payer" 
 						value="<?php echo isset($_POST['payer']) ? $_POST['payer'] : '' ?>">
                     <!-- ***************************** -->
 
                     <!--ADRESA ******************************-->
-                    <label for="address" class="label__heading">Adresa</label>
+                    <label for="address" class="label__heading">Ulica i broj uplatioca</label>
                     <input class="u-full-width" type="text" placeholder="" name="address"
 						value="<?php echo isset($_POST['address']) ? $_POST['address'] : '' ?>">
                     <!-- ***************************** -->                    
@@ -354,7 +354,7 @@ require_once "../../functions/functions.php";
 					<input type="hidden" name="orderType" id="orderType" value="uplatnice/nalog-za-uplatu">					
 					<input type="hidden" id="successMessage" value="Nalog za uplatu je uspešno naručen.">
                     <!-- POSALJI DUGME -->
-                    <input class="button-primary" type="submit" value="Pošalji" name="submit">
+                    <input class="button-primary" type="submit" value="Prikaži" name="submit">
                     <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
                 </div>
             </form>

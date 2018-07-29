@@ -7,12 +7,11 @@
         <div class="twelve columns">
             <ul class="nav1">
                 <li>
-                    <a class="tile" href="../">
-                        <i class="fas fa-home" aria-hidden="true"></i>Početna</a>
+                    <a class="tile" href="../">Početna</a>
                 </li>
                 <span class="line">/</span>
                 <li>
-                    <a class="tile" href="./" style="font-size: 1.6rem;">Uplatnice</a>
+                    <a class="tile" href="./">Uplatnice</a>
                 </li>
             </ul>
         </div>
@@ -95,24 +94,24 @@
             </div>
             <div class="container">
                 <!--first three icons/h3-->
-                <div class="row">
+                <div class="row  row-padding">
                     <div class="one-third column">
-                        <i class="far fa-file-alt fa-2x"></i>
                         <a href="./nalog-za-uplatu/" class="link">
+                            <img class="" src="../images/icons/nalog-za-uplatu.png">
                             <h3>Nalog za uplatu</h3>
                         </a>
                     </div>
 
                     <div class="one-third column">
-                        <i class="far fa-file-alt fa-2x"></i>
                         <a href="./nalog-za-prenos/" class="link">
+                            <img class="" src="../images/icons/nalog-za-prenos.png">
                             <h3>Nalog za prenos</h3>
                         </a>
                     </div>
 
                     <div class="one-third column">
-                        <i class="far fa-file-alt fa-2x"></i>
                         <a href="./nalog-za-isplatu/" class="link">
+                            <img class="" src="../images/icons/nalog-za-isplatu.png">
                             <h3>Nalog za isplatu</h3>
                         </a>
                     </div>

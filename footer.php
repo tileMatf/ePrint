@@ -4,7 +4,7 @@
                 <div class="row">
                     <!--Usluge na dnu-->
                     <div class="six columns aside">
-                        <h3>Usluge</h3>
+                        <h3 class="h3-footer">Usluge</h3>
                         <nav class="side__nav">
                             <ul class="side__nav--ul">
                                 <li>
@@ -28,7 +28,7 @@
                     <!-- End of usluga -->
 
                     <div class="six columns aside">
-                        <h3>Ostalo</h3>
+                        <h3 class="h3-footer">Ostalo</h3>
                         <nav class="side__nav">
                             <ul class="side__nav--ul">
                                 <li>

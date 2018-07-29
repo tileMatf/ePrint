@@ -14,7 +14,7 @@
 		} else if($sql_result != null){
 			$_SESSION['user_info'] = $sql_result[0];
 			$_SESSION['registration'] = null;
-			$_SESSION['status_message'] = "Ulogovani ste kao " . $_SESSION['user_info']->Email;
+			$_SESSION['status_message'] = $_SESSION['user_info']->Email;
 			$_SESSION['login'] = true;
 			unset($_SESSION['registration']);
 			unset($_SESSION['error_message']);

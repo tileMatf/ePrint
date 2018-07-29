@@ -24,23 +24,83 @@ General
 -----------------------------------------
 ***/
 
+
+.proba {
+    border: 1px solid green;
+}
+
+.buttonStyle {
+    display:inline-block;
+    width: 150px;
+    margin: 0 auto;
+    border: .15em solid rgb(255,255,255);
+    box-sizing: border-box;
+    text-decoration: none;
+    font-weight: 400;
+    color: #fff;
+    text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
+    text-align: center;
+    transition: all 0.2s;
+    }
+
+.buttonStyle:hover {
+    border-color: rgb(226, 213, 213);
+    color: #fff;
+ }
+
+.linkPassword {
+    font-size: 12px;
+    background-color: rgb(0,202,35);
+    color: white;
+    padding: .85em 1.5em;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: .15em solid rgb(255,255,255);
+    border-radius: 1px;
+}
+    
+.linkPassword:hover {
+    opacity: 0.8;
+    color: #fff;
+    transition: 0.3s;
+}
+    
+.linkPassword:active {
+    border: .1px solid rgb(4, 172, 32);
+}
+
+.icon-png {
+    width: 75;
+    transition: transform .8s ease-in-out;
+}
+
+.icon-png:hover {   
+    transform: rotate(360deg);
+}
+
+.button {
+    margin-left: 135px;
+}
+
 * {
-   box-sizing: border-box;
-}
-
-html {
-    height: 100%;
-}
-
-body {
-   background: #ffffff;
-   background: -webkit-linear-gradient(right, rgb(250, 250, 250), rgb(250, 250, 255));
-   background: -moz-linear-gradient(right, rgb(250, 250, 250), rgb(250, 250, 255));
-   background: -o-linear-gradient(to left, rgb(250, 250, 250), rgb(250, 250, 255));
-   background: linear-gradient(to left, rgb(250, 250, 250), rgb(250, 245, 255));
-   color: #222;
-   font-size: 1.5em;
-}
+    box-sizing: border-box;
+ }
+ 
+ html {
+     height: 100%;
+     font-family: 'Montserrat', sans-serif;
+ }
+ 
+ body {
+    background: #ffffff;
+    background: -webkit-linear-gradient(right, rgb(250, 250, 250), rgb(250, 250, 255));
+    background: -moz-linear-gradient(right, rgb(250, 250, 250), rgb(250, 250, 255));
+    background: -o-linear-gradient(to left, rgb(250, 250, 250), rgb(250, 250, 255));
+    background: linear-gradient(to left, rgb(250, 250, 250), rgb(250, 245, 255));
+    color: #222;
+    font-size: 1.5em;
+ }
 
 .side__nav--ul li {
     text-decoration: none;
@@ -49,7 +109,7 @@ body {
 
 
 .container__main {
-    margin-top: 4rem;
+    margin-top: 2rem;
     width: 100%;
     max-width: 1200px;
 }
@@ -72,9 +132,17 @@ body {
     background-color: #ffffff;
 }
 
+.row-padding-main-page {
+    padding-top: 1rem;
+}
+
+.row-padding {
+    padding-top: 5rem;
+    padding-bottom: 8rem;
+}
 
 .link h3:hover {
-    color: #b6aa92;
+    color: rgb(0,202,35);
     cursor: pointer;
     text-decoration: underline;
 }
@@ -83,12 +151,33 @@ body {
 Typography
 -----------------------------------------
 ***/
+.h3-footer {
+    font-weight: bold;
+}
+
+.h3-footer:after {
+    display: block;
+    height: 1.8px;
+    background-color: gray;
+    content: " ";
+    width: 60px;
+    margin: 0 auto;
+    margin-top: 3px;
+}
 
 .section__heading {
-    margin-bottom: 6rem;
-    margin-top: 12rem;
+    margin-bottom: 5rem;
+    margin-top: 8rem;
     text-align: center;
     font-size: 3.5rem;
+    /* font-weight: bold; <--- mozda */
+}
+
+.section__heading-second {
+    margin-bottom: 6rem;
+    margin-top: 8rem;
+    text-align: center;
+    font-size: 2.5rem;
     /* font-weight: bold; <--- mozda */
 }
 
@@ -96,7 +185,8 @@ Typography
     font-size: 3rem;
 }
 
-.section__heading:after {
+.section__heading:after, 
+.section__heading-second:after {
     display: block;
     height: 2px;
     background-color: gray;
@@ -119,17 +209,6 @@ Typography
     width: 100px;
     margin: 0 auto;
     margin-top: 8px;
-}
-
-
-.section__main .fas {
-    margin-bottom: .4rem;
-    margin-top: 2.5rem;
-}
-
-.section__main .far {
-    margin-bottom: .4rem;
-    margin-top: 2.5rem;
 }
 
 .section__main h3 {
@@ -172,7 +251,7 @@ a:link {
 }
 
 a:hover {
-    color: #576268;
+    color: rgb(0,202,35);
 }
 
 /***
@@ -181,16 +260,17 @@ Header and Nav
 ***/
 
 header {
-    background-color: #fdf9f9;
+    background-color: #f8fff5;
     -webkit-border-radius: 5px 5px 0 0;
-            border-radius: 5px 5px 0 0;
+    border-radius: 5px 5px 0 0;
     text-align: center;
     padding-top: 30px;
     padding-bottom: 20px;
 }
 
 .logo {
-    max-width: 150px;
+    max-width: 180px;
+    margin-right: 152.5px;
 }
 
 ul.nav.nav-login-register {
@@ -208,7 +288,7 @@ ul.nav.nav-login-register {
 
 /**nav1 je za ostale stranice poput stampanje.html, odnosi se na navigaciju pocetna / stampanje ...**/
 ul.nav1 {
-    background-color: rgb(91, 194, 95);;
+    background-color: rgb(0,202,35);
     padding-left: 5px;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -227,7 +307,7 @@ ul.nav1 a {
 }
 
 ul.nav1 a:hover {
-    color: #d4cfcf;
+    color: rgb(77, 247, 106);
 }
 
 /** ????? **/
@@ -238,15 +318,10 @@ ul.nav1 a:hover {
     margin-right: 5px;
 }
 
-.fa-home {
-    padding-right: 4px;
-}
-
 /**navigacija u footeru**/
 .aside {
     text-align: center;  
     padding: 1rem 1rem;
-    background-color: #eee8d5;
 }
 
 .side__nav--ul {
@@ -258,11 +333,6 @@ div.three.columns.aside {
     margin-top: 10rem;
 }
 
-
-/**Registruj se i uloguj se**/
-.fa-user, .fa-user-plus {
-    padding-left: 5px;
-}
 /*ako bude bela pozadina 
 .navigation__header--nav a {
     color: #fff;
@@ -274,15 +344,11 @@ Footer
 ***/
 
 footer {
-    background-color: #eee8d5;
+    background-color: #f8fff5;
     text-align: center;
     padding-top: 2rem;
     padding-bottom: 2rem;
     margin-bottom: 5rem;
-}
-
-footer .container {
-
 }
 
 /***
@@ -306,7 +372,7 @@ FORMS
             box-shadow: 0 1px 5px rgba(226, 203, 203, 0.3);
   }
 
-  .row2 {
+.row2 {
     overflow: hidden;
     padding: 10px;
 }
@@ -357,7 +423,7 @@ input[type="button"]:focus {
 
 /* Set a style for all buttons */
 button {
-    background-color: #4CAF50;
+    background-color: rgb(0,202,35);
     color: white;
     margin: 0 auto;
     border: none;
@@ -487,7 +553,6 @@ PICTURE MODAL
     height: 150px;
 }
 
-
 /* Add Animation */
 .picture-modal-content, #picture-caption {    
     -webkit-animation-name: zoom;
@@ -531,9 +596,6 @@ PICTURE MODAL
     }
 }
 
-
-
-
 /***
 MISC
 -----------------------------------------
@@ -547,7 +609,7 @@ MISC
 
 /** dugme posalji **/
 input[type="submit"].button-primary {
-    background-color: #4CAF50;
+    background-color: rgb(0,202,35);
     color: white;
     margin: 0 auto;
     border: none;
@@ -555,8 +617,6 @@ input[type="submit"].button-primary {
 }
 
 input[type="submit"].button-primary:hover {
-    background-color: rgb(91, 194, 95);
-    color: #222;
     opacity: 0.8;
 }
 
@@ -573,25 +633,20 @@ input[type="submit"].button-primary:hover {
 	opacity: 0;
 	overflow: hidden;
 	position: absolute;
-	z-index: -1;
+    z-index: -1;
+    background-color: rgb(0,202,35);
 }
 
 .inputfile + label {
     font-size: 1.25em;
     color: white;
-    background-color: rgb(91, 194, 95);
+    background-color: rgb(0,202,35);
     display: inline-block;
     padding: 5px 20px;
 }
 
-.fa-upload {
-    padding-right: 5px;
-}
-
 .inputfile:focus + label,
 .inputfile + label:hover {
-    background-color: rgb(91, 194, 95);
-    color: #222;
     opacity: 0.8;
 }
 
@@ -599,11 +654,33 @@ input[type="submit"].button-primary:hover {
 	cursor: pointer; 
 }
 
+.container-form {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.slike-forma {
+    border: 1px solid rgb(0,0,0);
+    border: 1px solid rgba(0,0,0,0.35);
+    border-radius: 5px;
+    max-width: 650px;
+}
+
 /***
 Media Queries 
 -----------------------------------------
 ***/
 @media (max-width: 548px) {
+
+    h1 {
+        font-size: 3rem;
+    }
+    /**H2**/
+    .section__heading {
+        font-size: 3.5rem;
+        margin-bottom: 2rem;
+        margin-top: 4rem;
+    }
 
     h3 {
         font-size: 1.4em;
@@ -629,13 +706,27 @@ Media Queries
         font-size: 1em;
     }
     
-
+    .modal p {
+        font-size: 1em;
+    }
+    
     h1 {
         font-size: 3rem;
     }
 
     .modal p {
         font-size: 1em;
+    }
+
+    .slike-forma {
+        display: none;
+    }
+}
+
+/**For pictures in forms**/
+@media (max-width: 990px) {
+    .slike-forma {
+        display: none;
     }
 }
 
@@ -664,7 +755,8 @@ Media Queries
         background:#B2DBBF;
         z-index:-1;
         -webkit-box-shadow: 0 20px 5px #9B7468;
-        box-shadow: 0 20px 5px #70C1B3;
+        box-shadow: 0 20px 5px rgb(146, 153, 152);
+        filter: blur(4px);
         -webkit-transform: rotate(-3deg);
         -ms-transform: rotate(-3deg);
             transform: rotate(-3deg);
@@ -703,7 +795,8 @@ Media Queries
 
 @media (min-width: 1200px) {
     h3 {
-        font-size: 1.5em;
+        font-size: 1.3em;
+        color: #5b5757;
     }
 }
 
@@ -714,6 +807,12 @@ p.loginStatus {
 	margin-right: 5%;
 }
 
+/*p.loggedStatus {
+    text-align: center;
+    padding-top: 10px;
+    font-weight: 600;
+ }*/
+
 p.loggedStatus {
 	margin-top: 0%;
 	margin-right: 0%;
@@ -721,6 +820,7 @@ p.loggedStatus {
 	padding-top: 0%;
 	float: right;
 }
+
 
 p#registrationMsg {
 	color: red;
@@ -761,4 +861,18 @@ hr {
 	margin-left: auto;
 	margin-right: auto;
 	width: 4%;
+}
+
+/**NARUDZBINE**/
+.section__narudzbine {
+    padding-bottom: 15rem;
+}
+
+.section__narudzbine h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #444;
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 100px;
 }

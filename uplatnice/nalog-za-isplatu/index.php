@@ -59,8 +59,9 @@ include('../../header.php');
 
         <!--Stampanje section-->
         <section class="section__stampanje">
-            <div class="container">
+            <div class="container container-form">
                 <h2 class="section__heading">Nalog za isplatu</h2>
+                <img class="slike-forma" src="../../images/nalog-za-isplatu-slika.png"/>
             </div>
             <!-- OVDE POCINJE FORMA -->
             <form method="POST" name="orderForm" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
@@ -88,13 +89,13 @@ include('../../header.php');
 						$order = json_decode($_POST['orderObject'], true);
 				?>				
 					<!--NAME AND SURNAME ******************************-->
-                    <label for="payer" class="label__heading">Ime i prezime</label>
+                    <label for="payer" class="label__heading">Ime i prezime isplatioca</label>
                     <input class="u-full-width" type="text" placeholder="" name="payer" 
 						value="<?php echo isset($order['Name']) ? $order['Name'] : '' ?>">
                     <!-- ***************************** -->
 
                     <!--ADRESA ******************************-->
-                    <label for="address" class="label__heading">Adresa</label>
+                    <label for="address" class="label__heading">Ulica i broj isplatioca</label>
                     <input class="u-full-width" type="text" placeholder="" name="address"
 						value="<?php echo isset($order['Address']) ? $order['Address'] : '' ?>">
                     <!-- ***************************** -->                    
@@ -220,13 +221,13 @@ include('../../header.php');
 					?>
 					
                     <!--NAME AND SURNAME ******************************-->
-                    <label for="payer" class="label__heading">Ime i prezime</label>
+                    <label for="payer" class="label__heading">Ime i prezime isplatioca</label>
                     <input class="u-full-width" type="text" placeholder="" name="payer"
 						value="<?php echo isset($_POST['payer']) ? $_POST['payer'] : '' ?>" >
                     <!-- ***************************** -->
 
                     <!--ADRESA ******************************-->
-                    <label for="address" class="label__heading">Adresa</label>
+                    <label for="address" class="label__heading">Ulica i broj isplatioca</label>
                     <input class="u-full-width" type="text" placeholder="" name="address"
 						value="<?php echo isset($_POST['address']) ? $_POST['address'] : '' ?>" >
                     <!-- ***************************** -->                    
@@ -355,7 +356,7 @@ include('../../header.php');
 					<?php }?>
 					<input type="hidden" name="orderType" id="orderType" value="uplatnice/nalog-za-isplatu">
 					<input type="hidden" id="successMessage" value="Nalog za isplatu je uspešno naručen.">
-                    <input class="button-primary" type="submit" value="Pošalji" name="submit" />
+                    <input class="button-primary" type="submit" value="Prikaži" name="submit" />
                     <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
                 </div>
             </form>

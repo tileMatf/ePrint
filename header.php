@@ -20,11 +20,11 @@
     <meta name="twitter:url" content="http://example.com/page.html">
     <meta name="twitter:title" content="ePrint">
     <meta name="twitter:image" content="http://example.com/image.jpg">
-    <meta name="twitter:description" content=Usluge se sastoje od pripreme za štampu, štampe, pečatiranja, kovertiranja, i otpremanja na poštu ili drugom dostavljaču.>
+    <meta name="twitter:description" content="Usluge se sastoje od pripreme za štampu, štampe, pečatiranja, kovertiranja, i otpremanja na poštu ili drugom dostavljaču.">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:image:alt" content="Alt text for image">
     <!--Font from Google-->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&amp;subset=latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600&amp;subset=cyrillic-ext" rel="stylesheet">
     <!--CSS files-->
     <link rel="stylesheet" href="http://localhost/eprint/css/normalize.css">
     <link rel="stylesheet" href="http://localhost/eprint/css/skeleton.css">
@@ -32,8 +32,6 @@
     <!--Favicon-->
     <link rel="icon" type="image/png" href="http://localhost/eprint/images/favicon.png">
     <link rel="apple-touch-icon" href="http://localhost/eprint/images/icon.png">
-    <!--FA icons-->
-    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 </head>
 
 <body>
@@ -63,10 +61,10 @@
 						<!--Registar and Login -->
 						<ul class="nav login nav-reg-log">
 						  <li>
-							<button id="loginButton">Uloguj se<i class="fas fa-user-plus" aria-hidden="true"></i></button>
+                            <button id="loginButton" class="buttonStyle">Uloguj se</button>
 						  </li>
 						  <li>
-							<button id="registerButton">Registruj se<i class="fas fa-user-plus" aria-hidden="true"></i></button>
+                            <button id="registerButton" class="buttonStyle">Registruj se</button>
 						  </li>
 						</ul>
 					</div>
@@ -83,8 +81,11 @@
 						<!--Logout-->
 						<ul class="nav login nav-reg-log">
 						  <li>
-							<button name="logout">Odjavi se<i class="fas fa-sign-out-alt" aria-hidden="true"></i></button>
-						  </li>
+                            <button name="logout" class="buttonStyle">Odjavi se</button>
+                          </li>
+                          <li> 
+                           <a href="./password" class="linkPassword">Promeni lozinku</a>
+                          </li>
 						</ul>
 	  				  </div>
 					</form>

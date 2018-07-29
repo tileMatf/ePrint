@@ -58,8 +58,9 @@ require_once "../../functions/functions.php";
 
         <!--Stampanje section-->
         <section class="section__stampanje">
-            <div class="container">
+            <div class="container container-form">
                 <h2 class="section__heading">Nalog za prenos</h2>
+                <img class="slike-forma" src="../../images/nalog-za-prenos-slika.png"/> 
             </div>
             <!-- OVDE POCINJE FORMA -->
             <form method="POST" name="orderForm" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
@@ -87,39 +88,39 @@ require_once "../../functions/functions.php";
 						$order = json_decode($_POST['orderObject'], true);
 				?> 
 					<!--NAME AND SURNAME ******************************-->
-                    <label for="payer" class="label__heading">Ime i prezime</label>
+                    <label for="payer" class="label__heading">Ime i prezime nalogodavca</label>
                     <input class="u-full-width" type="text" placeholder="" name="payer" 
-						<?php echo isset($order['Name']) ? "value=\"".$order['Name']."\"" : '' ?>" >
+						<?php echo isset($order['Name']) ? "value=\"".$order['Name']."\"" : '' ?> >
                     <!-- ***************************** -->
 
-                    <!--ADRESA ******************************-->
-                    <label for="address" class="label__heading">Adresa</label>
+                    <!--ADRESA ****************************** -->
+                    <label for="address" class="label__heading">Ulica i broj nalogodavca</label>
                     <input class="u-full-width" type="text" placeholder="" name="address"
-						<?php echo isset($order['Address']) ? "value=\"".$order['Address']."\"" : '' ?>" >
+						<?php echo isset($order['Address']) ? "value=\"".$order['Address']."\"" : '' ?> >
                     <!-- ***************************** -->                    
 
                     <!--MESTO ******************************-->
                     <label for="location" class="label__heading">Poštanski broj i mesto</label>
                     <input class="u-full-width" type="text" placeholder="" name="location"
-						<?php echo isset($order['Location']) ? "value=\"".$order['Location']."\"" : '' ?>" >
+						<?php echo isset($order['Location']) ? "value=\"".$order['Location']."\"" : '' ?> >
                     <!-- ***************************** -->
 
                     <!--DRZAVA ******************************-->
                     <label for="country" class="label__heading">Država</label>
                     <input class="u-full-width" type="text" placeholder="" name="country"
-						<?php echo isset($order['Country']) ? "value=\"".$order['Country']."\"" : '' ?>" >
+						<?php echo isset($order['Country']) ? "value=\"".$order['Country']."\"" : '' ?> >
                     <!-- ***************************** --> 
                     
                     <!--SVRHA UPLATE ******************************-->
                     <label for="purposeOfPayment" class="label__heading">Svrha uplate</label>
                     <input class="u-full-width" type="text" placeholder="" name="purposeOfPayment"
-						<?php echo isset($order['PaymentPurpose']) ? "value=\"".$order['PaymentPurpose']."\"" : '' ?>" >
+						<?php echo isset($order['PaymentPurpose']) ? "value=\"".$order['PaymentPurpose']."\"" : '' ?> >
                     <!-- ***************************** -->
 
                     <!--PRIMALAC ******************************-->
                     <label for="recipient" class="label__heading">Primalac</label>
                     <input class="u-full-width" type="text" placeholder="" name="recipient"
-						<?php echo isset($order['Recipient']) ? "value=\"".$order['Recipient']."\"" : '' ?>" >
+						<?php echo isset($order['Recipient']) ? "value=\"".$order['Recipient']."\"" : '' ?> >
                     <!-- ***************************** -->
 
                     <!--SIFRA PLACANJA ******************************-->
@@ -131,13 +132,13 @@ require_once "../../functions/functions.php";
                     <!--VALUTA ******************************-->
                     <label for="currency" class="label__heading">Valuta</label>
                     <input class="u-full-width" type="text" placeholder="" name="currency"
-						<?php echo isset($order['Currency']) ? "value=\"".$order['Currency']."\"" : '' ?>" readonly>
+						<?php echo isset($order['Currency']) ? "value=\"".$order['Currency']."\"" : '' ?> readonly>
                     <!-- ***************************** -->
 
                     <!--IZNOS ******************************-->
                     <label for="amount" class="label__heading">Iznos</label>
                     <input class="u-full-width" type="text" placeholder="RSD" name="amount"
-						<?php echo isset($order['Amount']) ? "value=\"".$order['Amount']."\"" : '' ?>" >
+						<?php echo isset($order['Amount']) ? "value=\"".$order['Amount']."\"" : '' ?> >
                     <!-- ***************************** -->
 
                     <!--RACUN PRIMAOCA ******************************-->
@@ -149,7 +150,7 @@ require_once "../../functions/functions.php";
                     <!--MODEL ******************************-->
                     <label for="mockUpDebit" class="label__heading">Model (zaduženje)</label>
                     <input class="u-full-width" type="text" placeholder="" name="mockUpDebit"
-						<?php echo isset($order['ModelDebit']) ? "value=\"".$order['ModelDebit']."\"" : '' ?>" >
+						<?php echo isset($order['ModelDebit']) ? "value=\"".$order['ModelDebit']."\"" : '' ?> >
                     <!-- ***************************** -->
 
                     <!--POZIV NA BROJ ZADUZENJA ******************************--> <!-- OVO JE DRUGACIJE OD DRUGE DVE UPLATNICE -->
@@ -167,13 +168,13 @@ require_once "../../functions/functions.php";
                     <!--MODEL ******************************-->
                     <label for="mockUpApproval" class="label__heading">Model (odobrenje)</label>
                     <input class="u-full-width" type="text" placeholder="" name="mockUpApproval"
-						<?php echo isset($order['ModelApproval']) ? "value=\"".$order['ModelApproval']."\"" : '' ?>">
+						<?php echo isset($order['ModelApproval']) ? "value=\"".$order['ModelApproval']."\"" : '' ?>>
                     <!-- ***************************** -->
 
                     <!--POZIV NA BROJ ODOBRENJA ******************************-->
                     <label for="referenceNumberApprovals" class="label__heading">Poziv na broj odobrenja</label>
                     <input class="u-full-width" type="text" placeholder="" name="referenceNumberApprovals"
-						<?php echo isset($order['ReferenceNumberApprovals']) ? "value=\"".$order['ReferenceNumberApprovals']."\"" : '' ?>">
+						<?php echo isset($order['ReferenceNumberApprovals']) ? "value=\"".$order['ReferenceNumberApprovals']."\"" : '' ?>>
                     <!-- ***************************** -->
 
                     <!-- Kraj naloga za prenos u setu sledi radio buttons -->
@@ -237,39 +238,39 @@ require_once "../../functions/functions.php";
 						} else {
 					?>
                     <!--NAME AND SURNAME ******************************-->
-                    <label for="payer" class="label__heading">Ime i prezime</label>
+                    <label for="payer" class="label__heading">Ime i prezime nalogodavca</label>
                     <input class="u-full-width" type="text" placeholder="" name="payer" 
-						<?php echo isset($_POST['payer']) ? "value=\"".$_POST['payer']."\"" : '' ?>" >
+						<?php echo isset($_POST['payer']) ? "value=\"".$_POST['payer']."\"" : '' ?> >
                     <!-- ***************************** -->
 
                     <!--ADRESA ******************************-->
-                    <label for="address" class="label__heading">Adresa</label>
+                    <label for="address" class="label__heading">Ulica i broj nalogodavca</label>
                     <input class="u-full-width" type="text" placeholder="" name="address"
-						<?php echo isset($_POST['address']) ? "value=\"".$_POST['address']."\"" : '' ?>" >
+						<?php echo isset($_POST['address']) ? "value=\"".$_POST['address']."\"" : '' ?> >
                     <!-- ***************************** -->                    
 
                     <!--MESTO ******************************-->
                     <label for="location" class="label__heading">Poštanski broj i mesto</label>
                     <input class="u-full-width" type="text" placeholder="" name="location"
-						<?php echo isset($_POST['location']) ? "value=\"".$_POST['location']."\"" : '' ?>" >
+						<?php echo isset($_POST['location']) ? "value=\"".$_POST['location']."\"" : '' ?> >
                     <!-- ***************************** -->
 
                     <!--DRZAVA ******************************-->
                     <label for="country" class="label__heading">Država</label>
                     <input class="u-full-width" type="text" placeholder="" name="country"
-						<?php echo isset($_POST['country']) ? "value=\"".$_POST['country']."\"" : '' ?>" >
+						<?php echo isset($_POST['country']) ? "value=\"".$_POST['country']."\"" : '' ?> >
                     <!-- ***************************** --> 
                     
                     <!--SVRHA UPLATE ******************************-->
                     <label for="purposeOfPayment" class="label__heading">Svrha uplate</label>
                     <input class="u-full-width" type="text" placeholder="" name="purposeOfPayment"
-						<?php echo isset($_POST['purposeOfPayment']) ? "value=\"".$_POST['purposeOfPayment']."\"" : '' ?>" >
+						<?php echo isset($_POST['purposeOfPayment']) ? "value=\"".$_POST['purposeOfPayment']."\"" : '' ?> >
                     <!-- ***************************** -->
 
                     <!--PRIMALAC ******************************-->
                     <label for="recipient" class="label__heading">Primalac</label>
                     <input class="u-full-width" type="text" placeholder="" name="recipient"
-						<?php echo isset($_POST['recipient']) ? "value=\"".$_POST['recipient']."\"" : '' ?>" >
+						<?php echo isset($_POST['recipient']) ? "value=\"".$_POST['recipient']."\"" : '' ?> >
                     <!-- ***************************** -->
 
                     <!--SIFRA PLACANJA ******************************-->
@@ -287,7 +288,7 @@ require_once "../../functions/functions.php";
                     <!--IZNOS ******************************-->
                     <label for="amount" class="label__heading">Iznos</label>
                     <input class="u-full-width" type="text" placeholder="RSD" name="amount"
-						<?php echo isset($_POST['amount']) ? "value=\"".$_POST['amount']."\"" : '' ?>" >
+						<?php echo isset($_POST['amount']) ? "value=\"".$_POST['amount']."\"" : '' ?> >
                     <!-- ***************************** -->
 
                     <!--RACUN PRIMAOCA ******************************-->
@@ -299,7 +300,7 @@ require_once "../../functions/functions.php";
                     <!--MODEL ******************************-->
                     <label for="mockUpDebit" class="label__heading">Model (zaduženje)</label>
                     <input class="u-full-width" type="text" placeholder="" name="mockUpDebit"
-						<?php echo isset($_POST['mockUpDebit']) ? "value=\"".$_POST['mockUpDebit']."\"" : '' ?>" >
+						<?php echo isset($_POST['mockUpDebit']) ? "value=\"".$_POST['mockUpDebit']."\"" : '' ?> >
                     <!-- ***************************** -->
 
                     <!--POZIV NA BROJ ZADUZENJA ******************************--> <!-- OVO JE DRUGACIJE OD DRUGE DVE UPLATNICE -->
@@ -317,13 +318,13 @@ require_once "../../functions/functions.php";
                     <!--MODEL ******************************-->
                     <label for="mockUpApproval" class="label__heading">Model (odobrenje)</label>
                     <input class="u-full-width" type="text" placeholder="" name="mockUpApproval"
-						<?php echo isset($_POST['mockUpApproval']) ? "value=\"".$_POST['mockUpApproval']."\"" : '' ?>">
+						<?php echo isset($_POST['mockUpApproval']) ? "value=\"".$_POST['mockUpApproval']."\"" : '' ?>>
                     <!-- ***************************** -->
 
                     <!--POZIV NA BROJ ODOBRENJA ******************************-->
                     <label for="referenceNumberApprovals" class="label__heading">Poziv na broj odobrenja</label>
                     <input class="u-full-width" type="text" placeholder="" name="referenceNumberApprovals"
-						<?php echo isset($_POST['referenceNumberApprovals']) ? "value=\"".$_POST['referenceNumberApprovals']."\"" : '' ?>">
+						<?php echo isset($_POST['referenceNumberApprovals']) ? "value=\"".$_POST['referenceNumberApprovals']."\"" : '' ?>>
                     <!-- ***************************** -->
 
                     <!-- Kraj naloga za prenos u setu sledi radio buttons -->
@@ -391,7 +392,7 @@ require_once "../../functions/functions.php";
 					<?php }?>
 					<input type="hidden" name="orderType" id="orderType" value="uplatnice/nalog-za-prenos">
 					<input type="hidden" id="successMessage" value="Nalog za prenos je uspešno naručen.">
-                    <input class="button-primary" type="submit" value="Pošalji" name="submit">
+                    <input class="button-primary" type="submit" value="Prikaži" name="submit">
                     <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
                 </div>
             </form>

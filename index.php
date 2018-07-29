@@ -15,25 +15,25 @@ include("header.php");
       </div>
       <!--first three icons/h3-->
       <div class="container">
-        <div class="row">
+        <div class="row row-padding-main-page">
           <div class="one-third column">
             <a href="./stampanje" class="link">
-				<i class="fas fa-print fa-2x"></i>
-				<h3>Štampanje</h3>
+            <img class="icon-png" src="images/icons/stampa.png"/>
+			    	<h3>Štampanje</h3>
             </a>
           </div>
 
           <div class="one-third column">
             <a href="./blokovi" class="link">
-				<i class="far fa-clone fa-2x"></i>
-				<h3>Preslikavajući blokovi</h3>
+            <img class="icon-png" src="images/icons/preslikavajuci-blokovi.png"/>
+			    	<h3>Preslikavajući blokovi</h3>
             </a>
           </div>
 
           <div class="one-third column">
             <a href="uplatnice/" class="link">
-              <i class="far fa-file-alt fa-2x"></i>
-              <h3>Uplatnice</h3>
+            <img class="icon-png" src="images/icons/uplatnice.png"/>
+            <h3>Uplatnice</h3>
             </a>
           </div>
           <!--end of last column-->
@@ -44,24 +44,24 @@ include("header.php");
       <!--second three icons/h3-->
       <div class="container">
         <!--second row-->
-        <div class="row">
+        <div class="row row-padding-main-page">
           <div class="one-third column">
             <a href="./koverte-dostavnice-formulari" class="link">
-		      <i class="far fa-envelope fa-2x"></i>
-              <h3>Koverte, Dostavnice, Formulari za adresiranje</h3>
+            <img class="icon-png" src="images/icons/koverte-dostavnice.png"/>
+            <h3>Koverte, Dostavnice, Formulari za adresiranje</h3>
             </a>
           </div>
 
           <div class="one-third column">
             <a href="./omot-spisa" class="link">
-              <i class="fas fa-file-alt fa-2x"></i>
-              <h3>Omot spisa</h3>
+            <img class="icon-png" src="images/icons/omot-spisa.png"/>
+            <h3>Omot spisa</h3>
             </a>
           </div>
 		  		  
 		  <div class="one-third column" <?php if(!isset($_SESSION['user_info'])) echo 'title="Opcija samo za registrovane korisnike"';?>>
             <a <?php if(isset($_SESSION['user_info'])) echo 'href="./narudzbine/"'?> class="link<?php if(!isset($_SESSION['user_info'])) echo ' disabled-links'?>">
-              <i class="fas fa-list-ol fa-2x"></i>
+              <img class="icon-png" src="images/icons/sacuvane-narudzbine.png"/>
               <h3>Sačuvane narudžbine</h3>
             </a>
           </div>
@@ -77,24 +77,24 @@ include("header.php");
       <div class="container">
         <h2 class="mainpage__heading">Ostalo</h2>
         <!--second row-->
-        <div class="row">
+        <div class="row row-padding-main-page">
           <div class="one-third column">
             <a href="./cenovnik" class="link">
-			  <i class="far fa-money-bill-alt fa-2x"></i>
+              <img class="icon-png" src="images/icons/cenovnik.png"/>
               <h3>Cenovnik</h3>
             </a>
           </div>
 
           <div class="one-third column">            
             <a href="./o-nama" class="link">
-			  <i class="fas fa-users fa-2x"></i>
+            <img class="icon-png" src="images/icons/o-nama.png"/>
               <h3>O nama</h3>
             </a>
           </div>
 
           <div class="one-third column">            
             <a href="./kontakt" class="link">
-			  <i class="far fa-comment fa-2x"></i>
+            <img class="icon-png" src="images/icons/kontakt.png"/>
               <h3>Kontakt</h3>
             </a>
           </div>
