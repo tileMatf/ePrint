@@ -812,12 +812,12 @@ p.loginStatus {
 	margin-right: 5%;
 }
 
-/*p.loggedStatus {
+p.loggedStatus {
     text-align: center;
     padding-top: 10px;
     font-weight: 600;
- }*/
-
+ }
+/**
 p.loggedStatus {
 	margin-top: 0%;
 	margin-right: 0%;
@@ -825,7 +825,7 @@ p.loggedStatus {
 	padding-top: 0%;
 	float: right;
 }
-
+**/
 
 p#registrationMsg {
 	color: red;
@@ -844,8 +844,17 @@ a.disabled-links{
 }
 
 #paymentConfirm {
-	margin:2% 25% auto auto;
-	display: block;
+	margin-top: 10px;
+    display: block;
+    color: #fff;
+}
+
+#paymentConfirm:focus {
+    color: #fff;
+}
+
+#paymentConfirm:active {
+    color: #fff;
 }
 
 .silver {
