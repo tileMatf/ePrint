@@ -38,11 +38,6 @@
     <div class="container container__main shadow">
         <!--HEADER-->
         <header>
-			<p class="loggedStatus" id="loggedStatus">
-				<?php
-					echo isset($_SESSION['user_info']) ? $_SESSION['status_message'] : '';
-				?>
-			</p>
             <div class="row">
                 <div class="six columns">
                     <a href="http://localhost/eprint/">
@@ -79,7 +74,10 @@
 					'<form name="logoutForm">
 					  <div class="six columns navigation__header navigation__header--nav">
 						<!--Logout-->
-						<ul class="nav login nav-reg-log">
+                        <ul class="nav login nav-reg-log">
+                            <li>
+                            ' . $_SESSION['status_message']  . '
+                            </li>
 						  <li>
                             <button name="logout" class="buttonStyle">Odjavi se</button>
                           </li>
