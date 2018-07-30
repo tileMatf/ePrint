@@ -31,7 +31,7 @@
                     <div class="one-third column">
                         <a href="./koverte-sa-dostavnicom" class="link">
                             <img class="" src="../images/icons/koverta-rucno.png">
-                            <h3 style="display: inline-block;">Koverte sa dostavnicom za ručno popunjavanje</h3>
+                            <h3 style="display: inline-block;">Koverte sa povratnicom za ručno popunjavanje</h3>
                         </a>
                     </div>
 

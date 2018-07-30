@@ -23,7 +23,12 @@ _______________
 General
 -----------------------------------------
 ***/
-
+/**
+button:focus { outline: none; }
+**/
+.buttonStyle:focus {
+    color: #fff;
+}
 
 .proba {
     border: 1px solid green;

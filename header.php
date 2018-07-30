@@ -102,7 +102,7 @@
             <!--end of row-->
         </header>
          <!-- LOGIN MODAL -->
-         <div id="loginModal" class="modal">
+        <div id="loginModal" class="modal">
             <span class="close" title="Close Modal">&times;</span>
             <form class="modal-content animate" name="loginForm" >
 				<input type="hidden" name="path" value="../uplatnice/nalog-za-isplatu/">
@@ -117,21 +117,14 @@
                     <label for="psw"><b>Lozinka</b></label>
                     <input type="password" placeholder="Unesite lozinku" name="psw" required>
                         
-                    <button type="submit" class="login-btn" name="login">Login</button>
+                    <button type="submit" class="buttonStyle" name="login">Login</button>
                     <label>
                         <input type="checkbox" checked="checked" name="remember"> Zapamti me
                     </label>
                 </div>
     
                 <div class="container" style="background-color:#f1f1f1; margin-top: 40px;">
-                    <div class="row">
-                        <div class="seven columns">
-                        <button type="button" class="cancelbtn">Nazad</button>
-                    </div>
-                    <div class="five columns" style="padding-top: 5px;">
-                        <a href="#">Zaboravili ste šifru?</a></span>
-                    </div>
-                </div>
+  
             </form>
         </div>
     </div>
