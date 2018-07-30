@@ -15,7 +15,7 @@ require_once "../../functions/functions.php";
 						<span class='picture-close'>&times;</span>
 							<img id='pictureContent' class='picture-modal-content' 
 							src='../../functions/createPicture.php?". http_build_query($_POST) . "'>
-						<button id='paymentConfirm'>Ok</button>
+						<button id='paymentConfirm'>Potvrdi</button>
 					</div>"; 
 			} catch(RuntimeException $e){
 				return $e->getMessage();
@@ -58,12 +58,9 @@ require_once "../../functions/functions.php";
         <section class="section__stampanje">
             <div class="container container-form">
                 <h2 class="section__heading">Nalog za uplatu</h2>
-                <img class="slike-forma" src="../../images/nalog-za-uplatu.jpg"/>
-            </div>
-            <!-- OVDE POCINJE FORMA -->
-            <form method="POST" name="orderForm" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">				
-                <div class="form-box">
+				<!-- Loading slika -->
 				<img src="../../images/loader.gif" class="gif_image" id="gif_image">
+				
 				<!-- Paragraf za povratnu poruku -->		
 				<p style="font-size:2rem; font-style: italic;" id="statusMessage"></p>
 				<?php
@@ -80,6 +77,12 @@ require_once "../../functions/functions.php";
 						}
 					}
 				?>
+				
+                <img class="slike-forma" src="../../images/nalog-za-uplatu.jpg"/>
+            </div>
+            <!-- OVDE POCINJE FORMA -->
+            <form method="POST" name="orderForm" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">				
+                <div class="form-box">				
 				<!-- UNOS PODATAKA ***************************** -->
 				<?php 
 					if(isset($_POST['orderObject'])){
