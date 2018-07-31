@@ -202,7 +202,7 @@
 
         <div class="twelve column" style="text-align:center;">
                             <!-- POSALJI DUGME -->
-                    <input class="button-primary" type="submit" value="Pošalji" name="submit">
+                    <input class="button-primary" type="submit" value="Prikaži" name="submit">
                     <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
                     </div>
         </div>

@@ -111,6 +111,8 @@
 	/*Echo status*/
 	if($status === false)	
 		echo "4";
-	else
+	else {
 		echo "5";
+		$_SESSION['submit_processed'] = true;
+	}
 ?>

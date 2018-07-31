@@ -6,10 +6,10 @@ include("../header.php");
 require_once '../functions/functions.php';
 
 	if(isset($_POST['submit'])) {
-			if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
+		if(isset($_SESSION['login']) && isset($_SESSION['submit_processed'])) {			
 			unset($_POST['submit']);
-			unset($_SESSION['login']);
-		} else {
+			unset($_SESSION['submit_processed']);
+		} else { 
 			try{
 				echo "<div id='pictureModal' class='picture-modal'>
 					 <span class='picture-close'>&times;</span>

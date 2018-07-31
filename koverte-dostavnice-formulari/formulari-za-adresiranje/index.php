@@ -7,9 +7,9 @@ require_once '../../functions/functions.php';
 	
 
 	if(isset($_POST['submit'])) {
-		if(isset($_SESSION['login']) && $_SESSION['login'] === true) {
+		if(isset($_SESSION['login']) && isset($_SESSION['submit_processed'])) {
 			unset($_POST['submit']);
-			unset($_SESSION['login']);
+			unset($_SESSION['submit_processed']);
 		} else {
 			try{
 				echo "<div id='pictureModal' class='picture-modal'>
@@ -194,7 +194,7 @@ require_once '../../functions/functions.php';
 					<?php }?>
 					<input type="hidden" id="orderType" name="orderType" value="koverte-dostavnice-formulari/formulari-za-adresiranje">
 					<input type="hidden" id="successMessage" name="successMessage" value="Formulari za adresiranje su uspešno naručeni.">
-                    <input class="button-primary" type="submit" value="Pošalji" name="submit" >
+                    <input class="button-primary" type="submit" value="Prikaži" name="submit" >
                     <!-- Smisli kako ovo lepse da izgleda -->
                     <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p> 
                 </div>
