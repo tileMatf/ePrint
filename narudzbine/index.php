@@ -21,14 +21,15 @@
    </ul>
 </div>
 <!-- End of navigation -->
+
 <section class="section__stampanje section__narudzbine">
 <div class="container">
    <h2 class="section__heading">Sačuvane narudžbine</h2>
-   <div class="12 columns">
+   <div class="twelve columns">
       <h3>Štampanje</h3>
    </div>
    <!-- tabela -->
-   <table class="u-full-width">
+   <table class="container">
       <thead>
          <tr>
             <th>Datum</th>
@@ -51,7 +52,7 @@
             				<td>
             					<form method="post" action="../stampanje/">			
             						<input type="hidden" name="orderObject" value=\''.json_encode($orders[0][$i]).'\'>
-            						<input type="submit" name="openOrderButton" value="Otvoriti">
+            						<input class="buttonForm" type="submit" name="openOrderButton" value="Otvoriti">
             					</form>
             				</td>
             			</tr>';
@@ -62,11 +63,11 @@
             ?>
       </tbody>
    </table>
-   <div class="12 columns">
+   <div class="twelve columns">
       <h3>Preslikavajući blokovi</h3>
    </div>
    <!-- tabela -->
-   <table class="u-full-width">
+   <table class="container">
       <thead>
          <tr>
             <th>Datum</th>
@@ -85,7 +86,7 @@
             					<td>
             						<form method="post" action="../blokovi/">			
             							<input type="hidden" name="orderObject" value=\''.json_encode($orders[1][$i]).'\'>
-            							<input type="submit" name="openOrderButton" value="Otvoriti">
+            							<input class="buttonForm" type="submit" name="openOrderButton" value="Otvoriti">
             						</form>
             					</td>
             				</form>
@@ -97,11 +98,11 @@
             ?>
       </tbody>
    </table>
-   <div class="12 columns">
+   <div class="twelve columns">
       <h3>Uplatnice</h3>
    </div>
    <!-- tabela -->
-   <table class="u-full-width">
+   <table class="container">
       <thead>
          <tr>
             <th>Datum</th>
@@ -119,7 +120,7 @@
             				<td>
             					<form method="post" action="../uplatnice/nalog-za-uplatu/">			
             						<input type="hidden" name="orderObject" value=\''.json_encode($orders[2][$i]).'\'>
-            						<input type="submit" name="openOrderButton" value="Otvoriti">
+            						<input class="buttonForm" type="submit" name="openOrderButton" value="Otvoriti">
             					</form>
             				</td>
             			</tr>';
@@ -130,11 +131,11 @@
             ?>
       </tbody>
    </table>
-   <div class="12 columns">
+   <div>
       <h3>Nalozi za isplatu</h3>
    </div>
    <!-- tabela -->
-   <table class="u-full-width">
+   <table class="container">
       <thead>
          <tr>
             <th>Datum</th>
@@ -152,7 +153,7 @@
             				<td>
             					<form method="post" action="../uplatnice/nalog-za-isplatu/">			
             						<input type="hidden" name="orderObject" value=\''.json_encode($orders[3][$i]).'\'>
-            						<input type="submit" name="openOrderButton" value="Otvoriti">
+            						<input class="buttonForm" type="submit" name="openOrderButton" value="Otvoriti">
             					</form>
             				</td>
             			</tr>';
@@ -163,11 +164,11 @@
             ?>
       </tbody>
    </table>
-   <div class="12 columns">
+   <div class="twelve columns">
       <h3>Nalozi za prenos</h3>
    </div>
    <!-- tabela -->
-   <table class="u-full-width">
+   <table class="container">
       <thead>
          <tr>
             <th>Datum</th>
@@ -185,7 +186,7 @@
             				<td>
             					<form method="post" action="../uplatnice/nalog-za-prenos/">			
             						<input type="hidden" name="orderObject" value=\''.json_encode($orders[4][$i]).'\'>
-            						<input type="submit" name="openOrderButton" value="Otvoriti">
+            						<input class="buttonForm" type="submit" name="openOrderButton" value="Otvoriti">
             					</form>
             				</td>
             			</tr>';
@@ -196,11 +197,11 @@
             ?>
       </tbody>
    </table>
-   <div class="12 columns">
+   <div class="twelve columns">
       <h3>Koverte sa povratnicom</h3>
    </div>
    <!-- tabela -->
-   <table class="u-full-width">
+   <table class="container">
       <thead>
          <tr>
             <th>Datum</th>
@@ -218,7 +219,7 @@
             				<td>
             					<form method="post" action="../koverte-dostavnice-formulari/koverte-sa-povratnicom/">			
             						<input type="hidden" name="orderObject" value=\''.json_encode($orders[5][$i]).'\'>
-            						<input type="submit" name="openOrderButton" value="Otvoriti">
+            						<input class="buttonForm" type="submit" name="openOrderButton" value="Otvoriti">
             					</form>
             				</td>
             			</tr>';
@@ -229,11 +230,11 @@
             ?>
       </tbody>
    </table>
-   <div class="12 columns">
+   <div class="twelve columns">
       <h3>Dostavnice</h3>
    </div>
    <!-- tabela -->
-   <table class="u-full-width">
+   <table class="container">
       <thead>
          <tr>
             <th>Datum</th>
@@ -251,7 +252,7 @@
             				<td>
             					<form method="post" action="../koverte-dostavnice-formulari/dostavnice/">			
             						<input type="hidden" name="orderObject" value=\''.json_encode($orders[6][$i]).'\'>
-            						<input type="submit" name="openOrderButton" value="Otvoriti">
+            						<input class="buttonForm" type="submit" name="openOrderButton" value="Otvoriti">
             					</form>
             				</td>
             			</tr>';
@@ -262,11 +263,11 @@
             ?>
       </tbody>
    </table>
-   <div class="12 columns">
+   <div class="twelve columns">
       <h3>Koverte sa dostavnicom</h3>
    </div>
    <!-- tabela -->
-   <table class="u-full-width">
+   <table class="container">
       <thead>
          <tr>
             <th>Datum</th>
@@ -286,7 +287,7 @@
             				<td>
             					<form method="post" action="../koverte-dostavnice-formulari/koverte-sa-dostavnicom/">			
             						<input type="hidden" name="orderObject" value=\''.json_encode($orders[7][$i]).'\'>
-            						<input type="submit" name="openOrderButton" value="Otvoriti">
+            						<input class="buttonForm" type="submit" name="openOrderButton" value="Otvoriti">
             					</form>
             				</td>
             			</tr>';
@@ -297,11 +298,11 @@
             ?>
       </tbody>
    </table>
-   <div class="12 columns">
+   <div class="twelve columns">
       <h3>Formulari za adresiranje</h3>
    </div>
    <!-- tabela -->
-   <table class="u-full-width">
+   <table class="container">
       <thead>
          <tr>
             <th>Datum</th>
@@ -319,7 +320,7 @@
             				<td>
             					<form method="post" action="../koverte-dostavnice-formulari/formulari-za-adresiranje/">			
             						<input type="hidden" name="orderObject" value=\''.json_encode($orders[8][$i]).'\'>
-            						<input type="submit" name="openOrderButton" value="Otvoriti">
+            						<input class="buttonForm" type="submit" name="openOrderButton" value="Otvoriti">
             					</form>
             				</td>
             			</tr>';
@@ -330,11 +331,11 @@
             ?>
       </tbody>
    </table>
-   <div class="12 columns">
+   <div class="twelve columns">
       <h3>Standardne koverte</h3>
    </div>
    <!-- tabela -->
-   <table class="u-full-width">
+   <table class="container">
       <thead>
          <tr>
             <th>Datum</th>
@@ -354,7 +355,7 @@
             				<td>
             					<form method="post" action="../koverte-dostavnice-formulari/standardne-koverte/">			
             						<input type="hidden" name="orderObject" value=\''.json_encode($orders[9][$i]).'\'>
-            						<input type="submit" name="openOrderButton" value="Otvoriti">
+            						<input class="buttonForm" type="submit" name="openOrderButton" value="Otvoriti">
             					</form>
             				</td>
             			</tr>';
@@ -365,11 +366,11 @@
             ?>
       </tbody>
    </table>
-   <div class="12 columns">
+   <div class="twelve columns">
       <h3>Omoti spisa</h3>
    </div>
    <!-- tabela -->
-   <table class="u-full-width">
+   <table class="container">
       <thead>
          <tr>
             <th>Datum</th>
@@ -389,7 +390,7 @@
             				<td>
             					<form method="post" action="../omot-spisa/">			
             						<input type="hidden" name="orderObject" value=\''.json_encode($orders[10][$i]).'\'>
-            						<input type="submit" name="openOrderButton" value="Otvoriti">
+            						<input class="buttonForm" type="submit" name="openOrderButton" value="Otvoriti">
             					</form>
             				</td>
             			</tr>';
@@ -400,8 +401,8 @@
             ?>
       </tbody>
    </table>
-	</div>
 </section>
+</div>
 <?php
    include("../footer.php");
    ?>

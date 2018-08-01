@@ -11,7 +11,7 @@
                 </li>
                 <span class="line">/</span>
                 <li>
-                    <a class="tile" href="./">Uplatnice</a>
+                    <a class="tile" href="./" style="font-size: 1.6rem;">Uplatnice</a>
                 </li>
             </ul>
         </div>

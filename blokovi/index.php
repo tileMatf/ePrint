@@ -118,7 +118,7 @@
                 </li>
                 <span class="line">/</span>
                 <li>
-                    <a class="tile" href="./" style="font-size: 1.6rem;">Preslikavajući Blokovi</a>
+                    <a class="tile" href="./" style="font-size: 1.6rem;">Preslikavajući blokovi</a>
                 </li>
             </ul>
         </div>

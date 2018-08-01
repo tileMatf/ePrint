@@ -890,3 +890,48 @@ hr {
     margin-bottom: 30px;
     margin-top: 100px;
 }
+
+/**tables**/
+
+table.container {
+    max-width: 760px;
+    font-size: 14px;
+  }
+  
+  thead th {
+    font-weight: 400;
+    font-size: 16px;
+    background: rgb(0,202,35);
+    color: #FFF;
+  }
+  
+  tr {
+    background: #f4f7f8;
+    border-bottom: 1px solid #FFF;
+    margin-bottom: 5px;
+  }
+  
+  tr:nth-child(even) {
+    background: #e8eeef;
+  }
+  
+  th, td {
+    text-align: center;
+    padding: 10px;
+    font-weight: 300;
+  }
+  
+  tfoot tr {
+    background: none;
+  }
+  
+  tfoot td {
+    padding: 10px 2px;
+    font-size: 0.8em;
+    font-style: italic;
+    color: #8a97a0;
+  }
+
+  .buttonForm {
+
+  }
