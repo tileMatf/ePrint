@@ -11,12 +11,12 @@ include('../../header.php');
 			unset($_SESSION['submit_processed']);
 		} else {	
 			try{
-				echo "<div id='pictureModal' class='picture-modal'>
+				echo "<form><div id='pictureModal' class='picture-modal'>
 					 <span class='picture-close'>&times;</span>
 					  <img id='pictureContent' class='picture-modal-content' 
 						src='../../functions/createPicture.php?". http_build_query($_POST) ."'>
 					 <button id='paymentConfirm'>Potvrdi</button>
-					</div>";
+					</div></form>";
 			} catch(RuntimeException $e){
 				return $e->getMessage();
 			} 
