@@ -74,6 +74,8 @@ require_once '../functions/functions.php';
 						}
 					}
 				?>
+
+                <img class="slike-forma" src="../images/omot-spisa.png"/>
 			</div>
             <!-- OVDE POCINJE FORMA ** -->
             <form method="POST" name="orderForm" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">

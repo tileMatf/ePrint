@@ -52,7 +52,7 @@
                 <!--second row-->
                 <div class="row row-padding-main-page">
                     <div class="one-third column">
-                        <a href="./koverte-sa-dostavnicom" class="link">
+                        <a href="./dostavnice" class="link">
                          <img class="" src="../images/icons/dostavnice.png">
                             <h3>Dostavnice</h3>
                         </a>

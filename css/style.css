@@ -671,6 +671,11 @@ input[type="submit"].button-primary:hover {
     max-width: 650px;
 }
 
+.povratnice-img {
+    border-radius: 5px;
+    max-width: 650px;  
+}
+
 /***
 Media Queries 
 -----------------------------------------
