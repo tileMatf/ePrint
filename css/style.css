@@ -483,16 +483,35 @@ button:hover {
 /* The Close Button (x) */
 .close {
     position: absolute;
-    right: 25px;
-    top: 0;
-    color: #000;
-    font-size: 35px;
+    top: 15px;
+    right: 35px;
+    color: #333;
+    font-size: 40px;
     font-weight: bold;
+    transition: 0.3s;
 }
 
 .close:hover,
 .close:focus {
-    color: red;
+    color: rgb(0,202,35);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.picture-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #333;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.picture-close:hover,
+.picture-close:focus {
+    color: rgb(0,202,35);
+    text-decoration: none;
     cursor: pointer;
 }
 
@@ -574,24 +593,6 @@ PICTURE MODAL
 @keyframes zoom {
     from {transform:scale(0)} 
     to {transform:scale(1)}
-}
-
-/* The Close Button */
-.picture-close {
-    position: absolute;
-    top: 15px;
-    right: 35px;
-    color: #f1f1f1;
-    font-size: 40px;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.picture-close:hover,
-.picture-close:focus {
-    color: #bbb;
-    text-decoration: none;
-    cursor: pointer;
 }
 
 /* 100% Image Width on Smaller Screens */
