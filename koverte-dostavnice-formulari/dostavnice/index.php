@@ -54,11 +54,12 @@ require_once '../../functions/functions.php';
         </div>
         <!-- End of navigation -->
 
-
         <!--Stampanje section-->
         <section class="section__stampanje">
             <h2 class="section__heading">Dostavnice</h2>
-
+            <div class="container container-form">
+                <img class="slike-forma" src="../../images/dostavnice.png"/>
+            </div>
 
             <!-- OVDE POCINJE FORMA ** -->
             <form method="POST" name="orderForm" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">

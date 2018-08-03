@@ -79,7 +79,7 @@ require_once '../../functions/functions.php';
 						}
 					}
 				?>
-			
+			<img class="slike-forma" src="../../images/formulari-za-adresiranje1.png"/>	
 			</div>
 			
             <!-- OVDE POCINJE FORMA ** -->

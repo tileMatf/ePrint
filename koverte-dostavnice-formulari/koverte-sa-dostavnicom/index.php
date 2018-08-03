@@ -77,6 +77,8 @@ require_once '../../functions/functions.php';
 						}
 					}
 				?>
+
+            <img class="povratnice-img" src="../../images/koverte-sa-dostavnicom.png"/>
 			</div>
             <!-- OVDE POCINJE FORMA ** -->
             <form method="POST" name="orderForm" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
