@@ -14,7 +14,10 @@
 
 	if(isset($_POST['submit'])) {
 		try{
-			$message = makeMessage('koverte-dostavnice-formulari/standardne-koverte');
+			if(isset($_SESSION['user_info']))
+				$message = makeMessage('koverte-dostavnice-formulari/standardne-koverte', $_SESSION['user_info']->Email);
+			else 
+				$message = makeMessage('koverte-dostavnice-formulari/standardne-koverte');
 
 			$status = false;
 			if(!isset($_POST['sendCopy'])){
@@ -24,22 +27,22 @@
 			}
 			
 			if($mailStatus === true){
-				$order = new StandardnaKoverta($_POST, $_FILES);
+				$koverta_order = new StandardnaKoverta($_POST, $_FILES);
 				
-				if(!isset($order) || !is_object($order)){
+				if(!isset($koverta_order) || !is_object($koverta_order)){
 					header("Location: ../");
 					exit();
 				}
 			
 				$db = new DB();
 				if(isset($_SESSION['user_info'])){
-					$order->UserID = $_SESSION['user_info']->ID;	
+					$koverta_order->UserID = $_SESSION['user_info']->ID;	
 				} else {
 					$unregisterUserID = $db->getIdOfUnregisterUser()[0]->ID;
-					$order->UserID = $unregisterUserID;
+					$koverta_order->UserID = $unregisterUserID;
 				}
 			
-				$status = $db->saveOrder($order);				
+				$status = $db->saveOrder($koverta_order);				
 			} else {
 				$status = false;
 			}

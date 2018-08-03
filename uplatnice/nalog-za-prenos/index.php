@@ -235,7 +235,7 @@ require_once "../../functions/functions.php";
 											echo $_POST['sendCopyEmail'];
 										else 
 											echo ''; ?>">
-                    </label>
+                    </label>					
 					
 					<?php
 						} else {
@@ -386,13 +386,15 @@ require_once "../../functions/functions.php";
 										else 
 											echo ''; ?>">
                     </label>
+					
 					<?php if(isset($_SESSION['user_info'])) {?> 
 						<label for="savedOrder">
 							<input type="checkbox" name="savedOrder" id="savedOrder" <?php echo isset($_POST['savedOrder']) ? 'checked' : ''?>>
-							<span class="label-body">Prikaži u sačuvanim narudžbinama</span>
+							<span class="label-body">Sačuvaj narudžbinu</span>
 						</label>
 					<?php }?>
 					<?php }?>
+					
 					<input type="hidden" name="orderType" id="orderType" value="uplatnice/nalog-za-prenos">
 					<input type="hidden" id="successMessage" value="Nalog za prenos je uspešno naručen.">
                     <input class="button-primary" type="submit" value="Prikaži" name="submit">

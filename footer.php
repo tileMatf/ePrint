@@ -51,7 +51,7 @@
             <!-- End of container -->
         </footer>
         <!--End of footer-->
-    </div>
+    
     <!--end of MAIN container-->
 	<!-- JS files -->	
 	<script src="http://localhost/eprint/js/main.js"></script>

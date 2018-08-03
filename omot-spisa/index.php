@@ -5,7 +5,7 @@
 include("../header.php");
 require_once '../functions/functions.php';
 
-	if(isset($_POST['submit'])) {
+	if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		if(isset($_SESSION['login']) && isset($_SESSION['submit_processed'])) {			
 			unset($_POST['submit']);
 			unset($_SESSION['submit_processed']);

@@ -41,7 +41,7 @@
             <div class="row">
                 <div class="six columns">
                     <a href="http://localhost/eprint/">
-                        <img class="logo" src="http://localhost/eprint/images/eprint1.png" />
+                        <img class="logo" src="http://localhost/eprint/images/eprint1.png" alt="eprint_logo" />
                     </a>
                 </div>
                 <!--NAVIGATION-->
@@ -121,7 +121,7 @@
                     </label>
                 </div>
     
-                <div class="container" style="background-color:#f1f1f1; margin-top: 40px;">
+                <div class="container" style="background-color:#f1f1f1; margin-top: 40px;"></div>
   
             </form>
         </div>
@@ -141,13 +141,13 @@
 				</p>
                 <hr>
                 <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Upišite Vašu email adresu" name="email" required>
+                <input type="text" placeholder="Upišite Vašu email adresu" name="email" id="email" required>
             
                 <label for="psw"><b>Lozinka</b></label>
-                <input type="password" placeholder="Upišite Vašu lozinku" name="psw" required>
+                <input type="password" placeholder="Upišite Vašu lozinku" name="psw" id="psw" required>
             
                 <label for="psw-repeat"><b>Potvrdite lozinku</b></label>
-                <input type="password" placeholder="Potvrdite Vašu lozinku" name="pswRepeat" required>
+                <input type="password" placeholder="Potvrdite Vašu lozinku" name="pswRepeat" id="psw-repeat" required>
                     
                 <label>
                 <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Zapamti me

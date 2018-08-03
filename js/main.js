@@ -133,6 +133,7 @@
 	if(paymentConfirm != null){
 		paymentConfirm.addEventListener('click', function(event){
 			event.preventDefault();
+			
 			if(pictureModal != null)
 				pictureModal.style.display = "none";
 			var form = document.forms.namedItem('orderForm');
@@ -140,10 +141,17 @@
 			var formData = new FormData(form);
 			
 			var xhttp = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-		
-			let parameters = [...formData.entries()]
+
+			/*let parameters = [...formData.entries()]
                      .map(e => encodeURIComponent(e[0]) + "=" + encodeURIComponent(e[1]));
-			
+			*/
+			var parameters = [];
+			for (var pair of formData.entries()) {
+				parameters.push(
+					encodeURIComponent(pair[0]) + '=' +
+					encodeURIComponent(pair[1])
+				);
+			}
 			xhttp.open("POST",  window.location.origin + "/eprint/functions/confirm/", true);
 			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			xhttp.onload = function(e){
