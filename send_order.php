@@ -5,7 +5,7 @@
 require_once '/functions/mail.php';
 require_once '/functions/functions.php';
 
-if(isset($_POST['submit'])) {
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
 	try{
 	
 		$status = 0;

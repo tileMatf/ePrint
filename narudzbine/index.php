@@ -50,7 +50,7 @@
             				<td>'.$orders[0][$i]->FileName.'</td>
             				<td>'.$orders[0][$i]->BindingFile.'</td>
             				<td>
-            					<form method="post" action="../stampanje/">			
+            					<form method="get" action="../stampanje/">			
             						<input type="hidden" name="orderObject" value=\''.json_encode($orders[0][$i]).'\'>
             						<input class="buttonForm" type="submit" name="openOrderButton" value="Otvoriti">
             					</form>
@@ -84,7 +84,7 @@
             					<td>'.$orders[1][$i]->OrderDate.'</td>
             					<td>'.$orders[1][$i]->FileName.'</td>
             					<td>
-            						<form method="post" action="../blokovi/">			
+            						<form method="get" action="../blokovi/">			
             							<input type="hidden" name="orderObject" value=\''.json_encode($orders[1][$i]).'\'>
             							<input class="buttonForm" type="submit" name="openOrderButton" value="Otvoriti">
             						</form>
@@ -118,7 +118,7 @@
             				<td>'.$orders[2][$i]->OrderDate.'</td>
             				<td>'.$orders[2][$i]->Name.'</td>
             				<td>
-            					<form method="post" action="../uplatnice/nalog-za-uplatu/">			
+            					<form method="get" action="../uplatnice/nalog-za-uplatu/">			
             						<input type="hidden" name="orderObject" value=\''.json_encode($orders[2][$i]).'\'>
             						<input class="buttonForm" type="submit" name="openOrderButton" value="Otvoriti">
             					</form>
@@ -151,7 +151,7 @@
             				<td>'.$orders[3][$i]->OrderDate.'</td>
             				<td>'.$orders[3][$i]->Name.'</td>
             				<td>
-            					<form method="post" action="../uplatnice/nalog-za-isplatu/">			
+            					<form method="get" action="../uplatnice/nalog-za-isplatu/">			
             						<input type="hidden" name="orderObject" value=\''.json_encode($orders[3][$i]).'\'>
             						<input class="buttonForm" type="submit" name="openOrderButton" value="Otvoriti">
             					</form>
@@ -184,7 +184,7 @@
             				<td>'.$orders[4][$i]->OrderDate.'</td>
             				<td>'.$orders[4][$i]->Name.'</td>
             				<td>
-            					<form method="post" action="../uplatnice/nalog-za-prenos/">			
+            					<form method="get" action="../uplatnice/nalog-za-prenos/">			
             						<input type="hidden" name="orderObject" value=\''.json_encode($orders[4][$i]).'\'>
             						<input class="buttonForm" type="submit" name="openOrderButton" value="Otvoriti">
             					</form>
@@ -217,7 +217,7 @@
             				<td>'.$orders[5][$i]->OrderDate.'</td>
             				<td>'.$orders[5][$i]->Quantity.'</td>
             				<td>
-            					<form method="post" action="../koverte-dostavnice-formulari/koverte-sa-povratnicom/">			
+            					<form method="get" action="../koverte-dostavnice-formulari/koverte-sa-povratnicom/">			
             						<input type="hidden" name="orderObject" value=\''.json_encode($orders[5][$i]).'\'>
             						<input class="buttonForm" type="submit" name="openOrderButton" value="Otvoriti">
             					</form>
@@ -250,7 +250,7 @@
             				<td>'.$orders[6][$i]->OrderDate.'</td>
             				<td>'.$orders[6][$i]->Name.'</td>
             				<td>
-            					<form method="post" action="../koverte-dostavnice-formulari/dostavnice/">			
+            					<form method="get" action="../koverte-dostavnice-formulari/dostavnice/">			
             						<input type="hidden" name="orderObject" value=\''.json_encode($orders[6][$i]).'\'>
             						<input class="buttonForm" type="submit" name="openOrderButton" value="Otvoriti">
             					</form>
@@ -285,7 +285,7 @@
             				<td>'.$orders[7][$i]->Name.'</td>
             				<td>'.$orders[7][$i]->EnvelopeType.'</td>
             				<td>
-            					<form method="post" action="../koverte-dostavnice-formulari/koverte-sa-dostavnicom/">			
+            					<form method="get" action="../koverte-dostavnice-formulari/koverte-sa-dostavnicom/">			
             						<input type="hidden" name="orderObject" value=\''.json_encode($orders[7][$i]).'\'>
             						<input class="buttonForm" type="submit" name="openOrderButton" value="Otvoriti">
             					</form>
@@ -318,7 +318,7 @@
             				<td>'.$orders[8][$i]->OrderDate.'</td>
             				<td>'.$orders[8][$i]->Quantity.'</td>
             				<td>
-            					<form method="post" action="../koverte-dostavnice-formulari/formulari-za-adresiranje/">			
+            					<form method="get" action="../koverte-dostavnice-formulari/formulari-za-adresiranje/">			
             						<input type="hidden" name="orderObject" value=\''.json_encode($orders[8][$i]).'\'>
             						<input class="buttonForm" type="submit" name="openOrderButton" value="Otvoriti">
             					</form>
@@ -353,7 +353,7 @@
             				<td>'.$orders[9][$i]->Size.'</td>
             				<td>'.$orders[9][$i]->Quantity.'</td>
             				<td>
-            					<form method="post" action="../koverte-dostavnice-formulari/standardne-koverte/">			
+            					<form method="get" action="../koverte-dostavnice-formulari/standardne-koverte/">			
             						<input type="hidden" name="orderObject" value=\''.json_encode($orders[9][$i]).'\'>
             						<input class="buttonForm" type="submit" name="openOrderButton" value="Otvoriti">
             					</form>
@@ -388,7 +388,7 @@
             				<td>'.$orders[10][$i]->Name.'</td>
             				<td>'.$orders[10][$i]->Quantity.'</td>
             				<td>
-            					<form method="post" action="../omot-spisa/">			
+            					<form method="get" action="../omot-spisa/">			
             						<input type="hidden" name="orderObject" value=\''.json_encode($orders[10][$i]).'\'>
             						<input class="buttonForm" type="submit" name="openOrderButton" value="Otvoriti">
             					</form>

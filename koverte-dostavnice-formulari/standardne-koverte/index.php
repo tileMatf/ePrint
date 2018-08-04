@@ -12,7 +12,7 @@
 	require_once "../../functions/mail.php";
 	require_once "../../functions/functions.php";
 
-	if(isset($_POST['submit'])) {
+	if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		try{
 			if(isset($_SESSION['user_info']))
 				$message = makeMessage('koverte-dostavnice-formulari/standardne-koverte', $_SESSION['user_info']->Email);
@@ -113,8 +113,8 @@
 					}
 				?> 
 				<?php 
-					if(isset($_POST['orderObject'])){
-						$order = json_decode($_POST['orderObject'], true);
+					if(isset($_GET['orderObject'])){
+						$order = json_decode($_GET['orderObject'], true);
 				?> 
 				                    <!-- VELICINA -->
                     <label class="label__heading">Veličina</label>

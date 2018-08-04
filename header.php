@@ -45,8 +45,8 @@
                     </a>
                 </div>
                 <!--NAVIGATION-->
-                <?php 
-				
+                <?php 		
+			
 			require_once("/registration/order.php");
 			require_once("/registration/connection.php");	
 				
@@ -121,7 +121,7 @@
                     </label>
                 </div>
     
-                <div class="container" style="background-color:#f1f1f1; margin-top: 40px;"></div>
+                <div class="container" style="background-color:#f1f1f1; margin-top: 40px;">
   
             </form>
         </div>
@@ -149,9 +149,9 @@
                 <label for="psw-repeat"><b>Potvrdite lozinku</b></label>
                 <input type="password" placeholder="Potvrdite Vašu lozinku" name="pswRepeat" id="psw-repeat" required>
                     
-                <label>
+                <!-- <label>
                 <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Zapamti me
-                </label>
+                </label> -->
             
                 <p>Pravljenjem naloga prihvatate naše <a href="#" style="color:dodgerblue">uslove</a> poslovanja</p>
             

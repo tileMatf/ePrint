@@ -5,7 +5,7 @@
 include("../../header.php");
 require_once "../../functions/functions.php";
 
-	if(isset($_POST['submit'])) {
+	if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		if(isset($_SESSION['login']) && isset($_SESSION['submit_processed'])) {
 			unset($_POST['submit']);
 			unset($_SESSION['submit_processed']);
@@ -87,8 +87,8 @@ require_once "../../functions/functions.php";
 				
                 <!-- UNOS PODATAKA ***************************** -->
 				<?php 
-					if(isset($_POST['orderObject'])){
-						$order = json_decode($_POST['orderObject'], true);
+					if(isset($_GET['orderObject'])){
+						$order = json_decode($_GET['orderObject'], true);
 				?> 
 					<!--NAME AND SURNAME ******************************-->
                     <label for="payer" class="label__heading">Ime i prezime nalogodavca</label>
