@@ -1,7 +1,7 @@
 <?php
 	@session_start();		
 	
-	if(!isset($_POST['submit']) && !isset($_POST['orderType'])){
+	if($_SERVER['REQUEST_METHOD'] !== 'POST') && !isset($_POST['orderType'])){
 		header("Location: ../");	
 		exit();
 	}	

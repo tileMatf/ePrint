@@ -2,7 +2,7 @@
 
 @session_start();
 
-	if(isset($_POST['submit']) && isset($_SESSION['status']) && $_SESSION['status'] == '1'){
+	if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['status']) && $_SESSION['status'] == '1'){
 		header('Location: ' . $_SERVER['HTTP_REFERER']);
 		exit();
 	}
@@ -11,7 +11,7 @@
 	require_once '../functions/mail.php';
 	require_once '../functions/functions.php';
 
-	if(isset($_POST['submit'])) {
+	if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		try{
 		
 			$status = 0;
@@ -168,8 +168,8 @@
 			}
 		?> 		
 		<?php 
-			if(isset($_POST['orderObject'])){
-				$order = json_decode($_POST['orderObject'], true);				
+			if(isset($_GET['orderObject'])){
+				$order = json_decode($_GET['orderObject'], true);				
 		?>
 			<!--UPLOAD dugme-->  
             <input type='file' name='fileToUpload' id="file" class="inputfile" accept='.jpe,.jpg,.jpeg,.png,.pdf'>			

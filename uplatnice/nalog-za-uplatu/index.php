@@ -5,9 +5,9 @@
 include("../../header.php");
 require_once "../../functions/functions.php";
 
-	if(isset($_POST['submit'])) {
+	if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		if(isset($_SESSION['login']) && isset($_SESSION['submit_processed'])) {
-			unset($_POST['submit']);
+			//unset($_POST['submit']);
 			unset($_SESSION['submit_processed']);
 		} else {
 			try{
@@ -85,8 +85,8 @@ require_once "../../functions/functions.php";
                 <div class="form-box">				
 				<!-- UNOS PODATAKA ***************************** -->
 				<?php 
-					if(isset($_POST['orderObject'])){
-						$order = json_decode($_POST['orderObject'], true);
+					if(isset($_GET['orderObject'])){
+						$order = json_decode($_GET['orderObject'], true);
 				?>                
 
 					<!--NAME AND SURNAME ******************************-->
@@ -216,7 +216,7 @@ require_once "../../functions/functions.php";
 										else 
 											echo ''; ?>">
                     </label>
-					
+
 					<?php
 						} else {
 					?>
@@ -347,13 +347,15 @@ require_once "../../functions/functions.php";
 										else 
 											echo ''; ?>">
                     </label>
+					
 					<?php if(isset($_SESSION['user_info'])) {?> 
 						<label for="savedOrder">
-							<input type="checkbox" name="savedOrder" id="saveOrder" <?php echo isset($_POST['savedOrder']) ? 'checked' : ''?>>
-							<span class="label-body">Prikaži u sačuvanim narudžbinama</span>
+							<input type="checkbox" name="savedOrder" id="savedOrder" <?php echo isset($_POST['savedOrder']) ? 'checked' : ''?>>
+							<span class="label-body">Sačuvaj narudžbinu</span>
 						</label>
 					<?php } ?>
 					<?php } ?>
+					
 					<input type="hidden" name="orderType" id="orderType" value="uplatnice/nalog-za-uplatu">					
 					<input type="hidden" id="successMessage" value="Nalog za uplatu je uspešno naručen.">
                     <!-- POSALJI DUGME -->

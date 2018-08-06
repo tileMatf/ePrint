@@ -1,22 +1,28 @@
 <?php
 
-	function readjustText($text) {
-		if(strlen($text) <= 59){			
+	function readjustText($text, $max_length) {
+		if(!isset($text))
+			return $text;
+		if(strlen($text) <= $max_length){			
 			return $text;
 		}
 		$new_text = "";
-		while(strlen($text) > 59){
-			if(substr($text, 58, 1) === " ") {
-				$new_text .= substr($text, 0, 59) . "\n";
-				$text = substr($text, 59);
+		$text_parts = [];
+		while(strlen($text) > $max_length){
+			if(substr($text, $max_length-1, 1) === " ") {
+				$new_text = substr($text, 0, $max_length); //. "\n";
+				array_push($text_parts, $new_text);
+				$text = substr($text, $max_length);
 			} else {
-				$last_space = strrpos($text, " ", -(strlen($text)-59));
-				$new_text .= trim(substr($text, 0, $last_space)) . "\n";
+				$last_space = strrpos($text, " ", -(strlen($text)-$max_length));
+				$new_text = trim(substr($text, 0, $last_space)) . "\n";
+				array_push($text_parts, $new_text);
 				$text = trim(substr($text, $last_space));
 			} 
 		}		
-		$new_text .= $text;
-		return $new_text;
+		//$new_text .= $text;
+		array_push($text_parts, $text);
+		return $text_parts;
 	}
 
 	function getSecondIndexOfSpace($text) {
@@ -71,16 +77,16 @@
 		if($input === null || $input === '')
 			return '';
         $cyr = [
-            'а','б','в','г','д','ђ','е','ж','з','и','j','к','л','љ','м','н','њ','о','п',
-            'р','с','т','ћ','у','ф','х','ц','ч','џ','ш',
-            'А','Б','В','Г','Д','Ђ','Е','Ж','З','И','Ј','К','Л','Љ','М','Н','Њ','О','П',
-            'Р','С','Т','Ћ','У','Ф','Х','Ц','Ч','Џ','Ш','', ',',
+            'љ','њ','џ','а','б','в','г','д','ђ','е','ж','з','и','j','к','л','м','н','о','п',
+            'р','с','т','ћ','у','ф','х','ц','ч','ш',
+            'Љ','Њ','Џ','А','Б','В','Г','Д','Ђ','Е','Ж','З','И','Ј','К','Л','М','Н','О','П',
+            'Р','С','Т','Ћ','У','Ф','Х','Ц','Ч','Ш'
         ];
         $lat = [
-            'a','b','v','g','d','đ','e','ž','z','i','j','k','l','lj','m','n','nj','o','p',
-            'r','s','t','ć','u','f','h','c','č','dž','š',
-            'A','B','V','G','D','Đ','E','Ž','Z','I','J','K','L','LJ','M','N','NJ','O','P',
-            'R','S','T','Ć','U','F','H','C','Č','Dž','Š', '', ','
+            'lj','nj','dž','a','b','v','g','d','đ','e','ž','z','i','j','k','l','m','n','o','p',
+            'r','s','t','ć','u','f','h','c','č','š',
+            'LJ','NJ','Dž','A','B','V','G','D','Đ','E','Ž','Z','I','J','K','L','M','N','O','P',
+            'R','S','T','Ć','U','F','H','C','Č','Š'
         ];
         $input = str_replace($lat, $cyr, $input);
 		return $input;

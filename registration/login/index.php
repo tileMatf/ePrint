@@ -20,6 +20,19 @@
 			unset($_SESSION['error_message']);
 			unset($_SESSION['statusMessage']);
 			unset($statusMessage);
+			/*setting cookie with email and password when 'remember me' is checked*/
+			if(!empty($_POST['remember'])){
+				setcookie ("email",$_POST["email"],time()+ (10 * 365 * 24 * 60 * 60), false);
+				setcookie ("psw",$_POST["psw"],time()+ (10 * 365 * 24 * 60 * 60), false);
+			} else {
+				if(isset($_COOKIE["email"])) {
+					setcookie ("email","");
+				}
+				if(isset($_COOKIE["psw"])) {
+					setcookie ("psw","");
+				}
+			}
+			
 			echo json_encode($sql_result[0]);
 		} else {
 			$_SESSION['user_info'] = null;
