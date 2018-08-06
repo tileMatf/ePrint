@@ -64,21 +64,8 @@ require_once '../../functions/functions.php';
 				<!-- Loading slika -->
 				<img src="../../images/loader.gif" class="gif_image" id="gif_image">
 				<!-- Paragraf za povratnu poruku -->		
-				<p style="font-size:2rem; font-style: italic;" id="statusMessage"></p>				
-				<?php
-					if(isset($status)){
-						if($status === true){
-							if(isset($status) && $status)
-								echo '<p id="statusMessage" style="font-size:2rem; font-style: italic; color: green">'.
-									htmlspecialchars($statusMessage) . '</p>';							
-						}
-						else {
-							if(isset($statusMessage) && $statusMessage)
-								echo '<p id="statusMessage" style="font-size:2rem; font-style: italic; color: red">'.
-									htmlspecialchars($statusMessage) . '</p>';						
-						}
-					}
-				?>
+				<p style="font-size:2rem; font-style: italic;" id="statusMessage"><p id="statusMessage2"></p></p>				
+				
 			<img class="slike-forma" src="../../images/formulari-za-adresiranje1.png"/>	
 			</div>
 			
