@@ -149,9 +149,9 @@
                 <label for="psw-repeat"><b>Potvrdite lozinku</b></label>
                 <input type="password" placeholder="Potvrdite Vašu lozinku" name="pswRepeat" required>
                     
-                <label>
+                <!--<label>
                 <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Zapamti me
-                </label>
+                </label>-->
             
                 <p>Pravljenjem naloga prihvatate naše <a href="#" style="color:dodgerblue">uslove</a> poslovanja</p>
             
