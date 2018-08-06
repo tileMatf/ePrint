@@ -110,10 +110,10 @@
 					<p id="errorLoginMsg"> </p>
                     <hr>
                     <label for="email"><b>Email</b></label>
-                    <input type="text" placeholder="Unesite email" name="email" required>
+                    <input type="text" placeholder="Unesite email" name="email" id="email" required>
                 
                     <label for="psw"><b>Lozinka</b></label>
-                    <input type="password" placeholder="Unesite lozinku" name="psw" required>
+                    <input type="password" placeholder="Unesite lozinku" name="psw" id="psw" required>
                         
                     <button type="submit" class="buttonStyle" name="login">Login</button>
                     <label>
