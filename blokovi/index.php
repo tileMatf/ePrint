@@ -102,6 +102,7 @@
 			unset($_POST);
 			$_POST = array();
 			$statusMessage = "Uspešno poslata narudžbina.";
+			$statusMessage2 = "Profaktura će biti poslata na Vaš mail. <br>  Isporuka u skladu sa uslovima poslovanja.";
 		} else {
 			$statusMessage .= " Došlo je do greške prilikom upisa narudžbine u bazu, pokušajte ponovo.";
 		}
@@ -126,21 +127,15 @@
 
         <!--Stampanje section-->
         <section class="section__stampanje">
-            <div class="container">
+            <div class="container container-form">
                 <h2 class="section__heading">Preslikavajući blokovi</h2>
-            </div>
-			
-            <!-- OVDE POCINJE FORMA ZA ***BLOKOVE*** echo htmlspecialchars($_SERVER['PHP_SELF']);-->
-            <form name="orderForm" id="orderForm" enctype="multipart/form-data" method="post" 
-				action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" onsubmit="return(validate());">
-                <div class="form-box">
 				<!-- Paragraf za povratnu poruku -->	
 				<?php
 					if(isset($status)){
 						if($status === true){
 							if(isset($statusMessage) && $statusMessage)
 								echo '<p id="statusMessage" style="font-size:2rem; font-style: italic; color: green">'.
-									htmlspecialchars($statusMessage) . '</p>';							
+									htmlspecialchars($statusMessage) . '<p id="statusMessage2">' . $statusMessage2 . '</p></p>';							
 						}
 						else {
 							if(isset($statusMessage) && $statusMessage)
@@ -148,7 +143,14 @@
 									htmlspecialchars($statusMessage) . '</p>';						
 						}
 					}
-				?> 
+				?>
+            </div>
+			
+            <!-- OVDE POCINJE FORMA ZA ***BLOKOVE*** echo htmlspecialchars($_SERVER['PHP_SELF']);-->
+            <form name="orderForm" id="orderForm" enctype="multipart/form-data" method="post" 
+				action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" onsubmit="return(validate());">
+                <div class="form-box">
+				 
 				<?php 
 					if(isset($_GET['orderObject'])){
 						$order = json_decode($_GET['orderObject'], true);

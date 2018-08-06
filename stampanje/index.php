@@ -119,6 +119,7 @@
 			unset($_POST);
 			$_POST = array();
 			$statusMessage = "Uspešno poslata narudžbina";
+			$statusMessage2 = "Profaktura će biti poslata na Vaš mail. <br>  Isporuka u skladu sa uslovima poslovanja.";
 		} else {
 			$statusMessage = "Došlo je do greške prilikom upisa narudžbine u bazu, pokušajte ponovo.";
 		}
@@ -142,31 +143,29 @@
 
     <!--Stampanje section-->
     <section class="section__stampanje">
-      <div class="container">
-        <h2 class="section__heading">Štampanje</h2>		
-      </div>
-
-      <!-- OVDE POCINJE FORMA ZA ***STAMPANJE*** -->
-      <form method="POST" name="orderForm" enctype="multipart/form-data" onsubmit="return(validate())";
-		action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
-        <div class="form-box">
+      <div class="container container-form">
+        <h2 class="section__heading">Štampanje</h2>
 		<!-- Paragraf za povratnu poruku -->		
 		<?php
 			if(isset($status)){
 				if($status === true){
 					if(isset($statusMessage) && $statusMessage)
 						echo '<p style="font-size:2rem; font-style: italic; color: green">'.
-							htmlspecialchars($statusMessage) .'</p>';
+							htmlspecialchars($statusMessage) . '<p id="statusMessage2">' . $statusMessage2 . '</p></p>';
 				}
 				else {
 					if(isset($_statusMessage) && $statusMessage)
 						echo '<p style="font-size:2rem; font-style: italic; color: red">'.
 							htmlspecialchars($statusMessage) . '</p>';						
-				}
-				if(isset($_SESSION['user_info']) && isset($_POST['submit']))
-					echo '<input type="button" value="Sačuvaj narudžbinu" id="saveOrder" title="Možete sačuvati narudžbinu u Vašem nalogu"><br><br>';
+				}				
 			}
 		?> 		
+      </div>
+
+      <!-- OVDE POCINJE FORMA ZA ***STAMPANJE*** -->
+      <form method="POST" name="orderForm" enctype="multipart/form-data" onsubmit="return(validate())";
+		action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
+        <div class="form-box">		
 		<?php 
 			if(isset($_GET['orderObject'])){
 				$order = json_decode($_GET['orderObject'], true);				

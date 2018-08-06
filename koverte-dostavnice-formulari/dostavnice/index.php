@@ -58,6 +58,10 @@ require_once '../../functions/functions.php';
         <section class="section__stampanje">
             <h2 class="section__heading">Dostavnice</h2>
             <div class="container container-form">
+				<!-- Loading slika -->
+				<img src="../../images/loader.gif" class="gif_image" id="gif_image">
+				<!-- Paragraf za povratnu poruku -->		
+				<p style="font-size:2rem; font-style: italic;" id="statusMessage"><p id="statusMessage2"></p></p>								
                 <img class="slike-forma" src="../../images/dostavnice.png"/>
             </div>
 

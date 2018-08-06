@@ -959,3 +959,8 @@ table.container {
   .buttonForm {
 
   }
+  
+  #statusMessage2 {
+	font-size: 17px;
+	color: green;
+  }

@@ -64,6 +64,7 @@
 			unset($_POST);
 			$_POST = array();
 			$statusMessage = "Uspešno naručena koverta.";
+			$statusMessage2 = "Profaktura će biti poslata na Vaš mail. <br>  Isporuka u skladu sa uslovima poslovanja.";
 		} else{
 			$statusMessage = "Došlo je do greške prilikom upisa narudžbine u bazu, pokušajte ponovo.";
 		}
@@ -92,18 +93,15 @@
 
         <!--Stampanje section-->
         <section class="section__stampanje">
-            <h2 class="section__heading">Standardne koverte</h2>
-
-            <!-- OVDE POCINJE FORMA ** -->
-            <form method="POST" name="orderForm" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
-                <div class="form-box">
+			<div class="container container-form">
+				<h2 class="section__heading">Standardne koverte</h2>
 				<!-- Paragraf za povratnu poruku -->		
 				<?php
 					if(isset($status)){
 						if($status === true){
 							if(isset($statusMessage) && $statusMessage)
 								echo '<p id="statusMessage" style="font-size:2rem; font-style: italic; color: green">'.
-									htmlspecialchars($statusMessage) . '</p>';
+									htmlspecialchars($statusMessage) . '<p id="statusMessage2">' . $statusMessage2 . '</p></p>';
 						}
 						else {
 							if(isset($statusMessage) && $statusMessage)
@@ -112,6 +110,11 @@
 						}
 					}
 				?> 
+			</div>
+            <!-- OVDE POCINJE FORMA ** -->
+            <form method="POST" name="orderForm" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
+                <div class="form-box">
+				
 				<?php 
 					if(isset($_GET['orderObject'])){
 						$order = json_decode($_GET['orderObject'], true);

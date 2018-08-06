@@ -135,6 +135,7 @@
    /*Ajax call on confirm of order*/
    var paymentConfirm = document.getElementById("paymentConfirm");
    var statusMessage = document.getElementById("statusMessage");
+   var statusMessage2 = document.getElementById("statusMessage2");
    
    if(paymentConfirm != null){
 	   paymentConfirm.addEventListener('click', function(event){
@@ -176,7 +177,8 @@
 				   statusMessage.style.color = "red";
 			   } else if(this.responseText === '5'){
 				   form.reset();
-				   statusMessage.innerHTML = successMessage;
+				   statusMessage.innerHTML = successMessage; 
+				   statusMessage2.innerHTML = "Profaktura će biti poslata na Vaš mail. <br>  Isporuka u skladu sa uslovima poslovanja.";
 				   statusMessage.style.color = "green";
 			   } else {
 				   statusMessage.innerHTML = "Došlo je do greške prilikom naručivanja. Molim Vas, pokušajte ponovo."
