@@ -486,7 +486,7 @@ button:hover {
     top: 15px;
     right: 35px;
     color: #333;
-    font-size: 50px;
+    font-size: 55px;
     font-weight: bold;
     transition: 0.3s;
 }
@@ -502,7 +502,7 @@ button:hover {
     position: absolute;
     top: 15px;
     right: 35px;
-    color: #333;
+    color: rgb(243, 232, 232);
     font-size: 40px;
     font-weight: bold;
     transition: 0.3s;
@@ -668,6 +668,12 @@ input[type="submit"].button-primary:hover {
 .slike-forma {
     border: 1px solid rgb(0,0,0);
     border: 1px solid rgba(0,0,0,0.35);
+    border-radius: 5px;
+    max-width: 650px;
+}
+
+.slike-forma-omot {
+
     border-radius: 5px;
     max-width: 650px;
 }
