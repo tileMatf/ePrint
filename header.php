@@ -41,12 +41,12 @@
             <div class="row">
                 <div class="six columns">
                     <a href="http://localhost/eprint/">
-                        <img class="logo" src="http://localhost/eprint/images/eprint1.png" alt="eprint_logo" />
+                        <img class="logo" src="http://localhost/eprint/images/eprint1.png" />
                     </a>
                 </div>
                 <!--NAVIGATION-->
-                <?php 		
-			
+                <?php 
+				
 			require_once("/registration/order.php");
 			require_once("/registration/connection.php");	
 				
@@ -141,17 +141,17 @@
 				</p>
                 <hr>
                 <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Upišite Vašu email adresu" name="email" id="email" required>
+                <input type="text" placeholder="Upišite Vašu email adresu" name="email" required>
             
                 <label for="psw"><b>Lozinka</b></label>
-                <input type="password" placeholder="Upišite Vašu lozinku" name="psw" id="psw" required>
+                <input type="password" placeholder="Upišite Vašu lozinku" name="psw" required>
             
                 <label for="psw-repeat"><b>Potvrdite lozinku</b></label>
-                <input type="password" placeholder="Potvrdite Vašu lozinku" name="pswRepeat" id="psw-repeat" required>
+                <input type="password" placeholder="Potvrdite Vašu lozinku" name="pswRepeat" required>
                     
-                <!-- <label>
+                <label>
                 <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Zapamti me
-                </label> -->
+                </label>
             
                 <p>Pravljenjem naloga prihvatate naše <a href="#" style="color:dodgerblue">uslove</a> poslovanja</p>
             

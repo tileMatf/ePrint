@@ -118,7 +118,7 @@
 		if($status === true){
 			unset($_POST);
 			$_POST = array();
-			$statusMessage = "Uspešno poslata narudžbina.";
+			$statusMessage = "Uspešno poslata narudžbina";
 		} else {
 			$statusMessage = "Došlo je do greške prilikom upisa narudžbine u bazu, pokušajte ponovo.";
 		}
