@@ -30,6 +30,10 @@ button:focus { outline: none; }
     color: #fff;
 }
 
+.modal::-webkit-scrollbar { 
+    display: none; 
+}
+
 .proba {
     border: 1px solid green;
 }
