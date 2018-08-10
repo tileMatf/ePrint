@@ -8,14 +8,14 @@
 	include("../header.php");
 ?>
 	<section class="section__stampanje">
-		<div class="container">
+		<div class="container container-form">
 			<h2 class="section__heading">Promena lozinke</h2>
+			<!-- Statusna poruka-->
+			<p id="statusMessage"></p>
 		</div>
 				
 		<form name="changePassForm" id="changePassForm">
-			<div class="form-box">
-				<!-- Statusna poruka-->
-				<p id="statusMessage"></p>				
+			<div class="form-box">				
 				
 				<!-- Stara lozinka-->
 				<label for="oldPassword" class="label__heading">Stara lozinka</label>

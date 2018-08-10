@@ -891,6 +891,11 @@ a.disabled-links{
     color: #fff;
 }
 
+.success {
+	font-size:2rem; 
+	font-style: italic;
+}
+
 .silver {
 	color: rgb(180, 180, 180);
 }

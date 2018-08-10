@@ -1,8 +1,11 @@
 <?php
 
 @session_start();
+	
+	$inputJSON = file_get_contents('php://input');
+	$input = json_decode($inputJSON, TRUE);
 
-	if(!isset($_POST['orderType'])){
+	if(!isset($input['orderType'])){
 		header("Location: ../../");
 		exit();
 	}
@@ -72,21 +75,21 @@
 			exit("3");
 	} else {
 		exit("4");
-	}		
-	
+	}			
 
 	/*Sending mail*/
 	if($status == true){
+		$_POST = $input;
 		/*Create mail message*/		
 		if(isset($_SESSION['user_info']))
-			$message = makeMessage($_POST['orderType'], $_SESSION['user_info']->Email);
+			$message = makeMessage($input['orderType'], $_SESSION['user_info']->Email);
 		else 
-			$message = makeMessage($_POST['orderType']);
+			$message = makeMessage($input['orderType']);
 		
-		if($_POST['orderType'] === 'stampanje' || $_POST['orderType'] == 'blokovi'){
-			if(isset($_POST['sendCopy'])) {
-				if(isset($_POST['sendCopyEmail'])){
-					$status = sendMail($message, $_POST['sendCopyEmail']);		
+		if($input['orderType'] === 'stampanje' || $input['orderType'] == 'blokovi'){
+			if(isset($input['sendCopy'])) {
+				if(isset($input['sendCopyEmail'])){
+					$status = sendMail($message, $input['sendCopyEmail']);		
 				} else if(isset($_SESSION['user_info'])){
 					$status = sendMail($message, $_SESSION['user_info']->Email);
 				} else {
@@ -98,9 +101,9 @@
 		} else {
 			$status = sendMail($message);
 			
-			if(isset($_POST['sendCopy'])){
-				if(isset($_POST['sendCopyEmail'])){		
-					$status = $status && sendMailWithPicture($_POST['sendCopyEmail']);
+			if(isset($input['sendCopy'])){
+				if(isset($input['sendCopyEmail'])){		
+					$status = $status && sendMailWithPicture($input['sendCopyEmail']);
 				} else if(isset($_SESSION['user_info'])){
 					$status = $status && sendMailWithPicture($_SESSION['user_info']->Email);
 				}

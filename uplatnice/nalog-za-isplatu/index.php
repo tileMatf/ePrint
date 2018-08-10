@@ -64,7 +64,9 @@ include('../../header.php');
 				<!-- Loading slika-->
 				<img src="../../images/loader.gif" class="gif_image" id="gif_image">
 				<!-- Paragraf za povratnu poruku -->		
-				<p style="font-size:2rem; font-style: italic;" id="statusMessage"><p id="statusMessage2"></p></p>
+				<p class='success' id="statusMessage">
+					<p id="statusMessage2"></p>
+				</p>
 				
 				<img class="slike-forma" src="../../images/nalog-za-isplatu-slika.png"/> 
             </div>
@@ -74,8 +76,8 @@ include('../../header.php');
 				
                 <!-- UNOS PODATAKA ***************************** -->
 				<?php 
-					if(isset($_GET['orderObject'])){
-						$order = json_decode($_GET['orderObject'], true);
+					if(isset($_GET['orderObject'])){						
+						$order = json_decode($_GET['orderObject'], true);						
 				?>				
 					<!--NAME AND SURNAME ******************************-->
                     <label for="payer" class="label__heading">Ime i prezime</label>
@@ -336,7 +338,7 @@ include('../../header.php');
 										else 
 											echo ''; ?>">
                     </label>
-					<?php if(isset($_SESSION['user_info'])) { ?> 					
+					<?php if(isset($_SESSION['user_info']) && !isset($order)) { ?> 					
 						<label for="savedOrder">
 						<input type="checkbox" name="savedOrder" id="savedOrder" <?php echo isset($_POST['savedOrder']) ? 'checked' : ''?>>
 						<span class="label-body">Sačuvaj narudžbinu</span>
@@ -347,7 +349,7 @@ include('../../header.php');
 					<input type="hidden" name="orderType" id="orderType" value="uplatnice/nalog-za-isplatu">
 					<input type="hidden" id="successMessage" value="Nalog za isplatu je uspešno naručen.">
                     <input class="button-primary" type="submit" value="Prikaži" name="submit" />
-                    <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
+                    <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudžbinom prihvatam uslove poslovanja.</p>
                 </div>
             </form>
         </section>
