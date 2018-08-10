@@ -30,6 +30,11 @@ button:focus { outline: none; }
     color: #fff;
 }
 
+.container-accept {
+    max-width: 400px;
+    margin: 0 auto
+}
+
 .modal::-webkit-scrollbar { 
     display: none; 
 }
@@ -677,7 +682,6 @@ input[type="submit"].button-primary:hover {
 }
 
 .slike-forma-omot {
-
     border-radius: 5px;
     max-width: 650px;
 }
@@ -894,6 +898,19 @@ a.disabled-links{
 .success {
 	font-size:2rem; 
 	font-style: italic;
+}
+#paymentCancel {
+    margin-top: 10px;
+    display: block;
+    background-color: #f44336;
+}
+
+#paymentCancel:focus {
+    color: #fff;
+}
+
+#paymentCancel:active {
+    color: #fff;
 }
 
 .silver {
