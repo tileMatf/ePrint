@@ -502,7 +502,7 @@ button:hover {
 
 .close:hover,
 .close:focus {
-    color: rgb(0,202,35);
+    color: rgb(218, 13, 13);
     text-decoration: none;
     cursor: pointer;
 }
