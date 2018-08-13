@@ -2,14 +2,15 @@
 	session_start();
 	include("../connection.php");
 	
+	$inputJSON = file_get_contents('php://input');
+	$input = json_decode($inputJSON, TRUE);
 	
-	if(!isset($_SESSION['user_info']) || !isset($_POST['oldPassword']) || !isset($_POST['newPassword'])){
+	if(!isset($_SESSION['user_info']) || !isset($input['oldPassword']) || !isset($input['newPassword'])){
 		header("Location: ../../");
 		exit();
 	}
 	
-	$db = new DB();
-	//echo $db->changePass($_SESSION['user_info']->ID, 'chadmajkl', 'chadmajkl1');
-	echo $db->changePass($_SESSION['user_info']->ID, $_POST['oldPassword'], $_POST['newPassword']);
+	$db = new DB();		
+	echo $db->changePass($_SESSION['user_info']->ID, $input['oldPassword'], $input['newPassword']);
 	
 ?>

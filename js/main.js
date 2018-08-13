@@ -143,26 +143,20 @@
 		   
 		   if(pictureModal != null)
 			   pictureModal.style.display = "none";
-		   var form = document.forms.namedItem('orderForm');
+		   var formData = document.forms.namedItem('orderForm').elements;
 		   var successMessage = document.getElementById('successMessage').getAttribute('value');
-		   var formData = new FormData(form);
-		   
+		   var formDataObject = {};		   
 		   var xhttp = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+		   
+		   Array.prototype.forEach.call(formData, function(field){
+			formDataObject[field.name] = field.value;
+		   });
 
-		   /*let parameters = [...formData.entries()]
-					.map(e => encodeURIComponent(e[0]) + "=" + encodeURIComponent(e[1]));
-		   */
-		   var parameters = [];
-		   for (var pair of formData.entries()) {
-			   parameters.push(
-				   encodeURIComponent(pair[0]) + '=' +
-				   encodeURIComponent(pair[1])
-			   );
-		   }
 		   xhttp.open("POST",  window.location.origin + "/eprint/functions/confirm/", true);
 		   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		   xhttp.onload = function(e){
 			   document.getElementById("gif_image").style.display = "none";
+
 			   if(this.responseText === '1'){
 				   statusMessage.innerHTML = "Greška prilikom skladištenja dodatog fajla. Molim Vas, pokušajte ponovo.";
 				   statusMessage.style.color = "red";
@@ -176,8 +170,8 @@
 				   statusMessage.innerHTML = "Oprostite, došlo je do greške prilikom slanja i naručivanja porudžbine. Molim Vas, pokušajte ponovo.";
 				   statusMessage.style.color = "red";
 			   } else if(this.responseText === '5'){
-				   form.reset();
-				   statusMessage.innerHTML = successMessage; 
+				  // form.reset();
+				   statusMessage.innerHTML = successMessage; 				   
 				   statusMessage2.innerHTML = "Profaktura će biti poslata na Vaš mail. <br>  Isporuka u skladu sa uslovima poslovanja.";
 				   statusMessage.style.color = "green";
 			   } else {
@@ -190,11 +184,9 @@
 			   statusMessage.innerHTML = "Oprostite, došlo je do greške na serveru prilikom slanja. Molim Vas, pokušajte ponovo.";
 			   statusMessage.style.color = "red";
 		   }
-		   xhttp.send(parameters.join("&"));
-		   document.getElementById("gif_image").style.display = "block";
-		   
-	   });
-		   
+		   xhttp.send(JSON.stringify(formDataObject));
+		   document.getElementById("gif_image").style.display = "block";		   
+	   });		   
    }
 		   
    var loginButton = document.getElementsByName("login")[0];
@@ -202,13 +194,22 @@
 
    if(loginButton != null){
 	   loginButton.addEventListener('click', function(event) {
-		   event.preventDefault();
-		   var form = document.forms.namedItem('loginForm');		
-		   var formData = new FormData(form);					
+		   event.preventDefault();		   		  
+		   var formData = document.forms.namedItem('loginForm').elements;
+		   var formDataObject = {};
 		   var xhttp = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
 
+		   Array.prototype.forEach.call(formData, function(field){
+			formDataObject[field.name] = field.value;
+		   });
+		   
+		   /* for(let field of formData){
+			formDataObject[field.name] = field.value;
+		   }*/
+		   /*var form = document.forms.namedItem('loginForm');		
+		   var formData = new FormData(form);
 		   let parameters = [...formData.entries()]
-					   .map(e => encodeURIComponent(e[0]) + "=" + encodeURIComponent(e[1]))
+					   .map(e => encodeURIComponent(e[0]) + "=" + encodeURIComponent(e[1]))*/
 		   
 		   xhttp.open("POST",  window.location.origin + "/eprint/registration/login/", true);
 		   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -232,10 +233,11 @@
 		   };
 			   
 		   xhttp.onerror = function(e) {
-			   errorMessage.innerHTML = "Oprostite, došlo je do greške prilikom logovanja. Molim Vas, pokušajte ponovo.";
+			   errorMessage.innerHTML = "Oprostite, došlo je do greške prilikom prijavljivanja. Molim Vas, pokušajte ponovo.";
 			   errorMessage.style.color = "red";
 		   }
-		   xhttp.send(parameters.join('&'));
+		   xhttp.send(JSON.stringify(formDataObject));
+		   //xhttp.send(parameters.join('&'));
 	   });	
    }
    
@@ -251,10 +253,14 @@
 			   form.pswRepeat.focus();
 			   return;
 		   }
-		   var formData = new FormData(form);					
+		   var formData = form.elements;					
+		   var formDataObject = {};
 		   var xhttp = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-		   let parameters = [...formData.entries()]
-					   .map(e => encodeURIComponent(e[0]) + "=" + encodeURIComponent(e[1]))
+			
+		   Array.prototype.forEach.call(formData, function(field){
+			formDataObject[field.name] = field.value;
+		   });
+		   
 		   xhttp.open("POST",  window.location.origin + "/eprint/registration/register/", true);
 		   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		   xhttp.onreadystatechange = function(e){
@@ -280,7 +286,7 @@
 			   registrationMessage.innerHTML = "Oprostite, došlo je do greške prilikom registracije. Molim Vas, pokušajte ponovo.";
 			   registrationMessage.style.color = "red";
 		   }
-		   xhttp.send(parameters.join('&'));
+		   xhttp.send(JSON.stringify(formDataObject));
 	   });	
    }
    
@@ -330,17 +336,18 @@
 			   return;
 		   }
 		   var form = document.forms.namedItem('changePassForm');
-		   var formData = new FormData(form);					
-
-		   let parameters = [...formData.entries()]
-					   .map(e => encodeURIComponent(e[0]) + "=" + encodeURIComponent(e[1]))
+		   var formData = form.elements;					
+		   var formDataObject = {};
+		   Array.prototype.forEach.call(formData, function(field){
+			formDataObject[field.name] = field.value;
+		   });
 		   
 		   var xhttp = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
 		   xhttp.open("POST",  window.location.origin + "/eprint/registration/change_pass/", true);
 		   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		   xhttp.onreadystatechange = function(e){
 			   
-			   if(xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200){					
+			   if(xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200){								   
 				   if(this.responseText == true){
 					   statusMessage.innerHTML = "Uspešno izmenjena lozinka!";
 					   statusMessage.style.color = "green";
@@ -361,7 +368,7 @@
 		   xhttp.onerror = function(e) {
 			   statusMessage.innerHTML = "Došlo je do greške prilikom promene lozinke, pokušajte ponovo.";
 		   }
-		   xhttp.send(parameters.join('&'));
+		   xhttp.send(JSON.stringify(formDataObject));
 	   });	
    }
 	   

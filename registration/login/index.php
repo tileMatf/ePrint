@@ -4,9 +4,11 @@
 	include("../user.php");
 
 	$db = new DB();
+	$inputJSON = file_get_contents('php://input');
+	$input = json_decode($inputJSON, TRUE);
 	
-	if(isset($_POST['email']) && isset($_POST['psw'])){
-		$sql_result = $db->loginCheck($_POST['email'], $_POST['psw']);
+	if(isset($input['email']) && isset($input['psw'])){		
+		$sql_result = $db->loginCheck($input['email'], $input['psw']);
 		if($sql_result === 0){
 			$_SESSION['user_info'] = null;
 			unset($_SESSION['user_info']);
@@ -21,9 +23,9 @@
 			unset($_SESSION['statusMessage']);
 			unset($statusMessage);
 			/*setting cookie with email and password when 'remember me' is checked*/
-			if(!empty($_POST['remember'])){
-				setcookie ("email",$_POST["email"],time()+ (10 * 365 * 24 * 60 * 60), false);
-				setcookie ("psw",$_POST["psw"],time()+ (10 * 365 * 24 * 60 * 60), false);
+			if(!empty($input['remember'])){
+				setcookie ("email",$input["email"],time()+ (10 * 365 * 24 * 60 * 60), false);
+				setcookie ("psw",$input["psw"],time()+ (10 * 365 * 24 * 60 * 60), false);
 			} else {
 				if(isset($_COOKIE["email"])) {
 					setcookie ("email","");

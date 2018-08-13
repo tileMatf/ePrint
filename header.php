@@ -82,7 +82,7 @@
                             <button name="logout" class="buttonStyle">Odjavi se</button>
                           </li>
                           <li> 
-                           <a href="./password" class="linkPassword">Promeni lozinku</a>
+                           <a href="http://localhost/eprint/password" class="linkPassword">Promeni lozinku</a>
                           </li>
 						</ul>
 	  				  </div>

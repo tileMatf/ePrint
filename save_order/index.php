@@ -1,7 +1,7 @@
 <?php
 	@session_start();		
 	
-	if($_SERVER['REQUEST_METHOD'] !== 'POST' && !isset($_POST['orderType'])){
+	if($_SERVER['REQUEST_METHOD'] !== 'POST' && !isset($input['orderType'])){
 		header("Location: ../");	
 		exit();
 	}	
@@ -9,39 +9,39 @@
 	require_once("../../registration/order.php");
 	require_once("../../registration/connection.php");
 	
-		switch($_POST['orderType']){
+		switch($input['orderType']){
 			case 'stampanje':
-				$order = new Stampanje($_POST, $_FILES);
+				$order = new Stampanje($input, $_FILES);
 				break;
 			case 'blokovi':
-				$order = new Blok($_POST, $_FILES);
+				$order = new Blok($input, $_FILES);
 				break;
 			case 'uplatnice/nalog-za-uplatu':
-				$order = new UplataIsplataPrenos($_POST, 'Uplata');
+				$order = new UplataIsplataPrenos($input, 'Uplata');
 				break;
 			case 'uplatnice/nalog-za-isplatu':
-				$order = new UplataIsplataPrenos($_POST, 'Isplata');
+				$order = new UplataIsplataPrenos($input, 'Isplata');
 				break;
 			case 'uplatnice/nalog-za-prenos':
-				$order = new UplataIsplataPrenos($_POST, 'Prenos');
+				$order = new UplataIsplataPrenos($input, 'Prenos');
 				break;
 			case 'koverte-dostavnice-formulari/koverte-sa-povratnicom':
-				$order = new KovertaSaPovratnicom($_POST);
+				$order = new KovertaSaPovratnicom($input);
 				break;
 			case 'koverte-dostavnice-formulari/dostavnice':
-				$order = new Dostavnica($_POST);
+				$order = new Dostavnica($input);
 				break;
 			case 'koverte-dostavnice-formulari/koverte-sa-dostavnicom':
-				$order = new KovertaSaDostavnicom($_POST);
+				$order = new KovertaSaDostavnicom($input);
 				break;
 			case 'koverte-dostavnice-formulari/formulari-za-adresiranje':
-				$order = new FormularZaAdresiranje($_POST);
+				$order = new FormularZaAdresiranje($input);
 				break;
 			case 'koverte-dostavnice-formulari/standardne-koverte':
-				$order = new StandardnaKoverta($_POST);
+				$order = new StandardnaKoverta($input);
 				break;
 			case 'omot-spisa':
-				$order = new OmotSpisa($_POST);
+				$order = new OmotSpisa($input);
 				break;
 		}
 		
