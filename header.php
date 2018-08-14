@@ -34,7 +34,7 @@
     <link rel="apple-touch-icon" href="http://localhost/eprint/images/icon.png">
 </head>
 
-<body>
+<body class="no-scroll">
     <div class="container container__main shadow">
         <!--HEADER-->
         <header>

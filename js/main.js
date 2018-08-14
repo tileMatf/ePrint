@@ -3,6 +3,7 @@
    var modal2 = document.getElementById('registerModal');
    var pictureModal = document.getElementById('pictureModal');
    var closeButtons = document.getElementsByClassName('close');
+   var closePayments = document.getElementById("paymentCancel");
    var cancelButtons = document.getElementsByClassName('cancelbtn');
    var pictureClose = document.getElementsByClassName("picture-close")[0];
    var loginModalButton = document.getElementById("loginButton");
@@ -37,6 +38,11 @@
 	   var cancelButton = cancelButtons[j];
 	   cancelButton.addEventListener('click', closeModal, false);
    }
+   //ne radi
+   for(var k = 0; k < closePayments.length; k++){
+		var closePayment = closePayments[k];
+		closePayment.addEventListener('click', closeModal, false);
+	}
    
    function closeModal(e) {
 	   if(modal != null)
@@ -423,3 +429,4 @@
 	   form.submit();
 	   //alert(params);
    }*/
+

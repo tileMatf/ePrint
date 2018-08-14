@@ -15,7 +15,13 @@ require_once "../../functions/functions.php";
 						<span class='picture-close'>&times;</span>
 							<img id='pictureContent' class='picture-modal-content' 
 							src='../../functions/createPicture.php?". http_build_query($_POST) . "'>
-						<button id='paymentConfirm'>Potvrdi</button>
+                            <div class='container-accept'>
+
+                                <button id='paymentConfirm'>Potvrdi</button>
+
+                                <button id='paymentCancel'>Otkaži</button>
+
+                            </div>
 					</div>"; 
 			} catch(RuntimeException $e){
 				return $e->getMessage();
