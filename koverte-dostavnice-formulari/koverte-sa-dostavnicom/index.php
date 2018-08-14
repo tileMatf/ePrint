@@ -113,7 +113,7 @@ require_once '../../functions/functions.php';
                     <!-- ***************************** -->
 
                     <!--Postanski broj ******************************-->
-                    <label for="zipCode" class="label__heading">Postanski broj</label>
+                    <label for="zipCode" class="label__heading">Poštanski broj</label>
                     <input name="zipCode" class="u-full-width" type="text"
 						value="<?php echo isset($order['ZipCode']) ? $order['ZipCode'] : '' ?>">
                     <!-- ***************************** -->

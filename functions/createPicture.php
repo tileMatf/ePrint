@@ -162,11 +162,37 @@ require_once("stringFunctions.php");
 			imagettftext($image, 20, 0, 170, 1000, $black, $font_path, $envelopeReciver);
 			imagettftext($image, 20, 0, 170, 1030, $black, $font_path, convertToCyrilic(strtoupper(isset($_GET['nameLastname']) ? $_GET['nameLastname'] : '')));
 			
-			imagettftext($image, 20, 0, 170, 1060, $black, $font_path, "Ул. ". convertToCyrilic(isset($_GET['adress']) ? $_GET['adress'] : ''));
-			imagettftext($image, 20, 0, 170, 1090, $black, $font_path, convertToCyrilic(isset($_GET['zipCode']) ? $_GET['zipCode'] : ''));
-			imagettftext($image, 20, 0, 280, 1090, $black, $font_path, convertToCyrilic(strtoupper(isset($_GET['location']) ? $_GET['location'] : '')));
+			$readjustedText = isset($_GET['adress']) ? readjustText($_GET['adress'], 23) : '';
+			if(is_array($readjustedText) && count($readjustedText) > 0){
+				imagettftext($image, 20, 0, 170, 1055, $black, $font_path, "Ул. " . convertToCyrilic($readjustedText[0]));
+				for($i = 1; $i < count($readjustedText); $i++){
+					imagettftext($image, 20, 0, 170, 1055+$i*30, $black, $font_path, convertToCyrilic($readjustedText[$i]));
+				}
+				$y_coord = 1500+(count($readjustedText)*30);
+			} else {
+				if(isset($_GET['adress'])) {
+					imagettftext($image, 20, 0, 170, 1060, $black, $font_path, "Ул. " . convertToCyrilic($_GET['adress']));
+				}
+			}
+			
+			if(isset($y_coord)){
+				imagettftext($image, 20, 0, 170, 1110, $black, $font_path, convertToCyrilic(isset($_GET['zipCode']) ? $_GET['zipCode'] : ''));
+				imagettftext($image, 20, 0, 280, 1110, $black, $font_path, convertToCyrilic(strtoupper(isset($_GET['location']) ? $_GET['location'] : '')));
+			} else {
+				imagettftext($image, 20, 0, 170, 1090, $black, $font_path, convertToCyrilic(isset($_GET['zipCode']) ? $_GET['zipCode'] : ''));
+				imagettftext($image, 20, 0, 280, 1090, $black, $font_path, convertToCyrilic(strtoupper(isset($_GET['location']) ? $_GET['location'] : '')));
+			}
 			imagettftext($image, 19, 0, 680, 1000, $black, $font_path, "ПОШТАРИНА ПЛАЋЕНА КОД ПОШТЕ");
-			imagettftext($image, 20, 0, 800, 1030, $black, $font_path, convertToCyrilic(strtoupper(isset($_GET['postagePaid']) ? $_GET['postagePaid'] : '')));
+			$readjustedText = isset($_GET['postagePaid']) ? readjustText($_GET['postagePaid'], 17) : '';
+			if(is_array($readjustedText) && count($readjustedText) > 0){
+				imagettftext($image, 20, 0, 800, 1030, $black, $font_path, convertToCyrilic(strtoupper($readjustedText[0])));
+				for($i = 1; $i < count($readjustedText); $i++){
+					imagettftext($image, 20, 0, 800, 1030+$i*30, $black, $font_path, convertToCyrilic(strtoupper($readjustedText[$i])));
+				}
+				$y_coord = 1500+(count($readjustedText)*30);
+			} else {
+				imagettftext($image, 20, 0, 800, 1030, $black, $font_path, convertToCyrilic(strtoupper(isset($_GET['postagePaid']) ? $_GET['postagePaid'] : '')));
+			}
 			imagettftext($image, 25, 0, 600, 1060, $black, $font_path, convertToCyrilic($_GET['envelopeType']));
 			imagerectangle($image, 590, 1020, 650, 1070, $black);
 			if($_GET['forInput'] === 'Javni izvrsitelj')
@@ -174,8 +200,8 @@ require_once("stringFunctions.php");
 			else 
 				imagettftext($image, 20, 0, 830, 1325, $black, $font_path, "УПРАВНИ ПОСТУПАК");			
 			imagettftext($image, 20, 0, 2050, 1400, $black, $font_path, $envelopeReciver);
-			imagettftext($image, 20, 0, 2050, 1450, $black, $font_path, convertToCyrilic($_GET['nameLastname']));
-			$readjustedText = readjustText($_GET['adress'], 17);
+			imagettftext($image, 20, 0, 2050, 1450, $black, $font_path, convertToCyrilic(isset($_GET['nameLastname'])) ? $_GET['nameLastname'] : '');
+			$readjustedText = isset($_GET['adress']) ? readjustText($_GET['adress'], 17) : '';
 			
 			if(is_array($readjustedText) && count($readjustedText) > 0){
 				imagettftext($image, 20, 0, 2050, 1500, $black, $font_path, "Ул. " . convertToCyrilic($readjustedText[0]));
@@ -190,8 +216,21 @@ require_once("stringFunctions.php");
 			}
 			
 			//imagettftext($image, 20, 0, 2050, 1500, $black, $font_path, "Ул. " . convertToCyrilic($_GET['adress']));
-			//imagettftext($image, 20, 0, 2050, 1550, $black, $font_path, $_GET['zipCode'] . " " . convertToCyrilic($_GET['location']));
-			imagettftext($image, 20, 0, 2050, $y_coord, $black, $font_path, $_GET['zipCode'] . " " . convertToCyrilic($_GET['location']));
+			if(isset($_GET['zipCode'])){
+				if(isset($y_coord)){
+					imagettftext($image, 20, 0, 2050, $y_coord, $black, $font_path, $_GET['zipCode']);
+				}
+				else {
+					imagettftext($image, 20, 0, 2050, 1550, $black, $font_path, $_GET['zipCode'] . " " . convertToCyrilic($_GET['location']));
+				}
+			}
+			if(isset($_GET['location'])){
+				if(isset($y_coord)){ 
+					imagettftext($image, 20, 0, 2130, $y_coord, $black, $font_path, " " . convertToCyrilic($_GET['location']));
+				} else {
+					imagettftext($image, 20, 0, 2060, 1550, $black, $font_path, " " . convertToCyrilic($_GET['location']));
+				}
+			}
 			break;
 		case 'koverte-dostavnice-formulari/dostavnice':			
 			imagettftext($image, 16, 0, 70, 50, $black, $font_path, $envelopeReciver);
