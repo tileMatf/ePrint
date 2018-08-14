@@ -77,7 +77,7 @@ include('../../header.php');
                 <!-- UNOS PODATAKA ***************************** -->
 				<?php 
 					if(isset($_GET['orderObject'])){						
-						$order = json_decode($_GET['orderObject'], true);						
+						$order = json_decode($_GET['orderObject'], true);
 				?>				
 					<!--NAME AND SURNAME ******************************-->
                     <label for="payer" class="label__heading">Ime i prezime</label>
@@ -185,29 +185,24 @@ include('../../header.php');
 						include("../../delivery_fields.php");
 					?>
 					
-                    <!--Krajnja poruka-->
+                    <!-- PORUKA -->
                     <label for="message" class="label__heading">Poruka</label>
                     <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"><?php echo isset($order['Comment']) ? $order['Comment'] : ''?></textarea>
-                    <!-- Varijabilni podaci i prihvatam uslove 
-                    <label for="varData">
-                        <input type="checkbox" name="varData" id="varData" 
-							<?php //echo isset($order['VariableData']) && $order['VariableData'] === '1' ? 'checked' : ''?>>
-                        <span class="label-body">Varijabilni podaci</span>
-                    </label> -->
+                    
+					<!-- SLANJE KOPIJE CHECKBOX -->
                     <label class="sendCopy" for="sendCopy">
                         <input type="checkbox" id="sendCopy" name="sendCopy"
 							<?php echo isset($order['SendCopy']) && $order['SendCopy'] === '1' ? "checked" : "" ?>>
                         <span class="label-body">Pošalji kopiju sebi</span>
                         <input type="text" placeholder="Upišite Vaš email" id="sendCopyEmail" name="sendCopyEmail"
 							value="<?php if(isset($_SESSION['user_info'])) 
-											echo $_SESSION['user_info']->Email;
+											echo $_SESSION['user_info']->Email; 
 										else if(isset($_POST['sendCopyEmail'])) 
-											echo $_POST['sendCopyEmail'];
-										else 
-											echo ''; ?>">
+											echo $_POST['sendCopyEmail']; ?>">
                     </label>
-					
-					<?php
+					<?php	
+						$_POST['savedOrder'] = null;
+						unset($_POST['savedOrder']);
 						} else {
 					?>
 					
@@ -318,37 +313,33 @@ include('../../header.php');
 						include("../../delivery_fields.php");
 					?>
                     
-                    <!--Krajnja poruka-->
+                    <!-- PORUKA -->
                     <label for="message" class="label__heading">Poruka</label>
                     <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"><?php echo isset($_POST['comment']) ? $_POST['comment'] : ''?></textarea>
-                    <!-- Varijabilni podaci i prihvatam uslove 
-                    <label for="varData">
-                        <input type="checkbox" name="varData" id="varData"
-							<?php //echo isset($_POST['varData']) ? 'checked' : ''?>>
-                        <span class="label-body">Varijabilni podaci</span>
-                    </label> -->
+                    
+					<!-- SLANJE KOPIJE CHECKBOX -->
                     <label for="sendCopy">
                         <input type="checkbox" name="sendCopy" id="sendCopy">
                         <span class="label-body">Pošalji kopiju sebi</span>
-						<input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail"
+						<input type="text" placeholder="Upišite Vaš email" id="sendCopyEmail" name="sendCopyEmail"
 							value="<?php if(isset($_SESSION['user_info'])) 
 											echo $_SESSION['user_info']->Email;
 										else if(isset($_POST['sendCopyEmail'])) 
-											echo $_POST['sendCopyEmail'];
-										else 
-											echo ''; ?>">
+											echo $_POST['sendCopyEmail']; ?>">
                     </label>
-					<?php if(isset($_SESSION['user_info']) && !isset($order)) { ?> 					
-						<label for="savedOrder">
-						<input type="checkbox" name="savedOrder" id="savedOrder" <?php echo isset($_POST['savedOrder']) ? 'checked' : ''?>>
+					
+					<!-- CUVANJE NARUDZBINE CHECKBOX -->
+					<?php if(isset($_SESSION['user_info']) && !isset($order)) { ?> 										
+					<label for="savedOrder">
+						<input type="checkbox" name="savedOrder" id="savedOrder">
 						<span class="label-body">Sačuvaj narudžbinu</span>
-						</label>
+					</label>
 					<?php }?>					
 					<?php }?>
 					
-					<input type="hidden" name="orderType" id="orderType" value="uplatnice/nalog-za-isplatu">
+					<input name="orderType" type="hidden" id="orderType" value="uplatnice/nalog-za-isplatu">
 					<input type="hidden" id="successMessage" value="Nalog za isplatu je uspešno naručen.">
-                    <input class="button-primary" type="submit" value="Prikaži" name="submit" />
+                    <input name="submit" class="button-primary" type="submit" value="Prikaži" />
                     <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudžbinom prihvatam uslove poslovanja.</p>
                 </div>
             </form>
