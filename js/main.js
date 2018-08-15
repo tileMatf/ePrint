@@ -3,9 +3,9 @@
    var modal2 = document.getElementById('registerModal');
    var pictureModal = document.getElementById('pictureModal');
    var closeButtons = document.getElementsByClassName('close');
-   var closePayments = document.getElementById("paymentCancel");
    var cancelButtons = document.getElementsByClassName('cancelbtn');
    var pictureClose = document.getElementsByClassName("picture-close")[0];
+   var pictureCloseBtn = document.getElementById("paymentCancel");
    var loginModalButton = document.getElementById("loginButton");
    var registerModalButton = document.getElementById("registerButton");
    var registrationMessage = document.getElementById("registrationMsg");
@@ -27,7 +27,13 @@
 	   pictureClose.onclick = function() { 
 		   pictureModal.style.display = "none";
 	   }
-   }	
+   }
+   /*Closing picture preview on button click*/
+   if(pictureCloseBtn != null){
+	   pictureCloseBtn.onclick = function() { 
+		   pictureModal.style.display = "none";
+	   }
+   }   
    
    /*adding event listener to close button*/
    for(var i = 0; i < closeButtons.length; i++){
@@ -38,11 +44,6 @@
 	   var cancelButton = cancelButtons[j];
 	   cancelButton.addEventListener('click', closeModal, false);
    }
-   //ne radi
-   for(var k = 0; k < closePayments.length; k++){
-		var closePayment = closePayments[k];
-		closePayment.addEventListener('click', closeModal, false);
-	}
    
    function closeModal(e) {
 	   if(modal != null)
@@ -50,7 +51,7 @@
 	   if(modal2 != null)
 		   modal2.style.display='none';	
 	   if(pictureModal != null)
-	   pictureModal.style.display='none';		
+			pictureModal.style.display='none';		
    }
    
    /*close modals on ESC key press*/
