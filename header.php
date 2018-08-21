@@ -71,8 +71,7 @@
 			}
 			else {
 				echo 
-					'<form name="logoutForm">
-					  <div class="six columns navigation__header navigation__header--nav">
+					' <div class="six columns navigation__header navigation__header--nav">
 						<!--Logout-->
                         <ul class="nav login nav-reg-log">
                             <li>
@@ -86,7 +85,6 @@
                           </li>
 						</ul>
 	  				  </div>
-					</form>
 					<!--end of column-->';
 			}
 		?>

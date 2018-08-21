@@ -317,19 +317,15 @@
    
    if(logoutButton != null){
 	   logoutButton.addEventListener('click', function(event) {
-		   event.preventDefault();
-		   var form = document.forms.namedItem('logoutForm');
-		   var formData = new FormData(form);					
+		   event.preventDefault();	
 
 		   var xhttp = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
 		   xhttp.open("POST",  window.location.origin + "/eprint/registration/logout/", true);
 		   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		   xhttp.onreadystatechange = function(e){
 			   if(xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200){
-				   form.reset();			
 				   var submitForm = document.forms.namedItem("orderForm"); 
 				   if(submitForm != null){
-					   //submitForm.reset();
 					   window.location.replace(window.location.origin + "/eprint/" + submitForm.orderType.value);
 				   } else {
 					   window.location.reload();
