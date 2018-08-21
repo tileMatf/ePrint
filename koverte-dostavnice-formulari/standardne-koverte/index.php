@@ -202,7 +202,7 @@
                         <span class="label-body">Varijabilni podaci</span>
                     </label>
                     <label class="sendCopy">
-                        <input type="checkbox" id="sendCopy" name="sendCopy"
+                        <input type="checkbox" id="sendCopy" name="sendCopy" value="true"
 							<?php echo isset($order['SendCopy']) && $order['SendCopy'] === '1' ? "checked" : ""?>>
                         <span class="label-body">Pošalji kopiju sebi</span>
                         <input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail" 
@@ -213,6 +213,12 @@
 										else 
 											echo ''; ?>">
                     </label>
+					
+					<!-- CUVANJE NARUDZBINE CHECKBOX -->
+					<label for="savedOrder">
+						<input type="checkbox" name="savedOrder" id="savedOrder" value="true" checked>
+						<span class="label-body">Sačuvaj narudžbinu</span>
+					</label>
 					
 				<?php } else { ?>
 				
@@ -299,7 +305,7 @@
                         <span class="label-body">Varijabilni podaci</span>
                     </label>
                     <label class="sendCopy">
-                        <input type="checkbox" id="sendCopy" name="sendCopy"
+                        <input type="checkbox" id="sendCopy" name="sendCopy" value="true"
 							<?php echo isset($_POST['sendCopy']) ? "checked" : ""?>>
                         <span class="label-body">Pošalji kopiju sebi</span>
                         <input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail" 
@@ -312,8 +318,8 @@
                     </label>
 					<?php if(isset($_SESSION['user_info'])) {?> 
 						<label for="savedOrder">
-							<input type="checkbox" name="savedOrder" id="savedOrder" <?php echo isset($_POST['savedOrder']) ? 'checked' : ''?>>
-							<span class="label-body">Prikaži u sačuvanim narudžbinama</span>
+							<input type="checkbox" name="savedOrder" id="savedOrder" value="true" <?php echo isset($_POST['savedOrder']) ? 'checked' : ''?>>
+							<span class="label-body">Sačuvaj narudžbinu</span>
 						</label>
 					<?php }?>
 					<?php }?>
@@ -321,7 +327,7 @@
 					<input type="hidden" id="successMessage" value="Standardna koverta je uspešno naručena.">
                     <!-- POSALJI DUGME -->
                     <input class="button-primary" type="submit" value="Pošalji" name="submit">
-                    <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
+                    <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudžbinom prihvatam uslove poslovanja.</p>
                 </div>
             </form>
         </section>

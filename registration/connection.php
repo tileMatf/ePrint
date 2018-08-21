@@ -436,8 +436,7 @@ class DB {
 				$query->bindValue(":nalogType", $nalogType, PDO::PARAM_STR);
 			} else {
 				$query = self::$connection->prepare("SELECT * FROM `". $type ."` WHERE UserID = :userID 
-							AND DATE(OrderDate) >= DATE(DATE_SUB(NOW(), INTERVAL ". $beforeDays ." DAY))
-							AND SavedOrder = 1");
+							AND SavedOrder = 1"); //AND DATE(OrderDate) >= DATE(DATE_SUB(NOW(), INTERVAL ". $beforeDays ." DAY))
 			}
 			
 			$query->bindValue(":userID", $userID, PDO::PARAM_INT);

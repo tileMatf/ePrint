@@ -221,14 +221,14 @@ require_once("stringFunctions.php");
 					imagettftext($image, 20, 0, 2050, $y_coord, $black, $font_path, $_GET['zipCode']);
 				}
 				else {
-					imagettftext($image, 20, 0, 2050, 1550, $black, $font_path, $_GET['zipCode'] . " " . convertToCyrilic($_GET['location']));
+					imagettftext($image, 20, 0, 2050, 1550, $black, $font_path, $_GET['zipCode']);
 				}
 			}
 			if(isset($_GET['location'])){
 				if(isset($y_coord)){ 
 					imagettftext($image, 20, 0, 2130, $y_coord, $black, $font_path, " " . convertToCyrilic($_GET['location']));
 				} else {
-					imagettftext($image, 20, 0, 2060, 1550, $black, $font_path, " " . convertToCyrilic($_GET['location']));
+					imagettftext($image, 20, 0, 2130, 1550, $black, $font_path, " " . convertToCyrilic($_GET['location']));
 				}
 			}
 			break;

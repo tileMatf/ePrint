@@ -179,6 +179,12 @@ require_once '../../functions/functions.php';
 											echo ''; ?>">
                     </label>
 					
+					<!-- CUVANJE NARUDZBINE CHECKBOX -->
+					<label for="savedOrder">
+						<input type="checkbox" name="savedOrder" id="savedOrder" checked>
+						<span class="label-body">Sačuvaj narudžbinu</span>
+					</label>
+					
 					<?php } else {?>
 					
                     <!-- ZA -->
@@ -285,14 +291,14 @@ require_once '../../functions/functions.php';
 					<?php if(isset($_SESSION['user_info'])) {?> 
 						<label for="savedOrder">
 							<input type="checkbox" name="savedOrder" id="savedOrder" <?php echo isset($_POST['savedOrder']) ? 'checked' : ''?>>
-							<span class="label-body">Prikaži u sačuvanim narudžbinama</span>
+							<span class="label-body">Sačuvaj narudžbinu</span>
 						</label>
 					<?php }?>
 					<?php }?>
 					<input type="hidden" name="orderType" id="orderType" value="koverte-dostavnice-formulari/koverte-sa-dostavnicom">
 					<input type="hidden" id="successMessage" value="Koverte sa dostavnicom su uspešno naručene.">
                     <input class="button-primary" type="submit" value="Prikaži" name="submit">
-                    <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p> 
+                    <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudžbinom prihvatam uslove poslovanja.</p> 
                 </div>
             </form>
         </section>

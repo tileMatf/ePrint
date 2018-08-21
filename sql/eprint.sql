@@ -182,6 +182,7 @@ CREATE TABLE IF NOT EXISTS `formulariorder` (
 ,`DeliveryZipCode` varchar(255)
 ,`DeliveryLocation` varchar(255)
 ,`OrderID` int(11)
+,`Type` varchar(10)
 ,`Quantity` int(11)
 ,`SendCopy` tinyint(1)
 );
@@ -805,7 +806,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `formulariorder`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `formulariorder`  AS  select `o`.`UserID` AS `UserID`,`o`.`OrderDate` AS `OrderDate`,`o`.`Seen` AS `Seen`,`o`.`SavedOrder` AS `SavedOrder`,`o`.`DeliveryName` AS `DeliveryName`,`o`.`DeliveryEmail` AS `DeliveryEmail`,`o`.`DeliveryPhone` AS `DeliveryPhone`,`o`.`DeliveryAddress` AS `DeliveryAddress`,`o`.`DeliveryZipCode` AS `DeliveryZipCode`,`o`.`DeliveryLocation` AS `DeliveryLocation`,`b`.`OrderID` AS `OrderID`,`b`.`Quantity` AS `Quantity`,`b`.`SendCopy` AS `SendCopy` from (`orders` `o` join `formulari-za-adresiranje` `b` on((`o`.`ID` = `b`.`OrderID`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `formulariorder`  AS  select `o`.`UserID` AS `UserID`,`o`.`OrderDate` AS `OrderDate`,`o`.`Seen` AS `Seen`,`o`.`SavedOrder` AS `SavedOrder`,`o`.`DeliveryName` AS `DeliveryName`,`o`.`DeliveryEmail` AS `DeliveryEmail`,`o`.`DeliveryPhone` AS `DeliveryPhone`,`o`.`DeliveryAddress` AS `DeliveryAddress`,`o`.`DeliveryZipCode` AS `DeliveryZipCode`,`o`.`DeliveryLocation` AS `DeliveryLocation`,`b`.`OrderID` AS `OrderID`,`b`.`Quantity` AS `Quantity`,`b`.`Type` AS `Type`, `b`.`SendCopy` AS `SendCopy` from (`orders` `o` join `formulari-za-adresiranje` `b` on((`o`.`ID` = `b`.`OrderID`))) ;
 
 -- --------------------------------------------------------
 

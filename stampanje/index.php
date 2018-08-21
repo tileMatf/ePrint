@@ -14,7 +14,7 @@
 	if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		try{
 		
-			$status = 0;
+			$status = true;
 			$fileStatus = 0;
 			$bindingFileStatus = 0;	
 			
@@ -25,11 +25,13 @@
 			else {
 				$fileStatus = uploadFile("uploaded_file/", $_FILES["fileToUpload"]);
 			}
+
 			$statusMessage = generateMessage($fileStatus, $_FILES['fileToUpload']);
-			if($fileStatus !== 2 && $fileStatus !== 3)
-				return false;
+			if($fileStatus !== 2 && $fileStatus !== 3){
+				$status = false;
+			}
 		
-			if(!empty($_FILES['bindingFileToUpload']['name'])){
+			if($status && !empty($_FILES['bindingFileToUpload']['name'])){
 				if(isset($_SESSION['user_info'])){
 					$directory = "uploaded_binding_file/". $_SESSION['user_info']->Email . "/";
 					$bindingFileStatus = uploadFile($directory, $_FILES["bindingFileToUpload"]);
@@ -38,31 +40,34 @@
 				}
 				$statusMessage .= " " . generateMessage($bindingFileStatus, $_FILES['bindingFileToUpload']);
 				if($bindingFileStatus !== 2 && $bindingFileStatus !== 3){
-					return false;
+					$status = false;
 				}
 			}
 		
-			if(isset($_SESSION['user_info']))
-				$message = makeMessage('stampanje', $_SESSION['user_info']->Email);
-			else 
-				$message = makeMessage('stampanje');
+			if($status){
+				if(isset($_SESSION['user_info']))
+					$message = makeMessage('stampanje', $_SESSION['user_info']->Email);
+				else 
+					$message = makeMessage('stampanje');
+			}
 			
-			$status = false;
-			if($fileStatus === 2 || $fileStatus === 3){
-				if(!empty($files['bindingFileToUpload']['name'])){
-					if($bindingFileStatus === 2 || $bindingFileStatus === 3){
-						$status = true;
+			if($status){
+				if($fileStatus === 2 || $fileStatus === 3){
+					if(!empty($files['bindingFileToUpload']['name'])){
+						if($bindingFileStatus === 2 || $bindingFileStatus === 3){
+							$status = true;
+						} else {
+							$status = false;
+						}
 					} else {
-						$status = false;
+						$status = true;
 					}
 				} else {
-					$status = true;
+					$status = false;
 				}
-			} else {
-				$status = false;
 			}
 
-			if($status === true) {
+			if($status) {
 				if(isset($_POST['sendCopy'])) {
 					if(isset($_POST['sendCopyEmail'])){
 						$status = sendMail($message, $_POST['sendCopyEmail']);		
@@ -118,12 +123,12 @@
 		if($status === true){
 			unset($_POST);
 			$_POST = array();
-			$statusMessage = "Uspešno poslata narudžbina";
+			$statusMessage = "Uspešno poslata narudžbina. ". $statusMessage;
 			$statusMessage2 = "Profaktura će biti poslata na Vaš mail. <br>  Isporuka u skladu sa uslovima poslovanja.";
-		} else {
-			$statusMessage = "Došlo je do greške prilikom upisa narudžbine u bazu, pokušajte ponovo.";
-		}
-	}	
+		} 
+	} else {
+		$statusMessage = "Došlo je do greške prilikom upisa narudžbine u bazu, pokušajte ponovo.";
+	}
 ?>
  
     <!-- Navigation 2 -->
@@ -152,13 +157,13 @@
 					if(isset($statusMessage) && $statusMessage)
 						echo '<p style="font-size:2rem; font-style: italic; color: green">'.
 							htmlspecialchars($statusMessage) . '<p id="statusMessage2">' . $statusMessage2 . '</p></p>';
-				}
-				else {
-					if(isset($_statusMessage) && $statusMessage)
+				} else {
+					if(isset($statusMessage) && $statusMessage){
 						echo '<p style="font-size:2rem; font-style: italic; color: red">'.
 							htmlspecialchars($statusMessage) . '</p>';						
-				}				
-			}
+					}
+				}								
+			} 
 		?> 		
       </div>
 
@@ -297,11 +302,11 @@
 				include("../delivery_fields.php");
 			?>
 			
-            <!-- Krajnja poruka -->
+            <!-- KRAJNJA PORUKA -->
             <label for="message" class="label__heading">Poruka</label>
             <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"><?php echo isset($order['Comment']) ? $order['Comment'] : "" ?></textarea>
             <label class="sendCopy" for="sendCopy">
-              <input type="checkbox" id="sendCopy" name="sendCopy"
+              <input type="checkbox" id="sendCopy" name="sendCopy" value="true" 
 				<?php echo isset($order['SendCopy']) && $order['SendCopy'] === '1' ? "checked" : "" ?>>
               <span class="label-body">Pošalji kopiju sebi</span>
               <input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail"
@@ -312,6 +317,12 @@
 										else 
 											echo ''; ?>">
             </label>
+			
+			<!-- CUVANJE NARUDZBINE CHECKBOX -->
+			<label for="savedOrder">
+				<input type="checkbox" name="savedOrder" id="savedOrder" value="true" checked>
+				<span class="label-body">Sačuvaj narudžbinu</span>
+			</label>
 			
 		<?php } else { ?>
 			
@@ -448,7 +459,7 @@
             <label for="message" class="label__heading">Poruka</label>
             <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"><?php echo isset($_POST['comment']) ? $_POST['comment'] : "" ?></textarea>
             <label class="sendCopy" for="sendCopy">
-              <input type="checkbox" id="sendCopy" name="sendCopy"
+              <input type="checkbox" id="sendCopy" name="sendCopy" value="true"
 				<?php echo isset($_POST['sendCopy']) ? "checked" : "" ?>>
               <span class="label-body">Pošalji kopiju sebi</span>
               <input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail"
@@ -461,15 +472,15 @@
             </label>
 			<?php if(isset($_SESSION['user_info'])) {?> 
 				<label for="savedOrder">
-					<input type="checkbox" name="savedOrder" id="savedOrder" <?php echo isset($_POST['savedOrder']) ? 'checked' : ''?>>
-					<span class="label-body">Prikaži u sačuvanim narudžbinama</span>
+					<input type="checkbox" name="savedOrder" id="savedOrder" value="true" <?php echo isset($_POST['savedOrder']) ? 'checked' : ''?>>
+					<span class="label-body">Sačuvaj narudžbinu</span>
 				</label>
 			<?php }?>			
 			<?php } ?>			
 			<input type="hidden" name="orderType" id="orderType" value="stampanje">
 			<input type="hidden" id="successMessage" value="Uspešno naručeno.">
             <input class="button-primary" type="submit" value="Pošalji" name="submit">
-            <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p> 
+            <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudžbinom prihvatam uslove poslovanja.</p> 
       </form>
     </div>
   </section>

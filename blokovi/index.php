@@ -15,8 +15,7 @@
 	
 	if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		try{
-		
-			$status = 0;
+			$status = true;
 			$fileStatus = 0;
 			
 			if(isset($_SESSION['user_info'])){
@@ -29,36 +28,34 @@
 			$statusMessage = generateMessage($fileStatus, $_FILES['fileToUpload']);
 			if($fileStatus !== 2 && $fileStatus !== 3){
 				$status = false;
-				$statusMessage = "Neodgovarajući fajl.";
-				return;
 			}
 			
-			if(isset($_SESSION['user_info']))
-				$message = makeMessage('blokovi', $_SESSION['user_info']->Email);
-			else 
-				$message = makeMessage('blokovi');
+			if($status){
+				if(isset($_SESSION['user_info']))
+					$message = makeMessage('blokovi', $_SESSION['user_info']->Email);
+				else 
+					$message = makeMessage('blokovi');
+			}
 
-			if(isset($_POST['sendCopy'])){
-				if(isset($_POST['sendCopyEmail'])){
-					$mailStatus = sendMail($message, $_POST['sendCopyEmail']);		
-				} else if(isset($_SESSION['user_info'])){
-					$mailStatus = sendMail($message, $_SESSION['user_info']->Email);
-				} else {
+			if($status){
+				if(isset($_POST['sendCopy'])){
+					if(isset($_POST['sendCopyEmail'])){
+						$mailStatus = sendMail($message, $_POST['sendCopyEmail']);		
+					} else if(isset($_SESSION['user_info'])){
+						$mailStatus = sendMail($message, $_SESSION['user_info']->Email);
+					} else {
+						$mailStatus = sendMail($message);
+					}
+				}
+				else {
 					$mailStatus = sendMail($message);
 				}
 			}
-			else {
-				$mailStatus = sendMail($message);
-			}
 			
-			$status = false;
-			if(($fileStatus === 2 || $fileStatus === 3) && $mailStatus === true){
-				$status = true;
+			if($status && $mailStatus){
 				if(isset($_SESSION['user_info'])){
 					$_POST['fileToUploadName'] = $_FILES['fileToUpload']['name'];  //pogledati ovaj deo
 				}
-			} else {
-				$status = false;
 			}
 
 			if($status === true){
@@ -101,11 +98,11 @@
 		if($status === true) {
 			unset($_POST);
 			$_POST = array();
-			$statusMessage = "Uspešno poslata narudžbina.";
+			$statusMessage = "Uspešno poslata narudžbina. " . $statusMessage;
 			$statusMessage2 = "Profaktura će biti poslata na Vaš mail. <br>  Isporuka u skladu sa uslovima poslovanja.";
-		} else {
-			$statusMessage .= " Došlo je do greške prilikom upisa narudžbine u bazu, pokušajte ponovo.";
-		}
+		} 
+	} else {
+			$statusMessage = " Došlo je do greške prilikom upisa narudžbine u bazu, pokušajte ponovo.";
 	}
 	
 ?>
@@ -225,7 +222,7 @@
                         <label for="message" class="label__heading">Poruka</label>
                         <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"><?php echo isset($order['Comment']) ? $order['Comment'] : ''?></textarea>
                         <label for="sendCopy">
-                        <input type="checkbox" name="sendCopy" id="sendCopy" 
+                        <input type="checkbox" name="sendCopy" id="sendCopy" value="true"
 							<?php echo isset($order['SendCopy']) && $order['SendCopy'] === '1' ? "checked" : "" ?>>
                         <span class="label-body">Pošalji kopiju sebi</span>
 						<input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail"
@@ -236,6 +233,13 @@
 										else 
 											echo ''; ?>">
                         </label>
+						
+						<!-- CUVANJE NARUDZBINE CHECKBOX -->
+						<label for="savedOrder">
+							<input type="checkbox" name="savedOrder" id="savedOrder" value="true" checked >
+							<span class="label-body">Sačuvaj narudžbinu</span>
+						</label>
+						
 					<?php } else {?>
 				
                     <!--UPLOAD dugme-->
@@ -308,7 +312,7 @@
                         <label for="message" class="label__heading">Poruka</label>
                         <textarea class="u-full-width" placeholder="Dodatni komentar ..." name="comment"><?php echo isset($_POST['comment']) ? $_POST['comment'] : ''?></textarea>
                         <label for="sendCopy">
-                        <input type="checkbox" name="sendCopy" id="sendCopy" 
+                        <input type="checkbox" name="sendCopy" id="sendCopy" value="true"
 							<?php echo isset($_POST['sendCopy']) ? "checked" : "" ?>>
                         <span class="label-body">Pošalji kopiju sebi</span>
 						<input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail"
@@ -321,15 +325,16 @@
                         </label>
 						<?php if(isset($_SESSION['user_info'])) {?> 
 							<label for="savedOrder">
-								<input type="checkbox" name="savedOrder" id="savedOrder" <?php echo isset($_POST['savedOrder']) ? 'checked' : ''?>>
-								<span class="label-body">Prikaži u sačuvanim narudžbinama</span>
+								<input type="checkbox" name="savedOrder" id="savedOrder" value="true" <?php echo isset($_POST['savedOrder']) ? 'checked' : ''?>>
+								<span class="label-body">Sačuvaj narudžbinu</span>
 							</label>
 						<?php } ?>
-						<?php }?>
+						<?php } ?>
+						
 						<input type="hidden" name="orderType" id="orderType" value="blokovi">
 						<input type="hidden" id="successMessage" value="Blokovi su uspešno naručeni.">
                         <input class="button-primary" type="submit" value="Pošalji" name="submit">
-                        <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
+                        <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudžbinom prihvatam uslove poslovanja.</p>
                     </div>
             </form>
         </section>

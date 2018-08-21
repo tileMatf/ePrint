@@ -21,7 +21,7 @@ class Order {
 		$this->DeliveryAddress = isset($data['deliveryAddress']) && !empty($data['deliveryAddress']) ? $data['deliveryAddress'] : null;
 		$this->DeliveryZipCode = isset($data['deliveryZipCode']) && !empty($data['deliveryZipCode']) ? $data['deliveryZipCode'] : null;
 		$this->DeliveryLocation = isset($data['deliveryLocation']) && !empty($data['deliveryLocation']) ? $data['deliveryLocation'] : null;
-		$this->SavedOrder = isset($data['savedOrder']) ? 1 : 0;
+		$this->SavedOrder = isset($data['savedOrder']) && $data['savedOrder'] == true ? 1 : 0;
 	}
 }
 
@@ -45,7 +45,7 @@ class OmotSpisa extends Order {
 		$this->PaperType = $data['typeOfPaper'];
 		$this->Quantity = isset($data['quantity']) && !empty($data['quantity']) ? $data['quantity'] : null;
 		$this->Comment = isset($data['comment']) && !empty($data['comment']) ? $data['comment'] : null;
-		$this->SendCopy = isset($data['sendCopy']) ? 1 : 0;
+		$this->SendCopy = $data['sendCopy'] === true ? 1 : 0;
 	}	
 }
 
@@ -67,7 +67,7 @@ class Blok extends Order{
 		$this->Size = $data['blockSize'];
 		$this->Packing = $data['packing'];
 		$this->Comment = isset($data['comment']) && !empty($data['comment']) ? $data['comment'] : null;
-		$this->SendCopy = isset($data['sendCopy']) ? 1 : 0;
+		$this->SendCopy = isset($data['sendCopy']) && $data['sendCopy'] == true ? 1 : 0;
 	}
 }
 
@@ -89,7 +89,7 @@ class Dostavnica extends Order{
 		$this->ZipCode = isset($data['zipCode']) && !empty($data['zipCode']) ? $data['zipCode'] : null;
 		$this->Location = isset($data['location']) && !empty($data['location']) ? $data['location'] : null;
 		$this->Quantity = isset($data['quantity']) && !empty($data['quantity']) ? $data['quantity'] : null;
-		$this->SendCopy = isset($data['sendCopy']) ? 1 : 0;
+		$this->SendCopy = $data['sendCopy'] === true ? 1 : 0;
 	}
 }
 class FormularZaAdresiranje extends Order{
@@ -101,7 +101,7 @@ class FormularZaAdresiranje extends Order{
 	function __construct($data){
 		parent::__construct($data);
 		$this->Quantity = $data['quantity'];
-		$this->SendCopy = isset($data['sendCopy']) ? 1 : 0;
+		$this->SendCopy = $data['sendCopy'] === true ? 1 : 0;
 		$this->Type = $data['typeOfEnvelope'];
 	}
 }
@@ -130,7 +130,7 @@ class KovertaSaDostavnicom extends Order{
 		$this->PostagePaid = isset($data['postagePaid']) && !empty($data['postagePaid']) ? $data['postagePaid'] : null;
 		$this->EnvelopeType = $data['envelopeType'];
 		$this->Quantity = isset($data['quantity']) && !empty($data['quantity']) ? $data['quantity'] : null;
-		$this->SendCopy = isset($data['sendCopy']) ? 1 : 0;
+		$this->SendCopy = $data['sendCopy'] === true ? 1 : 0;
 	}
 }
 
@@ -144,7 +144,7 @@ class KovertaSaPovratnicom extends Order{
 		parent::__construct($data);
 		$this->Quantity = $data['quantity'];
 		$this->Color = $data['color'];
-		$this->SendCopy = isset($data['sendCopy']) ? 1 : 0;
+		$this->SendCopy = $data['sendCopy'] === true ? 1 : 0;
 	}
 }
 
@@ -178,7 +178,7 @@ class Stampanje extends Order{
 		$this->HeftingType = $data['heftingType'];
 		$this->DrillingType = $data['drillingType'];
 		$this->Comment = isset($data['comment']) && !empty($data['comment']) ? $data['comment'] : null;
-		$this->SendCopy = isset($data['sendCopy']) ? 1 : 0;
+		$this->SendCopy = isset($data['sendCopy']) && $data['sendCopy'] == true ? 1 : 0;
 	}
 }
 
@@ -212,7 +212,7 @@ class StandardnaKoverta extends Order{
 		$this->AddressPrintRow4 = isset($data['printingOnAdressPage4']) ? $data['printingOnAdressPage4'] : null;
 		$this->Comment = isset($data['comment']) && !empty($data['comment']) ? $data['comment'] : null;
 		$this->VariableData = isset($data['varData']) ? 1 : 0;
-		$this->SendCopy = isset($data['sendCopy']) ? 1 : 0;
+		$this->SendCopy = isset($data['sendCopy']) && $data['sendCopy'] == true ? 1 : 0;
 	}
 }
 
@@ -261,7 +261,7 @@ class UplataIsplataPrenos extends Order {
 		$this->SetQuantity = isset($data['quantity']) && !empty($data['quantity']) ? $data['quantity'] : null;		
 		$this->Comment = isset($data['comment']) && !empty($data['comment']) ? $data['comment'] : null;
 		$this->VariableData = isset($data['varData']) ? 1 : 0;
-		$this->SendCopy = isset($data['sendCopy']) ? 1 : 0;
+		$this->SendCopy = $data['sendCopy'] === true ? 1 : 0;
 
 		$this->OrdererAccount = isset($data['accountOfOrderer']) && !empty($data['accountOfOrderer']) ? $data['accountOfOrderer'] : null;
 		$this->ModelDebit = isset($data['mockUpDebit']) && !empty($data['mockUpDebit']) ? $data['mockUpDebit'] : null;		

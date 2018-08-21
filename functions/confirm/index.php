@@ -4,7 +4,8 @@
 	
 	$inputJSON = file_get_contents('php://input');
 	$input = json_decode($inputJSON, TRUE);
-
+	//exit($inputJSON);
+	
 	if(!isset($input['orderType'])){
 		header("Location: ../../");
 		exit();
@@ -87,7 +88,7 @@
 			$message = makeMessage($input['orderType']);
 		
 		if($input['orderType'] === 'stampanje' || $input['orderType'] == 'blokovi'){
-			if(isset($input['sendCopy'])) {
+			if($input['sendCopy'] == true) {
 				if(isset($input['sendCopyEmail'])){
 					$status = sendMail($message, $input['sendCopyEmail']);		
 				} else if(isset($_SESSION['user_info'])){
@@ -101,7 +102,7 @@
 		} else {
 			$status = sendMail($message);
 			
-			if(isset($input['sendCopy'])){
+			if($input['sendCopy'] == true){
 				if(isset($input['sendCopyEmail'])){		
 					$status = $status && sendMailWithPicture($input['sendCopyEmail']);
 				} else if(isset($_SESSION['user_info'])){
@@ -117,5 +118,6 @@
 	else {
 		echo "5";
 		$_SESSION['submit_processed'] = true;
+		reset($_POST); 
 	}
 ?>

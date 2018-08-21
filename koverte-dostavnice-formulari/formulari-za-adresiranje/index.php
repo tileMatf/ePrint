@@ -96,10 +96,10 @@ require_once '../../functions/functions.php';
 					
 					<!-- Vrsta formulara-->
 					<label class="label__heading">Tip</label>
+					<?php echo $order['Type']; ?>
                     <label for="S5">
                         <input type="radio" name="typeOfEnvelope" id="S5" value="S5" 
-							<?php echo isset($order['Type']) && $order['Type'] == 'S5' ? "checked" : "" ?>>
-                        <span>S5</span>
+							<?php echo isset($order['Type']) && $order['Type'] == 'S5' ? "checked" : "" ?>>                        <span>S5</span> 
                     </label>
 	                <label for="S6">
                         <input type="radio" name="typeOfEnvelope" id="S6" value="S6" 
@@ -124,6 +124,12 @@ require_once '../../functions/functions.php';
 										else 
 											echo ''; ?>">
                     </label>
+					
+					<!-- CUVANJE NARUDZBINE CHECKBOX -->
+						<label for="savedOrder">
+							<input type="checkbox" name="savedOrder" id="savedOrder" checked>
+							<span class="label-body">Sačuvaj narudžbinu</span>
+						</label>
 					
 					<?php } else { ?>
 				
@@ -177,7 +183,7 @@ require_once '../../functions/functions.php';
 					<?php if(isset($_SESSION['user_info'])) {?> 
 						<label for="savedOrder">
 							<input type="checkbox" name="savedOrder" id="savedOrder" <?php echo isset($_POST['savedOrder']) ? 'checked' : ''?>>
-							<span class="label-body">Prikaži u sačuvanim narudžbinama</span>
+							<span class="label-body">Sačuvaj narudžbinu</span>
 						</label>
 					<?php }?>
 					<?php }?>
@@ -185,7 +191,7 @@ require_once '../../functions/functions.php';
 					<input type="hidden" id="successMessage" name="successMessage" value="Formulari za adresiranje su uspešno naručeni.">
                     <input class="button-primary" type="submit" value="Prikaži" name="submit" >
                     <!-- Smisli kako ovo lepse da izgleda -->
-                    <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p> 
+                    <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudžbinom prihvatam uslove poslovanja.</p> 
                 </div>
             </form>
         </section>

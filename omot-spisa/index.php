@@ -120,12 +120,12 @@ require_once '../functions/functions.php';
                     <label for="100gr/m2">
                         <input type="radio" name="typeOfPaper" id="100gr/m2" value="100gr/m2" 
 							<?php echo isset($order['PaperType']) && $order['PaperType'] == '100gr/m2' ? "checked" : "" ?>>
-                        <span>100gr/m<sup>2</span>
+                        <span>100 gr/m<sup>2</span>
                     </label>
                     <label for="300gr/m2" class="label__heading">
                         <input type="radio" name="typeOfPaper" id="300gr/m2" value="300gr/m2" 
 							<?php echo isset($order['PaperType']) && $order['PaperType'] == '300gr/m2' ? "checked" : ""?>>
-                        <span>300gr/m<sup>2</span>
+                        <span>300 gr/m<sup>2</span>
                     </label>
                     <!-- ***************************** -->
 
@@ -163,6 +163,12 @@ require_once '../functions/functions.php';
 										else 
 											echo ''; ?>">
                         </label>
+						
+						<!-- CUVANJE NARUDZBINE CHECKBOX -->
+						<label for="savedOrder">
+							<input type="checkbox" name="savedOrder" id="savedOrder" checked>
+							<span class="label-body">Sačuvaj narudžbinu</span>
+						</label>
 						
 				<?php } else { ?>
 				
@@ -208,12 +214,12 @@ require_once '../functions/functions.php';
                     <label for="100gr/m2">
                         <input type="radio" name="typeOfPaper" id="100gr/m2" value="100gr/m2" 
 							<?php echo (isset($_POST['typeOfPaper']) && $_POST['typeOfPaper'] == '100gr/m2') || !isset($_POST['typeOfPaper']) ? "checked" : "" ?>>
-                        <span>100gr/m<sup>2</span>
+                        <span>100 gr/m<sup>2</span>
                     </label>
                     <label for="300gr/m2" class="label__heading">
                         <input type="radio" name="typeOfPaper" id="300gr/m2" value="300gr/m2" 
 							<?php echo isset($_POST['typeOfPaper']) && $_POST['typeOfPaper'] == '300gr/m2' ? "checked" : ""?>>
-                        <span>300gr/m<sup>2</span>
+                        <span>300 gr/m<sup>2</span>
                     </label>
                     <!-- ***************************** -->
 
@@ -254,14 +260,14 @@ require_once '../functions/functions.php';
 						<?php if(isset($_SESSION['user_info'])) {?> 
 							<label for="savedOrder">
 								<input type="checkbox" name="savedOrder" id="savedOrder" <?php echo isset($_POST['savedOrder']) ? 'checked' : ''?>>
-								<span class="label-body">Prikaži u sačuvanim narudžbinama</span>
+								<span class="label-body">Sačuvaj narudžbinu</span>
 							</label>
 						<?php }?>
 						<?php }?>
 						<input type="hidden" name="orderType" id="orderType" value="omot-spisa">
 						<input type="hidden" id="successMessage" value="Omot spisa je uspešno naručen.">
                         <input class="button-primary" type="submit" value="Prikaži" name="submit" >
-                        <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
+                        <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudžbinom prihvatam uslove poslovanja.</p>
                 </div>
             </form>
         </section>

@@ -138,7 +138,18 @@
 	   return false;
 	   }
    }
-	   
+	
+	var saveOrderCheckbox = document.getElementById("savedOrder");
+	if(saveOrderCheckbox != null){
+		saveOrderCheckbox.addEventListener("change", function(e){
+			if(e.checked){
+				saveOrderCheckbox.nextSibling().value = "1";
+			} else {
+				saveOrderCheckbox.nextSibling().value = "0";
+			}
+		});
+	}
+	
    /*Ajax call on confirm of order*/
    var paymentConfirm = document.getElementById("paymentConfirm");
    var statusMessage = document.getElementById("statusMessage");
@@ -154,16 +165,22 @@
 		   var successMessage = document.getElementById('successMessage').getAttribute('value');
 		   var formDataObject = {};		   
 		   var xhttp = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
-		   
+		 
 		   Array.prototype.forEach.call(formData, function(field){
-			formDataObject[field.name] = field.value;
+			if(field.type == "checkbox"){
+				formDataObject[field.name] = field.checked;
+			} else if(field.type == "radio") {
+				if(field.checked)
+					formDataObject[field.name] = field.value;
+			} else {
+				formDataObject[field.name] = field.value;
+			}
 		   });
-
+			
 		   xhttp.open("POST",  window.location.origin + "/eprint/functions/confirm/", true);
 		   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		   xhttp.onload = function(e){
 			   document.getElementById("gif_image").style.display = "none";
-
 			   if(this.responseText === '1'){
 				   statusMessage.innerHTML = "Greška prilikom skladištenja dodatog fajla. Molim Vas, pokušajte ponovo.";
 				   statusMessage.style.color = "red";
@@ -267,7 +284,6 @@
 		   Array.prototype.forEach.call(formData, function(field){
 			formDataObject[field.name] = field.value;
 		   });
-		   
 		   xhttp.open("POST",  window.location.origin + "/eprint/registration/register/", true);
 		   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		   xhttp.onreadystatechange = function(e){

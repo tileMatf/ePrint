@@ -202,11 +202,16 @@ include('../../header.php');
 										else if(isset($_POST['sendCopyEmail'])) 
 											echo $_POST['sendCopyEmail']; ?>">
                     </label>
-					<?php	
-						$_POST['savedOrder'] = null;
-						unset($_POST['savedOrder']);
-						} else {
-					?>
+					
+					<!-- CUVANJE NARUDZBINE CHECKBOX -->
+					<label for="savedOrder">
+						<input type="checkbox" name="savedOrder" id="savedOrder" checked>
+						<span class="label-body">Sačuvaj narudžbinu</span>
+					</label>
+					
+				<?php	
+					} else {
+				?>
 					
                     <!--NAME AND SURNAME ******************************-->
                     <label for="payer" class="label__heading">Ime i prezime</label>
@@ -321,7 +326,8 @@ include('../../header.php');
                     
 					<!-- SLANJE KOPIJE CHECKBOX -->
                     <label for="sendCopy">
-                        <input type="checkbox" name="sendCopy" id="sendCopy">
+                        <input type="checkbox" name="sendCopy" id="sendCopy"
+							<?php echo isset($_POST['sendCopy']) ? 'checked' : ''?>>
                         <span class="label-body">Pošalji kopiju sebi</span>
 						<input type="text" placeholder="Upišite Vaš email" id="sendCopyEmail" name="sendCopyEmail"
 							value="<?php if(isset($_SESSION['user_info'])) 
@@ -331,13 +337,13 @@ include('../../header.php');
                     </label>
 					
 					<!-- CUVANJE NARUDZBINE CHECKBOX -->
-					<?php if(isset($_SESSION['user_info']) && !isset($order)) { ?> 										
-					<label for="savedOrder">
-						<input type="checkbox" name="savedOrder" id="savedOrder">
-						<span class="label-body">Sačuvaj narudžbinu</span>
-					</label>
-					<?php }?>					
-					<?php }?>
+					<?php if(isset($_SESSION['user_info'])) {?>
+						<label for="savedOrder">
+							<input type="checkbox" name="savedOrder" id="savedOrder" <?php if(isset($_POST['savedOrder'])) echo "checked"; ?>>
+							<span class="label-body">Sačuvaj narudžbinu</span>
+						</label>
+					<?php } ?>
+					<?php } ?>
 					
 					<input name="orderType" type="hidden" id="orderType" value="uplatnice/nalog-za-isplatu">
 					<input type="hidden" id="successMessage" value="Nalog za isplatu je uspešno naručen.">

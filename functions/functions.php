@@ -22,7 +22,7 @@ function uploadFile($target_dir, $file){
 	$target_file = $target_dir . basename($file['name']);
 	$uploadOk = 1;
 	$fileStatus = 0;
-	$fileType = pathinfo($target_file,PATHINFO_EXTENSION);	
+	$fileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
 	// Check if file is a actual image or fake image
 	/*$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);		
@@ -232,8 +232,8 @@ function makeMessage($type, $user = null){
 					<li>Boja: '.$_POST['color'].'</li>
 					<li>Količina: '.$_POST['quantity'].'</li>
 				</ul>';
-	} else if($type === 'dostavnica'){
-		$message .= '<label> Tip: </label> Dostavnica </br>
+	} else if($type === 'koverte-dostavnice-formulari/dostavnice'){
+		$message .= '<label> Tip: </label> Dostavnice </br>
 				<label> Izabrane opcije: </label> </br>
 				<ul>
 					<li>Za: '.$_POST['forInput'].'</li>

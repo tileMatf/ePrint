@@ -209,6 +209,12 @@ require_once "../../functions/functions.php";
 											echo ''; ?>">
                     </label>
 
+					<!-- CUVANJE NARUDZBINE CHECKBOX -->
+					<label for="savedOrder">
+						<input type="checkbox" name="savedOrder" id="savedOrder" checked>
+						<span class="label-body">Sačuvaj narudžbinu</span>
+					</label>
+					
 					<?php
 						} else {
 					?>
@@ -352,7 +358,7 @@ require_once "../../functions/functions.php";
 					<input type="hidden" id="successMessage" value="Nalog za uplatu je uspešno naručen.">
                     <!-- POSALJI DUGME -->
                     <input class="button-primary" type="submit" value="Prikaži" name="submit">
-                    <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
+                    <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudžbinom prihvatam uslove poslovanja.</p>
                 </div>
             </form>
         </section>

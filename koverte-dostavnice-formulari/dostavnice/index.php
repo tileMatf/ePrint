@@ -132,7 +132,7 @@ require_once '../../functions/functions.php';
 					?>
 					
                     <label class="sendCopy">
-                        <input type="checkbox" id="sendCopy" name="sendCopy" 
+                        <input type="checkbox" id="sendCopy" name="sendCopy"
 							<?php echo isset($order['SendCopy']) && $order['SendCopy'] === '1' ? "checked" : ""?>>
                         <span class="label-body">Pošalji kopiju sebi</span>
                         <input type="text" placeholder="Upišite Vas email" id="sendCopyEmail" name="sendCopyEmail" 
@@ -143,6 +143,12 @@ require_once '../../functions/functions.php';
 										else 
 											echo ''; ?>">
                     </label>
+					
+					<!-- CUVANJE NARUDZBINE CHECKBOX -->
+					<label for="savedOrder">
+						<input type="checkbox" name="savedOrder" id="savedOrder" checked>
+						<span class="label-body">Sačuvaj narudžbinu</span>
+					</label>
 					
 					<?php } else { ?>
 				
@@ -217,7 +223,7 @@ require_once '../../functions/functions.php';
 					<?php if(isset($_SESSION['user_info'])) {?> 
 						<label for="savedOrder">
 							<input type="checkbox" name="savedOrder" id="savedOrder" <?php echo isset($_POST['savedOrder']) ? 'checked' : ''?>>
-							<span class="label-body">Prikaži u sačuvanim narudžbinama</span>
+							<span class="label-body">Sačuvaj narudžbinu</span>
 						</label>
 					<?php }?>
 					<?php }?>
