@@ -1,7 +1,6 @@
 <?php
-/*$_SETTINGS["hostname"] = "localhost";
-$_SETTINGS["mysql_user"] = "tijana";
-$_SETTINGS["mysql_pass"] = "chadmajkl";
-$_SETTINGS["mysql_database"] = "eprint";
-*/
+define ('hostname', "localhost");
+define ('mysql_user', "tijana");
+define ('mysql_pass', "chadmajkl");
+define ('mysql_database', "eprint");
 ?>

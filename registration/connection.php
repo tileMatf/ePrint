@@ -1,5 +1,6 @@
 <?php
 
+require ("config.php");
 require_once("order.php");
 
 class DB {
@@ -8,7 +9,7 @@ class DB {
     public function __construct(){
         if(!isset(self::$connection)){
             try{
-				self::$connection=new PDO("mysql:host=localhost;dbname=eprint", "root", "", 
+				self::$connection=new PDO("mysql:host=".hostname.";dbname=".mysql_database, mysql_user, mysql_pass, 
 						array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
 			} catch(PDOException $e) {
 				echo $e->getMessage();
