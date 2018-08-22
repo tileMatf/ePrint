@@ -4,7 +4,6 @@
 	
 	$inputJSON = file_get_contents('php://input');
 	$input = json_decode($inputJSON, TRUE);
-	//exit($inputJSON);
 	
 	if(!isset($input['orderType'])){
 		header("Location: ../../");
@@ -116,8 +115,6 @@
 	if($status === false)	
 		echo "4";
 	else {
-		echo "5";
-		$_SESSION['submit_processed'] = true;
-		reset($_POST); 
+		echo "5";				
 	}
 ?>

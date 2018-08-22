@@ -5,34 +5,26 @@ include("../../header.php");
 require_once '../../functions/functions.php';
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST') {
-		if(isset($_SESSION['login']) && isset($_SESSION['submit_processed'])) {
-			unset($_POST['submit']);
-			unset($_SESSION['submit_processed']);
-		} else {
-			try{			
+		if(isset($_SESSION['first_log']) && $_SESSION['first_log']){
+			unset($_SESSION['first_log'])
+			if(isset($_POST['submit']))
+				unset($_POST['submit']);
+		} 
+		
+		if(isset($_POST['submit'])){
+			try{
 				echo "<div id='pictureModal' class='picture-modal'>
-					 <span class='picture-close'>&times;</span>
-					  <img id='pictureContent' class='picture-modal-content' 
-						src='../../functions/createPicture.php?". http_build_query($_POST) ."'>
-                        <button id='paymentConfirm'>Potvrdi</button>
+						<span class='picture-close'>&times;</span>
+							<img id='pictureContent' class='picture-modal-content' 
+							src='../../functions/createPicture.php?". http_build_query($_POST) ."'>
+						
+                            <button id='paymentConfirm'>Potvrdi</button>
 
-                        <button id='paymentCancel'>Otkaži</button>
+                            <button id='paymentCancel'>Otkaži</button>
 					</div>";
 			} catch(RuntimeException $e){
 				return $e->getMessage();
-			}
-		}
-	}
-	
-	if(isset($_SESSION['orderSaved'])){
-		if($_SESSION['orderSaved'] == 1){
-			unset($_POST);
-			$_POST = array();
-			$_SESSION['orderSaved'] = null;
-			unset($_SESSION['orderSaved']);
-		} else if($_SESSION['orderSaved'] == 2){
-//			$status = false;
-//			$statusMessage = "Došlo je do greške prilikom upisa u bazu, pokušajte ponovo.";
+			} 
 		}
 	}
 ?>

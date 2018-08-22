@@ -194,7 +194,6 @@
 				   statusMessage.innerHTML = "Oprostite, došlo je do greške prilikom slanja i naručivanja porudžbine. Molim Vas, pokušajte ponovo.";
 				   statusMessage.style.color = "red";
 			   } else if(this.responseText === '5'){
-				  // form.reset();
 				   statusMessage.innerHTML = successMessage; 				   
 				   statusMessage2.innerHTML = "Profaktura će biti poslata na Vaš mail. <br>  Isporuka u skladu sa uslovima poslovanja.";
 				   statusMessage.style.color = "green";

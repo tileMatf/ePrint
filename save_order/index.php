@@ -60,12 +60,5 @@
 		
 		$status = $db->saveOrder($order);
 		
-		if($status === true){
-			unset($statusMessage);			
-			$_SESSION['orderSaved'] = 1;
-		} else {
-			$_SESSION['orderSaved'] = 2;
-		}	
-		
 		echo $status;
 ?>

@@ -18,10 +18,12 @@
 			$_SESSION['registration'] = null;
 			$_SESSION['status_message'] = $_SESSION['user_info']->Email;
 			$_SESSION['login'] = true;
+			$_SESSION['first_log'] = true;
 			unset($_SESSION['registration']);
 			unset($_SESSION['error_message']);
 			unset($_SESSION['statusMessage']);
 			unset($statusMessage);
+			
 			/*setting cookie with email and password when 'remember me' is checked*/
 			if(!empty($input['remember'])){
 				setcookie ("email",$input["email"],time()+ (10 * 365 * 24 * 60 * 60), false);

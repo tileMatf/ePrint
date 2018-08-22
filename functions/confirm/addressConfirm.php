@@ -53,7 +53,7 @@ include("../../header.php")
 
                     <!-- POSALJI DUGME -->
                     <input class="button-primary" type="submit" value="Pošalji" name="submit" id="paymentConfirm">					
-                    <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudzbinom prihvatam uslove poslovanja.</p>
+                    <p class="uslovi" style="font-size:1.3rem; font-style: italic;">Narudžbinom prihvatam uslove poslovanja.</p>
                 </div>
             </form>
         </section>

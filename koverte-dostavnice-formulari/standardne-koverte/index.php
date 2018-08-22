@@ -65,9 +65,9 @@
 			$_POST = array();
 			$statusMessage = "Uspešno naručena koverta.";
 			$statusMessage2 = "Profaktura će biti poslata na Vaš mail. <br>  Isporuka u skladu sa uslovima poslovanja.";
-		} else{
-			$statusMessage = "Došlo je do greške prilikom upisa narudžbine u bazu, pokušajte ponovo.";
-		}
+		} 
+	} else {
+		$statusMessage = "Došlo je do greške prilikom upisa narudžbine u bazu, pokušajte ponovo.";
 	}
 	
 ?>

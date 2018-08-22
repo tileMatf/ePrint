@@ -5,11 +5,16 @@
 require_once "../../functions/functions.php";
 include('../../header.php');
 
+
 	if($_SERVER['REQUEST_METHOD'] == 'POST') {
-		if(isset($_SESSION['login']) && isset($_SESSION['submit_processed'])) {
-			//unset($_POST['submit']);
-			unset($_SESSION['submit_processed']);
-		} else {	
+		
+		if(isset($_SESSION['first_log']) && $_SESSION['first_log']){
+			unset($_SESSION['first_log']);
+			if(isset($_POST['submit']))
+				unset($_POST['submit']);
+		}
+		
+		if(isset($_POST['submit'])){
 			try{
 				echo "<div id='pictureModal' class='picture-modal'>
 					 <span class='picture-close'>&times;</span>
@@ -19,21 +24,10 @@ include('../../header.php');
 
                         <button id='paymentCancel'>Otkaži</button>
 					</div>";
+				unset($_POST['submit']);
 			} catch(RuntimeException $e){
 				return $e->getMessage();
 			} 
-		}
-	}
-	
-	if(isset($_SESSION['orderSaved'])){
-		if($_SESSION['orderSaved'] == 1){
-			unset($_POST);
-			$_POST = array();
-			$_SESSION['orderSaved'] = null;
-			unset($_SESSION['orderSaved']);
-		} else if($_SESSION['orderSaved'] == 2){
-//			$status = false;
-//			$statusMessage = "Došlo je do greške prilikom upisa u bazu, pokušajte ponovo.";
 		}
 	}
 

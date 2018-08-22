@@ -7,7 +7,12 @@
    	}
    	include("../header.php");
    	require_once("../registration/connection.php");
-   ?>
+	
+	if(isset($_SESSION['first_log']) && $_SESSION['first_log']){
+		unset($_SESSION['first_log']);
+	}
+	
+?>
 <!-- Navigation -->
 <div class="twelve columns">
    <ul class="nav1">
