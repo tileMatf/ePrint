@@ -8,7 +8,6 @@ require_once 'PHPMailer/src/SMTP.php';
 
 function sendMail($message, $cc = null){
 
-	date_default_timezone_set('Europe/Belgrade');
 	$mail = new PHPMailer;
 
 	$mail->isSMTP();                            // Set mailer to use SMTP
@@ -44,7 +43,6 @@ function sendMail($message, $cc = null){
 }	
 
 function sendMailWithPicture($to){
-	date_default_timezone_set('Europe/Belgrade');
 	$mail = new PHPMailer;
 
 	$mail->isSMTP();                            // Set mailer to use SMTP

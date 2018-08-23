@@ -89,6 +89,7 @@ function generateMessage($status, $file){
 function makeMessage($type, $user = null){
 	//$data = $_POST['data'];	
 	//parse_str($data, $data);
+	date_default_timezone_set('Europe/Belgrade');
 	$message = '<html>
 				<head><title> </title></head>
 				<body>
